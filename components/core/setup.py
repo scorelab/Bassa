@@ -1,6 +1,7 @@
 import os
 from setuptools import setup
 
+
 # Utility function to read the README file.
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -24,8 +25,8 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'bassa = Main:main'
+            'bassa = Main:main',
+            'bassa-pool = Worker:start_worker',
         ]
-    },
-    namespace_packages = ['bassa']
+    }
 )
