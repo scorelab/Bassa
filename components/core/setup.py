@@ -16,6 +16,7 @@ setup(
     keywords = "bassa download queue",
     url = "https://github.com/scorelab/Bassa",
     packages=['tests'],
+    install_requires=['flask', 'WorQ[redis]'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
