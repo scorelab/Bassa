@@ -20,7 +20,7 @@ def add(values):
 
 @ts.task
 def download(link, destination):
-    print("INFO: Downloading "+link)
+    logging.warning("INFO: Downloading "+link)
     obj = SmartDL(link, destination)
-    obj.start()
+    obj.start( bloking= False )
     print("INFO: Download completed for "+link+" , Download file at"+obj.get_dest())

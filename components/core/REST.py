@@ -15,7 +15,7 @@ def index():
 def download():
     link = request.args.get('link', '')
     destination = "~/Desktop/"
-    r = q.tasks.add(2)
-    print(r)
-    #q.tasks.download(link, destination)
+    #r = q.tasks.add(2)
+    #print(r)
+    q.tasks.download(link, destination)
     return '{ "msg": "Added to the queue"}'
