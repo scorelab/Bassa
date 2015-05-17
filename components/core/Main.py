@@ -1,6 +1,7 @@
 #!flask/bin/python
 from REST import *
 from Worker import *
+import logging
 
 
 def main():
@@ -8,5 +9,8 @@ def main():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(filename="./debug-server.log", level=logging.DEBUG)
+    logging.warning("INFO: Bassa starting")
     main()
+
 
