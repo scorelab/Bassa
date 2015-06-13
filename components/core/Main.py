@@ -1,6 +1,5 @@
 #!flask/bin/python
 from REST import *
-from Worker import *
 import logging
 
 
