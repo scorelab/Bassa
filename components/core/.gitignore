@@ -1,0 +1,7 @@
+.idea/
+build/
+*.egg-info/
+sdist/
+dist/
+*.pyc
+/27-sdist
