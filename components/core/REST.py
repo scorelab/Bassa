@@ -1,15 +1,10 @@
 from flask import Flask
 from flask import request, jsonify, abort, Response, g
-from redis import Redis
-from rq import Queue
-from func import downloadMe
 from Auth import *
 from Models import AuthLeval
 import json
 
 server = Flask(__name__)
-redis_conn = Redis()
-qu = Queue(connection=redis_conn)
 server.config['SECRET_KEY'] = "123456789"
 
 
@@ -25,13 +20,6 @@ def token_validator(token):
 @server.route('/')
 def index():
     return "Bassa 2"
-
-
-@server.route('/api/download', methods=['GET'])
-def download():
-    link = request.args.get('link', '')
-    job = qu.enqueue(downloadMe, link)
-    return '{ "msg": "Added to the queue"}'
 
 
 @server.route('/api/login', methods=['POST'])

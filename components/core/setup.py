@@ -16,7 +16,7 @@ setup(
     keywords="bassa download queue",
     url="https://github.com/scorelab/Bassa",
     packages=['tests'],
-    install_requires=['flask', 'WorQ[redis]', 'pySmartDL'],
+    install_requires=['flask'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -26,8 +26,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'bassa = Main:main',
-            'bassa-pool = Worker:start_worker',
+            'bassa = Main:main'
         ]
     }
 )
