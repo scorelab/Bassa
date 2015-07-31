@@ -13,3 +13,7 @@ class Download:
     def __init__(self, link, userName):
         self.link=link
         self.userName=userName
+
+class Status:
+
+    DEFAULT, STARTED, ON_PAUSE, COMPLETED, ERROR= range(5)
