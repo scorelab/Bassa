@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import request, jsonify, abort, Response, g
 from Auth import *
-from Models import AuthLeval
+from Models import *
+from DownloadManager import *
 import json
 
 server = Flask(__name__)
@@ -164,6 +165,27 @@ def unblock_user_request(username):
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = unblock_user(username)
+            if status == "success":
+                resp = Response(response="{'status':'" + status + "'}", status=200)
+            else:
+                resp = Response(response="{'error':'" + status + "'}", status=400)
+        except Exception, e:
+            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+        resp.headers['token'] = token
+        return resp
+    elif token is not None:
+        return "{'error':'not authorized'}", 403
+    else:
+        return "{'error':'token error'}", 403
+
+@server.route('/api/download', methods=['POST'])
+def add_download_request():
+    token = token_validator(request.headers['token'])
+    if token is not None:
+        data = request.get_json(force=True)
+        try:
+            newDownload = Download(data['link'], g.user.userName)
+            status = add_download(newDownload)
             if status == "success":
                 resp = Response(response="{'status':'" + status + "'}", status=200)
             else:

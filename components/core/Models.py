@@ -8,3 +8,8 @@ class User:
 class AuthLeval:
 
     ADMIN, STUDENT, ACADEMIC, NONACADEMIC= range(4)
+
+class Download:
+    def __init__(self, link, userName):
+        self.link=link
+        self.userName=userName
