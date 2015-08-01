@@ -23,6 +23,9 @@ def add_uri(ws, download):
     msg = JSONer("down_" + str(download.id), 'aria2.addUri', [[download.link]])
     ws.send(msg)
 
+def get_status(ws, gid):
+    msg = JSONer("stat", 'aria2.tellStatus', [gid, ['gid', 'files']])
+    ws.send(msg)
 
 def queue_adder(ws, num):
     for i in range(0, num):
@@ -42,9 +45,12 @@ def message_handle(ws, message):
         if txt[0] == "down":
             set_gid(txt[1], data['result'])
             update_status_gid(data['result'], Status.STARTED)
+        elif data['id']=="stat":
+            set_path(data['result']['gid'], data['result']['files'][0]['path'])
     elif 'method' in data:
         if data['method'] == "aria2.onDownloadComplete":
             update_status_gid(data['params'][0]['gid'], Status.COMPLETED, True)
+            get_status(ws, data['params'][0]['gid'])
             add_uri(ws, get_to_download())
             # if data['method']=="aria2.onDownloadStart":
             # update_status_gid(data['params'][0]['gid'], Status.STARTED)

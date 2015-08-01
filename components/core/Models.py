@@ -15,4 +15,4 @@ class Download:
 
 class Status:
 
-    DEFAULT, STARTED, ON_PAUSE, COMPLETED, ERROR= range(5)
+    DEFAULT, STARTED, DELETED, COMPLETED, ERROR= range(5)
