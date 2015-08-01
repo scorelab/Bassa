@@ -17,7 +17,7 @@ JSON: ```{'username':'<username>', 'password':'<password>', 'auth':'<authleval>'
 * 0:ADMIN
 * 1:STUDENT
 * 2:ACADEMIC
-* 3NONACADEMIC
+* 3:NONACADEMIC
   
 ######GET
 Headers: token: <auth token>  
@@ -35,7 +35,38 @@ Update the given user
 ######GET
 Headers: token: <auth token>  
 Returns JSON of all the blocked users  
-######POST 
+######POST  
 ```http://localhost:5000/api/user/blocked/<username>  ```  
 Headers: token: <auth token>  
-Block the given user
+Block the given user  
+  
+**http://localhost:5000/api/download**  
+######POST 
+Headers: Content-type : Application/JSON, token: <auth token>  
+JSON: ```{'link':'<download link>'}  ```   
+######GET
+```http://localhost:5000/api/download/<page> ```
+Headers: token: <auth token>  
+Returns JSON of all the completed downloads. Page contains 15 records ordered by added time. Page number is a int.
+  
+*Status*  
+* 0:DEFAULT- not started
+* 1:STARTED - started ot finished yet
+* 2:DELETED - download completed but deleted from disk
+* 3:COMPLETED - download completed
+* 4:ERROR - download error  
+  
+######DELETE
+```http://localhost:5000/api/download/<id>  ```  
+Deletes the download only if it is not starteed  
+  
+**http://localhost:5000/api/download/rate/<id>  **  
+######POST 
+Headers: Content-type : Application/JSON, token: <auth token>  
+JSON: ```{'rate':'<rating between 0-5>'}  ```  
+Adds the rating to download. If exists, update.  
+  
+**http://localhost:5000/api/user/downloads/<page>**  
+######GET
+Headers: token: <auth token>  
+Returns JSON of all the downloads of current user. Page contains 15 records ordered by added time. Page number is a int.
