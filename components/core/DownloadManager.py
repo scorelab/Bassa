@@ -66,7 +66,6 @@ def update_rate(id):
         try:
             cursor.execute(sql1, id)
             data = cursor.fetchone()
-            print data[0]
             cursor.execute(sql, (data[0], id))
             db.commit()
         except MySQLdb.Error, e:
@@ -92,16 +91,66 @@ def get_downloads_user(userName, limit):
 
 def get_downloads(limit):
     recordsPerPage=15
-    print limit
     db = get_db_con()
     if db is not None:
         cursor =  db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT * FROM download WHERE status=3 ORDER by 'added_time' LIMIT %s, %s;"
+        sql = "SELECT * FROM download WHERE status=3 ORDER by 'added_time' DESC LIMIT %s, %s;"
         try:
             cursor.execute(sql, ((limit-1)*recordsPerPage, limit*recordsPerPage))
             results = cursor.fetchall()
             db.commit()
             return results
+        except MySQLdb.Error, e:
+            return e[1]
+    return "db connection error"
+
+def update_status_gid(gid, status, completed=False):
+    db = get_db_con()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "UPDATE download SET status=%s WHERE gid=%s ;"
+        if completed:
+            sql = "UPDATE download SET status=%s, completed_time=%s WHERE gid=%s ;"
+        try:
+            if completed:
+                cursor.execute(sql, (status, time.time(), gid))
+            else:
+                cursor.execute(sql, (status, gid))
+            db.commit()
+        except MySQLdb.Error, e:
+            db.rollback()
+            return e[1]
+        return "success"
+    return "db connection error"
+
+def set_gid(id, gid):
+    db = get_db_con()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "UPDATE download SET gid=%s WHERE id=%s ;"
+        try:
+            cursor.execute(sql, (gid, id))
+            db.commit()
+        except MySQLdb.Error, e:
+            db.rollback()
+            return e[1]
+        return "success"
+    return "db connection error"
+
+def get_to_download ():
+    db = get_db_con()
+    if db is not None:
+        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT link, id FROM download WHERE status=0 ORDER by 'added_time' LIMIT 1;"
+        try:
+            cursor.execute(sql)
+            if cursor.rowcount==0:
+                return None
+            results = cursor.fetchone()
+            download=Download(results['link'], None)
+            download.id=results['id']
+            db.commit()
+            return download
         except MySQLdb.Error, e:
             return e[1]
     return "db connection error"

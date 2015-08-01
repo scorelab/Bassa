@@ -4,10 +4,12 @@ from Auth import *
 from Models import *
 from DownloadManager import *
 import json
+from multiprocessing import Process
+from DownloadDaemon import starter
 
 server = Flask(__name__)
 server.config['SECRET_KEY'] = "123456789"
-
+p=None
 
 def token_validator(token):
     user = verify_auth_token(token, server.config['SECRET_KEY'])
@@ -20,6 +22,16 @@ def token_validator(token):
 
 @server.route('/')
 def index():
+    global p
+    p = Process(target=starter)
+    p.start()
+    return str(p.pid)
+
+@server.route('/kill')
+def index2():
+    if p is not None:
+        p.terminate()
+        p.join()
     return "Bassa 2"
 
 
@@ -275,3 +287,4 @@ def get_downloads_request(limit):
         return "{'error':'not authorized'}", 403
     else:
         return "{'error':'token error'}", 403
+
