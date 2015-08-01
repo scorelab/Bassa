@@ -59,6 +59,8 @@ def message_handle(ws, message):
 def initialize(ws):
     msg = JSONer('init', 'aria2.unpauseAll')
     ws.send(msg)
+    msg = JSONer('purge', 'aria2.purgeDownloadResult')
+    ws.send(msg)
     msg = JSONer('act', 'aria2.tellActive', [['gid']])
     ws.send(msg)
 

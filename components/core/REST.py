@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import send_file
 from flask import request, jsonify, abort, Response, g
 from Auth import *
 from Models import *
@@ -265,7 +266,7 @@ def rate_download_request(id):
 @server.route('/api/user/downloads/<int:limit>', methods=['GET'])
 def get_downloads_user_request(limit):
     token = token_validator(request.headers['token'])
-    if token is not None and g.user.auth == AuthLeval.ADMIN:
+    if token is not None :
         try:
             status = get_downloads_user(g.user.userName, int(limit))
             if not isinstance(status, basestring):
@@ -285,7 +286,7 @@ def get_downloads_user_request(limit):
 @server.route('/api/downloads/<int:limit>', methods=['GET'])
 def get_downloads_request(limit):
     token = token_validator(request.headers['token'])
-    if token is not None and g.user.auth == AuthLeval.ADMIN:
+    if token is not None :
         try:
             status = get_downloads(int(limit))
             if not isinstance(status, basestring):
@@ -296,6 +297,25 @@ def get_downloads_request(limit):
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
         return resp
+    elif token is not None:
+        return "{'error':'not authorized'}", 403
+    else:
+        return "{'error':'token error'}", 403
+
+@server.route('/api/download/<int:id>', methods=['GET'])
+def get_download(id):
+    token = token_validator(request.headers['token'])
+    if token is not None :
+        try:
+            status = get_download_path(int(id))
+            if status is not None and status!="db connection error":
+                print status
+                return send_file(status,as_attachment=True, mimetype='multipart/form-data')
+            else:
+                return "{'error':'file not found'}", 404
+        except Exception, e:
+            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
     else:

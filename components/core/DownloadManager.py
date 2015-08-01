@@ -176,3 +176,20 @@ def set_path(gid, path):
             return e[1]
         return "success"
     return "db connection error"
+
+def get_download_path(id):
+    db = get_db_con()
+    if db is not None:
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT path FROM download WHERE status=3 AND id=%s LIMIT 1;"
+        try:
+            cursor.execute(sql, (id))
+            if cursor.rowcount == 0:
+                return None
+            results = cursor.fetchone()
+            path = results['path']
+            db.commit()
+            return path
+        except MySQLdb.Error, e:
+            return e[1]
+    return "db connection error"
