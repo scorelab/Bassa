@@ -74,3 +74,34 @@ def update_rate(id):
             return e[1]
         return "success"
     return "db connection error"
+
+def get_downloads_user(userName, limit):
+    recordsPerPage=15
+    db = get_db_con()
+    if db is not None:
+        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT * FROM download WHERE user_name=%s ORDER by 'added_time' LIMIT %s, %s;"
+        try:
+            cursor.execute(sql, (userName,(limit-1)*recordsPerPage, limit*recordsPerPage))
+            results = cursor.fetchall()
+            db.commit()
+            return results
+        except MySQLdb.Error, e:
+            return e[1]
+    return "db connection error"
+
+def get_downloads(limit):
+    recordsPerPage=15
+    print limit
+    db = get_db_con()
+    if db is not None:
+        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT * FROM download WHERE status=3 ORDER by 'added_time' LIMIT %s, %s;"
+        try:
+            cursor.execute(sql, ((limit-1)*recordsPerPage, limit*recordsPerPage))
+            results = cursor.fetchall()
+            db.commit()
+            return results
+        except MySQLdb.Error, e:
+            return e[1]
+    return "db connection error"

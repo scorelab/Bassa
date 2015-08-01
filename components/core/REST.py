@@ -237,3 +237,41 @@ def rate_download_request(id):
         return "{'error':'not authorized'}", 403
     else:
         return "{'error':'token error'}", 403
+
+@server.route('/api/user/downloads/<int:limit>', methods=['GET'])
+def get_downloads_user_request(limit):
+    token = token_validator(request.headers['token'])
+    if token is not None and g.user.auth == AuthLeval.ADMIN:
+        try:
+            status = get_downloads_user(g.user.userName, int(limit))
+            if not isinstance(status, basestring):
+                resp = Response(response=json.dumps(status), status=200)
+            else:
+                resp = Response(response="{'error':'" + status + "'}", status=400)
+        except Exception, e:
+            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+        resp.headers['token'] = token
+        return resp
+    elif token is not None:
+        return "{'error':'not authorized'}", 403
+    else:
+        return "{'error':'token error'}", 403
+
+@server.route('/api/downloads/<int:limit>', methods=['GET'])
+def get_downloads_request(limit):
+    token = token_validator(request.headers['token'])
+    if token is not None and g.user.auth == AuthLeval.ADMIN:
+        try:
+            status = get_downloads(int(limit))
+            if not isinstance(status, basestring):
+                resp = Response(response=json.dumps(status), status=200)
+            else:
+                resp = Response(response="{'error':'" + status + "'}", status=400)
+        except Exception, e:
+            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+        resp.headers['token'] = token
+        return resp
+    elif token is not None:
+        return "{'error':'not authorized'}", 403
+    else:
+        return "{'error':'token error'}", 403
