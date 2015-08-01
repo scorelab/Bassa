@@ -9,7 +9,8 @@ from DownloadDaemon import starter
 
 server = Flask(__name__)
 server.config['SECRET_KEY'] = "123456789"
-p=None
+p = None
+
 
 def token_validator(token):
     user = verify_auth_token(token, server.config['SECRET_KEY'])
@@ -26,6 +27,7 @@ def index():
     p = Process(target=starter)
     p.start()
     return str(p.pid)
+
 
 @server.route('/kill')
 def index2():
@@ -152,7 +154,10 @@ def get_blocked_users_request():
     else:
         return "{'error':'token error'}", 403
 
+
 server.route('/api/user/blocked/<string:username>', methods=['POST'])
+
+
 def block_user_request(username):
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -171,7 +176,10 @@ def block_user_request(username):
     else:
         return "{'error':'token error'}", 403
 
+
 server.route('/api/user/blocked/<string:username>', methods=['DELETE'])
+
+
 def unblock_user_request(username):
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -189,6 +197,7 @@ def unblock_user_request(username):
         return "{'error':'not authorized'}", 403
     else:
         return "{'error':'token error'}", 403
+
 
 @server.route('/api/download', methods=['POST'])
 def add_download_request():
@@ -211,6 +220,7 @@ def add_download_request():
     else:
         return "{'error':'token error'}", 403
 
+
 @server.route('/api/download/<int:id>', methods=['DELETE'])
 def remove_download_request(id):
     token = token_validator(request.headers['token'])
@@ -229,6 +239,7 @@ def remove_download_request(id):
         return "{'error':'not authorized'}", 403
     else:
         return "{'error':'token error'}", 403
+
 
 @server.route('/api/download/rate/<int:id>', methods=['POST'])
 def rate_download_request(id):
@@ -250,6 +261,7 @@ def rate_download_request(id):
     else:
         return "{'error':'token error'}", 403
 
+
 @server.route('/api/user/downloads/<int:limit>', methods=['GET'])
 def get_downloads_user_request(limit):
     token = token_validator(request.headers['token'])
@@ -268,6 +280,7 @@ def get_downloads_user_request(limit):
         return "{'error':'not authorized'}", 403
     else:
         return "{'error':'token error'}", 403
+
 
 @server.route('/api/downloads/<int:limit>', methods=['GET'])
 def get_downloads_request(limit):

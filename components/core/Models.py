@@ -6,7 +6,6 @@ class User:
         self.email=email
 
 class AuthLeval:
-
     ADMIN, STUDENT, ACADEMIC, NONACADEMIC= range(4)
 
 class Download:

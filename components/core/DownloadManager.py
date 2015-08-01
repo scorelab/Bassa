@@ -17,6 +17,7 @@ def add_download(download):
         return "success"
     return "db connection error"
 
+
 def remove_download(id, userName):
     db = get_db_con()
     if db is not None:
@@ -26,7 +27,7 @@ def remove_download(id, userName):
         try:
             cursor.execute(sql1, id)
             data = cursor.fetchone()
-            if data[0]!=Status.DEFAULT and data[0]!=Status.ERROR :
+            if data[0] != Status.DEFAULT and data[0] != Status.ERROR:
                 db.commit()
                 return "Download started. Entry cannot be deleted."
             cursor.execute(sql, (id, userName))
@@ -37,8 +38,9 @@ def remove_download(id, userName):
         return "success"
     return "db connection error"
 
+
 def rate_download(id, userName, rate):
-    if rate>5 or rate<0:
+    if rate > 5 or rate < 0:
         return "Value error"
     db = get_db_con()
     if db is not None:
@@ -47,7 +49,7 @@ def rate_download(id, userName, rate):
         sql = "INSERT INTO rate VALUES(%s, %s, %s);"
         try:
             cursor.execute(sql1, (rate, id, userName))
-            if cursor.rowcount==0 :
+            if cursor.rowcount == 0:
                 cursor.execute(sql, (userName, id, rate))
             db.commit()
             update_rate(id)
@@ -56,6 +58,7 @@ def rate_download(id, userName, rate):
             return e[1]
         return "success"
     return "db connection error"
+
 
 def update_rate(id):
     db = get_db_con()
@@ -74,14 +77,15 @@ def update_rate(id):
         return "success"
     return "db connection error"
 
+
 def get_downloads_user(userName, limit):
-    recordsPerPage=15
+    recordsPerPage = 15
     db = get_db_con()
     if db is not None:
-        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT * FROM download WHERE user_name=%s ORDER by 'added_time' LIMIT %s, %s;"
         try:
-            cursor.execute(sql, (userName,(limit-1)*recordsPerPage, limit*recordsPerPage))
+            cursor.execute(sql, (userName, (limit - 1) * recordsPerPage, limit * recordsPerPage))
             results = cursor.fetchall()
             db.commit()
             return results
@@ -89,20 +93,22 @@ def get_downloads_user(userName, limit):
             return e[1]
     return "db connection error"
 
+
 def get_downloads(limit):
-    recordsPerPage=15
+    recordsPerPage = 15
     db = get_db_con()
     if db is not None:
-        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT * FROM download WHERE status=3 ORDER by 'added_time' DESC LIMIT %s, %s;"
         try:
-            cursor.execute(sql, ((limit-1)*recordsPerPage, limit*recordsPerPage))
+            cursor.execute(sql, ((limit - 1) * recordsPerPage, limit * recordsPerPage))
             results = cursor.fetchall()
             db.commit()
             return results
         except MySQLdb.Error, e:
             return e[1]
     return "db connection error"
+
 
 def update_status_gid(gid, status, completed=False):
     db = get_db_con()
@@ -123,6 +129,7 @@ def update_status_gid(gid, status, completed=False):
         return "success"
     return "db connection error"
 
+
 def set_gid(id, gid):
     db = get_db_con()
     if db is not None:
@@ -137,18 +144,19 @@ def set_gid(id, gid):
         return "success"
     return "db connection error"
 
-def get_to_download ():
+
+def get_to_download():
     db = get_db_con()
     if db is not None:
-        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT link, id FROM download WHERE status=0 ORDER by 'added_time' LIMIT 1;"
         try:
             cursor.execute(sql)
-            if cursor.rowcount==0:
+            if cursor.rowcount == 0:
                 return None
             results = cursor.fetchone()
-            download=Download(results['link'], None)
-            download.id=results['id']
+            download = Download(results['link'], None)
+            download.id = results['id']
             db.commit()
             return download
         except MySQLdb.Error, e:
