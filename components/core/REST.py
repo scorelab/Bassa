@@ -22,20 +22,29 @@ def token_validator(token):
     return None
 
 
-@server.route('/')
-def index():
+@server.route('/download/start')
+def start():
+    token = request.headers['key']
+    if str(token)!=server.config['SECRET_KEY']:
+        return "{'error':'not authorized'}", 403
     global p
     p = Process(target=starter)
     p.start()
-    return str(p.pid)
+    return "{'status':'" + str(p.pid) + "'}"
 
 
-@server.route('/kill')
-def index2():
+@server.route('/download/kill')
+def kill():
+    token = request.headers['key']
+    if str(token)!=server.config['SECRET_KEY']:
+        return "{'error':'not authorized'}", 403
     if p is not None:
         p.terminate()
         p.join()
-    return "Bassa 2"
+    if not p.is_alive():
+        return "{'status':'success'}"
+    else:
+        return "{'error':'error'}"
 
 
 @server.route('/api/login', methods=['POST'])
