@@ -69,4 +69,9 @@ Adds the rating to download. If exists, update.
 **http://localhost:5000/api/user/downloads/<page>**  
 ######GET
 Headers: token: <auth token>  
-Returns JSON of all the downloads of current user. Page contains 15 records ordered by added time. Page number is a int.
+Returns JSON of all the downloads of current user. Page contains 15 records ordered by added time. Page number is a int.  
+  
+**http://localhost:5000/api/download/<id>**  
+######GET
+Headers: token: <auth token>  
+Returns fileas multipart form data. Dose not return a new auth token header
