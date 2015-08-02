@@ -4,7 +4,7 @@ from flask import request, jsonify, abort, Response, g
 from Auth import *
 from Models import *
 from DownloadManager import *
-import json
+import json, urllib2
 from multiprocessing import Process
 from DownloadDaemon import starter
 
@@ -24,27 +24,37 @@ def token_validator(token):
 
 @server.route('/download/start')
 def start():
-    token = request.headers['key']
-    if str(token)!=server.config['SECRET_KEY']:
-        return "{'error':'not authorized'}", 403
-    global p
-    p = Process(target=starter)
-    p.start()
-    return "{'status':'" + str(p.pid) + "'}"
+    try:
+        token = request.headers['key']
+        if str(token)!=server.config['SECRET_KEY']:
+            return "{'error':'not authorized'}", 403
+        global p
+        p = Process(target=starter)
+        p.start()
+        return "{'status':'" + str(p.pid) + "'}"
+    except Exception, e:
+            return "{'error':'" + e.message + "'}",400
+
 
 
 @server.route('/download/kill')
 def kill():
-    token = request.headers['key']
-    if str(token)!=server.config['SECRET_KEY']:
-        return "{'error':'not authorized'}", 403
-    if p is not None:
-        p.terminate()
-        p.join()
-    if not p.is_alive():
-        return "{'status':'success'}"
-    else:
-        return "{'error':'error'}"
+    try:
+        token = request.headers['key']
+        if str(token)!=server.config['SECRET_KEY']:
+            return "{'error':'not authorized'}", 403
+        if p is not None:
+            p.terminate()
+            p.join()
+            jsonreq = json.dumps({'jsonrpc':'2.0', 'id':'qwer', 'method':'aria2.pauseAll'})
+            c = urllib2.urlopen('http://localhost:6800/jsonrpc', jsonreq)
+            print c
+        if not p.is_alive():
+            return "{'status':'success'}"
+        else:
+            return "{'error':'error'}"
+    except Exception, e:
+        return "{'error':'" + e.message + "'}",400
 
 
 @server.route('/api/login', methods=['POST'])
