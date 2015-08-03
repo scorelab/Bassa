@@ -1,10 +1,10 @@
 from flask import Flask
-from flask import send_file
+from flask import send_file, send_from_directory
 from flask import request, jsonify, abort, Response, g
 from Auth import *
 from Models import *
 from DownloadManager import *
-import json, urllib2
+import json, urllib2, os
 from multiprocessing import Process
 from DownloadDaemon import starter
 
@@ -21,6 +21,14 @@ def token_validator(token):
         return token
     return None
 
+
+@server.route('/ui/<string:path>')
+def serve_ui(path):
+    return send_from_directory(os.path.dirname(os.path.realpath(__file__))+"/ui", path)
+
+@server.route('/ui/')
+def serve_ui1():
+    return send_file(os.path.dirname(os.path.realpath(__file__))+"/ui/index.html")
 
 @server.route('/download/start')
 def start():
