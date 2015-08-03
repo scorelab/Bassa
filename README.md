@@ -11,7 +11,7 @@ Returns auth token in response header for successful login
 **http://localhost:5000/api/user**  
 ######POST 
 Headers: Content-type : Application/JSON, token: <auth token>  
-JSON: ```{'username':'<username>', 'password':'<password>', 'auth':'<authleval>', 'email':'<email>'}  ```   
+JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>, "email":"<email>"}  ```   
   
 *Auth levals*  
 * 0:ADMIN
@@ -28,7 +28,7 @@ Deletes the user from system. Adviced not to use.
 ######PUT
 ```http://localhost:5000/api/user/<username>  ```  
 Headers: Content-type : Application/JSON, token: <auth token>  
-JSON: ```{'username':'<username>', 'password':'<password>', 'auth':'<authleval>', 'email':'<email>'}  ```   
+JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>, "email":"<email>"}  ```   
 Update the given user  
 
 **http://localhost:5000/api/user/blocked**  
@@ -43,7 +43,7 @@ Block the given user
 **http://localhost:5000/api/download**  
 ######POST 
 Headers: Content-type : Application/JSON, token: <auth token>  
-JSON: ```{'link':'<download link>'}  ```   
+JSON: ```{"link":"<download link>"}  ```   
 ######GET
 ```http://localhost:5000/api/download/<page> ```
 Headers: token: <auth token>  
@@ -63,15 +63,15 @@ Deletes the download only if it is not starteed
 **http://localhost:5000/api/download/rate/<id>  **  
 ######POST 
 Headers: Content-type : Application/JSON, token: <auth token>  
-JSON: ```{'rate':'<rating between 0-5>'}  ```  
+JSON: ```{"rate":"<rating between 0-5>"}  ```  
 Adds the rating to download. If exists, update.  
   
-**http://localhost:5000/api/user/downloads/<page>**  
+**http://localhost:5000/api/user/downloads/\<page\>**  
 ######GET
 Headers: token: <auth token>  
 Returns JSON of all the downloads of current user. Page contains 15 records ordered by added time. Page number is a int.  
   
-**http://localhost:5000/api/download/<id>**  
+**http://localhost:5000/api/download/\<id\>**  
 ######GET
 Headers: token: <auth token>  
 Returns fileas multipart form data. Dose not return a new auth token header
