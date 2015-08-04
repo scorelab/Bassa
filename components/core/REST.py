@@ -1,4 +1,5 @@
 from flask import Flask
+from flask.ext.cors import CORS
 from flask import send_file, send_from_directory
 from flask import request, jsonify, abort, Response, g
 from Auth import *
@@ -10,6 +11,7 @@ from DownloadDaemon import starter
 
 server = Flask(__name__)
 server.config['SECRET_KEY'] = "123456789"
+cors = CORS(server)
 p = None
 
 
