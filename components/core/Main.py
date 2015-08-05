@@ -4,7 +4,7 @@ import logging
 
 
 def main():
-    server.run('0.0.0.0')
+    server.run(debug=True)
 
 
 if __name__ == '__main__':

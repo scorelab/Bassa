@@ -76,6 +76,7 @@ def login():
         token = generate_auth_token(user, server.config['SECRET_KEY'])
         resp = Response(status=200)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     else:
         abort(403)
