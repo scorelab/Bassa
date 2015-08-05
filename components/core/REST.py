@@ -155,8 +155,8 @@ def get_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_users()
-            if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+            if not isinstance(status, basestring):
+                resp = Response(response=json.dumps(status), status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -176,8 +176,8 @@ def get_blocked_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_blocked_users()
-            if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+            if not isinstance(status, basestring):
+                resp = Response(response=json.dumps(status), status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -309,8 +309,8 @@ def get_downloads_user_request(limit):
     if token is not None :
         try:
             status = get_downloads_user(g.user.userName, int(limit))
-            if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+            if not isinstance(status, basestring):
+                resp = Response(response=json.dumps(status), status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -330,8 +330,8 @@ def get_downloads_request(limit):
     if token is not None :
         try:
             status = get_downloads(int(limit))
-            if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+            if not isinstance(status, basestring):
+                resp = Response(response=json.dumps(status), status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
