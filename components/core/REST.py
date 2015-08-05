@@ -74,7 +74,7 @@ def login():
     if user_login(userName, password):
         user = get_user(userName)
         token = generate_auth_token(user, server.config['SECRET_KEY'])
-        resp = Response(response='"{auth:"'+ str(user.auth) + '"}',status=200)
+        resp = Response(response='{"auth":"'+ str(user.auth) + '"}',status=200)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
