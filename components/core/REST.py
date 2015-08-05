@@ -102,7 +102,7 @@ def add_user_request():
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 @server.route('/api/user/<string:username>', methods=['DELETE'])
@@ -123,7 +123,7 @@ def remove_user_request(username):
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 @server.route('/api/user/<string:username>', methods=['PUT'])
@@ -146,7 +146,7 @@ def update_user_request(username):
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 @server.route('/api/user', methods=['GET'])
@@ -167,7 +167,7 @@ def get_users_request():
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 @server.route('/api/user/blocked', methods=['GET'])
@@ -188,7 +188,7 @@ def get_blocked_users_request():
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 server.route('/api/user/blocked/<string:username>', methods=['POST'])
@@ -211,7 +211,7 @@ def block_user_request(username):
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 server.route('/api/user/blocked/<string:username>', methods=['DELETE'])
@@ -234,7 +234,7 @@ def unblock_user_request(username):
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 @server.route('/api/download', methods=['POST'])
@@ -257,7 +257,7 @@ def add_download_request():
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 @server.route('/api/download/<int:id>', methods=['DELETE'])
@@ -278,7 +278,7 @@ def remove_download_request(id):
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 @server.route('/api/download/rate/<int:id>', methods=['POST'])
@@ -300,7 +300,7 @@ def rate_download_request(id):
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 @server.route('/api/user/downloads/<int:limit>', methods=['GET'])
@@ -321,7 +321,7 @@ def get_downloads_user_request(limit):
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 
 @server.route('/api/downloads/<int:limit>', methods=['GET'])
@@ -342,7 +342,7 @@ def get_downloads_request(limit):
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
 @server.route('/api/download/<int:id>', methods=['GET'])
 def get_download(id):
@@ -361,5 +361,5 @@ def get_download(id):
     elif token is not None:
         return '{"error":"not authorized"}', 403
     else:
-        return '{"error"":"token error"}', 403
+        return '{"error":"token error"}', 403
 
