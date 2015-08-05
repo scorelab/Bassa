@@ -2,11 +2,12 @@ import thread
 import json, inspect, os, time
 from DownloadManager import *
 from Models import Status
+from EMail import send_mail
 
 import websocket
 
 conf = {}
-
+db_lock = thread.allocate_lock()
 
 def conf_reader():
     global conf
@@ -43,17 +44,26 @@ def message_handle(ws, message):
     elif 'id' in data:
         txt = data['id'].split('_')
         if txt[0] == "down":
+            db_lock.acquire()
             set_gid(txt[1], data['result'])
             update_status_gid(data['result'], Status.STARTED)
+            db_lock.release()
         elif data['id']=="stat":
+            db_lock.acquire()
             set_path(data['result']['gid'], data['result']['files'][0]['path'])
+            db_lock.release()
+            path=data['result']['files'][0]['path'].split('/')
+            msg='Your download '+path[-1]+' is completed.'
+            send_mail([get_download_email(data['result']['gid'])],msg)
     elif 'method' in data:
         if data['method'] == "aria2.onDownloadComplete":
+            db_lock.acquire()
             update_status_gid(data['params'][0]['gid'], Status.COMPLETED, True)
             get_status(ws, data['params'][0]['gid'])
             add_uri(ws, get_to_download())
-            # if data['method']=="aria2.onDownloadStart":
-            # update_status_gid(data['params'][0]['gid'], Status.STARTED)
+            db_lock.release()
+        # elif data['method'] == "aria2.onDownloadError":
+        #     get_status(ws, data['params'][0]['gid'])
 
 
 def initialize(ws):

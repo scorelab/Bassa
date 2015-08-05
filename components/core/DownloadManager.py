@@ -193,3 +193,20 @@ def get_download_path(id):
         except MySQLdb.Error, e:
             return e[1]
     return "db connection error"
+
+def get_download_email(gid):
+    db = get_db_con()
+    if db is not None:
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT user.email FROM user LEFT JOIN download ON user.user_name = download.user_name WHERE download.gid=%s LIMIT 1;"
+        try:
+            cursor.execute(sql, gid)
+            if cursor.rowcount == 0:
+                return None
+            results = cursor.fetchone()
+            path = results['email']
+            db.commit()
+            return path
+        except MySQLdb.Error, e:
+            return e[1]
+    return "db connection error"
