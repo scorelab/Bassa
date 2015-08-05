@@ -5,9 +5,10 @@ from flask import request, jsonify, abort, Response, g
 from Auth import *
 from Models import *
 from DownloadManager import *
-import json, urllib2, os
+import json, urllib2, os, thread
 from multiprocessing import Process
 from DownloadDaemon import starter
+from EMail import send_mail
 
 server = Flask(__name__)
 server.config['SECRET_KEY'] = "123456789"
@@ -92,6 +93,7 @@ def add_user_request():
             status = add_user(newUser)
             if status == "success":
                 resp = Response(response='{"status": "'+ status + '"}', status=200)
+                thread.start_new_thread(send_mail, (data['email'],"Hi\n Your user name for Bassa is "+data['user_name']+" and your password is "+ data['password']))
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
