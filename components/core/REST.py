@@ -97,6 +97,7 @@ def add_user_request():
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -117,6 +118,7 @@ def remove_user_request(username):
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -139,6 +141,7 @@ def update_user_request(username):
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -159,6 +162,7 @@ def get_users_request():
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -179,6 +183,7 @@ def get_blocked_users_request():
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -201,6 +206,7 @@ def block_user_request(username):
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -223,6 +229,7 @@ def unblock_user_request(username):
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -245,6 +252,7 @@ def add_download_request():
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -265,6 +273,7 @@ def remove_download_request(id):
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -286,6 +295,7 @@ def rate_download_request(id):
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -306,6 +316,7 @@ def get_downloads_user_request(limit):
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
@@ -326,6 +337,7 @@ def get_downloads_request(limit):
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
         resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
         return "{'error':'not authorized'}", 403
