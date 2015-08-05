@@ -43,7 +43,7 @@ def start():
         p.start()
         return "{'status':'" + str(p.pid) + "'}"
     except Exception, e:
-            return "{'error':'" + e.message + "'}",400
+            return '{"error":"' + e.message + '"}',400
 
 
 
@@ -60,11 +60,11 @@ def kill():
             c = urllib2.urlopen('http://localhost:6800/jsonrpc', jsonreq)
             print c
         if not p.is_alive():
-            return "{'status':'success'}"
+            return '{"status":"success"}'
         else:
-            return "{'error':'error'}"
+            return '{"error":"error"}'
     except Exception, e:
-        return "{'error':'" + e.message + "'}",400
+        return '{"error":"' + e.message + '"}',400
 
 
 @server.route('/api/login', methods=['POST'])
@@ -74,7 +74,7 @@ def login():
     if user_login(userName, password):
         user = get_user(userName)
         token = generate_auth_token(user, server.config['SECRET_KEY'])
-        resp = Response(response="{'auth':'" + str(user.auth) + "'}",status=200)
+        resp = Response(response='"{auth:"'+ str(user.auth) + '"}',status=200)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -91,18 +91,18 @@ def add_user_request():
             newUser = User(data['user_name'], data['password'], int(data['auth']), data['email'])
             status = add_user(newUser)
             if status == "success":
-                resp = Response(response="{'status':'" + status + "'}", status=200)
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 @server.route('/api/user/<string:username>', methods=['DELETE'])
@@ -112,18 +112,18 @@ def remove_user_request(username):
         try:
             status = remove_user(username)
             if status == "success":
-                resp = Response(response="{'status':'" + status + "'}", status=200)
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 @server.route('/api/user/<string:username>', methods=['PUT'])
@@ -135,18 +135,18 @@ def update_user_request(username):
             newUser = User(data['user_name'], data['password'], int(data['auth']), data['email'])
             status = update_user(newUser, username)
             if status == "success":
-                resp = Response(response="{'status':'" + status + "'}", status=200)
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 @server.route('/api/user', methods=['GET'])
@@ -155,19 +155,19 @@ def get_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_users()
-            if not isinstance(status, basestring):
-                resp = Response(response=json.dumps(status), status=200)
+            if status == "success":
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 @server.route('/api/user/blocked', methods=['GET'])
@@ -176,19 +176,19 @@ def get_blocked_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_blocked_users()
-            if not isinstance(status, basestring):
-                resp = Response(response=json.dumps(status), status=200)
+            if status == "success":
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 server.route('/api/user/blocked/<string:username>', methods=['POST'])
@@ -200,18 +200,18 @@ def block_user_request(username):
         try:
             status = block_user(username)
             if status == "success":
-                resp = Response(response="{'status':'" + status + "'}", status=200)
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 server.route('/api/user/blocked/<string:username>', methods=['DELETE'])
@@ -223,18 +223,18 @@ def unblock_user_request(username):
         try:
             status = unblock_user(username)
             if status == "success":
-                resp = Response(response="{'status':'" + status + "'}", status=200)
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 @server.route('/api/download', methods=['POST'])
@@ -246,18 +246,18 @@ def add_download_request():
             newDownload = Download(data['link'], g.user.userName)
             status = add_download(newDownload)
             if status == "success":
-                resp = Response(response="{'status':'" + status + "'}", status=200)
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 @server.route('/api/download/<int:id>', methods=['DELETE'])
@@ -267,18 +267,18 @@ def remove_download_request(id):
         try:
             status = remove_download(id, g.user.userName)
             if status == "success":
-                resp = Response(response="{'status':'" + status + "'}", status=200)
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 @server.route('/api/download/rate/<int:id>', methods=['POST'])
@@ -289,18 +289,18 @@ def rate_download_request(id):
         try:
             status = rate_download(id, g.user.userName, data['rate'])
             if status == "success":
-                resp = Response(response="{'status':'" + status + "'}", status=200)
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 @server.route('/api/user/downloads/<int:limit>', methods=['GET'])
@@ -309,19 +309,19 @@ def get_downloads_user_request(limit):
     if token is not None :
         try:
             status = get_downloads_user(g.user.userName, int(limit))
-            if not isinstance(status, basestring):
-                resp = Response(response=json.dumps(status), status=200)
+            if status == "success":
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 
 @server.route('/api/downloads/<int:limit>', methods=['GET'])
@@ -330,19 +330,19 @@ def get_downloads_request(limit):
     if token is not None :
         try:
             status = get_downloads(int(limit))
-            if not isinstance(status, basestring):
-                resp = Response(response=json.dumps(status), status=200)
+            if status == "success":
+                resp = Response(response='"{status: "'+ status + '"}', status=200)
             else:
-                resp = Response(response="{'error':'" + status + "'}", status=400)
+                resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
-            resp = Response(response="{'error':'" + e.message + "'}", status=400)
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
 @server.route('/api/download/<int:id>', methods=['GET'])
 def get_download(id):
@@ -354,12 +354,12 @@ def get_download(id):
                 print status
                 return send_file(status,as_attachment=True, mimetype='multipart/form-data')
             else:
-                return "{'error':'file not found'}", 404
+                return '{"error":"file not found"}', 404
         except Exception, e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
             return resp
     elif token is not None:
-        return "{'error':'not authorized'}", 403
+        return '{"error":"not authorized"}', 403
     else:
-        return "{'error':'token error'}", 403
+        return '{"error"":"token error"}', 403
 
