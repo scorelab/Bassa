@@ -91,7 +91,7 @@ def add_user_request():
             newUser = User(data['user_name'], data['password'], int(data['auth']), data['email'])
             status = add_user(newUser)
             if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+                resp = Response(response='{"status": "'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -112,7 +112,7 @@ def remove_user_request(username):
         try:
             status = remove_user(username)
             if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+                resp = Response(response='{"status": "'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -135,7 +135,7 @@ def update_user_request(username):
             newUser = User(data['user_name'], data['password'], int(data['auth']), data['email'])
             status = update_user(newUser, username)
             if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+                resp = Response(response='{"status": "'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -200,7 +200,7 @@ def block_user_request(username):
         try:
             status = block_user(username)
             if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+                resp = Response(response='{"status": "'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -223,7 +223,7 @@ def unblock_user_request(username):
         try:
             status = unblock_user(username)
             if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+                resp = Response(response='{"status": "'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -246,7 +246,7 @@ def add_download_request():
             newDownload = Download(data['link'], g.user.userName)
             status = add_download(newDownload)
             if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+                resp = Response(response='{"status":"'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -267,7 +267,7 @@ def remove_download_request(id):
         try:
             status = remove_download(id, g.user.userName)
             if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+                resp = Response(response='{"status":"'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
@@ -289,7 +289,7 @@ def rate_download_request(id):
         try:
             status = rate_download(id, g.user.userName, data['rate'])
             if status == "success":
-                resp = Response(response='"{status: "'+ status + '"}', status=200)
+                resp = Response(response='{"status":"'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception, e:
