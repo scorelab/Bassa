@@ -9,7 +9,7 @@ def add_download(download):
         cursor = db.cursor()
         sql = "INSERT into download(link, user_name, added_time) VALUES(%s, %s, %s);"
         try:
-            cursor.execute(sql, (download.link, download.userName, time.time()))
+            cursor.execute(sql, (download.link, download.userName, long(time.time())))
             db.commit()
         except MySQLdb.Error, e:
             db.rollback()
@@ -119,7 +119,7 @@ def update_status_gid(gid, status, completed=False):
             sql = "UPDATE download SET status=%s, completed_time=%s WHERE gid=%s ;"
         try:
             if completed:
-                cursor.execute(sql, (status, time.time(), gid))
+                cursor.execute(sql, (status, long(time.time()), gid))
             else:
                 cursor.execute(sql, (status, gid))
             db.commit()
