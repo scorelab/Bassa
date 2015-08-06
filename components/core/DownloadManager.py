@@ -210,3 +210,32 @@ def get_download_email(gid):
         except MySQLdb.Error, e:
             return e[1]
     return "db connection error"
+
+def get_to_delete(time, rate):
+    recordsPerPage = 15
+    db = get_db_con()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "SELECT path FROM  download  WHERE  completed_time <%s AND  rating <=%s AND status=3;"
+        try:
+            cursor.execute(sql, (time, rate))
+            results = cursor.fetchall()
+            db.commit()
+            return results
+        except MySQLdb.Error, e:
+            return e[1]
+    return "db connection error"
+
+def set_delete_status(path):
+    db = get_db_con()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "UPDATE download SET status=2 WHERE path=%s ;"
+        try:
+            cursor.execute(sql, path)
+            db.commit()
+        except MySQLdb.Error, e:
+            db.rollback()
+            return e[1]
+        return "success"
+    return "db connection error"

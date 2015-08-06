@@ -3,11 +3,13 @@ import json, inspect, os, time
 from DownloadManager import *
 from Models import Status
 from EMail import send_mail
+from DiskMan import *
 
 import websocket
 
 conf = {}
 db_lock = thread.allocate_lock()
+folder_size=0
 
 def conf_reader():
     global conf
@@ -19,7 +21,8 @@ def conf_reader():
 
 
 def add_uri(ws, download):
-    if download is None:
+    print folder_size
+    if download is None or folder_size>=conf['size_limit']:
         return
     msg = JSONer("down_" + str(download.id), 'aria2.addUri', [[download.link]])
     ws.send(msg)
@@ -36,6 +39,7 @@ def queue_adder(ws, num):
 
 def message_handle(ws, message):
     print message
+    global folder_size
     data = json.loads(message)
     if 'id' in data and data['id'] == "act":
         remain = conf['max_downloads'] - len(data['result'])
@@ -51,10 +55,11 @@ def message_handle(ws, message):
         elif data['id']=="stat":
             db_lock.acquire()
             set_path(data['result']['gid'], data['result']['files'][0]['path'])
+            folder_size+=long(data['result']['files'][0]['completedLength'])
             db_lock.release()
             path=data['result']['files'][0]['path'].split('/')
             msg='Your download '+path[-1]+' is completed.'
-            send_mail([get_download_email(data['result']['gid'])],msg)
+            # send_mail([get_download_email(data['result']['gid'])],msg)
     elif 'method' in data:
         if data['method'] == "aria2.onDownloadComplete":
             db_lock.acquire()
@@ -102,7 +107,10 @@ def on_open(ws):
 
 
 def starter():
+    global folder_size
     conf_reader()
+    remove_files(conf['max_age'], conf['min_rating'])
+    folder_size=get_size(conf['down_folder'])
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp("ws://localhost:6800/jsonrpc",
                                 on_message=on_message,
