@@ -1,0 +1,36 @@
+WARNING:root:INFO: Bassa starting
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:root:INFO: Bassa starting
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger pin code: 300-233-702
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2016 01:18:24] "GET /api/login HTTP/1.1" 405 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2016 01:18:25] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug: * Detected change in '/home/sash/Documents/Projects/ScoreLab/Bassa/components/core/DBCon.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:root:INFO: Bassa starting
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger pin code: 300-233-702
+INFO:werkzeug: * Detected change in '/home/sash/Documents/Projects/ScoreLab/Bassa/components/core/DBCon.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:root:INFO: Bassa starting
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger pin code: 300-233-702
+INFO:werkzeug: * Detected change in '/home/sash/Documents/Projects/ScoreLab/Bassa/components/core/Main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:root:INFO: Bassa starting
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger pin code: 300-233-702
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2016 01:19:15] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2016 01:19:15] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2016 01:19:27] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2016 01:19:30] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2016 01:19:40] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2016 01:20:50] "GET /ui HTTP/1.1" 301 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2016 01:20:50] "GET /ui/ HTTP/1.1" 200 -
+WARNING:root:INFO: Bassa starting
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:root:INFO: Bassa starting
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger pin code: 300-233-702
