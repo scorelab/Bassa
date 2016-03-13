@@ -7,6 +7,7 @@
 # Precompiled Headers
 *.gch
 *.pch
+*.pyc
 
 # Libraries
 *.lib
@@ -30,3 +31,10 @@
 
 # Debug files
 *.dSYM/
+
+# Swap files
+*.swp
+
+# Log files
+*.log
+
