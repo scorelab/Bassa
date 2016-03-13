@@ -1,0 +1,5 @@
+Flask==0.10.1
+Flask-Cors==2.1.2
+Jinja2==2.8
+MySQL-python==1.2.5
+websocket==0.2.1
