@@ -1,17 +1,10 @@
 import os
 from setuptools import setup
-from pip.req import parse_requirements
+
 
 # Utility function to read the README file.
 def read(file_name):
     return open(os.path.join(os.path.dirname(__file__), file_name)).read()
-
-base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-requirements_path = os.path.join(base_dir, 'requirements.txt')
-
-install_reqs = parse_requirements(requirements_path, session=False)
-
-requirements = [str(ir.req) for ir in install_reqs]
 
 setup(
     name="bassa",
@@ -23,7 +16,7 @@ setup(
     keywords="bassa download queue",
     url="https://github.com/scorelab/Bassa",
     packages=['tests'],
-    install_requires=requirements,
+    install_requires=['flask'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -35,5 +28,5 @@ setup(
         'console_scripts': [
             'bassa = Main:main'
         ]
-    },
+    }
 )
