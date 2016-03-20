@@ -30,3 +30,6 @@
 
 # Debug files
 *.dSYM/
+
+*.log
+components/core/debug-server.log
