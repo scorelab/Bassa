@@ -3,18 +3,7 @@
 
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
-## Installation
-```
-	$ pip install -r requirements.txt
-```
-
-## Test Server
-```
-	$ cd components/core/
-	$ python Main.py
-```
-
-## URL endpoints
+##URL endpoints
   
 **http://localhost:5000/api/login**  
   
@@ -22,7 +11,7 @@ Form data: user_name, password
 Returns auth token in response header for successful login
 
 **http://localhost:5000/api/user**  
-###### POST 
+######POST 
 Headers: Content-type : Application/JSON, token: <auth token>  
 JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>, "email":"<email>"}  ```   
   
@@ -32,33 +21,32 @@ JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>,
 * 2:ACADEMIC
 * 3:NONACADEMIC
   
-###### GET
+######GET
 Headers: token: <auth token>  
 Returns JSON of all the users  
-###### DELETE
+######DELETE
 ```http://localhost:5000/api/user/<username>  ```  
 Deletes the user from system. Adviced not to use.
-
-###### PUT
+######PUT
 ```http://localhost:5000/api/user/<username>  ```  
 Headers: Content-type : Application/JSON, token: <auth token>  
 JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>, "email":"<email>"}  ```   
 Update the given user  
 
 **http://localhost:5000/api/user/blocked**  
-###### GET
+######GET
 Headers: token: <auth token>  
 Returns JSON of all the blocked users  
-###### POST  
+######POST  
 ```http://localhost:5000/api/user/blocked/<username>  ```  
 Headers: token: <auth token>  
 Block the given user  
   
 **http://localhost:5000/api/download**  
-###### POST 
+######POST 
 Headers: Content-type : Application/JSON, token: <auth token>  
 JSON: ```{"link":"<download link>"}  ```   
-###### GET
+######GET
 ```http://localhost:5000/api/download/<page> ```
 Headers: token: <auth token>  
 Returns JSON of all the completed downloads. Page contains 15 records ordered by added time. Page number is a int.
@@ -70,22 +58,22 @@ Returns JSON of all the completed downloads. Page contains 15 records ordered by
 * 3:COMPLETED - download completed
 * 4:ERROR - download error  
   
-###### DELETE
+######DELETE
 ```http://localhost:5000/api/download/<id>  ```  
 Deletes the download only if it is not starteed  
   
 **http://localhost:5000/api/download/rate/<id>  **  
-###### POST 
+######POST 
 Headers: Content-type : Application/JSON, token: <auth token>  
 JSON: ```{"rate":"<rating between 0-5>"}  ```  
 Adds the rating to download. If exists, update.  
   
 **http://localhost:5000/api/user/downloads/\<page\>**  
-###### GET
+######GET
 Headers: token: <auth token>  
 Returns JSON of all the downloads of current user. Page contains 15 records ordered by added time. Page number is a int.  
   
 **http://localhost:5000/api/download/\<id\>**  
-###### GET
+######GET
 Headers: token: <auth token>  
 Returns fileas multipart form data. Dose not return a new auth token header
