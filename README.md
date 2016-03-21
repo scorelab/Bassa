@@ -3,7 +3,10 @@ Automated Download Queue for Enterprise to take the best use of Internet bandwid
 
 ## Installation
 ```
-	$ pip install -r requirements.txt
+	$ sudo apt-get install libmysqlclient-dev
+	$ sudo apt-get install python-dev
+	$ cd components/core/
+	$ sudo python setup.py develop
 ```
 
 ## Test Server
