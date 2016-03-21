@@ -1,4 +1,6 @@
-# Bassa
+
+
+![logo](http://gdurl.com/7XYK)
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
 ## Installation
@@ -14,6 +16,16 @@ Automated Download Queue for Enterprise to take the best use of Internet bandwid
 	$ cd components/core/
 	$ python Main.py
 ```
+
+###Main functionalities
+* Provides an interface for users to add their downloads as links or torrent magnet links
+* Provide users  an interface to view and download the files in local server
+* Provide a rating system to users to rate the files residing in local server
+* Automatically start and stop downloading in given time frame
+* Automatically clean the disks and make room for new downloads
+* Notify user when his/her download is completed
+* Mark inappropriate downloads
+* Provides admins an interface to deal with inappropriate files
 
 ## URL endpoints
   
