@@ -230,9 +230,9 @@ def set_delete_status(path):
     db = get_db_con()
     if db is not None:
         cursor = db.cursor()
-        sql = "UPDATE download SET status=2 WHERE path=%s ;"
+        sql = "UPDATE download SET status=2 WHERE path='%s' ;" % path
         try:
-            cursor.execute(sql, path)
+            cursor.execute(sql)
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
