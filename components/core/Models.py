@@ -6,7 +6,7 @@ class User:
         self.email=email
 
 class AuthLeval:
-    ADMIN, STUDENT, ACADEMIC, NONACADEMIC= range(4)
+    ADMIN, STUDENT, ACADEMIC, NONACADEMIC= list(range(4))
 
 class Download:
     def __init__(self, link, userName):
@@ -15,4 +15,4 @@ class Download:
 
 class Status:
 
-    DEFAULT, STARTED, DELETED, COMPLETED, ERROR= range(5)
+    DEFAULT, STARTED, DELETED, COMPLETED, ERROR= list(range(5))

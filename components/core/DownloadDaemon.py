@@ -1,4 +1,4 @@
-import thread
+import _thread
 import json, inspect, os, time
 from DownloadManager import *
 from Models import Status
@@ -8,7 +8,7 @@ from DiskMan import *
 import websocket
 
 conf = {}
-db_lock = thread.allocate_lock()
+db_lock = _thread.allocate_lock()
 folder_size=0
 
 def conf_reader():
@@ -21,7 +21,7 @@ def conf_reader():
 
 
 def add_uri(ws, download):
-    print folder_size
+    print(folder_size)
     if download is None or folder_size>=conf['size_limit']:
         return
     msg = JSONer("down_" + str(download.id), 'aria2.addUri', [[download.link]])
@@ -38,7 +38,7 @@ def queue_adder(ws, num):
 
 
 def message_handle(ws, message):
-    print message
+    print(message)
     global folder_size
     data = json.loads(message)
     if 'id' in data and data['id'] == "act":
@@ -55,7 +55,7 @@ def message_handle(ws, message):
         elif data['id']=="stat":
             db_lock.acquire()
             set_path(data['result']['gid'], data['result']['files'][0]['path'])
-            folder_size+=long(data['result']['files'][0]['completedLength'])
+            folder_size+=int(data['result']['files'][0]['completedLength'])
             db_lock.release()
             path=data['result']['files'][0]['path'].split('/')
             msg='Your download '+path[-1]+' is completed.'
@@ -91,11 +91,11 @@ def JSONer(id, method, params=None):
 
 
 def on_message(ws, message):
-    thread.start_new_thread(message_handle, (ws, message))
+    _thread.start_new_thread(message_handle, (ws, message))
 
 
 def on_error(ws, error):
-    print error
+    print(error)
 
 
 def on_close(ws):

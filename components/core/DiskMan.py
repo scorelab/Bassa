@@ -13,11 +13,11 @@ def get_size(path):
     return total_size
 
 def remove_files(days, rate):
-    time_now=long(time.time())
+    time_now=int(time.time())
     time_then=time_now-(days*SECS_PER_DAY)
     files=get_to_delete(time_then, rate)
-    print files
+    print(files)
     for file in files:
-        print file[0]
+        print(file[0])
         os.unlink(file[0])
         set_delete_status(file[0])
