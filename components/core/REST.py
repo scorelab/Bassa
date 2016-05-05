@@ -5,7 +5,7 @@ from flask import request, jsonify, abort, Response, g
 from Auth import *
 from Models import *
 from DownloadManager import *
-import json, urllib2, os, thread
+import json, urllib.request, urllib.error, urllib.parse, os, _thread
 from multiprocessing import Process
 from DownloadDaemon import starter
 from EMail import send_mail
@@ -43,7 +43,7 @@ def start():
         p = Process(target=starter)
         p.start()
         return "{'status':'" + str(p.pid) + "'}"
-    except Exception, e:
+    except Exception as e:
             return '{"error":"' + e.message + '"}',400
 
 
@@ -58,13 +58,13 @@ def kill():
             p.terminate()
             p.join()
             jsonreq = json.dumps({'jsonrpc':'2.0', 'id':'qwer', 'method':'aria2.pauseAll'})
-            c = urllib2.urlopen('http://localhost:6800/jsonrpc', jsonreq)
-            print c
+            c = urllib.request.urlopen('http://localhost:6800/jsonrpc', jsonreq)
+            print(c)
         if not p.is_alive():
             return '{"status":"success"}'
         else:
             return '{"error":"error"}'
-    except Exception, e:
+    except Exception as e:
         return '{"error":"' + e.message + '"}',400
 
 
@@ -93,10 +93,10 @@ def add_user_request():
             status = add_user(newUser)
             if status == "success":
                 resp = Response(response='{"status": "'+ status + '"}', status=200)
-                thread.start_new_thread(send_mail, (data['email'],"Hi\n Your user name for Bassa is "+data['user_name']+" and your password is "+ data['password']))
+                _thread.start_new_thread(send_mail, (data['email'],"Hi\n Your user name for Bassa is "+data['user_name']+" and your password is "+ data['password']))
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -117,7 +117,7 @@ def remove_user_request(username):
                 resp = Response(response='{"status": "'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -140,7 +140,7 @@ def update_user_request(username):
                 resp = Response(response='{"status": "'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -157,11 +157,11 @@ def get_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_users()
-            if not isinstance(status, basestring):
+            if not isinstance(status, str):
                 resp = Response(response=json.dumps(status), status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -178,11 +178,11 @@ def get_blocked_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_blocked_users()
-            if not isinstance(status, basestring):
+            if not isinstance(status, str):
                 resp = Response(response=json.dumps(status), status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -205,7 +205,7 @@ def block_user_request(username):
                 resp = Response(response='{"status": "'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -228,7 +228,7 @@ def unblock_user_request(username):
                 resp = Response(response='{"status": "'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -251,7 +251,7 @@ def add_download_request():
                 resp = Response(response='{"status":"'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -272,7 +272,7 @@ def remove_download_request(id):
                 resp = Response(response='{"status":"'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -294,7 +294,7 @@ def rate_download_request(id):
                 resp = Response(response='{"status":"'+ status + '"}', status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -311,11 +311,11 @@ def get_downloads_user_request(limit):
     if token is not None :
         try:
             status = get_downloads_user(g.user.userName, int(limit))
-            if not isinstance(status, basestring):
+            if not isinstance(status, str):
                 resp = Response(response=json.dumps(status), status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -332,11 +332,11 @@ def get_downloads_request(limit):
     if token is not None :
         try:
             status = get_downloads(int(limit))
-            if not isinstance(status, basestring):
+            if not isinstance(status, str):
                 resp = Response(response=json.dumps(status), status=200)
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
-        except Exception, e:
+        except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -353,11 +353,11 @@ def get_download(id):
         try:
             status = get_download_path(int(id))
             if status is not None and status!="db connection error":
-                print status
+                print(status)
                 return send_file(status,as_attachment=True, mimetype='multipart/form-data')
             else:
                 return '{"error":"file not found"}', 404
-        except Exception, e:
+        except Exception as e:
             resp = Response(response="{'error':'" + e.message + "'}", status=400)
             return resp
     elif token is not None:

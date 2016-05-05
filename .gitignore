@@ -33,3 +33,4 @@
 
 *.log
 components/core/debug-server.log
+downloads/

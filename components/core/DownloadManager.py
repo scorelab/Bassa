@@ -9,9 +9,9 @@ def add_download(download):
         cursor = db.cursor()
         sql = "INSERT into download(link, user_name, added_time) VALUES(%s, %s, %s);"
         try:
-            cursor.execute(sql, (download.link, download.userName, long(time.time())))
+            cursor.execute(sql, (download.link, download.userName, int(time.time())))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -32,7 +32,7 @@ def remove_download(id, userName):
                 return "Download started. Entry cannot be deleted."
             cursor.execute(sql, (id, userName))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -53,7 +53,7 @@ def rate_download(id, userName, rate):
                 cursor.execute(sql, (userName, id, rate))
             db.commit()
             update_rate(id)
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -71,7 +71,7 @@ def update_rate(id):
             data = cursor.fetchone()
             cursor.execute(sql, (data[0], id))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -89,7 +89,7 @@ def get_downloads_user(userName, limit):
             results = cursor.fetchall()
             db.commit()
             return results
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
@@ -105,7 +105,7 @@ def get_downloads(limit):
             results = cursor.fetchall()
             db.commit()
             return results
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
@@ -119,11 +119,11 @@ def update_status_gid(gid, status, completed=False):
             sql = "UPDATE download SET status=%s, completed_time=%s WHERE gid=%s ;"
         try:
             if completed:
-                cursor.execute(sql, (status, long(time.time()), gid))
+                cursor.execute(sql, (status, int(time.time()), gid))
             else:
                 cursor.execute(sql, (status, gid))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -138,7 +138,7 @@ def set_gid(id, gid):
         try:
             cursor.execute(sql, (gid, id))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -159,7 +159,7 @@ def get_to_download():
             download.id = results['id']
             db.commit()
             return download
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
@@ -171,7 +171,7 @@ def set_path(gid, path):
         try:
             cursor.execute(sql, (path, gid))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -190,7 +190,7 @@ def get_download_path(id):
             path = results['path']
             db.commit()
             return path
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
@@ -207,7 +207,7 @@ def get_download_email(gid):
             path = results['email']
             db.commit()
             return path
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
@@ -222,7 +222,7 @@ def get_to_delete(time, rate):
             results = cursor.fetchall()
             db.commit()
             return results
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
@@ -230,11 +230,11 @@ def set_delete_status(path):
     db = get_db_con()
     if db is not None:
         cursor = db.cursor()
-        sql = "UPDATE download SET status=2 WHERE path=%s ;"
+        sql = "UPDATE download SET status=2 WHERE path='%s' ;" % path
         try:
-            cursor.execute(sql, path)
+            cursor.execute(sql)
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"

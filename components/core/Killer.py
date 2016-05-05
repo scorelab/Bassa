@@ -1,6 +1,6 @@
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
-req = urllib2.Request('http://localhost:5000/download/kill')
+req = urllib.request.Request('http://localhost:5000/download/kill')
 req.add_header('key', '123456789')
-resp = urllib2.urlopen(req)
+resp = urllib.request.urlopen(req)
 content = resp.read()

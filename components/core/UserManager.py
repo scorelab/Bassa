@@ -32,8 +32,8 @@ def get_user(username):
     db = get_db_con()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT * FROM user WHERE user_name=%s and blocked=0;"
-        cursor.execute(sql, (username))
+        sql = "SELECT * FROM user WHERE user_name='%s' and blocked=0;" % username
+        cursor.execute(sql)
         data = cursor.fetchone()
         if data == None:
             return None
@@ -49,7 +49,7 @@ def add_user(user):
         try:
             cursor.execute(sql, (user.userName, user.password, user.auth, user.email))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -64,7 +64,7 @@ def remove_user(username):
         try:
             cursor.execute(sql, (username))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -79,7 +79,7 @@ def update_user(user, username):
         try:
             cursor.execute(sql, (user.userName, user.auth, user.email, username))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -94,7 +94,7 @@ def get_users():
             cursor.execute(sql)
             results = cursor.fetchall()
             return results
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
@@ -107,7 +107,7 @@ def get_blocked_users():
             cursor.execute(sql)
             results = cursor.fetchall()
             return results
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
@@ -119,7 +119,7 @@ def block_user(username):
         try:
             cursor.execute(sql, (1, username))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -133,7 +133,7 @@ def unblock_user(username):
         try:
             cursor.execute(sql, (0, username))
             db.commit()
-        except MySQLdb.Error, e:
+        except MySQLdb.Error as e:
             db.rollback()
             return e[1]
         return "success"
