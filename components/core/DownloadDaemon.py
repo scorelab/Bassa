@@ -1,15 +1,53 @@
-import _thread
+import threading
+import queue
 import json, inspect, os, time
 from DownloadManager import *
-from Models import Status
+from Models import Status, Download
 from EMail import send_mail
 from DiskMan import *
 
 import websocket
 
 conf = {}
-db_lock = _thread.allocate_lock()
+db_lock = threading.Lock()
 folder_size=0
+startedDownloads = []
+pausedDownloads = []
+handler = None
+
+class Handler(queue.Queue):
+
+    def __init__(self, ws):
+        queue.Queue.__init__(self)
+        self.ws = ws
+        self.num_workers = 5
+        # self.start_workers()
+
+    def add_to_queue(self, download):
+        self.put(download)
+
+    def start_workers(self):
+        for i in range(self.num_workers):
+            t = threading.Thread(target=self.worker)
+            t.daemon = True
+            t.start()
+
+    def start_download(self, download):
+        msg = JSONer("down_" + str(download.id), 'aria2.addUri', [[download.link]])
+        self.ws.send(msg)
+        startedDownloads.append(download)
+        self.task_done()
+
+    def pause_download(self, download):
+        msg = JSONer("pause_" + str(download.id), 'aria2.pause', [[download.gid]])
+        self.ws.send(msg)
+
+    def worker(self):
+        while True:
+            download = self.get()
+            if download is None or folder_size>=conf['size_limit']:
+                return
+            self.start_download(download)
 
 def conf_reader():
     global conf
@@ -89,9 +127,29 @@ def JSONer(id, method, params=None):
         data['params'] = params
     return json.dumps(data)
 
+def set_download_gid(id, gid):
+    global startedDownloads
+    for d in startedDownloads:
+        if d.id == int(id):
+            d.gid = gid
 
 def on_message(ws, message):
-    _thread.start_new_thread(message_handle, (ws, message))
+    global handler
+    data = json.loads(message)
+    if 'id' in data and data['id'] == "act":
+        toBeDownloaded = get_to_download()
+        for download in toBeDownloaded:
+            handler.add_to_queue(download)
+        handler.join()
+    elif 'id' in data:
+        txt = data['id'].split('_')
+        if txt[0] == "down":
+            db_lock.acquire()
+            set_gid(txt[1], data['result'])
+            set_download_gid(txt[1], data['result'])
+            # update_status_gid(data['result'], Status.STARTED)
+            db_lock.release()
+
 
 
 def on_error(ws, error):
@@ -107,7 +165,7 @@ def on_open(ws):
 
 
 def starter():
-    global folder_size
+    global folder_size, handler
     conf_reader()
     remove_files(conf['max_age'], conf['min_rating'])
     folder_size=get_size(conf['down_folder'])
@@ -117,5 +175,8 @@ def starter():
                                 on_error=on_error,
                                 on_close=on_close)
     ws.on_open = on_open
+
+    handler = Handler(ws)
+    threading.Thread(target=handler.start_workers).start()
 
     ws.run_forever()
