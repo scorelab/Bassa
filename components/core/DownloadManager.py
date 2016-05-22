@@ -1,6 +1,12 @@
 from Models import Download, Status
 from DBCon import *
 import time
+import sys
+
+verbose = False
+
+if len(sys.argv) == 2 and sys.argv[1] == '-v':
+    verbose = True
 
 
 def add_download(download):
@@ -153,10 +159,10 @@ def get_to_download():
         try:
             cursor.execute(sql)
             if cursor.rowcount == 0:
-                print ("zero count")
+                if verbose: print ("zero count")
                 return None
             results = cursor.fetchall()
-            print ("LIST", results)
+            if verbose: print ("LIST", results)
             downloads = [Download(result['link'], result['user_name'], result['id']) for result in results]
             return downloads
         except MySQLdb.Error as e:
@@ -221,8 +227,8 @@ def get_to_delete(time, rate):
             cursor.execute(sql, (time, rate))
             results = cursor.fetchall()
             db.commit()
-            print ("Time", time, "Rate", rate)
-            print ("results", results)
+            if verbose: print ("Time", time, "Rate", rate)
+            if verbose: print ("results", results)
             return results
         except MySQLdb.Error as e:
             return e[1]
