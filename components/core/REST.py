@@ -9,12 +9,16 @@ import json, urllib.request, urllib.error, urllib.parse, os, _thread
 from multiprocessing import Process
 from DownloadDaemon import starter
 from EMail import send_mail
+import sys
 
 server = Flask(__name__)
 server.config['SECRET_KEY'] = "123456789"
 cors = CORS(server)
 p = None
+verbose = False
 
+if len(sys.argv) == 2 and sys.argv[1] == '-v':
+    verbose = True
 
 def token_validator(token):
     user = verify_auth_token(token, server.config['SECRET_KEY'])
@@ -58,8 +62,10 @@ def kill():
             p.terminate()
             p.join()
             jsonreq = json.dumps({'jsonrpc':'2.0', 'id':'qwer', 'method':'aria2.pauseAll'})
+            jsonreq = jsonreq.encode('ascii')
             c = urllib.request.urlopen('http://localhost:6800/jsonrpc', jsonreq)
-            print(c)
+            if verbose:
+                print(c)
         if not p.is_alive():
             return '{"status":"success"}'
         else:
@@ -353,7 +359,8 @@ def get_download(id):
         try:
             status = get_download_path(int(id))
             if status is not None and status!="db connection error":
-                print(status)
+                if verbose:
+                    print(status)
                 return send_file(status,as_attachment=True, mimetype='multipart/form-data')
             else:
                 return '{"error":"file not found"}', 404

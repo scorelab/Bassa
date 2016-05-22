@@ -9,9 +9,11 @@ class AuthLeval:
     ADMIN, STUDENT, ACADEMIC, NONACADEMIC= list(range(4))
 
 class Download:
-    def __init__(self, link, userName):
+    def __init__(self, link, userName, id):
         self.link=link
         self.userName=userName
+        self.id=id
+        self.gid=None
 
 class Status:
 

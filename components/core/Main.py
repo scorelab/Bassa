@@ -2,7 +2,6 @@
 from REST import *
 import logging
 
-
 def main():
     server.run(debug=True)
 

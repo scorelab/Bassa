@@ -1,6 +1,12 @@
 from Models import Download, Status
 from DBCon import *
 import time
+import sys
+
+verbose = False
+
+if len(sys.argv) == 2 and sys.argv[1] == '-v':
+    verbose = True
 
 
 def add_download(download):
@@ -149,16 +155,16 @@ def get_to_download():
     db = get_db_con()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT link, id FROM download WHERE status=0 ORDER by 'added_time' LIMIT 1;"
+        sql = "SELECT link, id, user_name FROM download WHERE status=0 ORDER by 'added_time';"
         try:
             cursor.execute(sql)
             if cursor.rowcount == 0:
+                if verbose: print ("zero count")
                 return None
-            results = cursor.fetchone()
-            download = Download(results['link'], None)
-            download.id = results['id']
-            db.commit()
-            return download
+            results = cursor.fetchall()
+            if verbose: print ("LIST", results)
+            downloads = [Download(result['link'], result['user_name'], result['id']) for result in results]
+            return downloads
         except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
@@ -221,6 +227,8 @@ def get_to_delete(time, rate):
             cursor.execute(sql, (time, rate))
             results = cursor.fetchall()
             db.commit()
+            if verbose: print ("Time", time, "Rate", rate)
+            if verbose: print ("results", results)
             return results
         except MySQLdb.Error as e:
             return e[1]
