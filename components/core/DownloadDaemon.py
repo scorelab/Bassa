@@ -1,16 +1,17 @@
 import threading
 import queue
-import json, inspect, os, time
+import json, time
 from DownloadManager import *
 from Models import Status, Download
 from EMail import send_mail
 from DiskMan import *
+from ConfReader import conf_reader
 
 import websocket
 import sys
 
 
-conf = {}
+conf = conf_reader("dl.conf")
 db_lock = threading.Lock()
 folder_size=0
 startedDownloads = []
@@ -57,15 +58,6 @@ class Handler(queue.Queue):
             if download is None or folder_size>=conf['size_limit']:
                 return
             self.start_download(download)
-
-def conf_reader():
-    global conf
-    file = open(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/dl.conf")
-    txt = ""
-    for line in file:
-        txt += line.strip()
-    conf = json.loads(txt)
-
 
 def add_uri(ws, download):
     if verbose:
@@ -161,7 +153,6 @@ def on_open(ws):
 
 def starter():
     global folder_size, handler
-    conf_reader()
     # remove_files(conf['max_age'], conf['min_rating'])
     folder_size=get_size(conf['down_folder'])
     websocket.enableTrace(False)
