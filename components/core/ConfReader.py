@@ -13,12 +13,14 @@ def check_conf_availability():
     if any(val == '' for val in emailConf.values()):
         sys.exit("Please set all the values in email.conf")
 
-    dlConf.close()
-    emailConf.close()
 
 def get_conf_reader(confFile):
     f = open(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + confFile)
-    txt = ""
-    for line in f:
-        txt += line.strip()
-    return json.loads(txt)
+
+    try:
+        txt = ""
+        for line in f:
+            txt += line.strip()
+        return json.loads(txt)
+    finally:
+        f.close()
