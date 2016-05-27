@@ -32,8 +32,8 @@ if not os.path.exists(configdir):
 
 email_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + EMAIL_CONF
 dl_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + DL_CONF
-shutil.copyfile(email_conf_location, configdir + '/' + EMAIL_CONF)
-shutil.copyfile(dl_conf_location, configdir + '/' + DL_CONF)
+shutil.copyfile(email_conf_location, configdir + EMAIL_CONF)
+shutil.copyfile(dl_conf_location, configdir + DL_CONF)
 
 ###/ Set configs ###
 
