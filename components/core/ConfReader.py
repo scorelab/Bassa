@@ -2,6 +2,14 @@ import os
 import inspect
 import json
 import sys
+import platform
+
+
+if platform.system() == 'Linux':
+    configdir = os.path.expanduser('~') + '/.config/bassa/'
+elif platform.system() == 'Windows':
+    configdir = os.path.expanduser('~') + '/%app_data%/bassa/'
+
 
 def check_conf_availability():
     """Checks whether the conf files have been properly set. Exits otherwise"""
@@ -15,7 +23,7 @@ def check_conf_availability():
 
 
 def get_conf_reader(confFile):
-    f = open(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + confFile)
+    f = open(configdir + confFile)
 
     try:
         txt = ""
