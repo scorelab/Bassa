@@ -1,10 +1,10 @@
 import smtplib
+from ConfReader import get_conf_reader
 
-username = 'bassa.ucsc@gmail.com'
-password = 'bassa.123'
+conf = get_conf_reader("email.conf")
 
 def send_mail(toaddrs, msg):
     server = smtplib.SMTP_SSL('smtp.gmail.com:465')
-    server.login(username,password)
-    server.sendmail('bassa.ucsc@gmail.com', toaddrs, msg)
+    server.login(conf['username'],conf['password'])
+    server.sendmail(conf['username'], toaddrs, msg)
     server.quit()

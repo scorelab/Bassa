@@ -1,6 +1,14 @@
 import os
+import shutil
+import inspect
+import platform
 from setuptools import setup
 from pip.req import parse_requirements
+
+EMAIL_CONF = 'email.conf'
+DL_CONF = 'dl.conf'
+LINUX_CONFDIR = os.path.expanduser('~') + '/.config/bassa/'
+WIN_CONFDIR = os.path.expanduser('~') + '/%app_data%/bassa/'
 
 # Utility function to read the README file.
 def read(file_name):
@@ -12,6 +20,22 @@ requirements_path = os.path.join(base_dir, 'requirements.txt')
 install_reqs = parse_requirements(requirements_path, session=False)
 
 requirements = [str(ir.req) for ir in install_reqs]
+
+### Set configs ###
+if platform.system() == 'Linux':
+    configdir = LINUX_CONFDIR
+elif platform.system() == 'Windows':
+    configdir = WIN_CONFDIR
+
+if not os.path.exists(configdir):
+    os.makedirs(configdir)
+
+email_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + EMAIL_CONF
+dl_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + DL_CONF
+shutil.copyfile(email_conf_location, configdir + EMAIL_CONF)
+shutil.copyfile(dl_conf_location, configdir + DL_CONF)
+
+###/ Set configs ###
 
 setup(
     name="bassa",
