@@ -103,17 +103,18 @@ def findSupportedHandler(download):
     return None
 
 def on_message(ws, message):
-    global handler
+    global handler, folder_size
     data = json.loads(message)
     if 'id' in data and data['id'] == "act":
         toBeDownloaded = get_to_download()
-        for download in toBeDownloaded:
-            handler = findSupportedHandler(download)
-            if not handler:
-                handler = Handler(ws)
-                handlerLst.append(handler)
-            handler.add_to_queue(download)
-        handler.join()
+        if toBeDownloaded:
+            for download in toBeDownloaded:
+                handler = findSupportedHandler(download)
+                if not handler:
+                    handler = Handler(ws)
+                    handlerLst.append(handler)
+                handler.add_to_queue(download)
+            handler.join()
     elif 'id' in data:
         txt = data['id'].split('_')
         if txt[0] == "down":
@@ -135,7 +136,6 @@ def on_message(ws, message):
             db_lock.acquire()
             update_status_gid(data['params'][0]['gid'], Status.COMPLETED, True)
             get_status(ws, data['params'][0]['gid'])
-            add_uri(ws, get_to_download())
             db_lock.release()
 
 

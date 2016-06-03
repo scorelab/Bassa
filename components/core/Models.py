@@ -12,8 +12,10 @@ class Download:
     def __init__(self, link, userName, id=None):
         self.link=link
         self.userName=userName
-        if id: self.id=id
+        self.id=id
         self.gid=None
+    def __str__(self):
+        return "id: %s, user: %s, link: %s, gid: %s" % (self.id, self.userName, self.link, self.gid)
 
 class Status:
 
