@@ -2,15 +2,17 @@ from Models import Download, Status
 from DBCon import *
 import time
 import sys
+import sqlalchemy.pool as pool
 
 verbose = False
 
 if len(sys.argv) == 2 and sys.argv[1] == '-v':
     verbose = True
 
+threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=5)
 
 def add_download(download):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "INSERT into download(link, user_name, added_time) VALUES(%s, %s, %s);"
@@ -25,7 +27,7 @@ def add_download(download):
 
 
 def remove_download(id, userName):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql1 = "SELECT status FROM download WHERE id=%s;"
@@ -48,7 +50,7 @@ def remove_download(id, userName):
 def rate_download(id, userName, rate):
     if rate > 5 or rate < 0:
         return "Value error"
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql1 = "UPDATE rate SET rate=%s WHERE id=%s AND user_name=%s;"
@@ -67,7 +69,7 @@ def rate_download(id, userName, rate):
 
 
 def update_rate(id):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "UPDATE download SET rating=%s WHERE id=%s ;"
@@ -86,14 +88,14 @@ def update_rate(id):
 
 def get_downloads_user(userName, limit):
     recordsPerPage = 15
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT * FROM download WHERE user_name=%s ORDER by 'added_time' LIMIT %s, %s;"
         try:
             cursor.execute(sql, (userName, (limit - 1) * recordsPerPage, limit * recordsPerPage))
             results = cursor.fetchall()
-            db.commit()
+            db.close()
             return results
         except MySQLdb.Error as e:
             return e[1]
@@ -102,14 +104,14 @@ def get_downloads_user(userName, limit):
 
 def get_downloads(limit):
     recordsPerPage = 15
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT * FROM download WHERE status=3 ORDER by 'added_time' DESC LIMIT %s, %s;"
         try:
             cursor.execute(sql, ((limit - 1) * recordsPerPage, limit * recordsPerPage))
             results = cursor.fetchall()
-            db.commit()
+            db.close()
             return results
         except MySQLdb.Error as e:
             return e[1]
@@ -117,7 +119,7 @@ def get_downloads(limit):
 
 
 def update_status_gid(gid, status, completed=False):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "UPDATE download SET status=%s WHERE gid=%s ;"
@@ -137,12 +139,12 @@ def update_status_gid(gid, status, completed=False):
 
 
 def set_gid(id, gid):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql = "UPDATE download SET gid=%s WHERE id=%s ;"
+        sql = "UPDATE download SET gid='%s' WHERE id=%s;" % (gid, id)
         try:
-            cursor.execute(sql, (gid, id))
+            cursor.execute(sql)
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
@@ -150,9 +152,8 @@ def set_gid(id, gid):
         return "success"
     return "db connection error"
 
-
 def get_to_download():
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT link, id, user_name FROM download WHERE status=0 ORDER by 'added_time';"
@@ -170,7 +171,7 @@ def get_to_download():
     return "db connection error"
 
 def set_path(gid, path):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "UPDATE download SET path=%s WHERE gid=%s ;"
@@ -184,7 +185,7 @@ def set_path(gid, path):
     return "db connection error"
 
 def get_download_path(id):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT path FROM download WHERE status=3 AND id=%s LIMIT 1;"
@@ -194,14 +195,14 @@ def get_download_path(id):
                 return None
             results = cursor.fetchone()
             path = results['path']
-            db.commit()
+            db.close()
             return path
         except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
 def get_download_email(gid):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT user.email FROM user LEFT JOIN download ON user.user_name = download.user_name WHERE download.gid=%s LIMIT 1;"
@@ -211,7 +212,7 @@ def get_download_email(gid):
                 return None
             results = cursor.fetchone()
             path = results['email']
-            db.commit()
+            db.close()
             return path
         except MySQLdb.Error as e:
             return e[1]
@@ -219,14 +220,14 @@ def get_download_email(gid):
 
 def get_to_delete(time, rate):
     recordsPerPage = 15
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "SELECT path FROM  download  WHERE  completed_time <%s AND  rating <=%s AND status=3;"
         try:
             cursor.execute(sql, (time, rate))
             results = cursor.fetchall()
-            db.commit()
+            db.close()
             if verbose: print ("Time", time, "Rate", rate)
             if verbose: print ("results", results)
             return results
@@ -235,7 +236,7 @@ def get_to_delete(time, rate):
     return "db connection error"
 
 def set_delete_status(path):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "UPDATE download SET status=2 WHERE path='%s' ;" % path
