@@ -46,7 +46,7 @@ def start():
         global p
         p = Process(target=starter)
         p.start()
-        return "{'status':'" + str(p.pid) + "'}"
+        return '{"status":"' + str(p.pid) + '"}'
     except Exception as e:
             return '{"error":"' + e.message + '"}',400
 
