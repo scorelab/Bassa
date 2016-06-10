@@ -39,6 +39,7 @@ gulp.task('watch', function() {
   gulp.watch('app/*.html', browserSync.reload);
   gulp.watch('app/js/*.js', browserSync.reload);
   gulp.watch('app/lib/', browserSync.reload);
+  gulp.watch('app/views/*.html', browserSync.reload);
 })
 
 // Optimization Tasks 
