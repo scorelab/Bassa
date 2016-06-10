@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="bassa">
 
 <head>
   <meta charset="UTF-8">
@@ -7,14 +7,19 @@
   <!--build:css css/styles.min.css-->
   <link rel="stylesheet" href="css/styles.css">
   <!--endbuild-->
+
+  <!--build:js js/main.min.js -->
+  <script src="/lib/angular/angular.min.js"></script>
+  <script src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/controllers/RootCtrl.js"></script>
+  <!-- endbuild -->
 </head>
 
 <body>
-  Here be Bassa
-  <!--build:js js/main.min.js -->
-  <script src="/lib/angular/angular.min.js"></script>
-  <script src="js/main.js"></script>
-  <!-- endbuild -->
+  Here be Bassa!
+  <div ui-view></div>
 </body>
 
 </html>
