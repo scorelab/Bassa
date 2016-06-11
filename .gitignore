@@ -34,3 +34,8 @@
 *.log
 components/core/debug-server.log
 downloads/
+
+# UI
+ui/dist
+ui/node_modules
+ui/app/lib

@@ -1,5 +1,4 @@
 
-
 ![logo](http://gdurl.com/7XYK)
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
@@ -102,3 +101,14 @@ Returns JSON of all the downloads of current user. Page contains 15 records orde
 ###### GET
 Headers: token: <auth token>  
 Returns fileas multipart form data. Dose not return a new auth token header
+
+
+# Bassa UI
+
+### Install dependencies with
+
+`npm install`
+`bower install`
+
+### To start
+run `gulp`
