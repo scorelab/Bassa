@@ -100,7 +100,7 @@ Returns JSON of all the downloads of current user. Page contains 15 records orde
 **http://localhost:5000/api/download/\<id\>**  
 ###### GET
 Headers: token: <auth token>  
-Returns fileas multipart form data. Dose not return a new auth token header
+Returns file as multipart form data. Does not return a new auth token header
 
 
 # Bassa UI
@@ -108,6 +108,7 @@ Returns fileas multipart form data. Dose not return a new auth token header
 ### Install dependencies with
 
 `npm install`
+
 `bower install`
 
 ### To start
