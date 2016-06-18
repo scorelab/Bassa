@@ -248,7 +248,9 @@ def unblock_user_request(username):
 @server.route('/api/download', methods=['POST'])
 def add_download_request():
     token = token_validator(request.headers['token'])
+    print (request, token)
     if token is not None:
+        print (dir(request))
         data = request.get_json(force=True)
         try:
             newDownload = Download(data['link'], g.user.userName)
