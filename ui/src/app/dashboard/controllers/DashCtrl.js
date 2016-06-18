@@ -2,12 +2,13 @@
 
   angular
     .module('app')
-    .controller('DashCtrl', [ '$scope', '$http',
+    .controller('DashCtrl', [ '$scope', '$http', 'ToastService',
       DashCtrl
     ]);
 
-  function DashCtrl($scope, $http) {
+  function DashCtrl($scope, $http, ToastService) {
     $scope.dlink = {link: ''}
+    console.log(ToastService);
 
     $scope.addLink = function() {
 
@@ -18,7 +19,9 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
         console.log("Success");
+        ToastService.showToast("Link added");
       }, function(error){
+        ToastService.showToast("Oops! Something went wrong");
         console.log("Oops!", error);
       });
     };
