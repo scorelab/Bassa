@@ -19,9 +19,11 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
         console.log("Success");
+        $scope.dlink.link = '';
         ToastService.showToast("Link added");
       }, function(error){
         ToastService.showToast("Oops! Something went wrong");
+        $scope.dlink.link = '';
         console.log("Oops!", error);
       });
     };
