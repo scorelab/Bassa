@@ -9,8 +9,6 @@
 
   function Security($injector){
 
-    var token;
-
     function login(credentials, cb) {
       var $http = $injector.get('$http');
 
@@ -27,7 +25,6 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
         setToken(response.headers()['token']);
-        console.log(token);
         cb(true);
       }, function(error){
         console.log("Oops");
@@ -36,22 +33,26 @@
     };
 
     function setToken(newToken) {
-      token = newToken;
+      localStorage.setItem("Token", newToken);
     };
 
+    function removeToken() {
+      localStorage.setItem("Token", '');
+    }
+
     function getToken(){
-      return token;
+      return localStorage.getItem("Token");
     };
 
     function loggedIn() {
-      console.log(token);
-      return token !== undefined;
+      return getToken() !== '';
     };
 
     return {
       loggedIn: loggedIn,
       login:login,
       token:getToken,
+      removeToken:removeToken,
       setToken:setToken
     };
 

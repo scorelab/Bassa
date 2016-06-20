@@ -3,11 +3,11 @@
   angular
        .module('app')
        .controller('MainController', [
-          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state', 'ToastService',
+          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state', 'ToastService', 'Security',
           MainController
        ]);
 
-  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, ToastService) {
+  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, ToastService, Security) {
     var vm = this;
 
     vm.menuItems = [ ];
@@ -17,12 +17,17 @@
     vm.title = $state.current.data.title;
     vm.showSimpleToast = ToastService.showToast;
     vm.toggleRightSidebar = toggleRightSidebar;
+    vm.logout = logout;
 
     navService
       .loadAllItems()
       .then(function(menuItems) {
         vm.menuItems = [].concat(menuItems);
       });
+
+    function logout() {
+      Security.removeToken();
+    }
 
     function toggleRightSidebar() {
         $mdSidenav('right').toggle();

@@ -106,7 +106,6 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
     if (toState.authenticate && !Security.loggedIn()) {
       // User isn’t authenticated
-      console.log(Security.loggedIn());
       $state.transitionTo("login");
       event.preventDefault();
     }

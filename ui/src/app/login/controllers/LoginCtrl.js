@@ -12,6 +12,8 @@
     $scope.user = {};
     $scope.incorrectCredentials = false;
 
+    Security.removeToken();
+
     $scope.login = function(){
       Security.login($scope.user, function(status) {
         if (status){
