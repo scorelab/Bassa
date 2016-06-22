@@ -109,7 +109,5 @@ Returns file as multipart form data. Does not return a new auth token header
 
 `npm install`
 
-`bower install`
-
 ### To start
-run `gulp`
+run `gulp serve`
