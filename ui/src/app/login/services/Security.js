@@ -9,7 +9,7 @@
 
   function Security($injector){
 
-    function login(credentials, cb) {
+    var login = function(credentials, cb) {
       var $http = $injector.get('$http');
 
       return $http({
@@ -32,19 +32,19 @@
       });
     };
 
-    function setToken(newToken) {
+    var setToken = function(newToken) {
       localStorage.setItem("Token", newToken);
     };
 
-    function removeToken() {
+    var removeToken = function() {
       localStorage.setItem("Token", '');
     }
 
-    function getToken(){
+    var getToken = function(){
       return localStorage.getItem("Token");
     };
 
-    function loggedIn() {
+    var loggedIn = function() {
       return getToken() !== '';
     };
 

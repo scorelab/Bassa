@@ -25,9 +25,9 @@
         vm.menuItems = [].concat(menuItems);
       });
 
-    function logout() {
+    var logout = function () {
       Security.removeToken();
-    }
+    };
 
     function toggleRightSidebar() {
         $mdSidenav('right').toggle();
