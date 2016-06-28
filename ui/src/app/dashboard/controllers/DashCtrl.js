@@ -2,31 +2,25 @@
 
   angular
     .module('app')
-    .controller('DashCtrl', [ '$scope', '$http', 'ToastService',
+    .controller('DashCtrl', [ '$scope', 'ToastService', 'DashService',
       DashCtrl
     ]);
 
-  function DashCtrl($scope, $http, ToastService) {
-    $scope.dlink = {link: ''}
+  function DashCtrl($scope, ToastService, DashService) {
+    $scope.dlink = {link: ''};
+    $scope.downloads = [];
     console.log(ToastService);
 
     $scope.addLink = function() {
-
-      return $http({
-          method: 'POST',
-          url: 'http://localhost:5000/api/download',
-          data: JSON.stringify($scope.dlink),
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).then(function (response) {
-        console.log("Success");
+      DashService.addDownload($scope.dlink).then(function (response) {
         $scope.dlink.link = '';
         ToastService.showToast("Link added");
       }, function(error){
-        ToastService.showToast("Oops! Something went wrong");
         $scope.dlink.link = '';
-        console.log("Oops!", error);
+        ToastService.showToast("Oops! Something went wrong");
       });
     };
+
   }
 
 })();

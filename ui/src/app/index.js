@@ -38,7 +38,7 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
       })
       .state('home.table', {
         url: '/table',
-        controller: 'TableController',
+        controller: 'TableCtrl',
         controllerAs: 'vm',
         templateUrl: 'app/views/table.html',
         authenticate: true,

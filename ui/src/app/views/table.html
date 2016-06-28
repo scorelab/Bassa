@@ -4,22 +4,19 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>Issue</th>
-            <th>Status</th>
-            <th>Progress</th>
+            <th>User</th>
+            <th>Download name</th>
+            <th>Size</th>
+            <th>Completed time</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="data in vm.tableData track by $index">
+        <tr ng-repeat="data in downloads">
             <td data-title="ID">{{$index + 1}}</td>
-            <td data-title="Issue">{{data.issue}}</td>
-            <td data-title="Status">{{data.status}}</td>
-            <td data-title="Progress">
-                <md-progress-linear class="table-progress {{data.class}}"
-                                    md-mode="determinate"
-                                    value={{data.progress}}>
-                </md-progress-linear>
-            </td>
+            <td data-title="User">{{data.user_name}}</td>
+            <td data-title="Issue">{{data.download_name}}</td>
+            <td data-title="Progress">{{data.size}}</td>
+            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"</td>
         </tr>
         </tbody>
     </table>

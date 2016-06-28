@@ -96,6 +96,13 @@ def set_download_gid(id, gid):
         if d.id == int(id):
             d.gid = gid
 
+def sizeof(num):
+    for unit in ['','kB','MB','GB','TB','PB','EB','ZB']:
+        if abs(num) < 1024.0:
+            return "%3.1f%s" % (num, unit)
+        num /= 1024.0
+    return "%.1f%s" % (num, 'YB')
+
 def findSupportedHandler(download):
     for handler in handlerLst:
         if handler.isSupported(download):
@@ -129,7 +136,10 @@ def on_message(ws, message):
             folder_size+=int(data['result']['files'][0]['completedLength'])
             db_lock.release()
             path=data['result']['files'][0]['path'].split('/')
-            msg='Your download '+path[-1]+' is completed.'
+            size = sizeof(int(data['result']['files'][0]['completedLength']))
+            set_name(data['result']['gid'], path[-1])
+            set_size(data['result']['gid'], size)
+            # msg='Your download '+path[-1]+' is completed.'
             # send_mail([get_download_email(data['result']['gid'])],msg)
     elif 'method' in data:
         if data['method'] == "aria2.onDownloadComplete":

@@ -1,6 +1,6 @@
-<div layout-gt-md="row" layout-align="center">
+<div layout-gt-md="column" layout-align="center">
 
-  <div class="add-download-box" >
+  <md-content class="add-download-box" >
     <md-input-container flex class="downlod-input-box">
         <label>Add download</label>
         <input ng-model="dlink.link" name="taskText" type="url" required>
@@ -8,5 +8,19 @@
     <md-button class="md-fab md-wayrn md-mini" ng-click="addLink()">
         <i class="material-icons">add</i>
     </md-button>
-  </div>
+  </md-content>
+
+  <md-content class="downloads md-padding" >
+    <h5> On going downloads</h5>
+    <!-- <div ng-repeat="download in downloads">
+      <div id="download-link">
+        <p class="flow-text"> {{download.link}} </p>
+      </div>
+      <div id="time">
+        <p> Completed on {{download.completed_time}} </p>
+      </div>
+    </div> -->
+  </md-content
+
 </div>
+

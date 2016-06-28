@@ -152,6 +152,34 @@ def set_gid(id, gid):
         return "success"
     return "db connection error"
 
+def set_name(gid, name):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "UPDATE download SET download_name=%s WHERE gid=%s ;"
+        try:
+            cursor.execute(sql, (name, gid))
+            db.commit()
+        except MySQLdb.Error as e:
+            db.rollback()
+            return e[1]
+        return "success"
+    return "db connection error"
+
+def set_size(gid, size):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "UPDATE download SET size=%s WHERE gid=%s ;"
+        try:
+            cursor.execute(sql, (size, gid))
+            db.commit()
+        except MySQLdb.Error as e:
+            db.rollback()
+            return e[1]
+        return "success"
+    return "db connection error"
+
 def get_to_download():
     db = threadpool.connect()
     if db is not None:
