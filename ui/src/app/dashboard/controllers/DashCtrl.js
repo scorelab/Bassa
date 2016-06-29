@@ -9,7 +9,6 @@
   function DashCtrl($scope, ToastService, DashService) {
     $scope.dlink = {link: ''};
     $scope.downloads = [];
-    console.log(ToastService);
 
     $scope.addLink = function() {
       DashService.addDownload($scope.dlink).then(function (response) {
