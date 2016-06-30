@@ -3,15 +3,15 @@
 
   angular.module('app')
         .service('DashService', [
-        '$http',
+        '$http', 'BassaUrl',
       dashService
   ]);
 
-  function dashService($http){
+  function dashService($http, BassaUrl){
     var addDownload = function(link) {
       return $http({
           method: 'POST',
-          url: 'http://localhost:5000/api/download',
+          url: BassaUrl + '/api/download',
           data: JSON.stringify(link),
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
@@ -20,7 +20,7 @@
     var getDownloads = function() {
       return $http({
         method: 'GET',
-        url: 'http://localhost:5000/api/downloads/1'
+        url: BassaUrl + '/api/downloads/1'
       });
     };
 

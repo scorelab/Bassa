@@ -3,18 +3,18 @@
 
   angular.module('app')
         .service('Security', [
-        '$injector',
+        '$injector', 'BassaUrl',
       Security
   ]);
 
-  function Security($injector){
+  function Security($injector, BassaUrl){
 
     var login = function(credentials, cb) {
       var $http = $injector.get('$http');
 
       return $http({
           method: 'POST',
-          url: 'http://localhost:5000/api/login',
+          url: BassaUrl + '/api/login',
           transformRequest: function(obj) {
             var str = [];
             for(var p in obj)
