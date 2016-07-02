@@ -3,6 +3,8 @@
 angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
   'ngSanitize', 'ui.router', 'ngMaterial', 'nvd3', 'app'])
 
+  .value("BassaUrl", "http://localhost:5000")
+
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $mdThemingProvider,
                     $mdIconProvider) {
 
@@ -38,7 +40,7 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
       })
       .state('home.table', {
         url: '/table',
-        controller: 'TableController',
+        controller: 'TableCtrl',
         controllerAs: 'vm',
         templateUrl: 'app/views/table.html',
         authenticate: true,
