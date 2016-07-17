@@ -71,8 +71,8 @@ class RepeatedTimer(object):
         self.start()
 
     def _run(self):
-        gid = self.args[1]
-        if get_download_status(gid) == 3:
+        id = self.args[1]
+        if get_download_status(id) == 3:
             print ("stopping thread")
             self.stop()
         else:
@@ -99,7 +99,9 @@ def add_uri(ws, download):
     msg = JSONer("down_" + str(download.id), 'aria2.addUri', [[download.link]])
     ws.send(msg)
 
-def get_status(ws, gid):
+def get_status(ws, id=None, gid=None):
+    if id:
+        gid = get_gid_from_id(id)
     msg = JSONer("stat", 'aria2.tellStatus', [gid, ['gid', 'files']])
     print ("Getting status")
     ws.send(msg)
@@ -129,18 +131,18 @@ def set_download_gid(id, gid):
         if d.id == int(id):
             d.gid = gid
 
-def sizeof(num):
+def size_of(num):
     for unit in ['','kB','MB','GB','TB','PB','EB','ZB']:
         if abs(num) < 1024.0:
             return "%3.1f%s" % (num, unit)
         num /= 1024.0
     return "%.1f%s" % (num, 'YB')
 
-def sendStatus(id, completedLength, fileSize):
+def send_status(id, completedLength, fileSize):
     progress = int(float(completedLength)/float(fileSize) * 100)
     sc.emit('daemon', {'id': id, 'progress': progress})
 
-def findSupportedHandler(download):
+def find_supported_handler(download):
     for handler in handlerLst:
         if handler.isSupported(download):
             return handler
@@ -151,17 +153,17 @@ def on_message(ws, message):
     data = json.loads(message)
     print ("TOP LEVEL DATA", data)
     if 'id' in data and data['id'] == "act":
-        gid = data['result'][0]['gid']
         toBeDownloaded = get_to_download()
         if toBeDownloaded:
             for download in toBeDownloaded:
-                handler = findSupportedHandler(download)
+                handler = find_supported_handler(download)
                 if not handler:
                     handler = Handler(ws)
                     handlerLst.append(handler)
                 handler.add_to_queue(download)
+                print ("in download")
+                rt = RepeatedTimer(1, get_status, ws, download.id, None)
             handler.join()
-        rt = RepeatedTimer(1, get_status, ws, gid)
     elif 'id' in data:
         txt = data['id'].split('_')
         if txt[0] == "down":
@@ -181,18 +183,18 @@ def on_message(ws, message):
             path=data['result']['files'][0]['path'].split('/')
             raw_size = int(data['result']['files'][0]['length'])
             completedLength = data['result']['files'][0]['completedLength']
-            fileSize = sizeof(raw_size)
+            fileSize = size_of(raw_size)
             set_name(data['result']['gid'], path[-1])
             set_size(data['result']['gid'], fileSize)
             download_id = get_id_from_gid(gid)
-            sendStatus(download_id, completedLength, raw_size)
+            send_status(download_id, completedLength, raw_size)
             # msg='Your download '+path[-1]+' is completed.'
             # send_mail([get_download_email(data['result']['gid'])],msg)
     elif 'method' in data:
         if data['method'] == "aria2.onDownloadComplete":
             db_lock.acquire()
             update_status_gid(data['params'][0]['gid'], Status.COMPLETED, True)
-            get_status(ws, data['params'][0]['gid'])
+            get_status(ws, None, data['params'][0]['gid'])
             db_lock.release()
 
 

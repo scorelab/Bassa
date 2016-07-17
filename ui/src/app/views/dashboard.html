@@ -15,33 +15,6 @@
       <!-- <div class="table-responsive-vertical md-whiteframe-z1"> -->
     <table id="table" class="table table-hover table-bordered">
         <thead>
-        <tr>
-            <th>#</th>
-            <th>Download name</th>
-            <th>Progress</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td data-title="ID">{{$index + 1}}</td>
-            <td data-title="Name">fsociety.mp4</td>
-            <td data-title="Progress">
-              <md-progress-linear
-                md-mode="determinate"
-                value=70>
-              </md-progress-linear>
-            </td>
-        </tr>
-        <tr>
-            <td data-title="ID">2</td>
-            <td data-title="Name">Demon-days-Gorillaz.mp3</td>
-            <td data-title="Progress">
-              <md-progress-linear
-                md-mode="determinate"
-                value=10>
-              </md-progress-linear>
-            </td>
-        </tr>
         <tr ng-repeat="data in downloads">
             <td data-title="ID">{{$index + 1}}</td>
             <td data-title="Issue">{{data.download_name}}</td>

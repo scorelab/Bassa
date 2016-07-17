@@ -283,7 +283,8 @@ def get_download_status(gid):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT status FROM download WHERE gid='%s';" % gid
+        sql = "SELECT status FROM download WHERE id='%s';" % gid
+        print (sql)
         try:
             cursor.execute(sql)
             if cursor.rowcount == 0:
@@ -311,6 +312,24 @@ def get_id_from_gid(gid):
             status = results['id']
             db.close()
             return status
+        except MySQLdb.Error as e:
+            return e[1]
+    return "db connection error"
+
+def get_gid_from_id(id):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT gid FROM download WHERE id='%s';" % id
+        try:
+            cursor.execute(sql)
+            if cursor.rowcount == 0:
+                return None
+            results = cursor.fetchone()
+            print ('results')
+            gid = results['gid']
+            db.close()
+            return gid
         except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
