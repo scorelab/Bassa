@@ -20,7 +20,7 @@
     var getDownloads = function() {
       return $http({
         method: 'GET',
-        url: BassaUrl + '/api/downloads/1'
+        url: BassaUrl + '/api/user/downloads/1'
       });
     };
 

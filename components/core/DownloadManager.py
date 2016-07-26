@@ -15,9 +15,10 @@ def add_download(download):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql = "INSERT into download(link, user_name, added_time) VALUES(%s, %s, %s);"
+        download_name = download.link.split('/')[-1]
+        sql = "INSERT into download(link, user_name, added_time, download_name) VALUES(%s, %s, %s, %s);"
         try:
-            cursor.execute(sql, (download.link, download.userName, int(time.time())))
+            cursor.execute(sql, (download.link, download.userName, int(time.time()), download_name))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
@@ -119,6 +120,7 @@ def get_downloads(limit):
 
 
 def update_status_gid(gid, status, completed=False):
+    print ("Update status", gid, status, completed)
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
@@ -275,4 +277,59 @@ def set_delete_status(path):
             db.rollback()
             return e[1]
         return "success"
+    return "db connection error"
+
+def get_download_status(gid):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT status FROM download WHERE id='%s';" % gid
+        print (sql)
+        try:
+            cursor.execute(sql)
+            if cursor.rowcount == 0:
+                return None
+            results = cursor.fetchone()
+            print ('results')
+            status = results['status']
+            db.close()
+            return status
+        except MySQLdb.Error as e:
+            return e[1]
+    return "db connection error"
+
+def get_id_from_gid(gid):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT id FROM download WHERE gid='%s';" % gid
+        try:
+            cursor.execute(sql)
+            if cursor.rowcount == 0:
+                return None
+            results = cursor.fetchone()
+            print ('results')
+            status = results['id']
+            db.close()
+            return status
+        except MySQLdb.Error as e:
+            return e[1]
+    return "db connection error"
+
+def get_gid_from_id(id):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT gid FROM download WHERE id='%s';" % id
+        try:
+            cursor.execute(sql)
+            if cursor.rowcount == 0:
+                return None
+            results = cursor.fetchone()
+            print ('results')
+            gid = results['gid']
+            db.close()
+            return gid
+        except MySQLdb.Error as e:
+            return e[1]
     return "db connection error"

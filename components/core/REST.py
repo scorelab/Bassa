@@ -2,6 +2,7 @@ from flask import Flask
 from flask.ext.cors import CORS
 from flask import send_file, send_from_directory
 from flask import request, jsonify, abort, Response, g
+from flask_socketio import SocketIO
 from Auth import *
 from Models import *
 from DownloadManager import *
@@ -11,8 +12,12 @@ from DownloadDaemon import starter
 from EMail import send_mail
 import sys
 
+from gevent import monkey
+monkey.patch_all(ssl=False)
+
 server = Flask(__name__)
 server.config['SECRET_KEY'] = "123456789"
+socketio = SocketIO(server, debug=True, logger=True, engineio_logger=True)
 cors = CORS(server)
 p = None
 verbose = False
@@ -44,13 +49,15 @@ def start():
         if str(token)!=server.config['SECRET_KEY']:
             return "{'error':'not authorized'}", 403
         global p
-        p = Process(target=starter)
+        p = Process(target=starter, args=(socketio,))
         p.start()
         return '{"status":"' + str(p.pid) + '"}'
     except Exception as e:
             return '{"error":"' + e.message + '"}',400
 
-
+@socketio.on('status')
+def get_progress(json):
+    print('Get the damned progress ')
 
 @server.route('/download/kill')
 def kill():

@@ -2,15 +2,15 @@
 
   angular
     .module('app')
-    .controller('TableCtrl', [ '$scope', 'ToastService', 'DashService',
+    .controller('TableCtrl', [ '$scope', 'ToastService', 'TableService',
       TableCtrl
     ]);
 
-  function TableCtrl($scope, ToastService, DashService) {
+  function TableCtrl($scope, ToastService, TableService) {
     $scope.dlink = {link: ''};
     $scope.downloads = [];
 
-    DashService.getDownloads().then(function (response) {
+    TableService.getCompletedDownloads().then(function (response) {
         $scope.downloads = response.data;
       }, function(error){
         ToastService.showToast("Oops! Something went wrong fetching data");
