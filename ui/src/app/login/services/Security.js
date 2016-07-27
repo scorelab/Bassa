@@ -25,11 +25,16 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
         setToken(response.headers()['token']);
+        setUsername(credentials.user_name);
         cb(true);
       }, function(error){
         console.log("Oops");
         cb(false);
       });
+    };
+
+    var setUsername = function(name) {
+      localStorage.setItem("Username", name);
     };
 
     var setToken = function(newToken) {

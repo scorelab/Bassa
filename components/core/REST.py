@@ -2,7 +2,7 @@ from flask import Flask
 from flask.ext.cors import CORS
 from flask import send_file, send_from_directory
 from flask import request, jsonify, abort, Response, g
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, join_room
 from Auth import *
 from Models import *
 from DownloadManager import *
@@ -17,7 +17,7 @@ monkey.patch_all(ssl=False)
 
 server = Flask(__name__)
 server.config['SECRET_KEY'] = "123456789"
-socketio = SocketIO(server, debug=True, logger=True, engineio_logger=True)
+socketio = SocketIO(server, debug=True, logger=True, engineio_logger=True, ping_timeout=600)
 cors = CORS(server)
 p = None
 verbose = False
@@ -55,9 +55,11 @@ def start():
     except Exception as e:
             return '{"error":"' + e.message + '"}',400
 
-@socketio.on('status')
-def get_progress(json):
-    print('Get the damned progress ')
+@socketio.on('join', namespace='/progress')
+def on_join(data):
+    print (data)
+    room = data['room']
+    join_room(room)
 
 @server.route('/download/kill')
 def kill():

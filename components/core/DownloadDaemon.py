@@ -138,9 +138,9 @@ def size_of(num):
         num /= 1024.0
     return "%.1f%s" % (num, 'YB')
 
-def send_status(id, completedLength, fileSize):
+def send_status(id, completedLength, fileSize, username):
     progress = int(float(completedLength)/float(fileSize) * 100)
-    sc.emit('daemon', {'id': id, 'progress': progress})
+    sc.emit('status', {'id': id, 'progress': progress}, room=username, namespace='/progress')
 
 def find_supported_handler(download):
     for handler in handlerLst:
@@ -187,7 +187,8 @@ def on_message(ws, message):
             set_name(data['result']['gid'], path[-1])
             set_size(data['result']['gid'], fileSize)
             download_id = get_id_from_gid(gid)
-            send_status(download_id, completedLength, raw_size)
+            username = get_username_from_gid(gid)
+            send_status(download_id, completedLength, raw_size, username)
             # msg='Your download '+path[-1]+' is completed.'
             # send_mail([get_download_email(data['result']['gid'])],msg)
     elif 'method' in data:
