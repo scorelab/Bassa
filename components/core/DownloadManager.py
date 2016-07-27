@@ -308,8 +308,24 @@ def get_id_from_gid(gid):
             if cursor.rowcount == 0:
                 return None
             results = cursor.fetchone()
-            print ('results')
             status = results['id']
+            db.close()
+            return status
+        except MySQLdb.Error as e:
+            return e[1]
+    return "db connection error"
+
+def get_username_from_gid(gid):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT user_name FROM download WHERE gid='%s';" % gid
+        try:
+            cursor.execute(sql)
+            if cursor.rowcount == 0:
+                return None
+            results = cursor.fetchone()
+            status = results['user_name']
             db.close()
             return status
         except MySQLdb.Error as e:

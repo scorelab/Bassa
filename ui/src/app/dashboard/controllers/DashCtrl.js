@@ -8,11 +8,17 @@
 
   function DashCtrl($scope, ToastService, DashService) {
     $scope.dlink = {link: ''};
-    $scope.downloads = []
+    $scope.downloads = [];
+    $scope.username = localStorage.getItem('Username');
 
-    var socket = io.connect('http://localhost:5000');
 
-    socket.on('daemon', function(data) {
+    var socket = io.connect('http://localhost:5000/progress');
+
+    socket.on('connect', function(){
+      socket.emit('join', {room: $scope.username});
+    });
+
+    socket.on('status', function(data) {
       _.forEach($scope.downloads, function(obj){
         if (obj.id == data.id) {
           obj.progress = data.progress;
