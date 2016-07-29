@@ -2,14 +2,14 @@
 
   angular
     .module('app')
-    .controller('DashCtrl', [ '$scope', 'ToastService', 'DashService', 'userService',
+    .controller('DashCtrl', [ '$scope', 'ToastService', 'DashService', 'UserService',
       DashCtrl
     ]);
 
-  function DashCtrl($scope, ToastService, DashService, userService) {
+  function DashCtrl($scope, ToastService, DashService, UserService) {
     $scope.dlink = {link: ''};
     $scope.downloads = [];
-    $scope.username = userService.getUsername();
+    $scope.username = UserService.getUsername();
 
     var socket = io.connect('http://localhost:5000/progress');
 

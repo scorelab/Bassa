@@ -9,7 +9,6 @@
 
   function AdminService($http, BassaUrl){
     var startDownloads = function() {
-      console.log(BassaUrl+'/download/start');
       return $http({
           method: 'GET',
           url: BassaUrl + '/download/start',

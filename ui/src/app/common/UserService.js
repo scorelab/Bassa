@@ -2,12 +2,12 @@
   'use strict';
 
   angular.module('app')
-        .service('userService', [
+        .service('UserService', [
         '$injector', 'BassaUrl',
-      userService
+      UserService
   ]);
 
-  function userService($injector, BassaUrl){
+  function UserService($injector, BassaUrl){
 
     var data = {
       name: '',

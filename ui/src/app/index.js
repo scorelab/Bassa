@@ -104,13 +104,13 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
   })
 
 
-.run(function ($rootScope, $state, userService, ToastService) {
+.run(function ($rootScope, $state, UserService, ToastService) {
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-    if (toState.authenticate && !userService.loggedIn()) {
+    if (toState.authenticate && !UserService.loggedIn()) {
       // User isn’t authenticated
       $state.transitionTo("login");
       event.preventDefault();
-    } else if (toState.name =='home.admin' && userService.getAuthLevel() !== '0') {
+    } else if (toState.name =='home.admin' && UserService.getAuthLevel() !== '0') {
       ToastService.showToast("Sorry you don't have admin priviledges");
       if (fromState.name == '') {
         $state.transitionTo('home.dashboard');
