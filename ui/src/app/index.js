@@ -31,7 +31,7 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
       .state('home.admin', {
         url: '/admin',
         templateUrl: 'app/views/admin.html',
-        controller: 'ProfileController',
+        controller: 'AdminCtrl',
         controllerAs: 'vm',
         authenticate: true,
         data: {
