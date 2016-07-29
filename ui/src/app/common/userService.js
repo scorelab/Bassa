@@ -29,9 +29,9 @@
           data: credentials,
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
-        console.log(response.data.auth);
         setToken(response.headers()['token']);
         setName(credentials.user_name);
+        setAuthLevel(response.data.auth);
         cb(true);
       }, function(error){
         console.log("Oops");
