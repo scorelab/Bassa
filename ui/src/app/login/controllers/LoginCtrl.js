@@ -3,19 +3,19 @@
   angular
     .module('app')
     .controller('LoginCtrl', [
-      '$scope', '$state', 'Security',
+      '$scope', '$state', 'userService',
       LoginCtrl
     ]);
 
-  function LoginCtrl($scope, $state, Security) {
+  function LoginCtrl($scope, $state, userService) {
     console.log("In control");
     $scope.user = {};
     $scope.incorrectCredentials = false;
 
-    Security.removeToken();
+    userService.removeToken();
 
     $scope.login = function(){
-      Security.login($scope.user, function(status) {
+      userService.login($scope.user, function(status) {
         if (status){
           $state.go('home.dashboard');
         } else {
