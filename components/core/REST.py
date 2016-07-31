@@ -59,7 +59,8 @@ def start():
 def on_join(data):
     print (data)
     room = data['room']
-    join_room(room)
+    if room != '':
+        join_room(room)
 
 @server.route('/download/kill')
 def kill():

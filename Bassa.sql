@@ -32,31 +32,19 @@ CREATE TABLE IF NOT EXISTS `download` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `link` text NOT NULL,
   `user_name` varchar(256) NOT NULL,
+  `download_name` varchar(256) NOT NULL,
   `added_time` bigint(20) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   `rating` tinyint(4) NOT NULL DEFAULT '0',
   `gid` varchar(256) DEFAULT NULL,
   `completed_time` bigint(20) NOT NULL DEFAULT '0',
+  `size` varchar(7) NOT NULL DEFAULT '0',
   `path` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
---
--- Dumping data for table `download`
---
-
-INSERT INTO `download` (`id`, `link`, `user_name`, `added_time`, `status`, `rating`, `gid`, `completed_time`, `path`) VALUES
-(6, 'https://pypi.python.org/packages/source/w/websocket-client/websocket_client-0.32.0.tar.gz#md5=b07a897511a3c585251fe2ea85a9d9d9', 'rand', 1438363998, 3, 0, '1a58327748885ead', 1438833950, '/home/rand/bassa/websocket_client-0.32.0.tar.gz.1'),
-(7, 'https://pypi.python.org/packages/source/F/Flask-Cors/Flask-Cors-2.1.0.tar.gz#md5=dd8a83b98d86490e2b7d72ff4e07f970', 'rand', 1438364004, 3, 0, '0a06f3987abd4735', 1438833949, '/home/rand/bassa/Flask-Cors-2.1.0.tar.gz.1'),
-(8, 'https://pypi.python.org/packages/source/w/websocket-client/websocket_client-0.32.0.tar.gz#md5=b07a897511a3c585251fe2ea85a9d9d9', 'rand', 1438364005, 1, 3, 'b10f84e81763b611', 0, NULL),
-(9, 'https://pypi.python.org/packages/source/F/Flask-Cors/Flask-Cors-2.1.0.tar.gz#md5=dd8a83b98d86490e2b7d72ff4e07f970', 'rand', 1438364006, 0, 0, '7896a9f895af2fd5', 0, NULL),
-(10, 'https://pypi.python.org/packages/source/w/websocket-client/websocket_client-0.32.0.tar.gz#md5=b07a897511a3c585251fe2ea85a9d9d9', 'rand', 1438763880, 0, 0, NULL, 0, NULL),
-(11, 'dummy', 'rand', 1438833176, 0, 0, NULL, 0, NULL),
-(12, 'dummy1', 'rand', 1438833890, 0, 0, NULL, 0, NULL);
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `rate`
