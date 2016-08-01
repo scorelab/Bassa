@@ -2,10 +2,7 @@
   'use strict';
 
   angular.module('app')
-        .service('TableService', [
-        '$http', 'BassaUrl',
-      tableService
-  ]);
+    .service('TableService', ['$http', 'BassaUrl', tableService]);
 
   function tableService($http, BassaUrl){
 

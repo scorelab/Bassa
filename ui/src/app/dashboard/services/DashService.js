@@ -2,10 +2,7 @@
   'use strict';
 
   angular.module('app')
-        .service('DashService', [
-        '$http', 'BassaUrl',
-      dashService
-  ]);
+    .service('DashService', ['$http', 'BassaUrl', dashService]);
 
   function dashService($http, BassaUrl){
     var addDownload = function(link) {

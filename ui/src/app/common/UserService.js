@@ -2,10 +2,7 @@
   'use strict';
 
   angular.module('app')
-        .service('UserService', [
-        '$injector', 'BassaUrl',
-      UserService
-  ]);
+    .service('UserService', ['$injector', 'BassaUrl', UserService]);
 
   function UserService($injector, BassaUrl){
 
@@ -34,7 +31,6 @@
         setAuthLevel(response.data.auth);
         cb(true);
       }, function(error){
-        console.log("Oops");
         cb(false);
       });
     };

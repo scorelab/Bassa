@@ -2,9 +2,7 @@
 
   angular
     .module('app')
-    .controller('AdminCtrl', [ '$scope', 'ToastService', 'AdminService',
-     AdminCtrl
-    ]);
+    .controller('AdminCtrl', [ '$scope', 'ToastService', 'AdminService', AdminCtrl]);
 
   function AdminCtrl($scope, ToastService, AdminService) {
 

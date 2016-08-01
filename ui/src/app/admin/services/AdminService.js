@@ -2,10 +2,7 @@
   'use strict';
 
   angular.module('app')
-        .service('AdminService', [
-        '$http', 'BassaUrl',
-     AdminService
-  ]);
+    .service('AdminService', ['$http', 'BassaUrl', AdminService]);
 
   function AdminService($http, BassaUrl){
     var startDownloads = function() {

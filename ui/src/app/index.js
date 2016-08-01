@@ -110,9 +110,9 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
       // User isn’t authenticated
       $state.transitionTo("login");
       event.preventDefault();
-    } else if (toState.name =='home.admin' && UserService.getAuthLevel() !== '0') {
+    } else if (toState.name === 'home.admin' && UserService.getAuthLevel() !== '0') {
       ToastService.showToast("Sorry you don't have admin priviledges");
-      if (fromState.name == '') {
+      if (fromState.name === '') {
         $state.transitionTo('home.dashboard');
       } else {
         $state.transitionTo(fromState.name);

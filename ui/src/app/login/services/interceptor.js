@@ -3,7 +3,7 @@ angular.module('app')
 .factory('authorizationInterceptor', ['UserService', function (UserService) {
   return {
     request: function (config) {
-      var token=UserService.token();
+      var token = UserService.token();
       config.headers = config.headers || {};
       if (token) {
         config.headers.token = token;

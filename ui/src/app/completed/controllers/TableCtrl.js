@@ -2,9 +2,7 @@
 
   angular
     .module('app')
-    .controller('TableCtrl', [ '$scope', 'ToastService', 'TableService',
-      TableCtrl
-    ]);
+    .controller('TableCtrl', [ '$scope', 'ToastService', 'TableService', TableCtrl]);
 
   function TableCtrl($scope, ToastService, TableService) {
     $scope.dlink = {link: ''};
