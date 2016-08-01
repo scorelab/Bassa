@@ -21,9 +21,26 @@
       });
     };
 
+    var getSignupRequests = function() {
+      return $http({
+        method: 'GET',
+        url: BassaUrl + '/api/user/requests'
+      });
+    }
+
+    var approve = function(username) {
+      return $http({
+        method: 'POST',
+        url: BassaUrl + '/api/user/approve/' + username,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    }
+
     return {
       startDownloads : startDownloads,
-      killDownloads : killDownloads
+      killDownloads : killDownloads,
+      getSignupRequests : getSignupRequests,
+      approve: approve
     };
   }
 })();

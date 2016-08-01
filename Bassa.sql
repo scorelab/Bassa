@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `auth` tinyint(11) NOT NULL,
   `email` varchar(256) NOT NULL,
   `blocked` tinyint(1) NOT NULL DEFAULT '0',
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_name`),
   UNIQUE KEY `user_name` (`user_name`),
   UNIQUE KEY `email` (`email`)
@@ -99,10 +100,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_name`, `password`, `auth`, `email`, `blocked`) VALUES
-('rand', '1a1dc91c907325c69271ddf0c944bc72', 0, 'dilankachathurangi@gmail.com', 0),
-('rush', '1a1dc91c907325c69271ddf0c944bc72', 1, 'mgdmadusanka@gmail.com', 0),
-('tom', '1a1dc91c907325c69271ddf0c944bc72', 0, 'tom@mail.com', 0);
+INSERT INTO `user` (`user_name`, `password`, `auth`, `email`, `blocked`, `approved`) VALUES
+('rand', '1a1dc91c907325c69271ddf0c944bc72', 0, 'dilankachathurangi@gmail.com', 0, 1),
+('rush', '1a1dc91c907325c69271ddf0c944bc72', 1, 'mgdmadusanka@gmail.com', 0, 0),
+('tom', '1a1dc91c907325c69271ddf0c944bc72', 0, 'tom@mail.com', 0, 0);
 
 --
 -- Constraints for dumped tables
