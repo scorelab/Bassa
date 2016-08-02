@@ -2,12 +2,14 @@
   'use strict';
 
   angular.module('app')
-        .service('Security', [
-        '$injector', 'BassaUrl',
-      Security
-  ]);
+    .service('UserService', ['$injector', 'BassaUrl', UserService]);
 
-  function Security($injector, BassaUrl){
+  function UserService($injector, BassaUrl){
+
+    var data = {
+      name: '',
+      authLevel: ''
+    };
 
     var login = function(credentials, cb) {
       var $http = $injector.get('$http');
@@ -25,16 +27,28 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
         setToken(response.headers()['token']);
-        setUsername(credentials.user_name);
+        setName(credentials.user_name);
+        setAuthLevel(response.data.auth);
         cb(true);
       }, function(error){
-        console.log("Oops");
         cb(false);
       });
     };
 
-    var setUsername = function(name) {
-      localStorage.setItem("Username", name);
+    var setName = function(name) {
+      data.name = name;
+    };
+
+    var getName = function() {
+      return data.name;
+    };
+
+    var getAuthLevel = function() {
+      return data.authLevel;
+    };
+
+    var setAuthLevel = function(auth) {
+      data.authLevel = auth;
     };
 
     var setToken = function(newToken) {
@@ -58,7 +72,11 @@
       login:login,
       token:getToken,
       removeToken:removeToken,
-      setToken:setToken
+      getUsername:getName,
+      getAuthLevel:getAuthLevel,
+      setToken:setToken,
+      setUsername:setName,
+      setAuthLevel:setAuthLevel
     };
 
   }

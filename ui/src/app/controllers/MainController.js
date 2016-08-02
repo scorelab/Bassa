@@ -3,11 +3,11 @@
   angular
        .module('app')
        .controller('MainController', [
-          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state', 'ToastService', 'Security',
+          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state', 'ToastService', 'UserService',
           MainController
        ]);
 
-  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, ToastService, Security) {
+  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, ToastService, UserService) {
     var vm = this;
 
     vm.menuItems = [ ];
@@ -26,7 +26,7 @@
       });
 
     var logout = function () {
-      Security.removeToken();
+      UserService.removeToken();
     };
 
     function toggleRightSidebar() {

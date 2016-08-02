@@ -57,7 +57,6 @@ def start():
 
 @socketio.on('join', namespace='/progress')
 def on_join(data):
-    print (data)
     room = data['room']
     join_room(room)
 
@@ -186,6 +185,45 @@ def get_users_request():
     else:
         return '{"error":"token error"}', 403
 
+@server.route('/api/user/requests', methods=['GET'])
+def get_user_signup_requests():
+    token = token_validator(request.headers['token'])
+    if token is not None and g.user.auth == AuthLeval.ADMIN:
+        try:
+            status = get_signup_requests()
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status), status=200)
+            else:
+                resp = Response(response='{"error":"' + status + '"}', status=400)
+        except Exception as e:
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
+
+@server.route('/api/user/approve/<string:username>', methods=['POST'])
+def approve_user_request(username):
+    token = token_validator(request.headers['token'])
+    if token is not None and g.user.auth == AuthLeval.ADMIN:
+        try:
+            status = approve_user(username)
+            if status == "success":
+                resp = Response(response='{"status": "'+ status + '"}', status=200)
+            else:
+                resp = Response(response='{"error":"' + status + '"}', status=400)
+        except Exception as e:
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
 
 @server.route('/api/user/blocked', methods=['GET'])
 def get_blocked_users_request():

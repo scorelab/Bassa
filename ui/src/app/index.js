@@ -28,10 +28,10 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
           title: 'Dashboard'
         }
       })
-      .state('home.profile', {
-        url: '/profile',
-        templateUrl: 'app/views/profile.html',
-        controller: 'ProfileController',
+      .state('home.admin', {
+        url: '/admin',
+        templateUrl: 'app/views/admin.html',
+        controller: 'AdminCtrl',
         controllerAs: 'vm',
         authenticate: true,
         data: {
@@ -104,11 +104,19 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
   })
 
 
-.run(function ($rootScope, $state, Security) {
+.run(function ($rootScope, $state, UserService, ToastService) {
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-    if (toState.authenticate && !Security.loggedIn()) {
+    if (toState.authenticate && !UserService.loggedIn()) {
       // User isn’t authenticated
       $state.transitionTo("login");
+      event.preventDefault();
+    } else if (toState.name === 'home.admin' && UserService.getAuthLevel() !== '0') {
+      ToastService.showToast("Sorry you don't have admin priviledges");
+      if (fromState.name === '') {
+        $state.transitionTo('home.dashboard');
+      } else {
+        $state.transitionTo(fromState.name);
+      }
       event.preventDefault();
     }
   });

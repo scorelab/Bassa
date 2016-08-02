@@ -20,9 +20,9 @@
         sref: '.table'
       },
       {
-        name: 'Profile',
+        name: 'Admin',
         icon: 'person',
-        sref: '.profile'
+        sref: '.admin'
       },
     ];
 

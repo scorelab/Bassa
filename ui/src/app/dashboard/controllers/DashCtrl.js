@@ -2,17 +2,13 @@
 
   angular
     .module('app')
-    .controller('DashCtrl', [ '$scope', 'ToastService', 'DashService',
-      DashCtrl
-    ]);
+    .controller('DashCtrl', [ '$scope', 'ToastService', 'DashService', 'UserService', 'BassaUrl', DashCtrl]);
 
-  function DashCtrl($scope, ToastService, DashService) {
+  function DashCtrl($scope, ToastService, DashService, UserService, BassaUrl) {
+    var socket = io.connect(BassaUrl + '/progress');
     $scope.dlink = {link: ''};
     $scope.downloads = [];
-    $scope.username = localStorage.getItem('Username');
-
-
-    var socket = io.connect('http://localhost:5000/progress');
+    $scope.username = UserService.getUsername();
 
     socket.on('connect', function(){
       socket.emit('join', {room: $scope.username});
