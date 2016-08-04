@@ -58,7 +58,8 @@ def start():
 @socketio.on('join', namespace='/progress')
 def on_join(data):
     room = data['room']
-    join_room(room)
+    if room != '':
+        join_room(room)
 
 @server.route('/download/kill')
 def kill():

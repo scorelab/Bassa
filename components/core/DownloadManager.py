@@ -279,12 +279,11 @@ def set_delete_status(path):
         return "success"
     return "db connection error"
 
-def get_download_status(gid):
+def get_download_status(id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT status FROM download WHERE id='%s';" % gid
-        print (sql)
+        sql = "SELECT status FROM download WHERE id='%s';" % id
         try:
             cursor.execute(sql)
             if cursor.rowcount == 0:
