@@ -246,9 +246,7 @@ def get_blocked_users_request():
         return '{"error":"token error"}', 403
 
 
-server.route('/api/user/blocked/<string:username>', methods=['POST'])
-
-
+@server.route('/api/user/blocked/<string:username>', methods=['POST'])
 def block_user_request(username):
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -269,9 +267,7 @@ def block_user_request(username):
         return '{"error":"token error"}', 403
 
 
-server.route('/api/user/blocked/<string:username>', methods=['DELETE'])
-
-
+@server.route('/api/user/blocked/<string:username>', methods=['DELETE'])
 def unblock_user_request(username):
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
