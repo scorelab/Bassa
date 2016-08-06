@@ -131,13 +131,6 @@ def set_download_gid(id, gid):
         if d.id == int(id):
             d.gid = gid
 
-def size_of(num):
-    for unit in ['','kB','MB','GB','TB','PB','EB','ZB']:
-        if abs(num) < 1024.0:
-            return "%3.1f%s" % (num, unit)
-        num /= 1024.0
-    return "%.1f%s" % (num, 'YB')
-
 def send_status(id, completedLength, fileSize, username):
     progress = int(float(completedLength)/float(fileSize) * 100)
     sc.emit('status', {'id': id, 'progress': progress}, room=username, namespace='/progress')
@@ -183,9 +176,8 @@ def on_message(ws, message):
             path=data['result']['files'][0]['path'].split('/')
             raw_size = int(data['result']['files'][0]['length'])
             completedLength = data['result']['files'][0]['completedLength']
-            fileSize = size_of(raw_size)
             set_name(data['result']['gid'], path[-1])
-            set_size(data['result']['gid'], fileSize)
+            set_size(data['result']['gid'], raw_size)
             download_id = get_id_from_gid(gid)
             username = get_username_from_gid(gid)
             send_status(download_id, completedLength, raw_size, username)
