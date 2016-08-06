@@ -165,3 +165,17 @@ def approve_user(username):
             return e[1]
         return "success"
     return "db connection error"
+
+def get_heavy_users():
+    db = get_db_con()
+    if db is not None:
+        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        MONTH = 60 * 60 * 24 * 30
+        sql = "SELECT user_name, sum(size) AS size FROM download WHERE completed_time > unix_timestamp(now()) - %s GROUP BY user_name ORDER BY size DESC LIMIT 10;" % MONTH
+        try:
+            cursor.execute(sql)
+            results = cursor.fetchall()
+            return results
+        except MySQLdb.Error as e:
+            return e[1]
+    return "db connection error"

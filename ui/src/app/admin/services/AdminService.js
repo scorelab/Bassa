@@ -36,11 +36,19 @@
       });
     }
 
+    var getHeavyUsers = function() {
+      return $http({
+        method: 'GET',
+        url: BassaUrl + '/api/user/heavy'
+      });
+    }
+
     return {
       startDownloads : startDownloads,
       killDownloads : killDownloads,
       getSignupRequests : getSignupRequests,
-      approve: approve
+      approve: approve,
+      getHeavyUsers: getHeavyUsers
     };
   }
 })();
