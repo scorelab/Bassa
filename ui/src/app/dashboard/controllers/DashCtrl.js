@@ -27,21 +27,26 @@
       DashService.addDownload($scope.dlink).then(function (response) {
         $scope.dlink.link = '';
         ToastService.showToast("Link added");
+        getActiveDownloads();
       }, function(error){
         $scope.dlink.link = '';
         ToastService.showToast("Oops! Something went wrong");
       });
     };
 
-    DashService.getDownloads().then(function (response) {
-      var data = response.data;
-      $scope.downloads = _.filter(data, function(d) {return d.status==0});
-      $scope.downloads = _.map($scope.downloads, function(element) {
-           return _.extend({}, element, {progress: 0});
+    var getActiveDownloads = function() {
+      DashService.getDownloads().then(function (response) {
+        var data = response.data;
+        $scope.downloads = _.filter(data, function(d) {return d.status==0});
+        $scope.downloads = _.map($scope.downloads, function(element) {
+             return _.extend({}, element, {progress: 0});
+        });
+      }, function(error){
+        ToastService.showToast("Oops! Something went wrong when fetching data");
       });
-    }, function(error){
-      ToastService.showToast("Oops! Something went wrong when fetching data");
-    });
+    }
+
+    getActiveDownloads();
 
   }
 
