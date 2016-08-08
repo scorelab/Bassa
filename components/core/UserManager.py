@@ -1,14 +1,17 @@
 from Models import User
 from DBCon import *
+import sqlalchemy.pool as pool
 
+threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=5)
 
 def user_login(username, password):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "SELECT * FROM user WHERE user_name=%s AND password=MD5(%s) AND blocked=0 AND approved=1;"
         cursor.execute(sql, (username, password))
         data = cursor.fetchone()
+        db.close()
         if data == None:
             return False
         else:
@@ -16,12 +19,13 @@ def user_login(username, password):
 
 
 def check_user_name(username):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "SELECT * FROM user WHERE user_name=%s;"
         cursor.execute(sql, (username))
         data = cursor.fetchone()
+        db.close()
         if data == None:
             return False
         else:
@@ -29,12 +33,13 @@ def check_user_name(username):
 
 
 def get_user(username):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT * FROM user WHERE user_name='%s' and blocked=0;" % username
         cursor.execute(sql)
         data = cursor.fetchone()
+        db.close()
         if data == None:
             return None
         else:
@@ -42,7 +47,7 @@ def get_user(username):
 
 
 def add_user(user):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "INSERT into user VALUES(%s, MD5(%s), %s, %s, 0);"
@@ -57,7 +62,7 @@ def add_user(user):
 
 
 def remove_user(username):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "DELETE from user WHERE user_name=%s;"
@@ -72,7 +77,7 @@ def remove_user(username):
 
 
 def update_user(user, username):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "UPDATE user SET user_name=%s, auth=%s, email=%s WHERE user_name=%s;"
@@ -86,33 +91,35 @@ def update_user(user, username):
     return "db connection error"
 
 def get_users():
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor =  db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT user_name, email, auth FROM user WHERE blocked=0;"
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
+            db.close()
             return results
         except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
 def get_blocked_users():
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor =  db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT user_name, email, auth FROM user WHERE blocked=1;"
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
+            db.close()
             return results
         except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
 def block_user(username):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "UPDATE user SET blocked=%s WHERE user_name=%s;"
@@ -126,7 +133,7 @@ def block_user(username):
     return "db connection error"
 
 def unblock_user(username):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "UPDATE user SET blocked=%s WHERE user_name=%s;"
@@ -140,20 +147,21 @@ def unblock_user(username):
     return "db connection error"
 
 def get_signup_requests():
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor =  db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT user_name, email FROM user WHERE approved=0;"
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
+            db.close()
             return results
         except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
 
 def approve_user(username):
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "UPDATE user SET approved=%s WHERE user_name=%s;"
