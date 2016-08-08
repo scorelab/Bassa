@@ -1,6 +1,9 @@
 from Models import User
 from DBCon import *
+from ConfReader import get_conf_reader
 import sqlalchemy.pool as pool
+
+conf = get_conf_reader("dl.conf")
 
 threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=5)
 
@@ -175,7 +178,7 @@ def approve_user(username):
     return "db connection error"
 
 def get_heavy_users():
-    db = get_db_con()
+    db = threadpool.connect()
     if db is not None:
         cursor =  db.cursor(MySQLdb.cursors.DictCursor)
         MONTH = 60 * 60 * 24 * 30
@@ -183,7 +186,26 @@ def get_heavy_users():
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
+            db.close()
             return results
+        except MySQLdb.Error as e:
+            return e[1]
+    return "db connection error"
+
+def check_if_bandwidth_exceeded(username):
+    db = threadpool.connect()
+    if db is not None:
+        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        MONTH = 60 * 60 * 24 * 30
+        sql = "SELECT sum(size) AS sum FROM download WHERE completed_time > unix_timestamp(now()) - %s AND user_name=%s;"
+        try:
+            cursor.execute(sql, (MONTH, username))
+            result = cursor.fetchone()
+            if result['sum'] > conf['max_bandwidth']:
+                return True
+            else:
+                return False
+            return result
         except MySQLdb.Error as e:
             return e[1]
     return "db connection error"
