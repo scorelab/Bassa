@@ -214,7 +214,7 @@ def on_open(ws):
 def starter(socket):
     global folder_size, handler, sc
     sc = socket
-    # remove_files(conf['max_age'], conf['min_rating'])
+    remove_files(conf['max_age'], conf['min_rating'])
     folder_size=get_size(conf['down_folder'])
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp("ws://localhost:6800/jsonrpc",
