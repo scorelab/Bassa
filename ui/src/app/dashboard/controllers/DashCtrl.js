@@ -30,7 +30,11 @@
         getActiveDownloads();
       }, function(error){
         $scope.dlink.link = '';
-        ToastService.showToast("Oops! Something went wrong");
+        if (error.data.quota) {
+          ToastService.showToast("Your monthly quota has been exceeded");
+        } else {
+          ToastService.showToast("Oops! Something went wrong :(");
+        }
       });
     };
 

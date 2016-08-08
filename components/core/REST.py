@@ -295,12 +295,15 @@ def add_download_request():
     if token is not None:
         data = request.get_json(force=True)
         try:
-            newDownload = Download(data['link'], g.user.userName)
-            status = add_download(newDownload)
-            if status == "success":
-                resp = Response(response='{"status":"'+ status + '"}', status=200)
+            if check_if_bandwidth_exceeded(g.user.userName):
+                resp = Response(response='{"quota":"exceeded"}', status=400)
             else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+                newDownload = Download(data['link'], g.user.userName)
+                status = add_download(newDownload)
+                if status == "success":
+                    resp = Response(response='{"status":"'+ status + '"}', status=200)
+                else:
+                    resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token

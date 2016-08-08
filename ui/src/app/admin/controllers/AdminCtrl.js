@@ -4,7 +4,7 @@
     .module('app')
     .controller('AdminCtrl', [ '$scope', 'ToastService', 'AdminService', 'UtilityService', AdminCtrl]);
 
-  function AdminCtrl($scope, ToastService, AdminService) {
+  function AdminCtrl($scope, ToastService, AdminService, UtilityService) {
 
     $scope.signup_requests = [];
     $scope.usageChartData = [];
