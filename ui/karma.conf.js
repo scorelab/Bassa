@@ -9,9 +9,12 @@ module.exports = function(config) {
 
     browsers : ['PhantomJS'],
 
+    reporters: ['spec'],
+
     plugins : [
         'karma-phantomjs-launcher',
-        'karma-jasmine'
+        'karma-jasmine',
+        "karma-spec-reporter"
     ]
   });
 };
