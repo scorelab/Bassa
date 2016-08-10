@@ -1,4 +1,4 @@
-describe('Utility Service', function() {
+describe('Service: UtilityService', function() {
   beforeEach(module('app'));
 
   var UtilityService;
@@ -7,7 +7,7 @@ describe('Utility Service', function() {
     UtilityService = _UtilityService_;
   }));
 
-  it('should have UtilityService be defined', function () {
+  it('Should have UtilityService be defined', function () {
     expect(UtilityService).toBeDefined();
   });
 
