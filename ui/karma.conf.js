@@ -7,11 +7,14 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
-    browsers : ['PhantomJS'],
+    browsers : ['PhantomJS2'],
+
+    reporters: ['spec'],
 
     plugins : [
-        'karma-phantomjs-launcher',
-        'karma-jasmine'
+        'karma-phantomjs2-launcher',
+        'karma-jasmine',
+        "karma-spec-reporter"
     ]
   });
 };
