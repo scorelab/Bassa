@@ -7,12 +7,12 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
-    browsers : ['PhantomJS'],
+    browsers : ['PhantomJS2'],
 
     reporters: ['spec'],
 
     plugins : [
-        'karma-phantomjs-launcher',
+        'karma-phantomjs2-launcher',
         'karma-jasmine',
         "karma-spec-reporter"
     ]
