@@ -54,20 +54,20 @@
       });
     };
 
-    var getRequests = function() {
+    this.getRequests = function() {
       AdminService.getSignupRequests().then(function (response) {
         $scope.signup_requests = response.data;
       });
     };
 
-    var getHeavyUsers = function() {
+    this.getHeavyUsers = function() {
       AdminService.getHeavyUsers().then(function (response) {
         $scope.usageChartData = response.data;
       });
     }
 
-    getRequests();
-    getHeavyUsers();
+    this.getRequests();
+    this.getHeavyUsers();
 
 
   }
