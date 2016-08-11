@@ -5,6 +5,7 @@
     "gulp-sass": "^2.3.2"
   },
   "devDependencies": {
+    "bower": "^1.5.2",
     "browser-sync": "~1.7.1",
     "chalk": "~0.5.1",
     "del": "~0.1.3",
