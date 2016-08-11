@@ -49,6 +49,7 @@
   },
   "scripts": {
     "init": "npm install",
-    "install": "bower install"
+    "install": "bower install",
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS2"
   }
 }
