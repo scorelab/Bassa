@@ -27,21 +27,16 @@
 <div layout="column" flex>
     <md-toolbar layout="row" layout-align="center center">
         <section layout-align="start center" layout-fill flex>
-            <md-button hide-gt-sm ng-click="vm.toggleItemsList()" aria-label="Menu">
-                <i class="material-icons">menu</i>
-            </md-button>
         </section>
         <section layout-align="end center">
-            <md-button class="toolbar-button" aria-label="Search">
-                <i class="material-icons">search</i>
-            </md-button>
-            <md-button class="toolbar-button" aria-label="Notifications">
-                <i class="material-icons">notifications</i>
-                <span class="notifications-label">7</span>
-            </md-button>
-            <md-button class="toolbar-button" aria-label="Settings" ng-click="vm.toggleRightSidebar()">
+            <md-menu md-offset="0 20">
+                <md-button class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">
                 <i class="material-icons">menu</i>
-            </md-button>
+                </md-button>
+                <md-menu-content width="3">
+                    <md-menu-item><md-button ng-click="vm.logout()" ui-sref="login">Log out</md-button></md-menu-item>
+                </md-menu-content>
+            </md-menu>
         </section>
     </md-toolbar>
 
@@ -49,31 +44,3 @@
         <div ui-view></div>
     </md-content>
 </div>
-
-<md-sidenav md-component-id="right"
-            class="md-whiteframe-z2 md-sidenav-right">
-    <md-toolbar>
-        <md-toolbar class="md-warn" layout="row" layout-align="center center">
-            <img class="img-circle" ng-src="assets/images/feynman.jpg">
-            <md-menu md-offset="0 20">
-                <md-button class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">
-                    <span>Richard Feynman</span>
-                    <i class="material-icons">keyboard_arrow_down</i>
-                </md-button>
-                <md-menu-content width="3">
-                    <md-menu-item><md-button ng-click="$mdCloseMenu()" ui-sref="home.profile">Profile</md-button></md-menu-item>
-                    <md-menu-item><md-button ng-click="vm.logout()" ui-sref="login">Log out</md-button></md-menu-item>
-                </md-menu-content>
-            </md-menu>
-        </md-toolbar>
-    </md-toolbar>
-
-    <section>
-        <md-toolbar md-theme="grey" class="md-hue-1">
-            <div class="md-toolbar-tools">
-                <h3>Messages</h3>
-            </div>
-        </md-toolbar>
-        <div ng-include src="'app/views/partials/messages.html'"/>
-    </section>
-</md-sidenav>
