@@ -1,0 +1,25 @@
+<div layout="column" layout-align="center center" class="">
+  <h1 class="md-display-2 login-heading">Signup for a Bassa account</h1>
+  <div layout="column">
+    <md-input-container>
+      <label>User name</label>
+      <input type="text" ng-model="user.user_name" required/>
+    </md-input-container>
+    <md-input-container>
+      <label>Email</label>
+      <input type="email" ng-model="user.email" required/>
+    </md-input-container>
+    <md-input-container>
+      <label>Password</label>
+      <input id="pw1" type="password" ng-model="user.password" required/>
+    </md-input-container>
+    <md-input-container>
+      <label>Confimation password</label>
+      <input id="pw2" type="password" ng-model="user.confirm_password" pw-check="pw1" required/>
+    </md-input-container>
+    <br>
+  </div>
+  <div>
+    <md-button class="md-raised md-primary" ng-click="signup()">Signup</md-button>
+  </div>
+</div>

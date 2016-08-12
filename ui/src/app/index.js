@@ -57,6 +57,16 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
         data: {
           title: 'Login'
         }
+      })
+      .state('signup', {
+        url: '/signup',
+        controller: 'SignupCtrl',
+        controllerAs: 'vm',
+        templateUrl: 'app/views/signup.html',
+        authenticate: false,
+        data: {
+          title: 'Signup'
+        }
       });
 
     $urlRouterProvider.otherwise('/login');

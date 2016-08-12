@@ -98,6 +98,22 @@ def login():
         abort(403)
 
 
+@server.route('/api/regularuser', methods=['POST'])
+def regular_user_request():
+    data = request.get_json(force=True)
+    try:
+        newUser = User(data['user_name'], data['password'], 1, data['email'])
+        status = add_regular_user(newUser)
+        if status == "success":
+            resp = Response(response='{"status": "'+ status + '"}', status=200)
+            # _thread.start_new_thread(send_mail, (data['email'],"Hi\n Your Bassa account will be approved after it has been approved by an admin."))
+        else:
+            resp = Response(response='{"error":"' + status + '"}', status=400)
+    except Exception as e:
+        resp = Response(response='{"error":"username exists"}', status=400)
+    return resp
+
+
 @server.route('/api/user', methods=['POST'])
 def add_user_request():
     token = token_validator(request.headers['token'])

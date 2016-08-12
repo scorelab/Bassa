@@ -35,6 +35,16 @@
       });
     };
 
+    var signup = function(obj) {
+      var $http = $injector.get('$http');
+      return $http({
+        method: 'POST',
+        url: BassaUrl + '/api/regularuser',
+        data: JSON.stringify(obj),
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    };
+
     var setName = function(name) {
       data.name = name;
     };
@@ -70,6 +80,7 @@
     return {
       loggedIn: loggedIn,
       login:login,
+      signup:signup,
       token:getToken,
       removeToken:removeToken,
       getUsername:getName,
