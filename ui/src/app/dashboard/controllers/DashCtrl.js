@@ -24,18 +24,22 @@
     });
 
     $scope.addLink = function() {
-      DashService.addDownload($scope.dlink).then(function (response) {
-        $scope.dlink.link = '';
-        ToastService.showToast("Link added");
-        getActiveDownloads();
-      }, function(error){
-        $scope.dlink.link = '';
-        if (error.data.quota) {
-          ToastService.showToast("Your monthly quota has been exceeded");
-        } else {
-          ToastService.showToast("Oops! Something went wrong :(");
-        }
-      });
+      if ($scope.dlink.link === "" || $scope.dlink.link === undefined) {
+        ToastService.showToast("Please check your url");
+      } else {
+        DashService.addDownload($scope.dlink).then(function (response) {
+          $scope.dlink.link = '';
+          ToastService.showToast("Link added");
+          getActiveDownloads();
+        }, function(error){
+          $scope.dlink.link = '';
+          if (error.data.quota) {
+            ToastService.showToast("Your monthly quota has been exceeded");
+          } else {
+            ToastService.showToast("Oops! Something went wrong :(");
+          }
+        });
+      }
     };
 
     var getActiveDownloads = function() {
