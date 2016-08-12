@@ -53,7 +53,7 @@ def add_user(user):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql = "INSERT into user VALUES(%s, MD5(%s), %s, %s, 0);"
+        sql = "INSERT into user VALUES(%s, MD5(%s), %s, %s, 0, 0);"
         try:
             cursor.execute(sql, (user.userName, user.password, user.auth, user.email))
             db.commit()
@@ -63,6 +63,19 @@ def add_user(user):
         return "success"
     return "db connection error"
 
+def add_regular_user(user):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "INSERT into user VALUES(%s, MD5(%s), %s, %s, 0, 0);"
+        try:
+            cursor.execute(sql, (user.userName, user.password, user.auth, user.email))
+            db.commit()
+        except MySQLdb.Error as e:
+            db.rollback()
+            return e[1]
+        return "success"
+    return "db connection error"
 
 def remove_user(username):
     db = threadpool.connect()

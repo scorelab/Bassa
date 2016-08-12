@@ -57,6 +57,11 @@ Headers: Content-type : Application/JSON, token: <auth token>
 JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>, "email":"<email>"}  ```
 Update the given user
 
+**http://localhost:5000/api/regularuser**
+###### POST
+Headers: Content-type : Application/JSON
+JSON: ```{"user_name":"<username>", "password":"<password>", "email":"<email>"}  ```
+
 **http://localhost:5000/api/user/blocked**
 ###### GET
 Headers: token: <auth token>
