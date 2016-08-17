@@ -1,6 +1,6 @@
 angular.module('app')
 
-.factory('authorizationInterceptor', ['UserService', function (UserService) {
+.factory('authorizationInterceptor', ['UserService', '$injector', function (UserService, $injector) {
   return {
     request: function (config) {
       var token = UserService.token();
@@ -17,6 +17,13 @@ angular.module('app')
         UserService.setToken(newToken);
       }
       return config;
-    }
+    },
+
+    responseError: function(res) {
+      if (res.status === 403) {
+         $injector.get('$state').transitionTo('login');
+      }
+      return res;
+    },
   };
 }]);
