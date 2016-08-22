@@ -4,8 +4,7 @@ Automated Download Queue for Enterprise to take the best use of Internet bandwid
 
 ## Installation
 ```
-  $ sudo apt-get install libmysqlclient-dev
-  $ sudo apt-get install python-dev
+  $ ./setup.py
   $ cd components/core/
   $ sudo python setup.py develop
 ```
@@ -121,7 +120,12 @@ Approve the user with given username
 
 ### Install dependencies with
 
-`npm install`
+
+```
+  $ cd ui/
+  $ npm install
+```
+
 
 ### To start
 run `gulp serve`
