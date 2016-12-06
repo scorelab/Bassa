@@ -1,12 +1,11 @@
 [![PyPI](https://img.shields.io/pypi/dm/Bassa.svg)]()
 [![PyPI](https://img.shields.io/pypi/v/Bassa.svg)]()
 ![logo](http://gdurl.com/7XYK)
--
-
 
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
-
+### About 
+Bassa solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.
 
 ## Installation
 ```
@@ -30,6 +29,12 @@ Automated Download Queue for Enterprise to take the best use of Internet bandwid
 * Notify user when his/her download is completed
 * Mark inappropriate downloads
 * Provides admins an interface to deal with inappropriate files
+
+### How to Use Bassa
+* After Setting up Bassa, Login/Register.There are two types of users in Bassa- (1) The Admin and (2) The Normal Users.
+* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away. 
+* The organisation admin can start the downloads at a time of his/her liking. 
+* Then the users who had added links for certain files can download them from the local servers at a much higher speed.
 
 ## URL endpoints
 
