@@ -26,6 +26,10 @@
       return true;
     };
 
+    $scope.back = function() {
+     $state.go('login');
+   };
+
     $scope.signup = function() {
       if(validate($scope.user)) {
         UserService.signup($scope.user).then(function(response) {
