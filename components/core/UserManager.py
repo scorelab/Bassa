@@ -214,7 +214,9 @@ def check_if_bandwidth_exceeded(username):
         try:
             cursor.execute(sql, (MONTH, username))
             result = cursor.fetchone()
-            if result['sum'] > conf['max_bandwidth']:
+            if result['sum'] == None:
+                return False
+            elif result['sum'] > conf['max_bandwidth']:
                 return True
             else:
                 return False
