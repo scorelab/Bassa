@@ -9,6 +9,7 @@ EMAIL_CONF = 'email.conf'
 DL_CONF = 'dl.conf'
 LINUX_CONFDIR = os.path.expanduser('~') + '/.config/bassa/'
 WIN_CONFDIR = os.path.expanduser('~') + '/%app_data%/bassa/'
+OSX_CONFDIR  = os.path.expanduser('~') + '/.config/bassa/'
 
 # Utility function to read the README file.
 def read(file_name):
@@ -26,7 +27,8 @@ if platform.system() == 'Linux':
     configdir = LINUX_CONFDIR
 elif platform.system() == 'Windows':
     configdir = WIN_CONFDIR
-
+elif platform.system() == 'Darwin':
+    configdir = OSX_CONFDIR
 if not os.path.exists(configdir):
     os.makedirs(configdir)
 
