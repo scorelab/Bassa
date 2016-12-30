@@ -2,7 +2,7 @@
 
   angular
     .module('app')
-    .controller('TableCtrl', [ '$scope', '$http', 'BassaUrl', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
+    .controller('TableCtrl', [ '$scope', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
 
   function TableCtrl($scope, ToastService, TableService, UtilityService) {
     $scope.downloads = [];
@@ -20,13 +20,6 @@
     }, function(error){
       ToastService.showToast("Oops! Something went wrong fetching data");
     });
-
-    $scope.downloadAll = function(){
-      return $http({
-        method: 'GET',
-        url: BassaUrl + '/api/user/requests'
-      });
-    };
 
   }
 
