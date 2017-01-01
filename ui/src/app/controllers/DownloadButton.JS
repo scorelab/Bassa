@@ -8,7 +8,7 @@
     $scope.downloads = [];
 
     function downloadFiles(files) {
-            return $http.get(BassaUrl + 'api/use/downloads', files);
+            return $http.get(BassaUrl + 'api/user/downloads', files);
         }
   }
 
