@@ -15,7 +15,7 @@
     };
 
     TableService.getCompletedDownloads().then(function (response) {
-      dataList = setSize(response);
+      dataList = get(response);
       $scope.downloads = dataList.data;
     }
 
