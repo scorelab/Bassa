@@ -3,7 +3,7 @@
 </br>
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
-[![pypi](https://badge.fury.io/py/pypi.svg)
+![pypi](https://badge.fury.io/py/pypi.svg)
 
 ## Installation
 ```
