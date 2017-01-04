@@ -9,6 +9,8 @@ if platform.system() == 'Linux':
     configdir = os.path.expanduser('~') + '/.config/bassa/'
 elif platform.system() == 'Windows':
     configdir = os.path.expanduser('~') + '/%app_data%/bassa/'
+elif platform.system() == 'Darwin':
+    configdir = os.path.expanduser('~') + '/.config/bassa/'
 
 
 def check_conf_availability():
