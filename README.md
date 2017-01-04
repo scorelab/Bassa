@@ -1,6 +1,10 @@
 
 ![logo](http://gdurl.com/7XYK)
+<br>
+[![PyPI](https://img.shields.io/pypi/v/nine.svg?style=flat-square)]([![PyPI](https://img.shields.io/pypi/v/nine.svg)](https://pypi.python.org/pypi/bassa))
+<br> <br>
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
+
 
 ## Installation
 ```
