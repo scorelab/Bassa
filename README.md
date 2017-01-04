@@ -1,10 +1,13 @@
 
 ![logo](http://gdurl.com/7XYK)
+</br>
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
+
+![pypi](https://badge.fury.io/py/pypi.svg)
 
 ## Installation
 ```
-  $ ./setup.py
+  $ ./setup.sh
   $ cd components/core/
   $ sudo python setup.py develop
 ```
