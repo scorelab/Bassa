@@ -16,7 +16,7 @@
             donut: true,
             x: function (d) { return d.user_name; },
             y: function (d) { return d.size; },
-            valueFormat: (d3.format(".0f")),
+            valueFormat: (d3.format('.0f')),
             color: ['rgb(0, 150, 136)', '#E75753'],
             showLabels: false,
             showLegend: false,
@@ -31,26 +31,26 @@
 
     $scope.start = function() {
       AdminService.startDownloads().then(function (response) {
-        ToastService.showToast("Downloading");
+        ToastService.showToast('Downloading');
       }, function(error){
-        ToastService.showToast("Oops! Something went wrong");
+        ToastService.showToast('Oops! Something went wrong');
       });
     };
 
     $scope.kill = function() {
       AdminService.killDownloads().then(function (response) {
-        ToastService.showToast("Paused all downloads");
+        ToastService.showToast('Paused all downloads');
       }, function(error){
-        ToastService.showToast("Oops! Something went wrong");
+        ToastService.showToast('Oops! Something went wrong');
       });
     };
 
     $scope.approve = function(username) {
       AdminService.approve(username).then(function (response) {
-        ToastService.showToast("Approved", username);
+        ToastService.showToast('Approved', username);
         getRequests();
       }, function(error){
-        ToastService.showToast("Oops! Something went wrong");
+        ToastService.showToast('Oops! Something went wrong');
       });
     };
 
