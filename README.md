@@ -1,4 +1,4 @@
-PyPi Downloads badge markdown: [![PyPI](https://img.shields.io/pypi/dm/Django.svg)]()
+[![PyPI](https://img.shields.io/pypi/dm/Bassa.svg)]()
 ![logo](http://gdurl.com/7XYK)
 -
 
