@@ -18,7 +18,7 @@
       response = setSize(response);
       $scope.downloads = response.data;
     }, function(error){
-      ToastService.showToast("Oops! Something went wrong fetching data");
+      ToastService.showToast('Oops! Something went wrong fetching data');
     });
 
   }
