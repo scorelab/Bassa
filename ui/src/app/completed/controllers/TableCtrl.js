@@ -1,5 +1,5 @@
 (function(){
-
+  'use strict';
   angular
     .module('app')
     .controller('TableCtrl', [ '$scope', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
