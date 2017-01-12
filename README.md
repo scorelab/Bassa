@@ -23,6 +23,7 @@ Follow these instructions to setup and run Bassa on your Windows machine
 > pip install gulp
 > npm install aria2
 > npm install -g bower
+> pip install gevent
 ```
 
 ### Main functionalities
@@ -44,7 +45,7 @@ Follow these instructions to setup and run Bassa on your Windows machine
 3. Open up another command prompt and redirect to ui/, execute:  
 `gulp serve`  
 If it's your first time running Bassa, run `npm install` first - this will install all the dependencies for web components used by Bassa (this is a one-time step). Execute `gulp serve` afterwards.  
-4. Open up a browser and direct to "localhost/3000", you should be able to use Bassa now. 
+4. Open up a browser and direct to "localhost:3000", you should be able to use Bassa now. 
 
 
 
