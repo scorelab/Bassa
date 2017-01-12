@@ -1,5 +1,5 @@
 from flask import Flask
-from flask.ext.cors import CORS
+from flask_cors import CORS
 from flask import send_file, send_from_directory
 from flask import request, jsonify, abort, Response, g
 from flask_socketio import SocketIO, join_room
