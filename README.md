@@ -12,8 +12,8 @@ Follow these instructions to setup and run Bassa on your Windows machine
 
 ## Installation
 
-1. Download python 3.6.0 here: https://www.python.org/downloads/ (Make sure you download the correct bit distribution).
-2. Download (save as) this [file]:https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py -> open up a command prompt with Administrator privileges at its directory -> run `python get-pip.py`  
+1. Download python 3.6.0 [here](https://www.python.org/downloads/) (Make sure you download the correct bit distribution).
+2. Download (save as) this [file](https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py) -> open up a command prompt with Administrator privileges at its directory -> run `python get-pip.py`  
 
 
 ## Test Server
