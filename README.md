@@ -11,11 +11,8 @@ Follow these instructions to setup and run Bassa on your Windows machine
 
 
 ## Installation
-```
-  $ ./setup.py
-  $ cd components/core/
-  $ sudo python setup.py develop
-```
+
+1. Download python 3.6.0 [here]https://www.python.org/downloads/ . 
 
 ## Test Server
 ```
