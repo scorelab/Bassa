@@ -3,8 +3,11 @@
 -
 
 
-Automated Download Queue for Enterprise to take the best use of Internet bandwidth
+Automated Download Queue for Enterprise to take the best use of Internet bandwidth.
 
+###This is the sourecode of Bassa for Windows users.  
+The master branch's sourcecode is for Linux users only.  
+Follow these instructions to setup and run Bassa on your Windows machine  
 
 
 ## Installation
