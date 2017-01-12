@@ -25,12 +25,6 @@ Follow these instructions to setup and run Bassa on your Windows machine
 > npm install -g bower
 ```
 
-## Test Server
-```
-  $ cd components/core/
-  $ python Main.py
-```
-
 ### Main functionalities
 * Provides an interface for users to add their downloads as links or torrent magnet links
 * Provide users  an interface to view and download the files in local server
