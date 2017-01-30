@@ -3,21 +3,27 @@
 -
 
 
-Automated Download Queue for Enterprise to take the best use of Internet bandwidth
+Automated Download Queue for Enterprise to take the best use of Internet bandwidth.
 
+###This is the sourecode of Bassa for Windows users.  
+The master branch's sourcecode is for Linux users only.  
+Follow these instructions to setup and run Bassa on your Windows machine  
 
 
 ## Installation
-```
-  $ ./setup.py
-  $ cd components/core/
-  $ sudo python setup.py develop
-```
 
-## Test Server
+1. Download python 3.6.0 [here](https://www.python.org/downloads/) (Make sure you download the correct bit distribution).
+2. Download (save as) this [file](https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py) -> open up a command prompt with Administrator privileges at its directory -> run `python get-pip.py`  
+3. Install NodeJS [here](https://nodejs.org/en/download/)  
+4. Execute these codes to install dependencies:  
 ```
-  $ cd components/core/
-  $ python Main.py
+> pip install setuptools
+> pip install Flask
+> pip install pymysql  
+> pip install gulp
+> npm install aria2
+> npm install -g bower
+> pip install gevent
 ```
 
 ### Main functionalities
@@ -29,6 +35,19 @@ Automated Download Queue for Enterprise to take the best use of Internet bandwid
 * Notify user when his/her download is completed
 * Mark inappropriate downloads
 * Provides admins an interface to deal with inappropriate files
+
+====
+# Running Bassa
+
+1. Open up a command prompt and redirect to components/core, execute: `python Main.py`. ***Note:*** All server logs go in here.  
+2. Open up another command prompt and redirect to components/core, execute:  
+`aria2c --enable-rpc --rpc-listen-all --dir <YOUR_DOWNLOAD_DIRECTORY>`
+3. Open up another command prompt and redirect to ui/, execute:  
+`gulp serve`  
+If it's your first time running Bassa, run `npm install` first - this will install all the dependencies for web components used by Bassa (this is a one-time step). Execute `gulp serve` afterwards.  
+4. Open up a browser and direct to "localhost:3000", you should be able to use Bassa now. 
+
+
 
 ## URL endpoints
 
@@ -121,16 +140,4 @@ Returns a JSON of all the users who has signed up and not been approved yet
 Headers: Content-type : Application/JSON, token: <auth token>
 Approve the user with given username
 
-# Bassa UI
 
-### Install dependencies with
-
-
-```
-  $ cd ui/
-  $ npm install
-```
-
-
-### To start
-run `gulp serve`

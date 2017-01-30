@@ -2,7 +2,6 @@ from Models import User
 from DBCon import *
 from ConfReader import get_conf_reader
 import sqlalchemy.pool as pool
-
 conf = get_conf_reader("dl.conf")
 
 threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=5)
@@ -38,9 +37,9 @@ def check_user_name(username):
 def get_user(username):
     db = threadpool.connect()
     if db is not None:
-        cursor = db.cursor(MySQLdb.cursors.DictCursor)
+        cursor = db.cursor()#MySQLdb.cursors.DictCursor)
         sql = "SELECT * FROM user WHERE user_name='%s' and blocked=0;" % username
-        cursor.execute(sql)
+        cursor.execute(sql) 
         data = cursor.fetchone()
         db.close()
         if data == None:
@@ -57,7 +56,7 @@ def add_user(user):
         try:
             cursor.execute(sql, (user.userName, user.password, user.auth, user.email))
             db.commit()
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -71,7 +70,7 @@ def add_regular_user(user):
         try:
             cursor.execute(sql, (user.userName, user.password, user.auth, user.email))
             db.commit()
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -85,7 +84,7 @@ def remove_user(username):
         try:
             cursor.execute(sql, (username))
             db.commit()
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -100,7 +99,7 @@ def update_user(user, username):
         try:
             cursor.execute(sql, (user.userName, user.auth, user.email, username))
             db.commit()
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -109,28 +108,28 @@ def update_user(user, username):
 def get_users():
     db = threadpool.connect()
     if db is not None:
-        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        cursor =  db.cursor(pymysql.cursors.DictCursor)
         sql = "SELECT user_name, email, auth FROM user WHERE blocked=0;"
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
             db.close()
             return results
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             return e[1]
     return "db connection error"
 
 def get_blocked_users():
     db = threadpool.connect()
     if db is not None:
-        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        cursor =  db.cursor(pymysql.cursors.DictCursor)
         sql = "SELECT user_name, email, auth FROM user WHERE blocked=1;"
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
             db.close()
             return results
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -142,7 +141,7 @@ def block_user(username):
         try:
             cursor.execute(sql, (1, username))
             db.commit()
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -156,7 +155,7 @@ def unblock_user(username):
         try:
             cursor.execute(sql, (0, username))
             db.commit()
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -165,14 +164,14 @@ def unblock_user(username):
 def get_signup_requests():
     db = threadpool.connect()
     if db is not None:
-        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        cursor =  db.cursor(pymysql.cursors.DictCursor)
         sql = "SELECT user_name, email FROM user WHERE approved=0;"
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
             db.close()
             return results
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -184,7 +183,7 @@ def approve_user(username):
         try:
             cursor.execute(sql, (1, username))
             db.commit()
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -193,7 +192,7 @@ def approve_user(username):
 def get_heavy_users():
     db = threadpool.connect()
     if db is not None:
-        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        cursor =  db.cursor(pymysql.cursors.DictCursor)
         MONTH = 60 * 60 * 24 * 30
         sql = "SELECT user_name, sum(size) AS size FROM download WHERE completed_time > unix_timestamp(now()) - %s GROUP BY user_name ORDER BY size DESC LIMIT 10;" % MONTH
         try:
@@ -201,14 +200,14 @@ def get_heavy_users():
             results = cursor.fetchall()
             db.close()
             return results
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             return e[1]
     return "db connection error"
 
 def check_if_bandwidth_exceeded(username):
     db = threadpool.connect()
     if db is not None:
-        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        cursor =  db.cursor(pymysql.cursors.DictCursor)
         MONTH = 60 * 60 * 24 * 30
         sql = "SELECT sum(size) AS sum FROM download WHERE completed_time > unix_timestamp(now()) - %s AND user_name=%s;"
         try:
@@ -221,6 +220,6 @@ def check_if_bandwidth_exceeded(username):
             else:
                 return False
             return result
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             return e[1]
     return "db connection error"
