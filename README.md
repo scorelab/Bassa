@@ -9,7 +9,7 @@ Automated Download Queue for Enterprise to take the best use of Internet bandwid
 
 ## Installation
 ```
-  $ ./setup.py
+  $ ./setup.sh
   $ cd components/core/
   $ sudo python setup.py develop
 ```
