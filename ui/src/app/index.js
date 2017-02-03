@@ -6,8 +6,10 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
   .value("BassaUrl", "http://localhost:5000")
 
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $mdThemingProvider,
-                    $mdIconProvider) {
+                    $mdIconProvider, $qProvider) {
 
+    $qProvider.errorOnUnhandledRejections(false);
+    
     $httpProvider.interceptors.push('authorizationInterceptor');
 
     $stateProvider
