@@ -1,3 +1,4 @@
+'use strict';
 angular.module('app')
 .directive('ngEnter', function() {
   return function(scope, element, attrs) {

@@ -1,4 +1,5 @@
 describe('Service: UtilityService', function() {
+  'use strict';
   beforeEach(module('app'));
 
   var UtilityService;

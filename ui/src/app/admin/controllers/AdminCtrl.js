@@ -1,5 +1,5 @@
 (function(){
-
+  'use strict';
   angular
     .module('app')
     .controller('AdminCtrl', [ '$scope', 'ToastService', 'AdminService', 'UtilityService', AdminCtrl]);

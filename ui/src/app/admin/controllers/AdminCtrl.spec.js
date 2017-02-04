@@ -1,4 +1,5 @@
 describe('Controller: Admin controller', function() {
+  'use strict';
   beforeEach(module('bassa'))
   beforeEach(module('app'));
 

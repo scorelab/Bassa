@@ -1,5 +1,5 @@
 (function(){
-
+  'use strict';
   angular
     .module('app')
     .controller('DashCtrl', [ '$scope', 'ToastService', 'DashService', 'UserService', 'BassaUrl', DashCtrl]);
