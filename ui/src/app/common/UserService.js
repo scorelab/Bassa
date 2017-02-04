@@ -20,8 +20,8 @@
           transformRequest: function(obj) {
             var str = [];
             for(var p in obj)
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            return str.join("&");
+            str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+            return str.join('&');
           },
           data: credentials,
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -62,15 +62,15 @@
     };
 
     var setToken = function(newToken) {
-      localStorage.setItem("Token", newToken);
+      localStorage.setItem('Token', newToken);
     };
 
     var removeToken = function() {
-      localStorage.setItem("Token", '');
+      localStorage.setItem('Token', '');
     }
 
     var getToken = function(){
-      return localStorage.getItem("Token");
+      return localStorage.getItem('Token');
     };
 
     var loggedIn = function() {
