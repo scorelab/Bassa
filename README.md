@@ -1,4 +1,6 @@
 
+![PyPi version badge](https://img.shields.io/pypi/v/nine.svg)
+
 ![logo](http://gdurl.com/7XYK)
 -
 
