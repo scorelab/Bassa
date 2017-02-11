@@ -1,4 +1,4 @@
-describe('Service: AdminService', function() {
+describe("Service: AdminService", function() {
   beforeEach(module('bassa'));
   beforeEach(module('app'));
 
