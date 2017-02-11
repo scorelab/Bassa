@@ -1,4 +1,4 @@
-import MySQLdb
+import pymysql.cursors
 
 _db=None
 
@@ -6,7 +6,12 @@ def get_db_con () :
     global _db
     if _db==None:
         try:
-            _db=MySQLdb.connect("localhost", "dbuser", "dbpass", "Bassa" )
+            _db = pymysql.connect(host='localhost',
+                             user='root',
+                             password='',
+                             db='Bassa',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
             return _db
         except:
             return None
