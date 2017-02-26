@@ -1,33 +1,18 @@
 #!/bin/bash
 
-echo "Installing pip"
-sudo apt-get install python3-pip
-echo "pip installed"
+echo "Finding the package manager"
+APT_GET_CMD=$(which apt-get)
+PACMAN_CMD=$(which pacman)
 
-echo "Installing setuptools"
-sudo apt-get install python3-setuptools
-echo "pip installed"
+if [[ ! -z $APT_GET_CMD ]]; then
+    echo -e "apt-get found\n"
+    ./package-list-aptget
+    
+elif [[ ! -z $PACMAN_CMD ]]; then
+    echo -e "pacman found\n"
+    ./package-list-pacman
+else
+    echo "Please manually install packages in package-list-aptget file"
+    exit 1;
+fi
 
-echo "Installing Aria2"
-sudo apt-get install aria2
-echo "Aria2 installed"
-
-echo "Installing mysql-server"
-sudo apt-get install mysql-server
-echo "mysql-server installed"
-
-echo "Installing libmysqlclient"
-sudo apt-get install libmysqlclient-dev
-echo "libmysqlclient installed"
-
-echo "Installing node"
-curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
-echo "NodeJS installed"
-
-echo "Installing bower globally"
-sudo npm install -g bower
-echo "bower installed"
-
-echo "Installing gulp globally"
-sudo npm install -g gulp
-echo "gulp installed"
