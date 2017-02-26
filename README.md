@@ -48,7 +48,7 @@ Returns auth token in response header for successful login
 Headers: Content-type : Application/JSON, token: <auth token>
 JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>, "email":"<email>"}  ```
 
-*Auth levals*
+*Auth levels*
 * 0:ADMIN
 * 1:STUDENT
 * 2:ACADEMIC
