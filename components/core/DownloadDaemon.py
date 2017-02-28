@@ -132,8 +132,10 @@ def set_download_gid(id, gid):
             d.gid = gid
 
 def send_status(id, completedLength, fileSize, username):
-    progress = int(float(completedLength)/float(fileSize) * 100)
-    sc.emit('status', {'id': id, 'progress': progress}, room=username, namespace='/progress')
+    progress=-1
+    if fileSize>0:
+        progress = int(float(completedLength)/float(fileSize) * 100)
+        sc.emit('status', {'id': id, 'progress': progress}, room=username, namespace='/progress')
 
 def find_supported_handler(download):
     for handler in handlerLst:
