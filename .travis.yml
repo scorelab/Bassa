@@ -1,12 +1,12 @@
-sudo: required
-dist: trusty
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
 language: node_js
 node_js:
   - "0.12"
 script: cd ui && npm install && npm test
+before_install:
+ - sudo apt-get update
+ - sudo apt-get install chromium-chromedriver
+before_script:
+  - "export PATH=$PATH:/usr/lib/chromium-browser/"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
