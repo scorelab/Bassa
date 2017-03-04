@@ -52,5 +52,8 @@
     "init": "npm install",
     "install": "bower install",
     "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
+  },
+  "dependencies": {
+    "jasmine-core": "^2.5.2"
   }
 }
