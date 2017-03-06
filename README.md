@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/scorelab/Bassa.svg?branch=master)](https://travis-ci.org/scorelab/Bassa)
 [![PyPI](https://img.shields.io/pypi/dm/Bassa.svg)]()
 [![PyPI](https://img.shields.io/pypi/v/Bassa.svg)]()
 ![logo](http://gdurl.com/7XYK)
@@ -48,7 +49,7 @@ Returns auth token in response header for successful login
 Headers: Content-type : Application/JSON, token: <auth token>
 JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>, "email":"<email>"}  ```
 
-*Auth levals*
+*Auth levels*
 * 0:ADMIN
 * 1:STUDENT
 * 2:ACADEMIC
@@ -140,3 +141,7 @@ Approve the user with given username
 
 ### To start
 run `gulp serve`
+
+### Make sure you have aria2 installed.
+run `aria2c --enable-rpc`
+

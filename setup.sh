@@ -21,7 +21,8 @@ sudo apt-get install libmysqlclient-dev
 echo "libmysqlclient installed"
 
 echo "Installing node"
-curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install -y nodejs
 echo "NodeJS installed"
 
 echo "Installing bower globally"
