@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/scorelab/Bassa.svg?branch=master)](https://travis-ci.org/scorelab/Bassa)
 [![PyPI](https://img.shields.io/pypi/dm/Bassa.svg)]()
 [![PyPI](https://img.shields.io/pypi/v/Bassa.svg)]()
 ![logo](http://gdurl.com/7XYK)
