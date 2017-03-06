@@ -143,5 +143,5 @@ Approve the user with given username
 run `gulp serve`
 
 ### Make sure you have aria2 installed.
-run 'aria2c --enable-rpc'
+run `aria2c --enable-rpc`
 
