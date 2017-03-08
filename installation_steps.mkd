@@ -1,0 +1,32 @@
+**PREREQUISITE**
+pip, python3, npm.
+
+**MINIMAL QUICK START GUIDE**
+1. mkdir Project_bassa
+2. cd Project_bassa
+3. git clone https://github.com/scorelab/Bassa.git
+4. pip install virtualenv
+5. virtualenv bassa_env
+6. source bassa_venv/bin/activate
+7. virtualenv -p python3 bassa_venv/ 
+8. cd Bassa
+
+**INSTALLATION STEPS : **
+For Ubunutu (Tested on Ubuntu 16.10) :
+1. ./setup.sh 
+
+![Image on running setup.sh]
+(Images/Screenshot from 2017-03-07 13-09-10.png)
+
+2. cd cpmponents/core/
+3. python setup.py develop
+
+![Image on running above command]
+(Images/Screenshot from 2017-03-07 13-16-06.png)
+
+
+**ERROR MESSAGE AND TROUBLE SHOOTING**
+While installing python3 in virtual environment (pip install python3), it gives error :   
+Could not find a version that satisfies the requirement python3 (from versions: )
+No matching distribution found for python3
+Use : virtualenv -p python3 bassa_venv
