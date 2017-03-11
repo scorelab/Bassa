@@ -1,5 +1,5 @@
+'use strict';
 angular.module('app')
-
 .factory('authorizationInterceptor', ['UserService', '$injector', function (UserService, $injector) {
   return {
     request: function (config) {
