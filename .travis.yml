@@ -2,7 +2,11 @@ dist: trusty
 sudo: false
 language: node_js
 node_js:
-  - "0.12"
+  - "6.10.0"
+cache:
+  directories:
+    - ui/node_modules
+
 script: cd ui && npm install && npm test
 before_install:
   - export CHROME_BIN=chromium-browser
