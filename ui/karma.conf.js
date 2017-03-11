@@ -14,7 +14,7 @@ module.exports = function(config) {
     plugins : [
         'karma-chrome-launcher',
         'karma-jasmine',
-        "karma-spec-reporter"
+        'karma-spec-reporter'
     ],
     files: [
       'bower_components/jquery/dist/jquery.js',

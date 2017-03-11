@@ -1,5 +1,5 @@
 (function () {
-
+    'use strict';
     angular
         .module('app')
         .controller('ControlPanelController', [
@@ -32,7 +32,7 @@
         function showAlert() {
             alert = $mdDialog.alert({
                 title: 'Reloading done!',
-                content: vm.reloadServer + " server reloaded.",
+                content: vm.reloadServer + ' server reloaded.',
                 ok: 'Close'
             });
             $mdDialog

@@ -1,5 +1,5 @@
 (function(){
-
+  'use strict';
   angular
     .module('app')
     .controller('TableCtrl', [ '$scope', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
@@ -18,7 +18,7 @@
       response = setSize(response);
       $scope.downloads = response.data;
     }, function(error){
-      ToastService.showToast("Oops! Something went wrong fetching data");
+      ToastService.showToast('Oops! Something went wrong fetching data');
     });
 
   }

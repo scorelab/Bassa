@@ -1,5 +1,5 @@
 (function(){
-
+  'use strict';
   angular
     .module('app')
     .controller('DashCtrl', [ '$scope', 'ToastService', 'DashService', 'UserService', 'BassaUrl', DashCtrl]);
@@ -24,19 +24,19 @@
     });
 
     $scope.addLink = function() {
-      if ($scope.dlink.link === "" || $scope.dlink.link === undefined) {
-        ToastService.showToast("Please check your url");
+      if ($scope.dlink.link === '' || $scope.dlink.link === undefined) {
+        ToastService.showToast('Please check your url');
       } else {
         DashService.addDownload($scope.dlink).then(function (response) {
           $scope.dlink.link = '';
-          ToastService.showToast("Link added");
+          ToastService.showToast('Link added');
           getActiveDownloads();
         }, function(error){
           $scope.dlink.link = '';
           if (error.data.quota) {
-            ToastService.showToast("Your monthly quota has been exceeded");
+            ToastService.showToast('Your monthly quota has been exceeded');
           } else {
-            ToastService.showToast("Oops! Something went wrong :(");
+            ToastService.showToast('Oops! Something went wrong :(');
           }
         });
       }
@@ -50,7 +50,7 @@
              return _.extend({}, element, {progress: 0});
         });
       }, function(error){
-        ToastService.showToast("Oops! Something went wrong when fetching data");
+        ToastService.showToast('Oops! Something went wrong when fetching data');
       });
     }
 
