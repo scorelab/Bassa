@@ -134,3 +134,9 @@ Approve the user with given username
 
 ### To start
 run `gulp serve`
+
+### Run UI unit tests
+```
+	$ cd ui/
+	$ npm test OR $ yarn test 
+```
