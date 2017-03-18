@@ -9,11 +9,29 @@ Automated Download Queue for Enterprise to take the best use of Internet bandwid
 Bassa solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.
 
 ## Installation
+
+Use python 3 instead of Python 2
+
 ```
   $ ./setup.sh
   $ cd components/core/
   $ sudo python setup.py develop
 ```
+## Database Setup
+
+1. Type below in a MySql terminal.
+
+```
+create database Bassa
+```
+
+2. Then type below in the root of project.
+
+```
+mysql -u root -p  Bassa < <Bassa.sql>
+```
+3. Then open components/core/DBCon.py and setup database username and password.
+
 
 ## Test Server
 ```
