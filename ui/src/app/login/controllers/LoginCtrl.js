@@ -6,9 +6,9 @@
 
   function LoginCtrl($scope, $state, UserService) {
     $scope.user = {};
-    $scope.incorrectCredentials = false;
 
     $scope.login = function(){
+      $scope.incorrectCredentials = false;
       UserService.login($scope.user, function(status) {
         if (status){
           $state.go('home.dashboard');
