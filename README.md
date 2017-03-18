@@ -27,7 +27,7 @@ create database Bassa
 
 2. Then type below in the root of project.
 
-````
+```
 mysql -u root -p  Bassa < Bassa.sql
 ```
 
