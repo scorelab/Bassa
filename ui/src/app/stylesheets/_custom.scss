@@ -180,6 +180,29 @@ md-backdrop.md-sidenav-backdrop {
   margin-top: 0px;
 }
 
+#signup-button{
+  border-color: rgb(117,117,117);
+  border-width: 7px;
+  background-color: white;
+  color: rgb(117,117,117);
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: 7px;
+}
+
+.input-container{
+  margin:1px;
+}
+
+.login-content{
+  width: 23%;
+}
+
+.login-button{
+  font-weight:bolder;
+  margin: 0 6px 6px 0;
+}
+
 // Dashboard
 .add-download-box {
   background-color: white;

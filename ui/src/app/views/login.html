@@ -1,24 +1,24 @@
-<div layout="column" layout-align="center center" class="">
+<div layout="column" layout-align="center center">
   <img class="logo" ng-src="assets/images/logo.png">
-  <h1 class="md-display-2 login-heading">Login to Bassa</h1>
-  <div layout="row">
-    <md-input-container>
+  <div layout="column" class="login-content">
+    <md-input-container class="input-container">
       <label>User name</label>
       <input type="text" ng-model="user.user_name"/>
     </md-input-container>
-    <md-input-container>
+    <md-input-container class="input-container">
       <label>Password</label>
       <input type="password" ng-model="user.password" ng-enter="login()"/>
     </md-input-container>
+    <div style="padding:14px; background-color:grey; color: white;" class="alert" ng-if="incorrectCredentials">
+      <span style="margin-left: 15px;color: white;font-weight: bold;float: right;font-size: 22px;line-height: 20px;cursor: pointer;
+        transition: 0.3s;"class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      Incorrect Credentials
+    </div>
+    <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
+    <div layout="row">
+      <p>Don't have an account?</p>
+      <md-button class="md-raised md-primary" id="signup-button" ng-click="signup()">Signup</md-button>
+    </div>
     <br>
-  </div>
-  <div style="padding:14px; background-color:grey; color: white;" class="alert" ng-if="incorrectCredentials">
-  <span style="margin-left: 15px;color: white;font-weight: bold;float: right;font-size: 22px;line-height: 20px;cursor: pointer;
-    transition: 0.3s;"class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  Incorrect Credentials
-  </div>
-  <div>
-    <md-button class="md-raised md-primary" ng-click="login()">Login</md-button>
-    <md-button class="md-raised md-primary" ng-click="signup()">Signup</md-button>
   </div>
 </div>
