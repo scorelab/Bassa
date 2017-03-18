@@ -161,6 +161,11 @@ Approve the user with given username
 ### To start
 run `gulp serve`
 
+In the first time you login, the credentials would be as follows.
+
+username - rand
+password - pass
+
 ### Make sure you have aria2 installed.
 run `aria2c --enable-rpc`
 
