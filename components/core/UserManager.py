@@ -20,6 +20,18 @@ def user_login(username, password):
         else:
             return True
 
+def check_approved(username, password):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "SELECT * FROM user WHERE user_name=%s AND password=MD5(%s) AND blocked=0;"
+        cursor.execute(sql, (username, password))
+        data = cursor.fetchone()
+        db.close()
+        if data[5] == 0:
+            return False
+        else:
+            return True
 
 def check_user_name(username):
     db = threadpool.connect()
