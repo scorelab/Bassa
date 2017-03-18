@@ -15,13 +15,18 @@ def add_download(download):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        download_name = download.link.split('/')[-1]
+        if download.link.split(':')[0]=="magnet":
+            download_name = download.link.split('&')[1].split('=')[1]
+        else:
+            download_name = download.link.split('/')[-1]
         sql = "INSERT into download(link, user_name, added_time, download_name) VALUES(%s, %s, %s, %s);"
         try:
             cursor.execute(sql, (download.link, download.userName, int(time.time()), download_name))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
+            # Shows error thrown up by database
+            print(e)
             return e[1]
         return "success"
     return "db connection error"
