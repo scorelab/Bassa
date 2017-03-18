@@ -25,13 +25,13 @@ Use python 3 instead of Python 2
 create database Bassa
 ```
 
-2. Then type below in the root of project.
+2. Type below in the root of project.
 
 ```
 mysql -u root -p  Bassa < Bassa.sql
 ```
 
-3. Then open components/core/DBCon.py and setup database username and password.
+3. Open components/core/DBCon.py and setup database username and password.
 
 
 ## Test Server
