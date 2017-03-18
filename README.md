@@ -27,9 +27,10 @@ create database Bassa
 
 2. Then type below in the root of project.
 
+````
+mysql -u root -p  Bassa < Bassa.sql
 ```
-mysql -u root -p  Bassa < <Bassa.sql>
-```
+
 3. Then open components/core/DBCon.py and setup database username and password.
 
 
