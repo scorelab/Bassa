@@ -26,12 +26,23 @@
           data: credentials,
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
-        setToken(response.headers()['token']);
-        setName(credentials.user_name);
-        setAuthLevel(response.data.auth);
-        cb(true);
+        if(response.status === 200) {
+          setToken(response.headers()['token']);
+          setName(credentials.user_name);
+          setAuthLevel(response.data.auth);
+          cb({
+            state: response.status
+          });
+        }
+        else {
+          cb({
+            state: response.status
+          });
+        }
       }, function(error){
-        cb(false);
+        cb({
+          state: 403
+        });
       });
     };
 
