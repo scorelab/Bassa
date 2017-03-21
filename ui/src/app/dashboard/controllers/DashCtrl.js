@@ -50,8 +50,17 @@
             ToastService.showToast('Oops! Something went wrong :(');
           }
         });
-      }
+      };
     };
+
+    $scope.removeLink = function () {
+      DashService.removeDownload(2).then(function(response){
+        ToastService.showToast('Download removed');
+        getActiveDownloads();
+      }, function (error){
+         ToastService.showToast('Download started. Entry cannot be deleted.');
+      });
+     };
 
     var getActiveDownloads = function() {
       DashService.getDownloads().then(function (response) {

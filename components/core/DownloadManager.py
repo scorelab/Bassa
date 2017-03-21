@@ -47,6 +47,7 @@ def remove_download(id, userName):
             cursor.execute(sql, (id, userName))
             db.commit()
         except MySQLdb.Error as e:
+            print(e)
             db.rollback()
             return e[1]
         return "success"
