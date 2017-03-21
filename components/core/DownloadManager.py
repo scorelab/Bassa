@@ -111,7 +111,6 @@ def get_downloads_user(userName, limit):
 def get_downloads(limit):
     recordsPerPage = 15
     db = threadpool.connect()
-    print("hey i am here")
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT * FROM download WHERE status=3 ORDER by 'added_time' DESC LIMIT %s, %s;"
