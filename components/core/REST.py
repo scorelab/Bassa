@@ -88,12 +88,16 @@ def login():
     userName = request.form['user_name']
     password = request.form['password']
     if user_login(userName, password):
-        user = get_user(userName)
-        token = generate_auth_token(user, server.config['SECRET_KEY'])
-        resp = Response(response='{"auth":"'+ str(user.auth) + '"}',status=200)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
+        if check_approved(userName, password):
+            user = get_user(userName)
+            token = generate_auth_token(user, server.config['SECRET_KEY'])
+            resp = Response(response='{"auth":"'+ str(user.auth) + '"}',status=200)
+            resp.headers['token'] = token
+            resp.headers['Access-Control-Expose-Headers'] = 'token'
+            return resp
+        else:
+            resp = Response(response='{"status": "unapproved"}',status=401)
+            return resp
     else:
         abort(403)
 
