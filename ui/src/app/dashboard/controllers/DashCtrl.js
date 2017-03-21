@@ -53,11 +53,11 @@
       };
     };
 
-    $scope.removeLink = function () {
-      DashService.removeDownload(2).then(function(response){
+    $scope.removeLink = function (id) {
+      DashService.removeDownload(id).then(function(response){
         ToastService.showToast('Download removed');
-        getActiveDownloads();
-      }, function (error){
+         getActiveDownloads();},
+         function (error){
          ToastService.showToast('Download started. Entry cannot be deleted.');
       });
      };

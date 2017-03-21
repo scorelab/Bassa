@@ -36,18 +36,17 @@ def remove_download(id, userName):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql1 = "SELECT status FROM download WHERE id=%s;"
+        sql1 ="SELECT status FROM download WHERE id=%s;"
         sql = "DELETE from download WHERE id=%s and user_name=%s;"
         try:
-            cursor.execute(sql1, id)
+            cursor.execute(sql1,str(id))
             data = cursor.fetchone()
             if data[0] != Status.DEFAULT and data[0] != Status.ERROR:
                 db.commit()
                 return "Download started. Entry cannot be deleted."
-            cursor.execute(sql, (id, userName))
+            cursor.execute(sql, (str(id), userName))
             db.commit()
         except MySQLdb.Error as e:
-            print(e)
             db.rollback()
             return e[1]
         return "success"
@@ -112,6 +111,7 @@ def get_downloads_user(userName, limit):
 def get_downloads(limit):
     recordsPerPage = 15
     db = threadpool.connect()
+    print("hey i am here")
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
         sql = "SELECT * FROM download WHERE status=3 ORDER by 'added_time' DESC LIMIT %s, %s;"
