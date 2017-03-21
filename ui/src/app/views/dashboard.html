@@ -16,14 +16,18 @@
     <table id="table" class="table table-hover table-bordered">
         <thead>
         <tr ng-repeat="data in downloads">
-            <td data-title="ID">{{$index + 1}}</td>
-            <td data-title="Issue">{{data.download_name}}</td>
-            <td data-title="Progress">
+            <td style="padding-top: 3%" data-title="ID">{{$index + 1}}</td>
+            <td style="padding-top: 3%" data-title="Issue">{{data.download_name}}</td>
+            <td style="padding-top: 3%" data-title="Progress">
               <md-progress-linear
                 md-mode="determinate"
                 value="{{data.progress}}">
               </md-progress-linear>
             </td>
+            <td><md-button class="md-fab md-warn md-mini"  ng-click="addLink()">
+                <i class="material-icons">delete</i>
+                </md-button>
+          </td>
         </tr>
         </tbody>
     </table>
