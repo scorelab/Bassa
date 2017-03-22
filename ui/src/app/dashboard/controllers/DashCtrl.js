@@ -2,9 +2,9 @@
   'use strict';
   angular
     .module('app')
-    .controller('DashCtrl', [ '$scope', 'ToastService', 'DashService', 'UserService', 'BassaUrl', DashCtrl]);
+    .controller('DashCtrl', [ '$scope','$window','ToastService', 'DashService', 'UserService', 'BassaUrl', DashCtrl]);
 
-  function DashCtrl($scope, ToastService, DashService, UserService, BassaUrl) {
+  function DashCtrl($scope, $window , ToastService, DashService, UserService, BassaUrl) {
     var socket = io.connect(BassaUrl + '/progress');
     $scope.dlink = {link: ''};
     $scope.downloads = [];
@@ -65,16 +65,21 @@
     }
 
     $scope.removeLink = function (id) {
-      DashService.removeDownload(id).then(function(response){
-        ToastService.showToast("Download removed");
-         getActiveDownloads();},
-         function (error){
-         ToastService.showToast("Download started. Entry cannot be deleted.");
-      });
+      // Shows window confirmation before deleting download.
+      var deleteDownload = $window.confirm('Confirm download task deletion !');
+
+      if(deleteDownload){
+        DashService.removeDownload(id).then(function(response){
+          ToastService.showToast("Download removed");
+          getActiveDownloads();},
+          function (error){
+          ToastService.showToast("Download started. Entry cannot be deleted.");
+        });
+      }
      };
 
     getActiveDownloads();
-
+    
   }
 
 })();
