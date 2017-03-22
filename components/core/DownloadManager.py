@@ -39,12 +39,12 @@ def remove_download(id, userName):
         sql1 ="SELECT status FROM download WHERE id=%s;"
         sql = "DELETE from download WHERE id=%s and user_name=%s;"
         try:
-            cursor.execute(sql1,str(id))
+            cursor.execute(sql1,[str(id)])
             data = cursor.fetchone()
             if data[0] != Status.DEFAULT and data[0] != Status.ERROR:
                 db.commit()
                 return "Download started. Entry cannot be deleted."
-            cursor.execute(sql, (str(id), userName))
+            cursor.execute(sql, [str(id), userName])
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
