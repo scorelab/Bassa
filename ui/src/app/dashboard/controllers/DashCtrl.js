@@ -40,28 +40,18 @@
       } else {
         DashService.addDownload($scope.dlink).then(function (response) {
           $scope.dlink.link = '';
-          ToastService.showToast('Link added');
+          ToastService.showToast("Link added");
           getActiveDownloads();
         }, function(error){
           $scope.dlink.link = '';
           if (error.data.quota) {
-            ToastService.showToast('Your monthly quota has been exceeded');
+            ToastService.showToast("Your monthly quota has been exceeded");
           } else {
-            ToastService.showToast('Oops! Something went wrong :(');
+            ToastService.showToast("Oops! Something went wrong :(");
           }
         });
-      };
+      }
     };
-
-    $scope.removeLink = function (id) {
-      DashService.removeDownload(id).then(function(response){
-        ToastService.showToast('Download removed');
-         getActiveDownloads();},
-         function (error){
-         ToastService.showToast('Download started. Entry cannot be deleted.');
-      });
-     };
-
     var getActiveDownloads = function() {
       DashService.getDownloads().then(function (response) {
         var data = response.data;
@@ -70,9 +60,18 @@
              return _.extend({}, element, {progress: 0});
         });
       }, function(error){
-        ToastService.showToast('Oops! Something went wrong when fetching data');
+        ToastService.showToast("Oops! Something went wrong when fetching data");
       });
     }
+
+    $scope.removeLink = function (id) {
+      DashService.removeDownload(id).then(function(response){
+        ToastService.showToast("Download removed");
+         getActiveDownloads();},
+         function (error){
+         ToastService.showToast("Download started. Entry cannot be deleted.");
+      });
+     };
 
     getActiveDownloads();
 

@@ -16,8 +16,8 @@
 
     var removeDownload = function(id) {
       return $http({
-        method: 'DELETE',
-        url: BassaUrl + '/api/download/'+id
+        method: "DELETE",
+        url: BassaUrl + "/api/download/"+id
       });
     };
 
