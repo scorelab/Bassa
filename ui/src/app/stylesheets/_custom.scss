@@ -181,13 +181,14 @@ md-backdrop.md-sidenav-backdrop {
 }
 
 #signup-button{
-  border-color: rgb(117,117,117);
+  border-color: #757575;
   border-width: 7px;
-  background-color: white;
-  color: rgb(117,117,117);
+  color: #757575;
   font-weight: bold;
   margin-left: auto;
   margin-right: 7px;
+  margin-top: 15PX;
+  cursor: pointer;
 }
 
 .input-container{
@@ -201,6 +202,25 @@ md-backdrop.md-sidenav-backdrop {
 .login-button{
   font-weight:bolder;
   margin: 0 6px 6px 0;
+}
+
+.alert{
+  padding:14px;
+  background-color:#F2DEDE;
+  border-color: #EBCCD1;
+  color: #B94A48;
+  border-radius: 4px;
+}
+
+.closebtn{
+  margin-left: 15px;
+  color: #B94A48;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 // Dashboard
