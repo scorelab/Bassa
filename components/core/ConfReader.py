@@ -15,13 +15,14 @@ elif platform.system() == 'Darwin':
 
 def check_conf_availability():
     """Checks whether the conf files have been properly set. Exits otherwise"""
-    dlConf = get_conf_reader('dl.conf')
-    emailConf = get_conf_reader('email.conf')
+    conf = get_conf_reader('main.conf')
 
-    if any(val == '' for val in dlConf.values()):
-        sys.exit("Please set all the values in dl.conf")
-    if any(val == '' for val in emailConf.values()):
-        sys.exit("Please set all the values in email.conf")
+    if any(val == '' for val in conf['user'].values()):
+        sys.exit("Please set all the values for user in main.conf")
+    elif any(val == '' for val in conf['dl'].values()):
+        sys.exit("Please set all the values for dl in main.conf")
+    elif conf['db']['u_name'] == "":
+        sys.exit("Please set the value for db username in main.conf")
 
 
 def get_conf_reader(confFile):
