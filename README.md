@@ -12,11 +12,6 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 
 Use python 3 instead of Python 2
 
-```
-  $ ./setup.sh
-  $ cd components/core/
-  $ sudo python setup.py develop
-```
 ## Database Setup
 
 1. Type below in a MySql terminal.
@@ -31,7 +26,14 @@ create database Bassa
 mysql -u root -p  Bassa < Bassa.sql
 ```
 
-3. Open components/core/DBCon.py and setup database username and password.
+3. Update database username and password in Main.conf
+
+
+```
+  $ ./setup.sh
+  $ cd components/core/
+  $ sudo python setup.py develop
+```
 
 
 ## Test Server
