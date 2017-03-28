@@ -1,4 +1,4 @@
-describe('Service: TableService', function() {
+describe("Service: TableService", function() {
   'use strict';
   beforeEach(module("bassa"));
   beforeEach(module("app"));
@@ -13,13 +13,13 @@ describe('Service: TableService', function() {
     localBassaUrl = BassaUrl;
   }));
 
-  it('Should have TableService be defined', function () {
+  it("Should have TableService be defined", function () {
     expect(TableService).toBeDefined();
   });
 
-  describe('getCompletedDownloads', function() {
+  describe("getCompletedDownloads", function() {
     
-    it('Should return a promise [object]', function() {
+    it("Should return a promise [object]", function() {
       
       localHttpBackend.expect("GET", localBassaUrl + "api/downloads/1")
       .respond(201, { "status": "12345" });
