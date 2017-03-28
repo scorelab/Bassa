@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('app')
-    .service('TableService', ['$http', 'BassaUrl', tableService]);
+    .service('TableService', ['$http', 'BassaUrl', TableService]);
 
-  function tableService($http, BassaUrl){
+  function TableService($http, BassaUrl){
 
     var getCompletedDownloads = function() {
       return $http({

@@ -1,35 +1,31 @@
 describe('Service: TableService', function() {
   'use strict';
-  beforeEach(module('app'));
+  beforeEach(module("bassa"));
+  beforeEach(module("app"));
 
   var TableService;
+  var localBassaUrl;
+  var localHttpBackend;
 
-  beforeEach(inject(function (_TableService_) {
+  beforeEach(inject(function (_TableService_, $injector, BassaUrl) {
     TableService = _TableService_;
+    localHttpBackend = $injector.get("$httpBackend");
+    localBassaUrl = BassaUrl;
   }));
 
   it('Should have TableService be defined', function () {
     expect(TableService).toBeDefined();
   });
 
-  describe('formatBytes', function() {
-    it('Gives \'0 Byte\' when bytes equals 0', function() {
-      expect(UtilityService.formatBytes(0)).toEqual('0 Byte');
-    });
+  describe('getCompletedDownloads', function() {
+    
+    it('Should return a promise [object]', function() {
+      
+      localHttpBackend.expect("GET", localBassaUrl + "api/downloads/1")
+      .respond(201, { "status": "12345" });
 
-    it('Gives \'1.045 KB\' when bytes equals 1045', function() {
-      expect(UtilityService.formatBytes(1045)).toEqual('1.045 KB');
-    });
-
-    it('Gives \'2 MB\' when bytes equals 2000000', function() {
-      expect(UtilityService.formatBytes(2000000)).toEqual('2 MB');
-    });
-
-    it('Rounds off to 3 decimal places and gives \'20.003 MB\' when bytes' +
-        ' equals 20003124', function() {
-      expect(UtilityService.formatBytes(20003124)).toEqual('20.003 MB');
+      expect(typeof TableService.getCompletedDownloads()).toEqual('object');
     });
 
   });
-
 });
