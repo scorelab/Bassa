@@ -39,3 +39,6 @@ downloads/
 ui/dist
 ui/node_modules
 ui/app/lib
+
+# Editors
+.vscode/
