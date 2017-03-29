@@ -21,14 +21,12 @@ def user_login(username, password):
             return True
 
 def check_approved(username, password):
-    print(username + password)
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
         sql = "SELECT * FROM user WHERE user_name=%s AND password=MD5(%s) AND approved=1;"
         cursor.execute(sql, (username, password))
         data = cursor.fetchone()
-        print(data)
         db.close()
         if data == None:
             return False
