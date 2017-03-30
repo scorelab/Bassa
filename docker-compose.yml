@@ -1,8 +1,14 @@
-version: '2' # specify docker-compose version
+version: '2' 
 
 # Define the services/containers to be run
 services:
-  angular: # name of the first service
-    build: angular-client # specify the directory of the Dockerfile
+  angular: # name of the frond end client
+    build: ui 
     ports:
       - "4200:4200" # specify port forewarding
+
+services:
+  backend: # name of the first beck end python service
+    build: componets/core 
+    ports:
+      - "5200:5200" # specify port forewarding
