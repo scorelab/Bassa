@@ -34,13 +34,13 @@ def token_validator(token):
     return None
 
 
-@server.route('/ui/<string:path>')
+@server.route('/ui/<path:path>')
 def serve_ui(path):
-    return send_from_directory(os.path.dirname(os.path.realpath(__file__))+"/ui", path)
+    return send_file(os.path.abspath(__file__ + "/../../../ui/dist/" + path))
 
 @server.route('/ui/')
 def serve_ui1():
-    return send_file(os.path.dirname(os.path.realpath(__file__))+"/ui/index.html")
+    return send_file(os.path.abspath(__file__ + "/../../../ui/dist/index.html"))
 
 @server.route('/download/start')
 def start():
