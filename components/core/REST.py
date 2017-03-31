@@ -1,4 +1,5 @@
 from flask import Flask
+from Models import User
 from flask.ext.cors import CORS
 from flask import send_file, send_from_directory
 from flask import request, jsonify, abort, Response, g
@@ -89,8 +90,11 @@ def login():
     password = request.form['password']
     if user_login(userName, password):
         user = get_user(userName)
-        token = generate_auth_token(user, server.config['SECRET_KEY'])
-        resp = Response(response='{"auth":"'+ str(user.auth) + '"}',status=200)
+        if isinstance(user, User) or user == None:
+            token = generate_auth_token(user, server.config['SECRET_KEY'])
+            resp = Response(response='{"auth":"'+ str(user.auth) + '"}',status=200)
+        else:
+            resp = Response(response='{"error":"' + user + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
