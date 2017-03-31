@@ -38,15 +38,18 @@ def check_user_name(username):
 def get_user(username):
     db = threadpool.connect()
     if db is not None:
-        cursor = db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT * FROM user WHERE user_name='%s' and blocked=0;" % username
-        cursor.execute(sql)
-        data = cursor.fetchone()
-        db.close()
-        if data == None:
-            return None
-        else:
-            return User(data['user_name'], data['password'], data['auth'], data['email'])
+        try:
+            cursor = db.cursor(MySQLdb.cursors.DictCursor)
+            sql = "SELECT * FROM user WHERE user_name='%s' and blocked=0;" % username
+            cursor.execute(sql)
+            data = cursor.fetchone()
+            db.close()
+            if data == None:
+                return None
+            else:
+                return User(data['user_name'], data['password'], data['auth'], data['email'])
+        except MySQLdb.Error as e:
+            return e[1]
 
 
 def add_user(user):
