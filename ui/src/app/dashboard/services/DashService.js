@@ -14,6 +14,13 @@
       });
     };
 
+    var removeDownload = function(id) {
+      return $http({
+        method: "DELETE",
+        url: BassaUrl + "/api/download/"+id
+      });
+    };
+
     var getDownloads = function() {
       return $http({
         method: 'GET',
@@ -23,6 +30,7 @@
 
     return {
       addDownload : addDownload,
+      removeDownload : removeDownload,
       getDownloads : getDownloads
     };
   }
