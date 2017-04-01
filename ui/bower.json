@@ -21,7 +21,7 @@
   },
   "devDependencies": {},
   "resolutions": {
-    "angular":"1.6.3",
+    "angular":"~1.6.4",
     "angular-moment": "1.0.0-beta.3"
   },
   "overrides": {
