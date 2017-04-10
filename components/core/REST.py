@@ -415,12 +415,12 @@ def get_downloads_request(limit):
     else:
         return '{"error":"token error"}', 403
 
-@server.route('/api/download/<int:id>', methods=['GET'])
+@server.route('/api/download/<string:id>', methods=['GET'])
 def get_download(id):
-    token = token_validator(request.headers['token'])
+    token = token_validator(request.args.get('tk'))
     if token is not None :
         try:
-            status = get_download_path(int(id))
+            status = get_download_path(id)
             if status is not None and status!="db connection error":
                 if verbose:
                     print(status)
