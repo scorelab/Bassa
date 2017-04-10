@@ -16,7 +16,7 @@
             <td data-title="Issue">{{data.download_name}}</td>
             <td data-title="Progress">{{data.size}}</td>
             <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"</td>
-            <td data-title=""><a href="http://localhost:5000/api/download/{{data.id}}">Download</a></td>
+            <td data-title=""><a ng-href="http://localhost:5000/api/download/{{data.id}}?tk={{tk}}" >Download</a></td>
         </tr>
         </tbody>
     </table>
