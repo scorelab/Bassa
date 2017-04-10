@@ -18,7 +18,6 @@
     TableService.getCompletedDownloads().then(function (response) {
       response = setSize(response);
       $scope.downloads = response.data;
-      console.log($scope.downloads);
     }, function(error){
       ToastService.showToast('Oops! Something went wrong fetching data');
     });
