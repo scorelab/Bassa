@@ -223,9 +223,9 @@ def get_download_path(id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT path FROM download WHERE status=3 AND id=%s LIMIT 1;"
+        sql = "SELECT path FROM download WHERE status=3 AND id=%(download_id)s LIMIT 1;"
         try:
-            cursor.execute(sql, (id))
+            cursor.execute(sql, { 'download_id': id })
             if cursor.rowcount == 0:
                 return None
             results = cursor.fetchone()
@@ -233,6 +233,7 @@ def get_download_path(id):
             db.close()
             return path
         except MySQLdb.Error as e:
+            print(e)
             return e[1]
     return "db connection error"
 
