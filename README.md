@@ -119,7 +119,7 @@ Returns JSON of all the completed downloads. Page contains 15 records ordered by
 
 ###### DELETE
 ```http://localhost:5000/api/download/<id>  ```
-Deletes the download only if it is not starteed
+Deletes the download only if it is not started.
 
 **http://localhost:5000/api/download/rate/<id>**
 ###### POST
