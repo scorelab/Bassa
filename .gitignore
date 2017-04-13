@@ -33,6 +33,7 @@
 
 *.log
 components/core/debug-server.log
+components/core/email.conf
 downloads/
 
 # UI
