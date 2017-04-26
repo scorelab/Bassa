@@ -78,7 +78,7 @@ JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>,
 Headers: token: <auth token>
 Returns a JSON of all the users
 ###### DELETE
-```http://localhost:5000/api/user/<username>  ```
+```/api/user/<username>  ```
 Deletes the user from system. Adviced not to use.
 
 ###### PUT
