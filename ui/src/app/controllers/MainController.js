@@ -3,12 +3,14 @@
   angular
        .module('app')
        .controller('MainController', [
-          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state', 'ToastService', 'UserService',
+          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state','$scope' , 'ToastService', 'UserService',
           MainController
        ]);
 
-  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, ToastService, UserService) {
+  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $scope, ToastService, UserService) {
     var vm = this;
+    console.log("console " + localStorage.getItem("user"));
+    var usernm = JSON.parse(localStorage.getItem("user"));
 
     vm.menuItems = [ ];
     vm.selectItem = selectItem;
@@ -16,6 +18,9 @@
     vm.showSimpleToast = ToastService.showToast;
     vm.toggleRightSidebar = toggleRightSidebar;
     vm.logout = logout;
+
+    $scope.username =  usernm.user_name;
+    //$scope.username =  "hll";
 
     navService
       .loadAllItems()
