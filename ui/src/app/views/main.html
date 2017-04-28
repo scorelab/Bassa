@@ -28,8 +28,7 @@
                 <i class="material-icons">menu</i>
                 </md-button>
                 <md-menu-content width="3">
-                     <md-menu-item> Logged as {{ username }} </md-menu-item>
-                    <md-menu-item><md-button ng-click="vm.logout()" ui-sref="login">Log out</md-button></md-menu-item>
+                    <md-menu-item><md-button ng-click="vm.logout()" ui-sref="login">Log out from {{ username }}  </md-button></md-menu-item>
                 </md-menu-content>
             </md-menu>
         </section>
