@@ -127,10 +127,16 @@ Approve the user with given username
 
 
 ```
-  $ cd ui/
-  $ npm install
+$ cd ui/
+$ npm install
 ```
 
+### Autoformat JS with Prettier
+
+- [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
+- [Atom Plugin](https://github.com/prettier/prettier-atom)
+
+Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
 
 ### To start
 run `gulp serve`
