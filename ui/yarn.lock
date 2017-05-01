@@ -2305,6 +2305,10 @@ istextorbinary@1.0.2:
     binaryextensions "~1.0.0"
     textextensions "~1.0.0"
 
+jasmine-core@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.5.2.tgz#6f61bd79061e27f43e6f9355e44b3c6cab6ff297"
+
 jasminewd@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/jasminewd/-/jasminewd-1.1.0.tgz#25751a6845ef2fb424c2fa39647987ae156fd433"

@@ -47,11 +47,14 @@
     "wiredep": "~2.2.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=6.10.x"
   },
   "scripts": {
     "init": "npm install",
     "install": "bower install",
     "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
+  },
+  "dependencies": {
+    "jasmine-core": "^2.5.2"
   }
 }
