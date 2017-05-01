@@ -6,9 +6,6 @@
 
   function LoginCtrl($scope, $state, UserService) {
     $scope.user = {};
- 
-
-
     $scope.login = function(){
       $scope.incorrectCredentials = false;
       UserService.login($scope.user, function(status) {
