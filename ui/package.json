@@ -52,6 +52,7 @@
   "scripts": {
     "init": "npm install",
     "install": "bower install",
+    "start" : "gulp serve",
     "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
   },
   "dependencies": {

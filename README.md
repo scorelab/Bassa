@@ -175,8 +175,11 @@ password - pass
 ### Make sure you have aria2 installed.
 run `aria2c --enable-rpc`
 
-### Run UI unit tests
+## Docker
+
+Start docker and run:
+
+```bash
+$ docker-compose up
 ```
-	$ cd ui/
-	$ npm test OR $ yarn test 
-```
+
