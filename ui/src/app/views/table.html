@@ -1,0 +1,22 @@
+<div class="table-responsive-vertical md-whiteframe-z1">
+    <table id="table" class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>User</th>
+            <th>Download name</th>
+            <th>Size</th>
+            <th>Completed time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="data in downloads">
+            <td data-title="ID">{{$index + 1}}</td>
+            <td data-title="User">{{data.user_name}}</td>
+            <td data-title="Issue">{{data.download_name}}</td>
+            <td data-title="Progress">{{data.size}}</td>
+            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
