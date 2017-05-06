@@ -5,8 +5,8 @@
       <h1>Bassa</h1>
     </md-button>
   </md-toolbar>
-      <md-button ng-repeat-start="item in vm.menuItems" layout="column" layout-align="center center"
-                 flex class="capitalize" ng-click="vm.selectItem(item)"
+      <md-button ng-repeat-start="item in menuItems" layout="column" layout-align="center center"
+                 flex class="capitalize" ng-click="selectItem(item)"
                  ui-sref-active="md-warn" ui-sref="{{item.sref}}">
           <div hide-sm hide-md class="md-tile-content">
               <i class="material-icons md-36">{{item.icon}}</i>
@@ -28,7 +28,7 @@
                 <i class="material-icons">menu</i>
                 </md-button>
                 <md-menu-content width="3">
-                    <md-menu-item><md-button ng-click="vm.logout()" ui-sref="login">Log out from {{ username }}  </md-button></md-menu-item>
+                    <md-menu-item><md-button ng-click="logout()" ui-sref="login">Log out from {{ username }} </md-button></md-menu-item>
                 </md-menu-content>
             </md-menu>
         </section>
