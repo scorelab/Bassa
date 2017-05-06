@@ -40,6 +40,7 @@
     "main-bower-files": "~2.4.0",
     "node-sass": "^4.5.0",
     "postcss": "^5.1.2",
+    "prettier": "^1.2.2",
     "protractor": "~1.4.0",
     "require-dir": "~0.1.0",
     "uglify-save-license": "~0.4.1",

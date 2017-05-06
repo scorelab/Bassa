@@ -8,9 +8,7 @@
        ]);
 
   function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $scope, ToastService, UserService) {
-    //var vm = this;
     var usernm = JSON.parse(localStorage.getItem("user"));
-
     $scope.menuItems = [ ];
     $scope.selectItem = selectItem;
     $scope.title = $state.current.data.title;
