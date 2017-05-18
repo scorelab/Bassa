@@ -18,9 +18,9 @@ def check_conf_availability():
     dlConf = get_conf_reader('dl.conf')
     emailConf = get_conf_reader('email.conf')
 
-    if any(val == '' for val in list(dlConf.values())):
+    if any(val == '' for val in dlConf.values()):
         sys.exit("Please set all the values in dl.conf")
-    if any(val == '' for val in list(emailConf.values())):
+    if any(val == '' for val in emailConf.values()):
         sys.exit("Please set all the values in email.conf")
 
 
