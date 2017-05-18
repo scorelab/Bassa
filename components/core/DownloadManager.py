@@ -125,7 +125,7 @@ def get_downloads(limit):
 
 
 def update_status_gid(gid, status, completed=False):
-    print(("Update status", gid, status, completed))
+    print("Update status", gid, status, completed)
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
@@ -198,7 +198,7 @@ def get_to_download():
                 if verbose: print ("zero count")
                 return None
             results = cursor.fetchall()
-            if verbose: print(("LIST", results))
+            if verbose: print("LIST", results)
             downloads = [Download(result['link'], result['user_name'], result['id']) for result in results]
             return downloads
         except MySQLdb.Error as e:
@@ -263,8 +263,8 @@ def get_to_delete(time, rate):
             cursor.execute(sql, (time, rate))
             results = cursor.fetchall()
             db.close()
-            if verbose: print(("Time", time, "Rate", rate))
-            if verbose: print(("results", results))
+            if verbose: print("Time", time, "Rate", rate)
+            if verbose: print("results", results)
             return results
         except MySQLdb.Error as e:
             return e[1]

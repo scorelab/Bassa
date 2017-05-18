@@ -146,7 +146,7 @@ def find_supported_handler(download):
 def on_message(ws, message):
     global handler, folder_size
     data = json.loads(message)
-    print(("TOP LEVEL DATA", data))
+    print("TOP LEVEL DATA", data)
     if 'id' in data and data['id'] == "act":
         toBeDownloaded = get_to_download()
         if toBeDownloaded:

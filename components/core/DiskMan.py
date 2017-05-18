@@ -22,7 +22,7 @@ def remove_files(days, rate):
     time_then=time_now-(days*SECS_PER_DAY)
     files=get_to_delete(time_then, rate)
     if verbose:
-        print(("files to be removed", files))
+        print("files to be removed", files)
     for file in files:
         os.unlink(file[0])
         set_delete_status(file[0])
