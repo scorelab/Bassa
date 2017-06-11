@@ -1,5 +1,6 @@
 import threading
 import queue
+from queue import Queue
 import json, time
 from DownloadManager import *
 from Models import Status, Download
@@ -11,14 +12,21 @@ import websocket
 import sys
 
 
+
+
 conf = get_conf_reader("dl.conf")
 db_lock = threading.Lock()
 folder_size=0
 startedDownloads = []
 handlerLst = []
 handler = None
+mHandler = None
 verbose = False
 sc = None
+
+#message handling Queue
+global messageQ
+messageQ = Queue()
 
 if len(sys.argv) == 2 and sys.argv[1] == '-v':
     verbose = True
@@ -46,6 +54,7 @@ class Handler(queue.Queue):
     def start_download(self, download):
         msg = JSONer("down_" + str(download.id), 'aria2.addUri', [[download.link]])
         self.ws.send(msg)
+        print("starting Download")
         startedDownloads.append(download)
         self.task_done()
 
@@ -59,6 +68,30 @@ class Handler(queue.Queue):
             if download is None or folder_size>=conf['size_limit']:
                 return
             self.start_download(download)
+
+####Message Handler
+
+class MessageHandler():
+
+    def __init__(self):
+        self.num_workers = 5
+
+    def start_message_workers(self):
+        for i in range(self.num_workers):
+            t = threading.Thread(target=self.worker)
+            t.daemon = True
+            t.start()
+
+    def worker(self):
+        while True:
+            #with get_lock:
+            message = messageQ.get()
+            print(threading.current_thread().name,message)
+            messageQ.task_done()
+            
+            
+
+#message handler
 
 class RepeatedTimer(object):
     def __init__(self, interval, function, *args, **kwargs):
@@ -144,8 +177,11 @@ def find_supported_handler(download):
     return None
 
 def on_message(ws, message):
-    global handler, folder_size
+    global handler, folder_size, mHandler, messageQ
     data = json.loads(message)
+    #put messages on to the message handling queue
+    messageQ.put(message)
+    #mHandler.worker(ws, message)
     print ("TOP LEVEL DATA", data)
     if 'id' in data and data['id'] == "act":
         toBeDownloaded = get_to_download()
@@ -206,7 +242,7 @@ def on_open(ws):
 
 
 def starter(socket):
-    global folder_size, handler, sc
+    global folder_size, handler, sc, mHandler
     sc = socket
     remove_files(conf['max_age'], conf['min_rating'])
     folder_size=get_size(conf['down_folder'])
@@ -221,5 +257,60 @@ def starter(socket):
     # socketio.emit("test", {'data': 'A NEW FILE WAS POSTED'}, namespace='/news')
     threading.Thread(target=handler.start_workers).start()
 
+    mHandler = MessageHandler()
+    threading.Thread(target=mHandler.start_message_workers).start()
+    messageQ.join()
+
+
     ws.run_forever()
+
+########################## message Queue implementation
+
+
+'''
+print_lock = threading.Lock()
+
+def exampleJob(worker):
+    time.sleep(.5) # pretend to do some work.
+    with print_lock:
+        print(threading.current_thread().name,worker)
+'''
+
+# The threader thread pulls an worker from the queue and processes it
+'''
+def threader():
+    while True:
+        # gets an worker from the queue
+        worker = messageQueue.get()
+
+        # Run the example job with the avail worker in queue (thread)
+        with print_lock:
+            print(threading.current_thread().name,worker)
+
+        # completed with the job
+        messageQueue.task_done()
+
+
+# how many threads are we going to allow for
+for x in range(5):
+     t = threading.Thread(target=threader)
+
+     # classifying as a daemon, so they will die when the main dies
+     t.daemon = True
+
+     # begins, must come after daemon definition
+     t.start()
+
+#start = time.time()
+
+# 20 jobs assigned.
+for worker in range(20):
+    messageQueue.put(worker)
+
+# wait until the thread terminates.
+messageQueue.join()
+
+##### message queue handler##
+'''
+
 
