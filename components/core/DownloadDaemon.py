@@ -25,8 +25,8 @@ verbose = False
 sc = None
 
 #message handling Queue
-global messageQ
-messageQ = Queue()
+global messageQueue
+messageQueue = Queue()
 
 if len(sys.argv) == 2 and sys.argv[1] == '-v':
     verbose = True
@@ -73,8 +73,9 @@ class Handler(queue.Queue):
 
 class MessageHandler():
 
-    def __init__(self):
+    def __init__(self,ws):
         self.num_workers = 5
+        self.ws = ws
 
     def start_message_workers(self):
         for i in range(self.num_workers):
@@ -83,11 +84,59 @@ class MessageHandler():
             t.start()
 
     def worker(self):
+        global handler, folder_size, mHandler, messageQueue
+
         while True:
             #with get_lock:
-            message = messageQ.get()
-            print(threading.current_thread().name,message)
-            messageQ.task_done()
+            message = messageQueue.get()
+            data = json.loads(message)
+            print(threading.current_thread().name,data)
+            print ("TOP LEVEL DATA", data)
+            if 'id' in data and data['id'] == "act":
+                toBeDownloaded = get_to_download()
+                if toBeDownloaded:
+                    for download in toBeDownloaded:
+                        handler = find_supported_handler(download)
+                        if not handler:
+                            handler = Handler(self.ws)
+                            handlerLst.append(handler)
+                        handler.add_to_queue(download)
+                        print ("in download")
+                        rt = RepeatedTimer(1, get_status, self.ws, download.id, None)
+                    handler.join()
+            elif 'id' in data:
+                txt = data['id'].split('_')
+                if txt[0] == "down":
+                    gid = data['result']
+                    db_lock.acquire()
+                    set_gid(txt[1], gid)
+                    set_download_gid(txt[1], gid)
+                    update_status_gid(gid, Status.STARTED)
+                    db_lock.release()
+                elif data['id']=="stat":
+                    print (data)
+                    gid = data['result']['gid']
+                    db_lock.acquire()
+                    set_path(data['result']['gid'], data['result']['files'][0]['path'])
+                    folder_size+=int(data['result']['files'][0]['completedLength'])
+                    db_lock.release()
+                    path=data['result']['files'][0]['path'].split('/')
+                    raw_size = int(data['result']['files'][0]['length'])
+                    completedLength = data['result']['files'][0]['completedLength']
+                    set_name(data['result']['gid'], path[-1])
+                    set_size(data['result']['gid'], raw_size)
+                    download_id = get_id_from_gid(gid)
+                    username = get_username_from_gid(gid)
+                    send_status(download_id, completedLength, raw_size, username)
+                    # msg='Your download '+path[-1]+' is completed.'
+                    # send_mail([get_download_email(data['result']['gid'])],msg)
+            elif 'method' in data:
+                if data['method'] == "aria2.onDownloadComplete":
+                    db_lock.acquire()
+                    update_status_gid(data['params'][0]['gid'], Status.COMPLETED, True)
+                    get_status(self.ws, None, data['params'][0]['gid'])
+                    db_lock.release()
+                    messageQueue.task_done()
             
             
 
@@ -177,57 +226,10 @@ def find_supported_handler(download):
     return None
 
 def on_message(ws, message):
-    global handler, folder_size, mHandler, messageQ
+    global handler, folder_size, mHandler, messageQueue
     data = json.loads(message)
     #put messages on to the message handling queue
-    messageQ.put(message)
-    #mHandler.worker(ws, message)
-    print ("TOP LEVEL DATA", data)
-    if 'id' in data and data['id'] == "act":
-        toBeDownloaded = get_to_download()
-        if toBeDownloaded:
-            for download in toBeDownloaded:
-                handler = find_supported_handler(download)
-                if not handler:
-                    handler = Handler(ws)
-                    handlerLst.append(handler)
-                handler.add_to_queue(download)
-                print ("in download")
-                rt = RepeatedTimer(1, get_status, ws, download.id, None)
-            handler.join()
-    elif 'id' in data:
-        txt = data['id'].split('_')
-        if txt[0] == "down":
-            gid = data['result']
-            db_lock.acquire()
-            set_gid(txt[1], gid)
-            set_download_gid(txt[1], gid)
-            update_status_gid(gid, Status.STARTED)
-            db_lock.release()
-        elif data['id']=="stat":
-            print (data)
-            gid = data['result']['gid']
-            db_lock.acquire()
-            set_path(data['result']['gid'], data['result']['files'][0]['path'])
-            folder_size+=int(data['result']['files'][0]['completedLength'])
-            db_lock.release()
-            path=data['result']['files'][0]['path'].split('/')
-            raw_size = int(data['result']['files'][0]['length'])
-            completedLength = data['result']['files'][0]['completedLength']
-            set_name(data['result']['gid'], path[-1])
-            set_size(data['result']['gid'], raw_size)
-            download_id = get_id_from_gid(gid)
-            username = get_username_from_gid(gid)
-            send_status(download_id, completedLength, raw_size, username)
-            # msg='Your download '+path[-1]+' is completed.'
-            # send_mail([get_download_email(data['result']['gid'])],msg)
-    elif 'method' in data:
-        if data['method'] == "aria2.onDownloadComplete":
-            db_lock.acquire()
-            update_status_gid(data['params'][0]['gid'], Status.COMPLETED, True)
-            get_status(ws, None, data['params'][0]['gid'])
-            db_lock.release()
-
+    messageQueue.put(message)
 
 def on_error(ws, error):
     print(error)
@@ -257,60 +259,13 @@ def starter(socket):
     # socketio.emit("test", {'data': 'A NEW FILE WAS POSTED'}, namespace='/news')
     threading.Thread(target=handler.start_workers).start()
 
-    mHandler = MessageHandler()
+    mHandler = MessageHandler(ws) 
     threading.Thread(target=mHandler.start_message_workers).start()
-    messageQ.join()
+    messageQueue.join()
 
 
     ws.run_forever()
 
-########################## message Queue implementation
 
-
-'''
-print_lock = threading.Lock()
-
-def exampleJob(worker):
-    time.sleep(.5) # pretend to do some work.
-    with print_lock:
-        print(threading.current_thread().name,worker)
-'''
-
-# The threader thread pulls an worker from the queue and processes it
-'''
-def threader():
-    while True:
-        # gets an worker from the queue
-        worker = messageQueue.get()
-
-        # Run the example job with the avail worker in queue (thread)
-        with print_lock:
-            print(threading.current_thread().name,worker)
-
-        # completed with the job
-        messageQueue.task_done()
-
-
-# how many threads are we going to allow for
-for x in range(5):
-     t = threading.Thread(target=threader)
-
-     # classifying as a daemon, so they will die when the main dies
-     t.daemon = True
-
-     # begins, must come after daemon definition
-     t.start()
-
-#start = time.time()
-
-# 20 jobs assigned.
-for worker in range(20):
-    messageQueue.put(worker)
-
-# wait until the thread terminates.
-messageQueue.join()
-
-##### message queue handler##
-'''
 
 
