@@ -11,9 +11,6 @@ from ConfReader import get_conf_reader
 import websocket
 import sys
 
-
-
-
 conf = get_conf_reader("dl.conf")
 db_lock = threading.Lock()
 folder_size=0
@@ -23,8 +20,6 @@ handler = None
 mHandler = None
 verbose = False
 sc = None
-
-#message handling Queue
 global messageQueue
 messageQueue = Queue()
 
@@ -68,8 +63,6 @@ class Handler(queue.Queue):
             if download is None or folder_size>=conf['size_limit']:
                 return
             self.start_download(download)
-
-####Message Handler
 
 class MessageHandler():
 
@@ -138,10 +131,6 @@ class MessageHandler():
                     db_lock.release()
                     messageQueue.task_done()
             
-            
-
-#message handler
-
 class RepeatedTimer(object):
     def __init__(self, interval, function, *args, **kwargs):
         self._timer     = None
@@ -227,8 +216,6 @@ def find_supported_handler(download):
 
 def on_message(ws, message):
     global handler, folder_size, mHandler, messageQueue
-    data = json.loads(message)
-    #put messages on to the message handling queue
     messageQueue.put(message)
 
 def on_error(ws, error):
@@ -254,16 +241,12 @@ def starter(socket):
                                 on_error=on_error,
                                 on_close=on_close)
     ws.on_open = on_open
-
     handler = Handler(ws)
     # socketio.emit("test", {'data': 'A NEW FILE WAS POSTED'}, namespace='/news')
     threading.Thread(target=handler.start_workers).start()
-
     mHandler = MessageHandler(ws) 
     threading.Thread(target=mHandler.start_message_workers).start()
     messageQueue.join()
-
-
     ws.run_forever()
 
 
