@@ -20,7 +20,6 @@ handler = None
 mHandler = None
 verbose = False
 sc = None
-global messageQueue
 messageQueue = Queue()
 
 if len(sys.argv) == 2 and sys.argv[1] == '-v':
