@@ -42,3 +42,8 @@ ui/app/lib
 
 # Editors
 .vscode/
+
+
+
+components/core/DBCon.py
+components/core/email.conf
