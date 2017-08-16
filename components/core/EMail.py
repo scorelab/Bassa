@@ -1,5 +1,5 @@
 import smtplib
-from ConfReader import get_conf_reade
+from ConfReader import get_conf_reader
 
 conf = get_conf_reader("dl.conf")
 

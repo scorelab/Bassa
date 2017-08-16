@@ -1,7 +1,7 @@
 import MySQLdb
 from ConfReader import get_conf_reader
 
-mainconf = get_conf_reader("dl.conf")
+conf = get_conf_reader("dl.conf")
 
 _db=None
 
@@ -9,7 +9,7 @@ def get_db_con () :
     global _db
     if _db==None:
         try:
-            _db=MySQLdb.connect(mainconf['database']['host'], mainconf['database']['user'], mainconf['database']['password'], mainconf['database']['dbName'] )
+            _db=MySQLdb.connect(conf['database']['host'], conf['database']['user'], conf['database']['password'], conf['database']['dbName'] )
             return _db
         except:
             return None
