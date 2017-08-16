@@ -60,7 +60,7 @@ class Handler(queue.Queue):
     def worker(self):
         while True:
             download = self.get()
-            if download is None or folder_size>=conf['size_limit']:
+            if download is None or folder_size>=conf['download']['size_limit']:
                 return
             self.start_download(download)
 
@@ -165,7 +165,7 @@ class RepeatedTimer(object):
 def add_uri(ws, download):
     if verbose:
         print(folder_size)
-    if download is None or folder_size>=conf['size_limit']:
+    if download is None or folder_size>=conf['download']['size_limit']:
         return
     msg = JSONer("down_" + str(download.id), 'aria2.addUri', [[download.link]])
     ws.send(msg)
@@ -216,6 +216,7 @@ def find_supported_handler(download):
 
 def on_message(ws, message):
     global handler, folder_size, mHandler, messageQueue
+    print (message)
     messageQueue.put(message)
 
 def on_error(ws, error):
