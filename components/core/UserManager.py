@@ -2,8 +2,10 @@ from Models import User
 from DBCon import *
 from ConfReader import get_conf_reader
 import sqlalchemy.pool as pool
+import json 
 
-conf = get_conf_reader("dl.conf")
+mainConf = get_conf_reader('dl.conf')
+conf = mainConf['download']
 
 threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=20)
 

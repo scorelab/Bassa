@@ -3,13 +3,15 @@ from DBCon import *
 import time
 import sys
 import sqlalchemy.pool as pool
-
+conf = get_conf_reader("dl.conf")
+max_overflow = conf['downloadManager']['max_overflow']
+pool_size = conf['downloadManager']['pool_size']
 verbose = False
 
 if len(sys.argv) == 2 and sys.argv[1] == '-v':
     verbose = True
 
-threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=20)
+threadpool = pool.QueuePool(get_db_con, max_overflow, pool_size)
 
 def add_download(download):
     db = threadpool.connect()

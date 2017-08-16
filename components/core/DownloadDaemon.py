@@ -12,6 +12,7 @@ import websocket
 import sys
 
 conf = get_conf_reader("dl.conf")
+num_workers = conf['downloadDaemon']['num_workers']
 db_lock = threading.Lock()
 folder_size=0
 startedDownloads = []
@@ -30,7 +31,7 @@ class Handler(queue.Queue):
     def __init__(self, ws):
         queue.Queue.__init__(self)
         self.ws = ws
-        self.num_workers = 5
+        self.num_workers = num_workers
         self.start_workers()
 
     def add_to_queue(self, download):
@@ -66,7 +67,7 @@ class Handler(queue.Queue):
 class MessageHandler():
 
     def __init__(self,ws):
-        self.num_workers = 5
+        self.num_workers = num_workers
         self.ws = ws
 
     def start_message_workers(self):
@@ -232,8 +233,8 @@ def on_open(ws):
 def starter(socket):
     global folder_size, handler, sc, mHandler
     sc = socket
-    remove_files(conf['max_age'], conf['min_rating'])
-    folder_size=get_size(conf['down_folder'])
+    remove_files(conf['download']['max_age'] ,conf['download']['min_rating'])
+    folder_size=get_size(conf['download']['down_folder'])
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp("ws://localhost:6800/jsonrpc",
                                 on_message=on_message,
