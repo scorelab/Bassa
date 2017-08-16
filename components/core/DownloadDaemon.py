@@ -216,7 +216,6 @@ def find_supported_handler(download):
 
 def on_message(ws, message):
     global handler, folder_size, mHandler, messageQueue
-    print (message)
     messageQueue.put(message)
 
 def on_error(ws, error):

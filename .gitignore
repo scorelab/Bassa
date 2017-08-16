@@ -45,5 +45,3 @@ ui/app/lib
 
 
 
-components/core/DBCon.py
-components/core/email.conf
