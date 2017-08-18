@@ -2,7 +2,6 @@ from Models import User
 from DBCon import *
 from ConfReader import get_conf_reader
 import sqlalchemy.pool as pool
-import json 
 
 max_overflow = conf['downloadManager']['max_overflow']
 pool_size = conf['downloadManager']['pool_size']
