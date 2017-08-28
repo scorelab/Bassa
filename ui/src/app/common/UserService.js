@@ -50,17 +50,16 @@
     };
 
     var getName = function() {
-      return data.name;
+      var token = getToken()
+      var decoded = jwt_decode(token);
+      return decoded.userName;
     };
 
     var getAuthLevel = function() {
-      if(data.authLevel == ""){
         var token = getToken()
         var decoded = jwt_decode(token);
         var auth = '' + decoded.auth
         return auth;
-      }
-      return data.authLevel;
     };
 
     var setAuthLevel = function(auth) {
