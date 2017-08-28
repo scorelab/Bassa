@@ -1,3 +1,4 @@
+
 (function(){
   'use strict';
 
@@ -13,7 +14,6 @@
 
     var login = function(credentials, cb) {
       var $http = $injector.get('$http');
-
       return $http({
           method: 'POST',
           url: BassaUrl + '/api/login',
@@ -54,6 +54,12 @@
     };
 
     var getAuthLevel = function() {
+      if(data.authLevel == ""){
+        var token = getToken()
+        var decoded = jwt_decode(token);
+        var auth = '' + decoded.auth
+        return auth;
+      }
       return data.authLevel;
     };
 
