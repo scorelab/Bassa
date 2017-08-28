@@ -5,7 +5,7 @@ TIMEOUT = 60 * 60
 
 def generate_auth_token(user, key, expiration = TIMEOUT):
         s = Serializer(key, expires_in = expiration)
-        return s.dumps({ 'userName': user.userName})
+        return s.dumps({ 'userName': user.userName , 'auth': user.auth })
 
 def verify_auth_token(token, key):
     s = Serializer(key)
