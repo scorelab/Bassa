@@ -9,7 +9,7 @@ verbose = False
 if len(sys.argv) == 2 and sys.argv[1] == '-v':
     verbose = True
 
-threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=5)
+threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=20)
 
 def add_download(download):
     db = threadpool.connect()

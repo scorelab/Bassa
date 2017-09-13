@@ -58,12 +58,12 @@ mysql -u root -p  Bassa < Bassa.sql
 
 ## URL endpoints
 
-**http://localhost:5000/api/login**
+**/api/login**
 
 Form data: user_name, password
-Returns auth token in response header for successful login
+Returns a auth token in response header for a successful login
 
-**http://localhost:5000/api/user**
+**/api/user**
 ###### POST
 Headers: Content-type : Application/JSON, token: <auth token>
 JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>, "email":"<email>"}  ```
@@ -76,37 +76,37 @@ JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>,
 
 ###### GET
 Headers: token: <auth token>
-Returns JSON of all the users
+Returns a JSON of all the users
 ###### DELETE
-```http://localhost:5000/api/user/<username>  ```
+```/api/user/<username>  ```
 Deletes the user from system. Adviced not to use.
 
 ###### PUT
-```http://localhost:5000/api/user/<username>  ```
+```/api/user/<username>  ```
 Headers: Content-type : Application/JSON, token: <auth token>
 JSON: ```{"user_name":"<username>", "password":"<password>", "auth":<authleval>, "email":"<email>"}  ```
 Update the given user
 
-**http://localhost:5000/api/regularuser**
+**/api/regularuser**
 ###### POST
 Headers: Content-type : Application/JSON
 JSON: ```{"user_name":"<username>", "password":"<password>", "email":"<email>"}  ```
 
-**http://localhost:5000/api/user/blocked**
+**/api/user/blocked**
 ###### GET
 Headers: token: <auth token>
-Returns JSON of all the blocked users
+Returns a JSON of all the blocked users
 ###### POST
-```http://localhost:5000/api/user/blocked/<username>  ```
+```/api/user/blocked/<username>  ```
 Headers: token: <auth token>
-Block the given user
+Blocks the given user
 
-**http://localhost:5000/api/download**
+**/api/download**
 ###### POST
 Headers: Content-type : Application/JSON, token: <auth token>
 JSON: ```{"link":"<download link>"}  ```
 ###### GET
-```http://localhost:5000/api/download/<page> ```
+```/api/download/<page> ```
 Headers: token: <auth token>
 Returns JSON of all the completed downloads. Page contains 15 records ordered by added time. Page number is a int.
 
@@ -118,31 +118,31 @@ Returns JSON of all the completed downloads. Page contains 15 records ordered by
 * 4:ERROR - download error
 
 ###### DELETE
-```http://localhost:5000/api/download/<id>  ```
+```/api/download/<id>  ```
 Deletes the download only if it is not started.
 
-**http://localhost:5000/api/download/rate/<id>**
+**/api/download/rate/<id>**
 ###### POST
 Headers: Content-type : Application/JSON, token: <auth token>
 JSON: ```{"rate":"<rating between 0-5>"}  ```
 Adds the rating to download. If exists, update.
 
-**http://localhost:5000/api/user/downloads/\<page\>**
+**/api/user/downloads/<page>**
 ###### GET
 Headers: token: <auth token>
-Returns JSON of all the downloads of current user. Page contains 15 records ordered by added time. Page number is a int.
+Returns a JSON of all the downloads of current user. Page contains 15 records ordered by added time. Page number is a int.
 
-**http://localhost:5000/api/download/\<id\>**
+**/api/download/<id>**
 ###### GET
 Headers: token: <auth token>
 Returns file as multipart form data. Does not return a new auth token header
 
-**http://localhost:5000/api/user/requests**
+**/api/user/requests**
 ###### GET
 Headers: token: <auth token>
 Returns a JSON of all the users who has signed up and not been approved yet
 
-**http://localhost:5000/api/user/approve/\<username\>**
+**/api/user/approve/<username>**
 ###### POST
 Headers: Content-type : Application/JSON, token: <auth token>
 Approve the user with given username
@@ -153,10 +153,16 @@ Approve the user with given username
 
 
 ```
-  $ cd ui/
-  $ npm install
+$ cd ui/
+$ npm install
 ```
 
+### Autoformat JS with Prettier
+
+- [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
+- [Atom Plugin](https://github.com/prettier/prettier-atom)
+
+Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
 
 ### To start
 run `gulp serve`
