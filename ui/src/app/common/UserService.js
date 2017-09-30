@@ -50,15 +50,15 @@
     };
 
     var getName = function() {
-      var token = getToken()
+      var token = getToken();
       var decoded = jwt_decode(token);
       return decoded.userName;
     };
 
     var getAuthLevel = function() {
-        var token = getToken()
+        var token = getToken();
         var decoded = jwt_decode(token);
-        var auth = '' + decoded.auth
+        var auth = "" + decoded.auth;
         return auth;
     };
 
