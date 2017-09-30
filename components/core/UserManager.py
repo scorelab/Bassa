@@ -3,9 +3,12 @@ from DBCon import *
 from ConfReader import get_conf_reader
 import sqlalchemy.pool as pool
 
-conf = get_conf_reader("dl.conf")
+max_overflow = conf['downloadManager']['max_overflow']
+pool_size = conf['downloadManager']['pool_size']
 
-threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=20)
+conf = get_conf_reader('dl.conf')['download']
+
+threadpool = pool.QueuePool(get_db_con, max_overflow, pool_size)
 
 def user_login(username, password):
     db = threadpool.connect()
