@@ -66,8 +66,9 @@
       localStorage.setItem('Token', newToken);
     };
 
-    var removeToken = function() {
+    var cleanUpStorage = function() {
       localStorage.setItem('Token', '');
+      localStorage.setItem('UserName', '');
     }
 
     var getToken = function(){
@@ -83,7 +84,7 @@
       login:login,
       signup:signup,
       token:getToken,
-      removeToken:removeToken,
+      cleanUpStorage:cleanUpStorage,
       getUsername:getName,
       getAuthLevel:getAuthLevel,
       setToken:setToken,
