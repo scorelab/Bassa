@@ -21,7 +21,7 @@
       $state.go('signup');
     };
 
-    UserService.removeToken();
+    UserService.cleanUpStorage();
   }
 
 })();

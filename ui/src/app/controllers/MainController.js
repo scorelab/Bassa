@@ -23,7 +23,7 @@
       });
 
     var logout = function () {
-      UserService.removeToken();
+      UserService.cleanUpStorage();
     };
 
     function toggleRightSidebar() {
