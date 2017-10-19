@@ -10,7 +10,6 @@
       $scope.incorrectCredentials = false;
       UserService.login($scope.user, function(status) {
         if (status){
-          localStorage.setItem("user", JSON.stringify($scope.user));
           $state.go('home.dashboard');
         } else {
           $scope.incorrectCredentials = true;
