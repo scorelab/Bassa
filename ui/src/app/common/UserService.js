@@ -46,11 +46,12 @@
     };
 
     var setName = function(name) {
-      data.name = name;
+      localStorage.setItem('UserName', name);
     };
 
     var getName = function() {
-      return data.name;
+      return localStorage.getItem('UserName');
+
     };
 
     var getAuthLevel = function() {

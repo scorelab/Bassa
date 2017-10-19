@@ -8,14 +8,13 @@
        ]);
 
   function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $scope, ToastService, UserService) {
-    var usernm = JSON.parse(localStorage.getItem("user"));
     $scope.menuItems = [ ];
     $scope.selectItem = selectItem;
     $scope.title = $state.current.data.title;
     $scope.showSimpleToast = ToastService.showToast;
     $scope.toggleRightSidebar = toggleRightSidebar;
     $scope.logout = logout;
-    $scope.username =  usernm.user_name;
+    $scope.username =  UserService.getUsername();
 
     navService
       .loadAllItems()
