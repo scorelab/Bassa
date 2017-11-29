@@ -95,7 +95,8 @@ def login():
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
     else:
-        abort(403)
+        resp = Response(response='Wait for Admin Approval', status=400)
+        return resp
 
 
 @server.route('/api/regularuser', methods=['POST'])
