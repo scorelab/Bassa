@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/scorelab/Bassa.svg?branch=master)](https://travis-ci.org/scorelab/Bassa)
-[![PyPI](https://img.shields.io/pypi/dm/Bassa.svg)]()
-[![PyPI](https://img.shields.io/pypi/v/Bassa.svg)]()
+[![PyPI](https://img.shields.io/pypi/dm/Bassa.svg)](https://pypi.python.org/pypi)
+[![PyPI](https://img.shields.io/pypi/v/Bassa.svg)](https://pypi.python.org/pypi)
 ![logo](http://gdurl.com/7XYK)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/scorelab/scorelab)
 
