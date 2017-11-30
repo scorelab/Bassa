@@ -210,3 +210,18 @@ md-backdrop.md-sidenav-backdrop {
   padding-bottom: 0px;
 }
 
+
+.alert {
+  padding:14px; background-color:grey; color: white;
+}
+
+.closebtn.msg {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
