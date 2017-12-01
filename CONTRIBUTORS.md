@@ -2,4 +2,4 @@ CONTRIBUTORS
 ============
 
  - Milindu Sanoj Kumarage (agentmilindu)
- - Azis Naufal (oazisn)
+ - Azis Naufal (azisnaufal)
