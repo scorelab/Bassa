@@ -2,4 +2,4 @@ CONTRIBUTORS
 ============
 
  - Milindu Sanoj Kumarage (agentmilindu)
- - Thái Dương Bảo Duy (sunzi1520)
+ - Thai Duong Bao Duy (sunzi1520)
