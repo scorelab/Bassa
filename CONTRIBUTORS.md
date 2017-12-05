@@ -2,4 +2,4 @@ CONTRIBUTORS
 ============
 
  - Milindu Sanoj Kumarage (agentmilindu)
- - Aryan Jain
+ - Aryan Jain (Aryan9101)
