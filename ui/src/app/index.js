@@ -3,7 +3,7 @@
 angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
   'ngSanitize', 'ui.router', 'ngMaterial', 'nvd3', 'app'])
 
-  .value("BassaUrl", "http://localhost:5000")
+  .value('BassaUrl', 'http://localhost:5000')
 
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $mdThemingProvider,
                     $mdIconProvider, $qProvider) {
@@ -117,13 +117,13 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
 
 
 .run(function ($rootScope, $state, UserService, ToastService) {
-  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     if (toState.authenticate && !UserService.loggedIn()) {
       // User isn’t authenticated
-      $state.transitionTo("login");
+      $state.transitionTo('login');
       event.preventDefault();
     } else if (toState.name === 'home.admin' && UserService.getAuthLevel() !== '0') {
-      ToastService.showToast("Sorry you don't have admin priviledges");
+      ToastService.showToast('Sorry you don\'t have admin priviledges');
       if (fromState.name === '') {
         $state.transitionTo('home.dashboard');
       } else {

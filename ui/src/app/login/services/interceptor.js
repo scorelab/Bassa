@@ -1,5 +1,5 @@
+'use strict';
 angular.module('app')
-
 .factory('authorizationInterceptor', ['UserService', '$injector', function (UserService, $injector) {
   return {
     request: function (config) {
@@ -20,9 +20,13 @@ angular.module('app')
     },
 
     responseError: function(res) {
-      if (res.status === 403) {
-         $injector.get('$state').transitionTo('login');
-      }
+      // if (res.status === 403) {
+      //   $injector.get('$state').transitionTo('login');
+      //   $scope.incorrectCredentials=true;
+      // } else if(res.status === 401) {
+      //   $injector.get('$state').transitionTo('login');
+      //   $scope.unApproved=true;
+      // }
       return res;
     },
   };

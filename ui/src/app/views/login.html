@@ -12,6 +12,14 @@
     </md-input-container>
     <br>
   </div>
+  <div class="alert" ng-if="incorrectCredentials">
+  <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span>
+  Incorrect Credentials
+  </div>
+  <div class="alert" ng-if="unApproved">
+  <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span>
+  Please confirm your account
+  </div>
   <div>
     <md-button class="md-raised md-primary" ng-click="login()">Login</md-button>
     <md-button class="md-raised md-primary" ng-click="signup()">Signup</md-button>

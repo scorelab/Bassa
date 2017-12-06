@@ -20,18 +20,29 @@
           transformRequest: function(obj) {
             var str = [];
             for(var p in obj)
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-            return str.join("&");
+            str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+            return str.join('&');
           },
           data: credentials,
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function (response) {
-        setToken(response.headers()['token']);
-        setName(credentials.user_name);
-        setAuthLevel(response.data.auth);
-        cb(true);
+        if(response.status === 200) {
+          setToken(response.headers()['token']);
+          setName(credentials.user_name);
+          setAuthLevel(response.data.auth);
+          cb({
+            state: response.status
+          });
+        }
+        else {
+          cb({
+            state: response.status
+          });
+        }
       }, function(error){
-        cb(false);
+        cb({
+          state: 403
+        });
       });
     };
 
@@ -46,11 +57,12 @@
     };
 
     var setName = function(name) {
-      data.name = name;
+      localStorage.setItem('UserName', name);
     };
 
     var getName = function() {
-      return data.name;
+      return localStorage.getItem('UserName');
+
     };
 
     var getAuthLevel = function() {
@@ -62,15 +74,16 @@
     };
 
     var setToken = function(newToken) {
-      localStorage.setItem("Token", newToken);
+      localStorage.setItem('Token', newToken);
     };
 
-    var removeToken = function() {
-      localStorage.setItem("Token", '');
+    var cleanUpStorage = function() {
+      localStorage.setItem('Token', '');
+      localStorage.setItem('UserName', '');
     }
 
     var getToken = function(){
-      return localStorage.getItem("Token");
+      return localStorage.getItem('Token');
     };
 
     var loggedIn = function() {
@@ -82,7 +95,7 @@
       login:login,
       signup:signup,
       token:getToken,
-      removeToken:removeToken,
+      cleanUpStorage:cleanUpStorage,
       getUsername:getName,
       getAuthLevel:getAuthLevel,
       setToken:setToken,
