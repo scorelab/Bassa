@@ -2,4 +2,4 @@ CONTRIBUTORS
 ============
 
  - Milindu Sanoj Kumarage (agentmilindu)
- - Mikołaj Czermak (miko1999)
+ - Mikolaj Czermak (miko1999)
