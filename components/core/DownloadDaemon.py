@@ -235,7 +235,7 @@ def starter(socket):
     remove_files(conf['max_age'], conf['min_rating'])
     folder_size=get_size(conf['down_folder'])
     websocket.enableTrace(False)
-    ws = websocket.WebSocketApp("ws://localhost:6800/jsonrpc",
+    ws = websocket.WebSocketApp(conf['aria_server'],
                                 on_message=on_message,
                                 on_error=on_error,
                                 on_close=on_close)
