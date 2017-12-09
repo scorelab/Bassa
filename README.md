@@ -73,13 +73,32 @@ password - pass
 ### Make sure you have aria2 installed.
 run `aria2c --enable-rpc`
 
+### How to Use Bassa
+* After Setting up Bassa, Login/Register.There are two types of users in Bassa- (1) The Admin and (2) The Normal Users.
+* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away. 
+* The organisation admin can start the downloads at a time of his/her liking. 
+* Then the users who had added links for certain files can download them from the local servers at a much higher speed.
+
+### Autoformat JS with Prettier
+
+- [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
+- [Atom Plugin](https://github.com/prettier/prettier-atom)
+
+Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
+
+
+
+### Run UI unit tests
+
+	$ cd ui/
+	$ npm test OR $ yarn test 
 
 ## How to Contribute
 
 ### Contribution Guidelines
 
-* Select an issue from the [issue list](https://github.com/scorelab/Bassa/issues), claim it in the comments,thereafter approval fix the issue and send us a pull request.
-* Create a new issue,a admin will get back to you and once approved send the PR for the same.
+* Pick an open issue from the issue list, claim it in the comments,after approval fix the issue and send us a pull request.
+* Create a new issue,a community member will get back to you and once approved send the PR for the same
 * Please go through our issue list first(open as well as closed) and make sure the issues you are reporting do not replicate the issues already reported. If you have issues on multiple pages, report them separately. Do not combine them into a single issue.
 * All the PR’s need to be sent to the develop branch.
 
@@ -87,9 +106,6 @@ run `aria2c --enable-rpc`
 ### Avoid doing the following mistakes
 
 1. Fix a new issue and submit a PR without reporting and getting it approved at first.
-2. Report issues which are previously reported by others. (Please check the closed issues too before you report an issue).
-3. Fix an issue assigned to somebody else and submit a PR before the assignee does.
+2. Fix an issue assigned to somebody else and submit a PR before the assignee does.
+3. Report issues which are previously reported by others. (Please check the closed issues too before you report an issue).
 4. Suggest completely new developments in the issue list. (Please use the mailing list/slack channel for this kind of suggestions. Use issue list to suggest bugs/features in the already implemented sections.)
-
-
-```
