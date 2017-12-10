@@ -27,7 +27,6 @@ describe("Service: AdminService", function() {
       expect(response.data.status).toEqual("12345");
     });
 
-    localHttpBackend.flush();
   });
 
   it("should kill downloads", function() {
