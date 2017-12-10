@@ -1,14 +1,15 @@
 FROM python:3
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
-RUN apt-get update
+WORKDIR /home/Bassa
 
-RUN mkdir -p /home/Bassa
-RUN apt-get install git
-RUN git clone https://github.com/scorelab/Bassa.git /home/Bassa
-RUN chmod 755 /home/Bassa/setup.sh
-RUN /home/Bassa/setup.sh
-RUN python components/core/setup.py develop
+COPY setup.sh  . \
+&&   components/core components/core
+
+RUN apt-get update \
+&&  chmod 755 setup.sh && \
+&&  setup.sh && \
+&&  python components/core/setup.py develop
 
 CMD [ "python", "components/core/Main.py" ]
 
