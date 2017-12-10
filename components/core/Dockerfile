@@ -5,7 +5,7 @@ MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 WORKDIR /home/Bassa
 
 COPY setup.sh .
-COPY . .
+COPY components/core components/core
 
 RUN apt-get update \
 && ./setup.sh \

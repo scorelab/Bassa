@@ -5,11 +5,9 @@ MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 WORKDIR /home/Bassa
 
 COPY setup.sh .
-COPY . .
+COPY ui ui
 
 RUN apt-get update \
-&& ./setup.sh \
-&& python components/core/setup.py develop \
 && npm install
 
 CMD ["gulp", "serve"]
