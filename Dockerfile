@@ -3,13 +3,12 @@ MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 WORKDIR /home/Bassa
 
-COPY setup.sh  . \
-&&   components/core components/core
+COPY setup.sh .
+COPY components/core components/core
 
 RUN apt-get update \
-&&  chmod 755 setup.sh && \
-&&  setup.sh && \
-&&  python components/core/setup.py develop
+&& ./setup.sh && \
+&& python components/core/setup.py develop
 
 CMD [ "python", "components/core/Main.py" ]
 
