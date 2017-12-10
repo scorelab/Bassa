@@ -4,7 +4,7 @@ MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 WORKDIR /home/Bassa
 
-COPY ui ui
+COPY ui .
 
 RUN apt-get update \
 && npm install
