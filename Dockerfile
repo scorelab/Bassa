@@ -7,7 +7,7 @@ COPY setup.sh .
 COPY components/core components/core
 
 RUN apt-get update \
-&& ./setup.sh && \
+&& ./setup.sh \
 && python components/core/setup.py develop
 
 CMD [ "python", "components/core/Main.py" ]
