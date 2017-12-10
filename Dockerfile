@@ -13,9 +13,7 @@ RUN python components/core/setup.py develop
 CMD [ "python", "components/core/Main.py" ]
 
 LABEL multi.org.label-schema.name = "Bassa" \
-      multi.org.label-schema.description = "Bassa provides Automated Download Queue for Enterprise to take the best use of Internet bandwidth
-
-" \
+      multi.org.label-schema.description = "Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
       multi.org.label-schema.url="https://github.com/scorelab/Bassa/wiki" \
       multi.org.label-schema.vcs-url = "https://github.com/scorelab/Bassa" \
       multi.org.label-schema.vcs-ref = "" \
