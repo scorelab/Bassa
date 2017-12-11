@@ -1,13 +1,17 @@
 version: "3"
 services:
   web:
-    build: .
+    build:
+      context: components/core
+      dockerfile: Dockerfile
     ports:
       - 3000:3000
     labels:
       com.example.description: "Docker container for Bassa UI"
   api:
-    build: .
+    build:
+      context: ui
+      dockerfile: Dockerfile
     ports:
       - 8000:8000
     depends_on:
