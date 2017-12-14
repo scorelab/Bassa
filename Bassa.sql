@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `download` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `user_name` (`user_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
 
 
 --
@@ -58,13 +58,6 @@ CREATE TABLE IF NOT EXISTS `rate` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `rate`
---
-
-INSERT INTO `rate` (`user_name`, `id`, `rate`) VALUES
-('rand', 8, 1),
-('tom', 8, 5);
 
 -- --------------------------------------------------------
 
