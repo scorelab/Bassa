@@ -55,6 +55,7 @@
     "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
   },
   "dependencies": {
-    "jasmine-core": "^2.5.2"
+    "jasmine-core": "^2.5.2",
+    "package.json": "^2.0.1"
   }
 }
