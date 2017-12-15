@@ -1,6 +1,11 @@
 {
   "name": "Bassa",
   "version": "1.3.0",
+  "description": "Automated Download Queue for Enterprise to take the best use of Internet bandwidth",
+  "bugs": "",
+  "author": "",
+  "contributors": "",
+  "repository": "Bassa",
   "devDependencies": {
     "bower": "^1.5.2",
     "browser-sync": "~1.7.1",
