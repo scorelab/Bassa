@@ -4,10 +4,12 @@ MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 WORKDIR /home/Bassa
 
-COPY ui .
+COPY . .
 
 RUN apt-get update \
-&& npm install
+&& npm install -g gulp \
+&& npm install -g bower \
+&& npm install --unsafe-perm
 
 CMD ["gulp", "serve"]
 
