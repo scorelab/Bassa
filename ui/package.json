@@ -4,16 +4,40 @@
   "description": "Automated Download Queue for Enterprise to take the best use of Internet bandwidth",
   "bugs": "https://github.com/scorelab/Bassa/issues",
   "author": "SCoRe Community",
-  "contributors": "malithsen, paarandika, rajikaimal, saisankargochhayat, agentmilindu, funkyDunks, kmehant, padamchopra, scorpionhiccup, rehrumesh, harsh183, hmadhawa, KaveeshBaddage, tharindupr, Nuwini, uk175, lazypanda10117, ksoftlabs, Thuan2000"
+  "contributors": [
+    "malithsen", 
+    "paarandika", 
+    "rajikaimal", 
+    "saisankargochhayat", 
+    "agentmilindu", 
+    "funkyDunks", 
+    "kmehant", 
+    "padamchopra", 
+    "scorpionhiccup", 
+    "rehrumesh", 
+    "harsh183", 
+    "hmadhawa", 
+    "KaveeshBaddage", 
+    "tharindupr", 
+    "Nuwini", 
+    "uk175", 
+    "lazypanda10117", 
+    "ksoftlabs", 
+    "Thuan2000"
+  ],
+  "repository": { 
+   "type": ["git"],
+   "url": "https://github.com/scorelab/Bassa.git"
   },
-  "repository": "https://github.com/scorelab/Bassa",
   "keywords": [
     "Bassa"
    ],
-   "licenses" : [
-     "GPL-3.0"
-   ],
-   "homepage": "http://www.scorelab.org/",
+   "licenses":   [
+    { "type": "GPL-3.0",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+    }
+  ],
+  "homepage": "http://www.scorelab.org/Bassa/",
   "devDependencies": {
     "bower": "^1.5.2",
     "browser-sync": "~1.7.1",
