@@ -1,19 +1,15 @@
 version: "3"
 services:
-  web:
-    build:
-      context: components/core
-      dockerfile: Dockerfile
+  api:
+    build: components/core/
     ports:
-      - 3000:3000
+      - 5000:5000
     labels:
       com.example.description: "Docker container for Bassa UI"
-  api:
-    build:
-      context: ui
-      dockerfile: Dockerfile
+  web:
+    build: ui/
     ports:
-      - 8000:8000
+      - 3000:3000
     depends_on:
       - db
     labels:
@@ -26,6 +22,7 @@ services:
     ports:
       - 3306:3306
     environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${BASSA_DB_NAME}
       MYSQL_USER: ${BASSA_DB_USERNAME}
       MYSQL_PASSWORD: ${BASSA_DB_PASSWORD} 
