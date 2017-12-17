@@ -23,7 +23,7 @@ before_install:
 script: 
   - ./setup.sh 
   - cd ui && npm install && npm test
-  - cd components/core && python setup.py develop && python Main.py
+  - cd components/core && python --user setup.py develop && python --user Main.py
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
