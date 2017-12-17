@@ -13,7 +13,6 @@ services:
 cache:
   directories:
     - ui/node_modules
-    - components/core
 
 before_install:
   - export CHROME_BIN=chromium-browser
@@ -23,7 +22,8 @@ before_install:
 script: 
   - ./setup.sh 
   - cd ui && npm install && npm test
-  - cd components/core && python --user setup.py develop && python --user Main.py
+  - cd $TRAVIS_BUILD_DIR
+  - cd components/core && python setup.py test
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
