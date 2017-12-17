@@ -3,15 +3,15 @@ FROM python:3
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 WORKDIR /home/Bassa
-
-COPY setup.sh .
-COPY components/core components/core
+EXPOSE 5000
+COPY . .
 
 RUN apt-get update \
 && ./setup.sh \
-&& python components/core/setup.py develop 
+&& python setup.py develop 
 
-CMD [ "python", "components/core/Main.py" ]
+CMD [ "python", "Main.py" ]
+
 
 LABEL multi.org.label-schema.name = "Bassa" \
       multi.org.label-schema.description = "Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
