@@ -24,7 +24,7 @@ script:
   - cd ui && npm install && npm test
   - cd $TRAVIS_BUILD_DIR
   - cd components/core && python setup.py test
-  - docker build -t scorelab/bassa .
+  - docker build -t scoreucsc/bassa .
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
