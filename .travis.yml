@@ -24,10 +24,10 @@ script:
   - cd ui && npm install && npm test
   - cd $TRAVIS_BUILD_DIR
   - cd components/core && python setup.py test
+  - docker build -t scorelab/Bassa components/core
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-    docker build -t scorelab/Bassa components/core;
     docker push scorelab/Bassa;
     fi
