@@ -21,7 +21,6 @@ LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.vcs-url="https://github.com/scorelab/Bassa" \
       multi.org.label-schema.vcs-ref=$VCS_REF \
       multi.org.label-schema.build-date=$BUILD_DATE \
-      multi.org.label-schema.date=$(date) \
       multi.org.label-schema.vendor="Sustainable Computing Research Group" \
       multi.org.label-schema.version="" \
       multi.org.label-schema.schema-version="1.0"
