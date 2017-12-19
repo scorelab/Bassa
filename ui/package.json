@@ -98,23 +98,24 @@
   },
   "dependencies": {
     "jasmine-core": "^2.5.2",
-    "@bower_components/angular": "angular/bower-angular#1.6.7",
-    "@bower_components/angular-animate": "angular/bower-angular-animate#^1.4.8",
-    "@bower_components/angular-aria": "angular/bower-angular-aria#^1.4.8",
-    "@bower_components/angular-cookies": "angular/bower-angular-cookies#~1.6.0",
-    "@bower_components/angular-material": "angular/bower-material#^1.0.6",
-    "@bower_components/angular-messages": "angular/bower-angular-messages#^1.4.8",
-    "@bower_components/angular-mocks": "angular/bower-angular-mocks#~1.6.0",
-    "@bower_components/angular-moment": "urish/angular-moment#1.0.0-beta.3",
-    "@bower_components/angular-nvd3": "krispo/angular-nvd3#1.0.0-rc.2",
-    "@bower_components/angular-sanitize": "angular/bower-angular-sanitize#~1.6.0",
-    "@bower_components/angular-touch": "angular/bower-angular-touch#~1.6.0",
+    angular.module('myApp', [require('angular')]);
+    angular.module('myApp', [require('angular-animate')]);
+    angular.module('myApp', [require('angular-aria')]);
+    angular.module('myApp', [require('angular-cookies')]);
+    angular.module('myApp', [require('angular-material')]);
+    angular.module('myApp', [require('angular-messages')]);
+    angular.module('myApp', [require('angular-mocks/ngMock')]);
+    angular.module('myapp', [require('angularMoment')]);
+    angular.module('myApp', [require('nvd3')]);
+    angular.module('myApp', [require('angular-sanitize')]);
+    angular.module('myApp', [require('angular-touch')]);
     "@bower_components/angular-ui-router": "angular-ui/angular-ui-router-bower#^0.2.18",
-    "@bower_components/d3": "mbostock-bower/d3-bower#^3.3.13",
-    "@bower_components/jquery": "jquery/jquery-dist#~2.1.1",
-    "@bower_components/lodash": "lodash/lodash#~4.13.1",
-    "@bower_components/moment": "moment/moment#>=2.8.0 <2.11.0",
+    angular.module('myApp', [require("d3")]);
+    angular.module('myApp', [require('jquery')]);
+    angular.module('myApp', [require('lodash')]);
+    angular.module('myApp', [require('moment')]);
     "@bower_components/nvd3": "novus/nvd3#^1.7.1",
-    "@bower_components/socket.io-client": "LearnBoost/socket.io-client#~1.4.8"
-  }
+    var socket = require('socket.io-client')('http://localhost');
+
+    }
 }
