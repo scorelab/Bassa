@@ -24,4 +24,5 @@ LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.build-date=$BUILD_DATE \
       multi.org.label-schema.vendor="Sustainable Computing Research Group" \
       multi.org.label-schema.version="" \
-	  multi.org.label-schema.schema-version="1.0"
+      multi.org.label-schema.schema-version="1.0"
+      
