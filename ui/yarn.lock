@@ -2,92 +2,6 @@
 # yarn lockfile v1
 
 
-"@bower_components/angular-animate@angular/bower-angular-animate#^1.4.8":
-  version "1.6.7"
-  resolved "https://codeload.github.com/angular/bower-angular-animate/tar.gz/11953fa28eea83030aa29484728a53e58cd3e520"
-
-"@bower_components/angular-aria@angular/bower-angular-aria#^1.4.8":
-  version "1.6.7"
-  resolved "https://codeload.github.com/angular/bower-angular-aria/tar.gz/e3a7d3413d81cc9aa6bd492c0a5d17d3aa9f5e55"
-
-"@bower_components/angular-cookies@angular/bower-angular-cookies#~1.6.0":
-  version "1.6.7"
-  resolved "https://codeload.github.com/angular/bower-angular-cookies/tar.gz/68c8fa837e01108735c2ac53a54654528cbd9237"
-
-"@bower_components/angular-material@angular/bower-material#^1.0.6":
-  version "1.1.5"
-  resolved "https://codeload.github.com/angular/bower-material/tar.gz/571732036559e01141a73b6cab107adff4f17353"
-
-"@bower_components/angular-messages@angular/bower-angular-messages#^1.4.8":
-  version "1.6.7"
-  resolved "https://codeload.github.com/angular/bower-angular-messages/tar.gz/f2889bec076b06de917afdffd781e9d964506e29"
-
-"@bower_components/angular-mocks@angular/bower-angular-mocks#~1.6.0":
-  version "1.6.7"
-  resolved "https://codeload.github.com/angular/bower-angular-mocks/tar.gz/4e0e1f8150d5d712e0cc70b66b96cb4ad1c38a84"
-
-"@bower_components/angular-moment@urish/angular-moment#1.0.0-beta.3":
-  version "1.0.0-beta.3"
-  resolved "https://codeload.github.com/urish/angular-moment/tar.gz/3b32174202a5b8923195d06ccef0a326ce9c20b3"
-  dependencies:
-    moment ">=2.8.0 <2.11.0"
-
-"@bower_components/angular-nvd3@krispo/angular-nvd3#1.0.0-rc.2":
-  version "1.0.0-rc.2"
-  resolved "https://codeload.github.com/krispo/angular-nvd3/tar.gz/4441b1aa295b224813d9fc15ba5eab98b84a3106"
-
-"@bower_components/angular-sanitize@angular/bower-angular-sanitize#~1.6.0":
-  version "1.6.7"
-  resolved "https://codeload.github.com/angular/bower-angular-sanitize/tar.gz/33f83f6234686d411269c9ce7b292ad51f0b1be1"
-
-"@bower_components/angular-touch@angular/bower-angular-touch#~1.6.0":
-  version "1.6.7"
-  resolved "https://codeload.github.com/angular/bower-angular-touch/tar.gz/ca886bd884bf4633b9885343f507f6a743b93b9f"
-
-"@bower_components/angular-ui-router@angular-ui/angular-ui-router-bower#^0.2.18":
-  version "0.0.0"
-  resolved "https://codeload.github.com/angular-ui/angular-ui-router-bower/tar.gz/2b8d5241b4c631ca2aef079bb96690b213eff449"
-
-"@bower_components/angular@angular/bower-angular#1.6.7":
-  version "1.6.7"
-  resolved "https://codeload.github.com/angular/bower-angular/tar.gz/03cf5343bfd0d30b7b72a48f7974cd6ef6842630"
-
-"@bower_components/d3@mbostock-bower/d3-bower#^3.3.13":
-  version "0.0.0"
-  resolved "https://codeload.github.com/mbostock-bower/d3-bower/tar.gz/7a826d211d5067867debf9ce24a9987e0cb02b6e"
-
-"@bower_components/jquery@jquery/jquery-dist#~2.1.1":
-  version "2.1.4"
-  resolved "https://codeload.github.com/jquery/jquery-dist/tar.gz/7751e69b615c6eca6f783a81e292a55725af6b85"
-
-"@bower_components/lodash@lodash/lodash#~4.13.1":
-  version "4.13.1"
-  resolved "https://codeload.github.com/lodash/lodash/tar.gz/40ac55acb6a6966274929b33e071bfd73f8f5bd3"
-
-"@bower_components/moment@moment/moment#>=2.8.0 <2.11.0":
-  version "2.10.6"
-  resolved "https://codeload.github.com/moment/moment/tar.gz/f3fbef9d9875bbff340b527dbe3f1c447a942f69"
-
-"@bower_components/nvd3@novus/nvd3#^1.7.1":
-  version "1.8.6"
-  resolved "https://codeload.github.com/novus/nvd3/tar.gz/d273ea52d91b482d044f8cef1e921256f2bfddcd"
-
-"@bower_components/socket.io-client@LearnBoost/socket.io-client#~1.4.8":
-  version "1.4.8"
-  resolved "https://codeload.github.com/LearnBoost/socket.io-client/tar.gz/2bed4f433dcc09487c9be15ff013d767570aa8d9"
-  dependencies:
-    backo2 "1.0.2"
-    component-bind "1.0.0"
-    component-emitter "1.2.0"
-    debug "2.2.0"
-    engine.io-client "1.6.11"
-    has-binary "0.1.7"
-    indexof "0.0.1"
-    object-component "0.0.3"
-    parseuri "0.0.4"
-    socket.io-parser "2.2.6"
-    to-array "0.1.4"
-
 abbrev@1:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.0.9.tgz#91b4792588a7738c25f35dd6f63752a2f8776135"
@@ -124,6 +38,62 @@ alter@~0.2.0:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+angular-animate@~1.6.0:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.6.7.tgz#bc6dbe6a190d019a6fbb2c7373d40f01cfd75899"
+
+angular-aria@~1.4.8:
+  version "1.4.14"
+  resolved "https://registry.yarnpkg.com/angular-aria/-/angular-aria-1.4.14.tgz#4c8157181c9f6707314d15c7c2a9cbcbb1eb639e"
+
+angular-cookies@~1.6.0:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.6.7.tgz#841b8c1ba6d101d886f1676bda4dc1ad9095ad4c"
+
+angular-material@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/angular-material/-/angular-material-1.1.5.tgz#a5450cd8205e15a7691edc389476094cf86d592b"
+
+angular-messages@~1.4.8:
+  version "1.4.14"
+  resolved "https://registry.yarnpkg.com/angular-messages/-/angular-messages-1.4.14.tgz#b514070abf7b1377b88e2d7dc6a338d37037a98c"
+
+angular-mocks@~1.6.0:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/angular-mocks/-/angular-mocks-1.6.7.tgz#85bf45a2537eac59fc6f4cf319846102e8000e65"
+
+angular-moment@~1.0.0-beta.3:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/angular-moment/-/angular-moment-1.0.1.tgz#509d3326aea23f78221cfddb2b62bfede6841d31"
+  dependencies:
+    moment ">=2.8.0 <3.0.0"
+
+angular-nvd3@~1.0.1:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/angular-nvd3/-/angular-nvd3-1.0.9.tgz#8d8a71487d9e5a122e8a5d0f5cd26ab0e491a6f5"
+  dependencies:
+    angular "^1.x"
+    d3 "^3.3"
+    nvd3 "^1.7.1"
+
+angular-sanitize@~1.6.0:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.6.7.tgz#5a3d61ad7b8b699923329635d99248bcfce26408"
+
+angular-touch@~1.6.0:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/angular-touch/-/angular-touch-1.6.7.tgz#3c43c3d72c6096ff59c920651df861b4486ea7b6"
+
+angular-ui-router@^0.2.18:
+  version "0.2.18"
+  resolved "https://registry.yarnpkg.com/angular-ui-router/-/angular-ui-router-0.2.18.tgz#1dad70415c73d7046fd2e130df03d62fb7464360"
+  dependencies:
+    angular "^1.0.8"
+
+angular@^1.0.8, angular@^1.x, angular@~1.6.0:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.7.tgz#0f89837dae1776b01ccb1fa2096db0d9373d9897"
 
 ansi-regex@2, ansi-regex@^2.0.0:
   version "2.1.1"
@@ -412,10 +382,6 @@ bower-config@^0.5.0:
     optimist "~0.6.0"
     osenv "0.0.3"
 
-bower@^1.5.2:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/bower/-/bower-1.8.0.tgz#55dbebef0ad9155382d9e9d3e497c1372345b44a"
-
 brace-expand-join@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/brace-expand-join/-/brace-expand-join-0.1.0.tgz#6a2ee7d9787d5e6f641c1ba79fd998691e945c8b"
@@ -654,13 +620,13 @@ colornames@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/colornames/-/colornames-0.0.2.tgz#d811fd6c84f59029499a8ac4436202935b92be31"
 
-colors@^0.6.2, colors@~0.6.0:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/colors/-/colors-0.6.2.tgz#2423fe6678ac0c5dae8852e5d0e5be08c997abcc"
-
 colors@^1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
+
+colors@~0.6.0:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-0.6.2.tgz#2423fe6678ac0c5dae8852e5d0e5be08c997abcc"
 
 colorspace@1.0.x:
   version "1.0.1"
@@ -808,6 +774,10 @@ currently-unhandled@^0.4.1:
 custom-event@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/custom-event/-/custom-event-1.0.1.tgz#5d02a46850adf1b4a317946a3928fccb5bfd0425"
+
+d3@^3.3, d3@^3.3.13:
+  version "3.5.17"
+  resolved "https://registry.yarnpkg.com/d3/-/d3-3.5.17.tgz#bc46748004378b21a360c9fc7cf5231790762fb8"
 
 d@^0.1.1, d@~0.1.1:
   version "0.1.1"
@@ -1620,7 +1590,7 @@ glob@7.1.1, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@~7.1.1:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^4.0.0, glob@^4.0.2, glob@^4.0.3, glob@^4.0.5, glob@^4.3.1:
+glob@^4.0.0, glob@^4.0.2, glob@^4.0.5, glob@^4.3.1:
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/glob/-/glob-4.5.3.tgz#c6cb73d3226c1efef04de3c56d012f03377ee15f"
   dependencies:
@@ -2469,6 +2439,14 @@ jodid25519@^1.0.0:
   dependencies:
     jsbn "~0.1.0"
 
+jquery-ui-dist@~1.12.0:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/jquery-ui-dist/-/jquery-ui-dist-1.12.1.tgz#5c0815d3cc6f90ff5faaf5b268a6e23b4ca904fa"
+
+jquery@~2.1.1:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.1.4.tgz#228bde698a0c61431dc2630a6a154f15890d2317"
+
 js-base64@^2.1.9, js-base64@~2.1.5:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
@@ -2897,6 +2875,10 @@ lodash@~2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-2.2.1.tgz#ca935fd14ab3c0c872abacf198b9cda501440867"
 
+lodash@~4.13.1:
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.13.1.tgz#83e4b10913f48496d4d16fec4a560af2ee744b68"
+
 lodash@~4.16.4:
   version "4.16.6"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.16.6.tgz#d22c9ac660288f3843e16ba7d2b5d06cca27d777"
@@ -2937,15 +2919,6 @@ lru-queue@0.1:
   resolved "https://registry.yarnpkg.com/lru-queue/-/lru-queue-0.1.0.tgz#2738bd9f0d3cf4f84490c5736c48699ac632cda3"
   dependencies:
     es5-ext "~0.10.2"
-
-main-bower-files@~2.4.0:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/main-bower-files/-/main-bower-files-2.4.2.tgz#4f766cda1cd9a464e8335fc18ecfaba60bf7b525"
-  dependencies:
-    colors "^0.6.2"
-    glob "^4.0.3"
-    minimatch "^1.0.0"
-    strip-json-comments "^1.0.2"
 
 make-error-cause@^1.1.1:
   version "1.2.2"
@@ -3121,9 +3094,9 @@ minimize@^1.1.0:
   dependencies:
     minimist "0.0.8"
 
-"moment@>=2.8.0 <2.11.0":
-  version "2.10.6"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.10.6.tgz#6cb21967c79cba7b0ca5e66644f173662b3efa77"
+"moment@>=2.8.0 <3.0.0":
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
 
 mout@~0.9.0:
   version "0.9.1"
@@ -3319,6 +3292,10 @@ null-check@^1.0.0:
 number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
+
+nvd3@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/nvd3/-/nvd3-1.7.1.tgz#2d12d7231fd88eb2cc172020fcb23ad750089530"
 
 oauth-sign@~0.3.0:
   version "0.3.0"
@@ -4142,6 +4119,22 @@ socket.io-client@1.7.2:
     socket.io-parser "2.3.1"
     to-array "0.1.4"
 
+socket.io-client@~1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-1.4.8.tgz#481b241e73df140ea1a4fb03486a85ad097f5558"
+  dependencies:
+    backo2 "1.0.2"
+    component-bind "1.0.0"
+    component-emitter "1.2.0"
+    debug "2.2.0"
+    engine.io-client "1.6.11"
+    has-binary "0.1.7"
+    indexof "0.0.1"
+    object-component "0.0.3"
+    parseuri "0.0.4"
+    socket.io-parser "2.2.6"
+    to-array "0.1.4"
+
 socket.io-parser@2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-2.2.6.tgz#38dfd61df50dcf8ab1d9e2091322bf902ba28b99"
@@ -4347,7 +4340,7 @@ strip-indent@^1.0.1:
   dependencies:
     get-stdin "^4.0.1"
 
-strip-json-comments@1.0.x, strip-json-comments@^1.0.2, strip-json-comments@~1.0.4:
+strip-json-comments@1.0.x, strip-json-comments@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-1.0.4.tgz#1e15fbcac97d3ee99bf2d73b4c656b082bbafb91"
 
