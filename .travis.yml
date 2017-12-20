@@ -30,6 +30,6 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
     docker push scoreucsc/bassa;
-    curl -X POST https://hooks.microbadger.com/images/scoreucsc/bassa/Wbi5zehDMooS3ri2bgC8LETGGuQ=
+    curl -X POST 'https://hooks.microbadger.com/images/scoreucsc/bassa/Wbi5zehDMooS3ri2bgC8LETGGuQ=';
     fi
     
