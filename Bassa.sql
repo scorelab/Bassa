@@ -51,8 +51,16 @@ CREATE TABLE `download` (
   `gid` varchar(256) DEFAULT NULL,
   `completed_time` bigint(20) NOT NULL DEFAULT '0',
   `size` varchar(7) NOT NULL DEFAULT '0',
+<<<<<<< HEAD
   `path` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+=======
+  `path` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `user_name` (`user_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+>>>>>>> fcf2f8ecdc67dd66cac4b7e57b8797e45a17c299
 
 -- --------------------------------------------------------
 
@@ -66,6 +74,10 @@ CREATE TABLE `rate` (
   `rate` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fcf2f8ecdc67dd66cac4b7e57b8797e45a17c299
 -- --------------------------------------------------------
 
 --
