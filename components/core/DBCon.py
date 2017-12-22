@@ -6,9 +6,10 @@ def get_db_con () :
     global _db
     if _db==None:
         try:
-            _db=MySQLdb.connect("localhost", "dbuser", "dbpass", "Bassa" )
+            _db=MySQLdb.connect("localhost", "root", "", "Bassa" )
             return _db
-        except:
+        except Exception as e:
+            print (e)
             return None
     else:
         return _db
