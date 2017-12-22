@@ -8,6 +8,7 @@
 
     $scope.signup_requests = [];
     $scope.usageChartData = [];
+    $scope.users = [];
 
     $scope.chartOptions = {
         chart: {
@@ -48,7 +49,31 @@
     $scope.approve = function(username) {
       AdminService.approve(username).then(function (response) {
         ToastService.showToast('Approved', username);
-        getRequests();
+
+        AdminService.getSignupRequests().then(function (response) {
+          $scope.signup_requests = response.data;
+        });
+
+      }, function(error){
+        ToastService.showToast('Oops! Something went wrong');
+      });
+    };
+    
+    $scope.del = function(username) {
+      AdminService.del(username).then(function (response) {
+        ToastService.showToast('Deleted', username);
+
+        AdminService.getSignupRequests().then(function (response) {
+          $scope.signup_requests = response.data;
+        });
+
+        AdminService.getUser().then(function(response){
+          $scope.users = response.data;
+        });
+
+        AdminService.getHeavyUsers().then(function (response) {
+          $scope.usageChartData = response.data;
+        });
       }, function(error){
         ToastService.showToast('Oops! Something went wrong');
       });
@@ -60,12 +85,19 @@
       });
     };
 
+    this.getUsers = function(){
+      AdminService.getUser().then(function(response){
+          $scope.users = response.data;
+      });
+    }
+
     this.getHeavyUsers = function() {
       AdminService.getHeavyUsers().then(function (response) {
         $scope.usageChartData = response.data;
       });
     }
 
+    this.getUsers();
     this.getRequests();
     this.getHeavyUsers();
 

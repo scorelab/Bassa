@@ -28,10 +28,25 @@
       });
     }
 
+    var getUser = function() {
+      return $http({
+        method: 'GET',
+        url: BassaUrl + '/api/user'
+      });
+    }
+
     var approve = function(username) {
       return $http({
         method: 'POST',
         url: BassaUrl + '/api/user/approve/' + username,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    }
+
+    var del = function(username) {
+      return $http({
+        method: 'DELETE',
+        url: BassaUrl + '/api/user/delete/' + username,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
     }
@@ -48,6 +63,8 @@
       killDownloads : killDownloads,
       getSignupRequests : getSignupRequests,
       approve: approve,
+      del:del,
+      getUser:getUser,
       getHeavyUsers: getHeavyUsers
     };
   }
