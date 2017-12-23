@@ -5,10 +5,10 @@ MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 ARG BUILD_DATE
 ARG VCS_REF
 
+RUN apt-get update 
+
 COPY nginx.conf /etc/nginx/conf.d/bassa.conf
 COPY ui/dist /var/www/bassa
-
-RUN apt-get update 
 
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
