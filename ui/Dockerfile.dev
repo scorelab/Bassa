@@ -1,14 +1,20 @@
-FROM nginx:alpine
+FROM node
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 ARG BUILD_DATE
 ARG VCS_REF
 
-RUN apt-get update 
+WORKDIR /home/Bassa
 
-COPY nginx.conf /etc/nginx/conf.d/bassa.conf
-COPY ui/dist /var/www/bassa
+COPY . .
+
+RUN apt-get update \
+&& npm install -g gulp \
+&& npm install -g bower \
+&& npm install --unsafe-perm
+
+CMD ["gulp", "serve"]
 
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
@@ -19,3 +25,4 @@ LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.vendor="Sustainable Computing Research Group" \
       multi.org.label-schema.version="" \
       multi.org.label-schema.schema-version="1.0"
+ 
