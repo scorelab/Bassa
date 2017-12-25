@@ -122,7 +122,7 @@ def get_users():
     db = threadpool.connect()
     if db is not None:
         cursor =  db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT user_name, email, auth FROM user WHERE blocked=0;"
+        sql = "SELECT user_name, email, auth FROM user WHERE blocked=0; "
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
@@ -153,6 +153,19 @@ def block_user(username):
         sql = "UPDATE user SET blocked=%s WHERE user_name=%s;"
         try:
             cursor.execute(sql, (1, username))
+            db.commit()
+        except MySQLdb.Error as e:
+            db.rollback()
+            return e[1]
+        return "success"
+    return "db connection error"
+
+def delete_user(username):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        try:
+            cursor.execute("CALL delete_user(%s);", (username,))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()

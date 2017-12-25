@@ -22,6 +22,17 @@ SET time_zone = "+00:00";
 -- Database: `Bassa`
 --
 
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_user` (IN `in_user_name` VARCHAR(256))  BEGIN
+    delete from download where user_name = in_user_name;
+    delete from rate where user_name	= in_user_name;
+    delete from user where user_name = in_user_name;
+    END$$
+
+DELIMITER ;
 -- --------------------------------------------------------
 
 --
