@@ -2,12 +2,21 @@
 port="3306";
 ip="127.0.0.1";
 name="bassa";
-read -p "Database type: " DBTYPE;
+while [[ -z "$DBTYPE" ]]
+do
+    read -p "Database type: " DBTYPE;
+done
 read -p "Database port [$port]: " DBPORT;
 read -p "Database ip [$ip]: " DBIP;
 read -p "Database name [$name]: " DBNAME;
-read -p "Database username: " DBUSERNAME;
-read -p "Database password: " -s DBPASSWORD && echo "";
+while [[ -z "$DBUSERNAME" ]]
+do
+    read -p "Database username: " DBUSERNAME;
+done
+while [[ -z "$DBPASSWORD" ]]
+do
+    read -p "Database password: " -s DBPASSWORD && echo "";
+done
 DBPORT=${DBPORT:-$port};
 DBIP=${DBIP:-$ip};
 DBNAME=${DBNAME:-$name};
