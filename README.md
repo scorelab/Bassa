@@ -101,7 +101,7 @@ Find more plugins [here](https://github.com/prettier/prettier#editor-integration
 
 ### Contribution Guidelines
 
-* Pick an open issue from the issue list, claim it in the comments,after approval fix the issue and send us a pull request.
+* Pick an open issue from the issue list, claim it in the comments, after approval fix the issue and send us a pull request.
 * Create a new issue,a community member will get back to you and once approved send the PR for the same
 * Please go through our issue list first(open as well as closed) and make sure the issues you are reporting do not replicate the issues already reported. If you have issues on multiple pages, report them separately. Do not combine them into a single issue.
 * All the PR’s need to be sent to the develop branch.
@@ -112,4 +112,3 @@ Find more plugins [here](https://github.com/prettier/prettier#editor-integration
 * Fix a new issue and submit a PR without reporting and getting it approved at first.
 * Fix an issue assigned to somebody else and submit a PR before the assignee does.
 * Report issues which are previously reported by others. (Please check the closed issues too before you report an issue).
-* Suggest completely new developments in the issue list. (Please use the mailing list/slack channel for this kind of suggestions. Use issue list to suggest bugs/features in the already implemented sections.)
