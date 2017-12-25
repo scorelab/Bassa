@@ -4,18 +4,12 @@ services:
     build: components/core/
     ports:
       - 5000:5000
-    depends_on:
-      - db
-    environment:
-      BASSA_DB_NAME: ${BASSA_DB_NAME}
-      BASSA_DB_USERNAME: ${BASSA_DB_USERNAME}
-      BASSA_DB_PASSWORD: ${BASSA_DB_PASSWORD}
     labels:
       com.example.description: "Docker container for Bassa UI"
   web:
     build: ui/
     ports:
-      - 3000:80
+      - 3000:3000
     depends_on:
       - db
     labels:
