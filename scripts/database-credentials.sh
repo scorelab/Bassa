@@ -7,7 +7,7 @@ read -p "Database port [$port]: " DBPORT;
 read -p "Database ip [$ip]: " DBIP;
 read -p "Database name [$name]: " DBNAME;
 read -p "Database username: " DBUSERNAME;
-read -p "Database password: " DBPASSWORD;
+read -p "Database password: " -s DBPASSWORD && echo "";
 DBPORT=${DBPORT:-$port};
 DBIP=${DBIP:-$ip};
 DBNAME=${DBNAME:-$name};
