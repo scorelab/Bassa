@@ -1,20 +1,12 @@
-FROM python:3
+FROM nginx:alpine
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 ARG BUILD_DATE
 ARG VCS_REF
 
-WORKDIR /home/Bassa
-EXPOSE 5000
-COPY . .
-
-RUN apt-get update \
-&& ./setup.sh \
-&& python setup.py develop 
-
-CMD [ "python", "Main.py" ]
-
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY dist /var/www/bassa
 
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
@@ -25,4 +17,3 @@ LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.vendor="Sustainable Computing Research Group" \
       multi.org.label-schema.version="" \
       multi.org.label-schema.schema-version="1.0"
-      
