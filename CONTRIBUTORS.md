@@ -1,4 +1,4 @@
 CONTRIBUTORS
 ============
-Rohan Shiva
+ - Rohan Shiva (rhnshiva)
  - Milindu Sanoj Kumarage (agentmilindu)
