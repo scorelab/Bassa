@@ -6,7 +6,7 @@ import logging
 
 
 def main():
-    socketio.run(server)
+    socketio.run(server, host='0.0.0.0', port=5000)
     # server.run(debug=True)
 
 
