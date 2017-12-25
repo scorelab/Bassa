@@ -1,6 +1,5 @@
 #!/bin/bash
-distrofull=$(cat /etc/issue);
-distro=${distrofull:: -6};
+distro=$(cat /etc/*-release | grep "DISTRIB_ID=" | cut -d"=" -f2);
 echo "Select the Database Client you prefer:";
 options=("MySQL" "SQLite" "MariaDB" "PostgreSQL");
 select opt in "${options[@]}"
