@@ -1,0 +1,21 @@
+#!/bin/bash
+port="3306";
+ip="127.0.0.1";
+name="bassa";
+read -p "Database type:" DBTYPE;
+read -p "Database port [$port]:" DBPORT;
+read -p "Database ip: [$ip]" DBIP;
+read -p "Database name [$name]:" DBNAME;
+read -p "Database username:" DBUSERNAME;
+read -p "Database password:" DBPASSWORD;
+DBPORT=${DBPORT:-$port};
+DBIP=${DBIP:-$ip};
+DBNAME=${DBNAME:-$name};
+echo "database:" > ../bassa.yml;
+echo "    database_type: $DBTYPE" >> ../bassa.yml;
+echo "    database_port: $DBPORT" >> ../bassa.yml;
+echo "    database_ip: $DBIP" >> ../bassa.yml;
+echo "    database_name: $DBNAME" >> ../bassa.yml;
+echo "    database_user_username: $DBUSERNAME" >> ../bassa.yml;
+echo "    database_user_password: $DBPASSWORD" >> ../bassa.yml;
+echo "Credentials Stored!";
