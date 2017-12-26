@@ -1,26 +1,31 @@
 <div layout="column" layout-align="center center" class="">
   <h1 class="md-display-2 login-heading">Signup for a Bassa account</h1>
-  <div layout="column">
-    <md-input-container>
-      <label>User name</label>
-      <input type="text" ng-model="user.user_name" required/>
-    </md-input-container>
-    <md-input-container>
-      <label>Email</label>
-      <input type="email" ng-model="user.email" required/>
-    </md-input-container>
-    <md-input-container>
-      <label>Password</label>
-      <input id="pw1" type="password" ng-model="user.password" required/>
-    </md-input-container>
-    <md-input-container>
-      <label>Confimation password</label>
-      <input id="pw2" type="password" ng-model="user.confirm_password" pw-check="pw1" required/>
-    </md-input-container>
-    <br>
-  </div>
-  <div>
-    <md-button class="md-raised md-primary" ng-click="back()">Back</md-button>
-    <md-button class="md-raised md-primary" ng-click="signup()">Signup</md-button>
-  </div>
+  <form name="loginForm" novalidate>
+
+    <div class="group" ng-class="{'has-error': loginForm.user_name.$invalid && loginForm.user_name.$dirty, 'has-success': loginForm.user_name.$valid }">
+      <input type="user_name" class="form-control" placeholder="User Name" name="user_name" ng-model="user.user_name" ng-minlength="5" ng-maxlength="10" required/><span class="highlight"></span><span class="bar"></span>
+      <p class="help-block" ng-if="loginForm.user_name.$invalid && loginForm.user_name.$dirty">Username should be more than 5 characters and less than 10</p>
+    </div>
+
+    <div class="group" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+      <input type="email" class="form-control" placeholder="Email" name="email" ng-model="user.email" required/><span class="highlight"></span><span class="bar"></span>
+      <p class="help-block" ng-if="loginForm.email.$invalid && loginForm.email.$dirty">Please Enter a valid email address</p>
+    </div>
+
+    <div class="group" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
+      <input type="password" class="form-control" placeholder="Password" name="password" ng-model="user.password" ng-minLength="8" required"/><span class="highlight"></span><span class="bar"></span>
+      <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Please Enter at least 8 characters</p>
+    </div>
+
+    <div class="group" ng-class="{'has-error': loginForm.confirm_password.$invalid && loginForm.confirm_password.$dirty, 'has-success': loginForm.confirm_password.$valid}">
+      <input type="password" class="form-control" placeholder="Password" name="confirm_password" ng-model="user.confirm_password" ng-minLength="8" required ng-enter="login()"/><span class="highlight"></span><span class="bar"></span>
+      <p class="help-block" ng-if="loginForm.confirm_password != loginForm.password && loginForm.confirm_password.$invalid && loginForm.confirm_password.$dirty">Password did not match!</p>
+    </div>
+
+    <div>
+      <md-button class="md-raised md-primary" ng-click="back()">Back</md-button>
+      <md-button class="md-raised md-primary" ng-disabled="loginForm.emails.$invalid || loginForm.password.$invalid || loginForm.confirm_password.$invalid || loginForm.user_name.$invalid" ng-click="signup()">Signup</md-button>
+      
+    </div>
+  </form>
 </div>
