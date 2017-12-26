@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "Setting up Bassa on Debian bases Linux";
+echo "Setting up Bassa on Debian based Linux";
