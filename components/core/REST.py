@@ -266,6 +266,25 @@ def get_blocked_users_request():
     else:
         return '{"error":"token error"}', 403
 
+@server.route('/api/user/unblocked', methods=['GET'])
+def get_unblocked_users_request():
+    token = token_validator(request.headers['token'])
+    if token is not None and g.user.auth == AuthLeval.ADMIN:
+        try:
+            status = get_unblocked_users()
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status), status=200)
+            else:
+                resp = Response(response='{"error":"' + status + '"}', status=400)
+        except Exception as e:
+            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
 
 @server.route('/api/user/blocked/<string:username>', methods=['POST'])
 def block_user_request(username):

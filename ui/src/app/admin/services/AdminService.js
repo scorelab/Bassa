@@ -28,10 +28,40 @@
       });
     }
 
+    var getBlockedUsers = function() {
+      return $http({
+        method: 'GET',
+        url: BassaUrl + '/api/user/blocked'
+      });
+    }
+
+    var getUnblockedUsers = function() {
+      return $http({
+        method: 'GET',
+        url: BassaUrl + '/api/user/unblocked'
+      });
+    }
+
     var approve = function(username) {
       return $http({
         method: 'POST',
         url: BassaUrl + '/api/user/approve/' + username,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    }
+
+    var block = function(username) {
+      return $http({
+        method: 'POST',
+        url: BassaUrl + '/api/user/blocked/' + username,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    }
+
+    var unblock = function(username) {
+      return $http({
+        method: 'DELETE',
+        url: BassaUrl + '/api/user/blocked/' + username,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
     }
@@ -48,6 +78,10 @@
       killDownloads : killDownloads,
       getSignupRequests : getSignupRequests,
       approve: approve,
+      block:block,
+      unblock:unblock,
+      getBlockedUsers:getBlockedUsers,
+      getUnblockedUsers:getUnblockedUsers,
       getHeavyUsers: getHeavyUsers
     };
   }

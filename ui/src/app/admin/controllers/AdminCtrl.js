@@ -8,6 +8,8 @@
 
     $scope.signup_requests = [];
     $scope.usageChartData = [];
+    $scope.blocked_users = [];
+    $scope.unblocked_users = [];
 
     $scope.chartOptions = {
         chart: {
@@ -54,6 +56,38 @@
       });
     };
 
+    $scope.block = function(username) {
+      AdminService.block(username).then(function (response) {
+        ToastService.showToast('Blocked', username);
+        //reloading data
+        AdminService.getBlockedUsers().then(function (response) {
+          $scope.blocked_users = response.data;
+        });
+
+        AdminService.getUnblockedUsers().then(function (response) {
+          $scope.unblocked_users = response.data;
+        });
+      }, function(error){
+        ToastService.showToast('Oops! Something went wrong');
+      });
+    };
+
+    $scope.unblock = function(username) {
+      AdminService.unblock(username).then(function (response) {
+        ToastService.showToast('Unblocked', username);
+        //reloading data
+        AdminService.getBlockedUsers().then(function (response) {
+          $scope.blocked_users = response.data;
+        });
+
+        AdminService.getUnblockedUsers().then(function (response) {
+          $scope.unblocked_users = response.data;
+        });
+      }, function(error){
+        ToastService.showToast('Oops! Something went wrong');
+      });
+    };
+
     this.getRequests = function() {
       AdminService.getSignupRequests().then(function (response) {
         $scope.signup_requests = response.data;
@@ -66,7 +100,21 @@
       });
     }
 
+    this.getBlockedUsers = function() {
+      AdminService.getBlockedUsers().then(function (response) {
+        $scope.blocked_users = response.data;
+      });
+    }
+
+    this.getUnblockedUsers = function() {
+      AdminService.getUnblockedUsers().then(function (response) {
+        $scope.unblocked_users = response.data;
+      });
+    }
+
     this.getRequests();
+    this.getBlockedUsers();
+    this.getUnblockedUsers();
     this.getHeavyUsers();
 
 

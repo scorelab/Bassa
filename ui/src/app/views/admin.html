@@ -38,4 +38,44 @@
     <nvd3 options="chartOptions" data="usageChartData"></nvd3>
   </md-content>
 
+  <md-content class="block md-padding table-responsive-vertical" >
+    <md-subheader class="md-primary">Blocked Users</md-subheader>
+
+    <table id="table" class="table table-hover table-bordered signup-requests-table">
+        <tbody>
+        <tr ng-repeat="data in blocked_users">
+            <td data-title="ID">{{$index + 1}}</td>
+            <td data-title="Name">{{data.user_name}}</td>
+            <td data-title="Email">{{data.email}}</td>
+            <td id="approve-btn">
+              <md-button class="md-raised" ng-click="unblock(data.user_name)">
+                  <i class="material-icons">lock_open</i>
+              </md-button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+  </md-content>
+
+  <md-content class="block md-padding table-responsive-vertical" >
+    <md-subheader class="md-primary">Unblocked Users</md-subheader>
+
+    <table id="table" class="table table-hover table-bordered signup-requests-table">
+        <tbody>
+        <tr ng-repeat="data in unblocked_users">
+            <td data-title="ID">{{$index + 1}}</td>
+            <td data-title="Name">{{data.user_name}}</td>
+            <td data-title="Email">{{data.email}}</td>
+            <td id="block-btn">
+              <md-button class="md-raised md-warn" ng-click="block(data.user_name)">
+                  <i class="material-icons">lock</i>
+              </md-button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+  </md-content>
+
 </div>
