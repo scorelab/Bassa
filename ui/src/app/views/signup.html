@@ -17,14 +17,14 @@
       <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Please Enter at least 8 characters</p>
     </div>
 
-    <div class="group" ng-class="{'has-error': loginForm.confirm_password.$invalid && loginForm.confirm_password.$dirty, 'has-success': loginForm.confirm_password.$valid}">
+    <div class="group" ng-class="{'has-error': user.confirm_password != user.password, 'has-success': user.confirm_password == user.password}">
       <input type="password" class="form-control inputStyle" placeholder="Password" name="confirm_password" ng-model="user.confirm_password" ng-minLength="8" required ng-enter="login()"/><span class="highlight"></span><span class="bar"></span>
-      <p class="help-block" ng-if="loginForm.confirm_password != loginForm.password && loginForm.confirm_password.$invalid && loginForm.confirm_password.$dirty">Password did not match!</p>
+      <p class="help-block" ng-if="user.confirm_password != user.password">Password did not match!</p>
     </div>
 
     <center>
       <md-button class="md-raised md-primary" ng-click="back()">Back</md-button>
-      <md-button class="md-raised md-primary" ng-disabled="loginForm.emails.$invalid || loginForm.password.$invalid || loginForm.confirm_password.$invalid || loginForm.user_name.$invalid" ng-click="signup()">Signup</md-button>
+      <md-button class="md-raised md-primary" ng-disabled="loginForm.emails.$invalid || loginForm.password.$invalid || loginForm.confirm_password.$invalid || loginForm.user_name.$invalid || user.confirm_password != user.password" ng-click="signup()">Signup</md-button>
     </center>
   </form>
 
