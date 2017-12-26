@@ -180,6 +180,49 @@ md-backdrop.md-sidenav-backdrop {
   margin-top: 0px;
 }
 
+#signup-button{
+  border-color: #757575;
+  border-width: 7px;
+  color: #757575;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: 7px;
+  margin-top: 15PX;
+  cursor: pointer;
+}
+
+.input-container{
+  margin:1px;
+}
+
+.login-content{
+  width: 23%;
+}
+
+.login-button{
+  font-weight:bolder;
+  margin: 0 6px 6px 0;
+}
+
+.alert{
+  padding:14px;
+  background-color:#F2DEDE;
+  border-color: #EBCCD1;
+  color: #B94A48;
+  border-radius: 4px;
+}
+
+.closebtn{
+  margin-left: 15px;
+  color: #B94A48;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 // Dashboard
 .add-download-box {
   background-color: white;
@@ -191,8 +234,41 @@ md-backdrop.md-sidenav-backdrop {
   }
 }
 
-// LOGIN NEW
+.downloads {
+  margin-top: 10px;
+}
 
+#vertalign{
+  padding-top: 3%;
+}
+
+// Admin
+
+.block {
+  margin-top: 10px;
+}
+
+#approve-btn {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.alert {
+  padding:14px; background-color:grey; color: white;
+}
+
+.closebtn.msg {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+//Signup design
 
 form {
   width: 380px;
@@ -206,30 +282,6 @@ form {
 .group { 
   position: relative; 
   margin-bottom: 45px; 
-}
-
-input {
-  font-size: 18px;
-  padding: 10px 10px 10px 5px;
-  -webkit-appearance: none;
-  display: block;
-  background: #fafafa;
-  color: #636363;
-  width: 100%;
-  border: none;
-  border-radius: 0;
-  border-bottom: 1px solid #757575;
-}
-
-input:focus { outline: none; }
-
-/* active */
-
-input:focus ~ label, input.used ~ label {
-  top: -20px;
-  transform: scale(.75); left: -2px;
-  /* font-size: 14px; */
-  color: #4a89dc;
 }
 
 
@@ -256,10 +308,6 @@ input:focus ~ label, input.used ~ label {
 .bar:after { right: 50%; }
 
 
-/* active */
-
-input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
-
 
 /* Highlight */
 
@@ -274,11 +322,6 @@ input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
 }
 
 
-/* active */
-
-input:focus ~ .highlight {
-  animation: inputHighlighter 0.3s ease;
-}
 
 .has-error  {
     color: #f39c12;
@@ -289,37 +332,32 @@ input:focus ~ .highlight {
 }
 
 
-.downloads {
-  margin-top: 10px;
+.inputStyle {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  -webkit-appearance: none;
+  display: block;
+  background: #fafafa;
+  color: #636363;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #757575;
 }
 
-#vertalign{
-  padding-top: 3%;
+.inputStyle:focus { outline: none; }
+
+/* active */
+
+.inputStyle:focus ~ label, .inputStyle.used ~ label {
+  top: -20px;
+  transform: scale(.75); left: -2px;
+  /* font-size: 14px; */
+  color: #4a89dc;
 }
 
-// Admin
+.inputStyle:focus ~ .bar:before, .inputStyle:focus ~ .bar:after { width: 50%; }
 
-.block {
-  margin-top: 10px;
-}
-
-#approve-btn {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-
-.alert {
-  padding:14px; background-color:grey; color: white;
-}
-
-.closebtn.msg {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
+.inputStyle:focus ~ .highlight {
+  animation: inputHighlighter 0.3s ease;
 }
