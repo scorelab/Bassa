@@ -19,7 +19,7 @@
 
     <div class="group" ng-class="{'has-error': user.confirm_password != user.password, 'has-success': user.confirm_password == user.password}">
       <input type="password" class="form-control inputStyle" placeholder="Password" name="confirm_password" ng-model="user.confirm_password" ng-minLength="8" required ng-enter="login()"/><span class="highlight"></span><span class="bar"></span>
-      <p class="help-block" ng-if="user.confirm_password != user.password">Password did not match!</p>
+      <p class="help-block" ng-if="user.confirm_password != user.password && user.confirm_password != 0">Password did not match!</p>
     </div>
 
     <center>
