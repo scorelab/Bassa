@@ -180,6 +180,49 @@ md-backdrop.md-sidenav-backdrop {
   margin-top: 0px;
 }
 
+#signup-button{
+  border-color: #757575;
+  border-width: 7px;
+  color: #757575;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: 7px;
+  margin-top: 15PX;
+  cursor: pointer;
+}
+
+.input-container{
+  margin:1px;
+}
+
+.login-content{
+  width: 23%;
+}
+
+.login-button{
+  font-weight:bolder;
+  margin: 0 6px 6px 0;
+}
+
+.alert{
+  padding:14px;
+  background-color:#F2DEDE;
+  border-color: #EBCCD1;
+  color: #B94A48;
+  border-radius: 4px;
+}
+
+.closebtn{
+  margin-left: 15px;
+  color: #B94A48;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 // Dashboard
 .add-download-box {
   background-color: white;
