@@ -180,49 +180,6 @@ md-backdrop.md-sidenav-backdrop {
   margin-top: 0px;
 }
 
-#signup-button{
-  border-color: #757575;
-  border-width: 7px;
-  color: #757575;
-  font-weight: bold;
-  margin-left: auto;
-  margin-right: 7px;
-  margin-top: 15PX;
-  cursor: pointer;
-}
-
-.input-container{
-  margin:1px;
-}
-
-.login-content{
-  width: 23%;
-}
-
-.login-button{
-  font-weight:bolder;
-  margin: 0 6px 6px 0;
-}
-
-.alert{
-  padding:14px;
-  background-color:#F2DEDE;
-  border-color: #EBCCD1;
-  color: #B94A48;
-  border-radius: 4px;
-}
-
-.closebtn{
-  margin-left: 15px;
-  color: #B94A48;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
 // Dashboard
 .add-download-box {
   background-color: white;
@@ -233,6 +190,104 @@ md-backdrop.md-sidenav-backdrop {
     margin-bottom: 0px;
   }
 }
+
+// LOGIN NEW
+
+
+form {
+  width: 380px;
+  margin: 4em auto;
+  padding: 3em 2em 2em 2em;
+  background: #fafafa;
+  border: 1px solid #ebebeb;
+  box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+}
+
+.group { 
+  position: relative; 
+  margin-bottom: 45px; 
+}
+
+input {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  -webkit-appearance: none;
+  display: block;
+  background: #fafafa;
+  color: #636363;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #757575;
+}
+
+input:focus { outline: none; }
+
+/* active */
+
+input:focus ~ label, input.used ~ label {
+  top: -20px;
+  transform: scale(.75); left: -2px;
+  /* font-size: 14px; */
+  color: #4a89dc;
+}
+
+
+/* Underline */
+
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.bar:before, .bar:after {
+  content: '';
+  height: 2px; 
+  width: 0;
+  bottom: 1px; 
+  position: absolute;
+  background: #757575; 
+  transition: all 0.2s ease;
+}
+
+.bar:before { left: 50%; }
+
+.bar:after { right: 50%; }
+
+
+/* active */
+
+input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
+
+
+/* Highlight */
+
+.highlight {
+  position: absolute;
+  height: 60%; 
+  width: 100px; 
+  top: 25%; 
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+
+/* active */
+
+input:focus ~ .highlight {
+  animation: inputHighlighter 0.3s ease;
+}
+
+.has-error  {
+    color: #f39c12;
+}
+
+.has-success {
+    color: #18bc9c;
+}
+
 
 .downloads {
   margin-top: 10px;
@@ -252,6 +307,7 @@ md-backdrop.md-sidenav-backdrop {
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
 
 .alert {
   padding:14px; background-color:grey; color: white;
