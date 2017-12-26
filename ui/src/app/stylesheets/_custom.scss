@@ -267,3 +267,97 @@ md-backdrop.md-sidenav-backdrop {
   cursor: pointer;
   transition: 0.3s;
 }
+
+//Signup design
+
+form {
+  width: 380px;
+  margin: 4em auto;
+  padding: 3em 2em 2em 2em;
+  background: #fafafa;
+  border: 1px solid #ebebeb;
+  box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+}
+
+.group { 
+  position: relative; 
+  margin-bottom: 45px; 
+}
+
+
+/* Underline */
+
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.bar:before, .bar:after {
+  content: '';
+  height: 2px; 
+  width: 0;
+  bottom: 1px; 
+  position: absolute;
+  background: #757575; 
+  transition: all 0.2s ease;
+}
+
+.bar:before { left: 50%; }
+
+.bar:after { right: 50%; }
+
+
+
+/* Highlight */
+
+.highlight {
+  position: absolute;
+  height: 60%; 
+  width: 100px; 
+  top: 25%; 
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+
+
+.has-error  {
+    color: #f39c12;
+}
+
+.has-success {
+    color: #18bc9c;
+}
+
+
+.inputStyle {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  -webkit-appearance: none;
+  display: block;
+  background: #fafafa;
+  color: #636363;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #757575;
+}
+
+.inputStyle:focus { outline: none; }
+
+/* active */
+
+.inputStyle:focus ~ label, .inputStyle.used ~ label {
+  top: -20px;
+  transform: scale(.75); left: -2px;
+  /* font-size: 14px; */
+  color: #4a89dc;
+}
+
+.inputStyle:focus ~ .bar:before, .inputStyle:focus ~ .bar:after { width: 50%; }
+
+.inputStyle:focus ~ .highlight {
+  animation: inputHighlighter 0.3s ease;
+}
