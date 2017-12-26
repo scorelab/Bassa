@@ -79,7 +79,7 @@
     "postcss": "^5.1.2",
     "prettier": "^1.2.2",
     "protractor": "~1.4.0",
-    "require-dir": "~0.1.0",
+    "require-dir": "~0.3.0",
     "uglify-save-license": "~0.4.1",
     "wiredep": "~2.2.0"
   },
@@ -88,7 +88,7 @@
   },
   "scripts": {
     "init": "npm install",
-    "install": "bower install",
+    "install": "bower --allow-root install",
     "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
   },
   "dependencies": {
