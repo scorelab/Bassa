@@ -2,9 +2,9 @@
   'use strict';
   angular
     .module('app')
-    .controller('DashCtrl', [ '$scope', 'ToastService', 'DashService', 'UserService', 'BassaUrl', DashCtrl]);
+    .controller('DashCtrl', [ '$scope','$window','ToastService', 'DashService', 'UserService', 'BassaUrl', DashCtrl]);
 
-  function DashCtrl($scope, ToastService, DashService, UserService, BassaUrl) {
+  function DashCtrl($scope, $window , ToastService, DashService, UserService, BassaUrl) {
     var socket = io.connect(BassaUrl + '/progress');
     $scope.dlink = {link: ''};
     $scope.downloads = [];
@@ -40,19 +40,18 @@
       } else {
         DashService.addDownload($scope.dlink).then(function (response) {
           $scope.dlink.link = '';
-          ToastService.showToast('Link added');
+          ToastService.showToast("Link added");
           getActiveDownloads();
         }, function(error){
           $scope.dlink.link = '';
           if (error.data.quota) {
-            ToastService.showToast('Your monthly quota has been exceeded');
+            ToastService.showToast("Your monthly quota has been exceeded");
           } else {
-            ToastService.showToast('Oops! Something went wrong :(');
+            ToastService.showToast("Oops! Something went wrong :(");
           }
         });
       }
     };
-
     var getActiveDownloads = function() {
       DashService.getDownloads().then(function (response) {
         var data = response.data;
@@ -61,12 +60,26 @@
              return _.extend({}, element, {progress: 0});
         });
       }, function(error){
-        ToastService.showToast('Oops! Something went wrong when fetching data');
+        ToastService.showToast("Oops! Something went wrong when fetching data");
       });
     }
 
-    getActiveDownloads();
+    $scope.removeLink = function (id) {
+      // Shows window confirmation before deleting download.
+      var deleteDownload = $window.confirm('Confirm download task deletion !');
 
+      if(deleteDownload){
+        DashService.removeDownload(id).then(function(response){
+          ToastService.showToast("Download removed");
+          getActiveDownloads();},
+          function (error){
+          ToastService.showToast("Download started. Entry cannot be deleted.");
+        });
+      }
+     };
+
+    getActiveDownloads();
+    
   }
 
 })();
