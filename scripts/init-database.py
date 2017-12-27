@@ -2,7 +2,6 @@
 
 import yaml
 import sqlalchemy
-import MySQLdb
 
 values = list()
 
@@ -35,7 +34,7 @@ def importSQL():
             with engine.connect() as con:
                 con.execute(command+';')
         except:
-            error = 1
+            pass
 retreiveValues()
 createDatabase()
 importSQL()
