@@ -4,4 +4,5 @@ database:
         database_ip: localhost
         database_name: bassa
         database_user_username: bassaman
-        databse_user_password: s57d46857f968t79pho
+        database_user_password: s57d46857f968t79pho
+

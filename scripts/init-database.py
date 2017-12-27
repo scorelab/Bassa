@@ -2,42 +2,49 @@
 
 import yaml
 import sqlalchemy
-import MySQLdb
+import os
 
-values = list()
+values = 'configurations'
+path = 'root_path'
 
 
-def retreiveValues():
-    stream = open("../.config/bassa/config.yml", "r")
-    docs = yaml.load_all(stream)
+def retreive_values():
+    global path
+    path= os.path.abspath(os.path.join(os.path.join(__file__,os.pardir),os.pardir))
+    stream = open(path+"/bassa.yml", "r")
+    configs = yaml.load(stream)
     global values
-    for doc in docs:
-        for k, v in doc.items():
-            for m, n in v.items():
-                values.append(n)
+    values = configs
 
 
-def createDatabase():
-    param = values[5]+'://'+values[0]+':'+values[4]+'@'+values[2]
-    engine = sqlalchemy.create_engine(param)
-    engine.execute("CREATE DATABASE IF NOT EXISTS " + values[3])
+def create_database():
+    param = values['database']['database_type']+'://'+values['database']['database_user_username']+':'+values['database']['database_user_password']+'@'+values['database']['database_ip']
+    try:
+        engine = sqlalchemy.create_engine(param)
+	engine.execute("CREATE DATABASE IF NOT EXISTS " + values['database']['database_name'])
+    except:
+        param = values['database']['database_type']+'://root:'+values['database']['database_user_password']+'@'+values['database']['database_ip']
+	engine = sqlalchemy.create_engine(param)
+	engine.execute("CREATE DATABASE IF NOT EXISTS " + values['database']['database_name'])
+	engine.execute("GRANT ALL PRIVILEGES ON "+values['database']['database_name']+" TO "+values['database']['database_user_username']+"@"+values['database']['database_ip']+"WITH GRANT OPTION;")
 
 
-def importSQL():
-    param = values[5]+'://'+values[0]+':'+values[4]+'@'+values[2]+'/'+values[3]
-    engine = sqlalchemy.create_engine(param)
-    fd = open("../Bassa.sql", 'r')
-    sqlFile = fd.read()
+def import_SQL():
+    param = values['database']['database_type']+'://'+values['database']['database_user_username']+':'+values['database']['database_user_password']+'@'+values['database']['database_ip']+'/'+values['database']['database_name']
+    fd = open(path+"/Bassa.sql", 'r')
+    sql_File = fd.read()
     fd.close()
-    sqlCommands = sqlFile.split(';')
+    sqlCommands = sql_File.split(';')
     for command in sqlCommands:
         try:
             with engine.connect() as con:
                 con.execute(command+';')
         except:
-            error = 1
-retreiveValues()
-createDatabase()
-importSQL()
-print "Database (" + values[3] + ") is now successfuly setup"
+            pass
 
+
+if __name__ == "__main__":
+    retreive_values()
+    create_database()
+    import_SQL()
+    print "Database (" + values['database']['database_name'] + ") is now successfuly setup"
