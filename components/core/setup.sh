@@ -21,7 +21,7 @@ apt-get install libmysqlclient-dev
 echo "libmysqlclient installed"
 
 echo "Installing node"
-curl -sL https://deb.nodesource.com/setup_6.x | bash -
+curl -sL https://deb.nodesource.com/setup_9.x | bash -
 apt-get install -y nodejs
 echo "NodeJS installed"
 
