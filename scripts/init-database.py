@@ -2,38 +2,31 @@
 
 import yaml
 import sqlalchemy
-<<<<<<< HEAD
 import os
-=======
->>>>>>> f7bf0ce4665abd062393ad89c1d6cdbf19ce2cdb
 
-values = 'configurations'
+configs = 'configurations'
 path = 'root_path'
 
 
 def retreive_values():
     global path
+    global configs
     path= os.path.abspath(os.path.join(os.path.join(__file__,os.pardir),os.pardir))
     stream = open(path+"/bassa.yml", "r")
     configs = yaml.load(stream)
-    global values
-    values = configs
 
 
 def create_database():
-    param = values['database']['database_type']+'://'+values['database']['database_user_username']+':'+values['database']['database_user_password']+'@'+values['database']['database_ip']
-    try:
-        engine = sqlalchemy.create_engine(param)
-	engine.execute("CREATE DATABASE IF NOT EXISTS " + values['database']['database_name'])
-    except:
-        param = values['database']['database_type']+'://root:'+values['database']['database_user_password']+'@'+values['database']['database_ip']
-	engine = sqlalchemy.create_engine(param)
-	engine.execute("CREATE DATABASE IF NOT EXISTS " + values['database']['database_name'])
-	engine.execute("GRANT ALL PRIVILEGES ON "+values['database']['database_name']+" TO "+values['database']['database_user_username']+"@"+values['database']['database_ip']+"WITH GRANT OPTION;")
+    param = configs['database']['database_type']+'://root:'+configs['database']['database_user_password']+'@'+configs['database']['database_ip']
+    engine = sqlalchemy.create_engine(param)
+    engine.execute("CREATE DATABASE IF NOT EXISTS " + configs['database']['database_name'])
+    engine.execute("CREATE USER "+configs['database']['database_user_username']+"@"+configs['database']['database_ip']+" IDENTIFIED BY " + configs['database']['database_user_password'])
+    engine.execute("GRANT INSERT, UPDATE, SELECT, DELETE ON "+configs['database']['database_name']+".* TO "+configs['database']['database_user_username']+"@"+configs['database']['database_ip'])
+    engine.execute("FLUSH PRIVILEGES")
 
 
 def import_SQL():
-    param = values['database']['database_type']+'://'+values['database']['database_user_username']+':'+values['database']['database_user_password']+'@'+values['database']['database_ip']+'/'+values['database']['database_name']
+    connection_url = configs['database']['database_type']+'://'+configs['database']['database_user_username']+':'+configs['database']['database_user_password']+'@'+configs['database']['database_ip']+'/'+configs['database']['database_name']
     fd = open(path+"/Bassa.sql", 'r')
     sql_File = fd.read()
     fd.close()
@@ -44,17 +37,11 @@ def import_SQL():
                 con.execute(command+';')
         except:
             pass
-<<<<<<< HEAD
-=======
-retreiveValues()
-createDatabase()
-importSQL()
-print "Database (" + values[3] + ") is now successfuly setup"
->>>>>>> f7bf0ce4665abd062393ad89c1d6cdbf19ce2cdb
 
 
 if __name__ == "__main__":
     retreive_values()
     create_database()
     import_SQL()
-    print "Database (" + values['database']['database_name'] + ") is now successfuly setup"
+    print "Database (" + configs['database']['database_name'] + ") is now successfuly setup"
+
