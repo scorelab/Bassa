@@ -38,7 +38,6 @@ def import_SQL():
         except:
             pass
 
-
 if __name__ == "__main__":
     retreive_values()
     create_database()
