@@ -2,7 +2,10 @@
 
 import yaml
 import sqlalchemy
+<<<<<<< HEAD
 import os
+=======
+>>>>>>> f7bf0ce4665abd062393ad89c1d6cdbf19ce2cdb
 
 values = 'configurations'
 path = 'root_path'
@@ -41,6 +44,13 @@ def import_SQL():
                 con.execute(command+';')
         except:
             pass
+<<<<<<< HEAD
+=======
+retreiveValues()
+createDatabase()
+importSQL()
+print "Database (" + values[3] + ") is now successfuly setup"
+>>>>>>> f7bf0ce4665abd062393ad89c1d6cdbf19ce2cdb
 
 
 if __name__ == "__main__":
