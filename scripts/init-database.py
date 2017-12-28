@@ -18,9 +18,13 @@ def retreive_values():
 
 
 def create_database():
-    root_password = getpass.getpass(prompt = 'Enter root password:')
-    param = configs['database']['database_type']+'://root:'+root_password+'@'+configs['database']['database_ip']
-    engine = sqlalchemy.create_engine(param)
+    try:
+        os.environ["MYSQL_ROOT_PASSWORD"]
+    except:
+        root_password = getpass.getpass(prompt = 'Enter root password:')
+        os.environ["MYSQL_ROOT_PASSWORD"] = root_password
+    connection_url = configs['database']['database_type']+'://root:'+root_password+'@'+configs['database']['database_ip']
+    engine = sqlalchemy.create_engine(connection_url)
     engine.execute("CREATE DATABASE IF NOT EXISTS " + configs['database']['database_name'])
     engine.execute("CREATE USER "+configs['database']['database_user_username']+"@"+configs['database']['database_ip']+" IDENTIFIED BY " + configs['database']['database_user_password'])
     engine.execute("GRANT INSERT, UPDATE, SELECT, DELETE ON "+configs['database']['database_name']+".* TO "+configs['database']['database_user_username']+"@"+configs['database']['database_ip'])
