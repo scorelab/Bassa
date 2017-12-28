@@ -3,6 +3,7 @@
 import yaml
 import sqlalchemy
 import os
+import getpass
 
 configs = 'configurations'
 path = 'root_path'
@@ -17,7 +18,8 @@ def retreive_values():
 
 
 def create_database():
-    param = configs['database']['database_type']+'://root:'+configs['database']['database_user_password']+'@'+configs['database']['database_ip']
+    root_password = getpass.getpass(prompt = 'Enter root password:')
+    param = configs['database']['database_type']+'://root:'+root_password+'@'+configs['database']['database_ip']
     engine = sqlalchemy.create_engine(param)
     engine.execute("CREATE DATABASE IF NOT EXISTS " + configs['database']['database_name'])
     engine.execute("CREATE USER "+configs['database']['database_user_username']+"@"+configs['database']['database_ip']+" IDENTIFIED BY " + configs['database']['database_user_password'])
