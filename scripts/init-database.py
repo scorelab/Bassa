@@ -14,7 +14,7 @@ def retreive_values():
     global configs
     path= os.path.abspath(os.path.join(os.path.join(__file__,os.pardir),os.pardir))
     stream = open(path+"/bassa.yml", "r")
-    configs = yaml.load(stream)
+    configs = yaml.safe_load(stream)
 
 
 def create_database():
@@ -31,6 +31,7 @@ def create_database():
 
 def import_SQL():
     connection_url = configs['database']['database_type']+'://'+configs['database']['database_user_username']+':'+configs['database']['database_user_password']+'@'+configs['database']['database_ip']+'/'+configs['database']['database_name']
+    engine = sqlalchemy.create_engine(connection_url)
     fd = open(path+"/Bassa.sql", 'r')
     sql_File = fd.read()
     fd.close()
@@ -39,8 +40,8 @@ def import_SQL():
         try:
             with engine.connect() as con:
                 con.execute(command+';')
-        except:
-            pass
+        except Exception as exception:
+            pass;
 
 if __name__ == "__main__":
     retreive_values()
