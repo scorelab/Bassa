@@ -5,8 +5,8 @@ import sqlalchemy
 import os
 import getpass
 
-configs = 'configurations'
-path = 'root_path'
+configs = ''
+path = ''
 
 
 def retreive_values():
@@ -18,9 +18,8 @@ def retreive_values():
 
 
 def create_database():
-    try:
-        os.environ['MYSQL_ROOT_PASSWORD']
-    except:
+    root_password = os.environ['MYSQL_ROOT_PASSWORD']
+    if not root_password:
         root_password = getpass.getpass(prompt = 'Enter root password:')
         os.environ['MYSQL_ROOT_PASSWORD'] = root_password
     connection_url = configs['database']['database_type']+'://root:'+os.environ['MYSQL_ROOT_PASSWORD']+'@'+configs['database']['database_ip']
@@ -28,7 +27,6 @@ def create_database():
     engine.execute("CREATE DATABASE IF NOT EXISTS " + configs['database']['database_name'])
     engine.execute("CREATE USER "+configs['database']['database_user_username']+"@"+configs['database']['database_ip']+" IDENTIFIED BY " + configs['database']['database_user_password'])
     engine.execute("GRANT INSERT, UPDATE, SELECT, DELETE ON "+configs['database']['database_name']+".* TO "+configs['database']['database_user_username']+"@"+configs['database']['database_ip'])
-    engine.execute("FLUSH PRIVILEGES")
 
 
 def import_SQL():
