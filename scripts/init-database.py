@@ -19,11 +19,11 @@ def retreive_values():
 
 def create_database():
     try:
-        os.environ["MYSQL_ROOT_PASSWORD"]
+        os.environ['MYSQL_ROOT_PASSWORD']
     except:
         root_password = getpass.getpass(prompt = 'Enter root password:')
-        os.environ["MYSQL_ROOT_PASSWORD"] = root_password
-    connection_url = configs['database']['database_type']+'://root:'+root_password+'@'+configs['database']['database_ip']
+        os.environ['MYSQL_ROOT_PASSWORD'] = root_password
+    connection_url = configs['database']['database_type']+'://root:'+os.environ['MYSQL_ROOT_PASSWORD']+'@'+configs['database']['database_ip']
     engine = sqlalchemy.create_engine(connection_url)
     engine.execute("CREATE DATABASE IF NOT EXISTS " + configs['database']['database_name'])
     engine.execute("CREATE USER "+configs['database']['database_user_username']+"@"+configs['database']['database_ip']+" IDENTIFIED BY " + configs['database']['database_user_password'])
