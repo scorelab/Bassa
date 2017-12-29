@@ -32,4 +32,4 @@ after_success:
     docker push scoreucsc/bassa;
     curl -X POST 'https://hooks.microbadger.com/images/scoreucsc/bassa/Wbi5zehDMooS3ri2bgC8LETGGuQ=';
     fi
-    
+
