@@ -99,7 +99,8 @@ def login():
             resp = Response(response='{"status": "unapproved"}',status=401)
             return resp
     else:
-        abort(403)
+        resp = Response(response='Wait for Admin Approval', status=400)
+        return resp
 
 
 @server.route('/api/regularuser', methods=['POST'])
