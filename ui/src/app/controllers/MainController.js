@@ -16,11 +16,22 @@
     $scope.logout = logout;
     $scope.username =  UserService.getUsername();
 
-    navService
-      .loadAllItems()
-      .then(function(menuItems) {
+    if(UserService.getAuthLevel() !== '0') {
+      navService.loadAllItems().then(function(menuItems) {
+        for(var i =0;i<menuItems.length;i++){
+          if(menuItems[i].name == 'Admin'){
+            menuItems.splice(i,1);
+            break;
+          }
+        }
         $scope.menuItems = [].concat(menuItems);
       });
+    }
+    else {
+      navService.loadAllItems().then(function(menuItems) {
+        $scope.menuItems = [].concat(menuItems);
+      });
+    }
 
     var logout = function () {
       UserService.cleanUpStorage();
