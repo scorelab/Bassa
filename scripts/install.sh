@@ -1,24 +1,24 @@
-#/bin/bash
+#!/bin/bash
 
 echo "=== START OF FILE ==="
 
-echo "=== <Check to see if user is root> ===="
-if [ `whoami` != 'root' ]; then
+echo "==== <Check to see if user is root> ===="
+if [ $(whoami) != 'root' ]; then
 	echo "Please run this script as root or use sudo"
 	exit
 fi
-echo "=== </Check to see if user is root> ===="
+echo "==== </Check to see if user is root> ===="
 echo
 
-echo "=== <Set path to Bassa directory> ===="
+echo "==== <Set path to Bassa directory> ===="
 path=$(find ~  -name "Bassa")
 echo $path
 cd $path
-echo "=== </Set path to Bassa directory> ===="
+echo "==== </Set path to Bassa directory> ===="
 echo
 
 echo "==== <Python change 3.5> ===="
-pythonVersion=`python --version | grep -o "[[:digit:]]\.[[:digit:]]"`
+pythonVersion=$(python --version | grep -o "[[:digit:]]\.[[:digit:]]")
 if [ $pythonVersion = "3.5" ]; then
    echo "Verified that you are using python 3.5"
 else
@@ -34,7 +34,7 @@ apt-get update # updating system
 ./setup.sh # run setup script
 cd components/core/ 
 python setup.py develop 
-echo "==== </BASSA Setup> ====\n" 
+echo "==== </BASSA Setup> ====" 
 echo 
 
 echo "==== <BASSA DB Setup> ===="
