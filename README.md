@@ -27,8 +27,17 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 
 ## Installation
 
-Use python 3 instead of Python 2
+Use python 3 instead of Python 2 </br>
+You can check it which Python version are you using by default by typing
+```
+  $ python --version
+```
 
+Install python 3 if not installed and change your by default Python 2 to Python 3 by typing below command in terminal.
+```
+  $ alias python=python3
+```
+And then type
 ```
   $ ./setup.sh
   $ cd components/core/
