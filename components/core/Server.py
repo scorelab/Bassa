@@ -10,7 +10,7 @@ import json, urllib.request, urllib.error, urllib.parse, os, _thread
 from multiprocessing import Process
 from DownloadDaemon import starter
 from EMail import send_mail
-import sys, os
+import sys
 from gevent import monkey
 
 dir_path = os.getcwd()

@@ -10,12 +10,11 @@ from flask_socketio import SocketIO, join_room
 from Auth import *
 from Models import *
 from DownloadManager import *
-import json, urllib.request, urllib.error, urllib.parse, os, _thread
+import json, urllib.request, urllib.error, urllib.parse, _thread
 from multiprocessing import Process
 from DownloadDaemon import starter
 from EMail import send_mail
 from gevent import monkey
-
 
 @server.route('/download/start')
 def start():
