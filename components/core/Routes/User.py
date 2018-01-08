@@ -1,5 +1,5 @@
 import sys, os
-dir_path = os.getcwd()
+dir_path = os.path.abspath(__file__)[:-15]
 sys.path.append(dir_path)
 
 from flask import Flask

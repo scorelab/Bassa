@@ -13,7 +13,7 @@ from EMail import send_mail
 import sys
 from gevent import monkey
 
-dir_path = os.getcwd()
+dir_path = os.path.abspath(__file__)[:-10]
 sys.path.append(dir_path+'/Routes')
 import index
 
