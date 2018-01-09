@@ -41,7 +41,7 @@ def regular_user_request():
         status = add_regular_user(newUser)
         if status == "success":
             resp = Response(response='{"status": "'+ status + '"}', status=200)
-            # _thread.start_new_thread(send_mail, (data['email'],"Hi\n Your Bassa account will be approved after it has been approved by an admin."))
+            # _thread.start_new_thread(send_mail, (data['email'],"Hi\n Your Bassa account will be activated after it has been approved by an admin."))
         else:
             resp = Response(response='{"error":"' + status + '"}', status=400)
     except Exception as e:
@@ -79,10 +79,7 @@ def remove_user_request(username):
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = remove_user(username)
-            if status == "success":
-                resp = Response(response='{"status": "'+ status + '"}', status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -102,10 +99,7 @@ def update_user_request(username):
         try:
             newUser = User(data['user_name'], data['password'], int(data['auth']), data['email'])
             status = update_user(newUser, username)
-            if status == "success":
-                resp = Response(response='{"status": "'+ status + '"}', status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -123,10 +117,7 @@ def get_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_users()
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -143,10 +134,7 @@ def get_user_signup_requests():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_signup_requests()
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -163,10 +151,7 @@ def approve_user_request(username):
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = approve_user(username)
-            if status == "success":
-                resp = Response(response='{"status": "'+ status + '"}', status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -183,10 +168,7 @@ def get_blocked_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_blocked_users()
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -204,10 +186,7 @@ def block_user_request(username):
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = block_user(username)
-            if status == "success":
-                resp = Response(response='{"status": "'+ status + '"}', status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -225,10 +204,7 @@ def unblock_user_request(username):
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = unblock_user(username)
-            if status == "success":
-                resp = Response(response='{"status": "'+ status + '"}', status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -246,10 +222,7 @@ def get_downloads_user_request(limit):
     if token is not None :
         try:
             status = get_downloads_user(g.user.userName, int(limit))
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -267,10 +240,7 @@ def get_topten_heaviest_users():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_heavy_users()
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token

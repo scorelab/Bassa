@@ -68,10 +68,7 @@ def add_download_request():
             else:
                 newDownload = Download(data['link'], g.user.userName)
                 status = add_download(newDownload)
-                if status == "success":
-                    resp = Response(response='{"status":"'+ status + '"}', status=200)
-                else:
-                    resp = Response(response='{"error":"' + status + '"}', status=400)
+		resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -89,10 +86,7 @@ def remove_download_request(id):
     if token is not None:
         try:
             status = remove_download(id, g.user.userName)
-            if status == "success":
-                resp = Response(response='{"status":"'+ status + '"}', status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -111,10 +105,7 @@ def rate_download_request(id):
         data = request.get_json(force=True)
         try:
             status = rate_download(id, g.user.userName, data['rate'])
-            if status == "success":
-                resp = Response(response='{"status":"'+ status + '"}', status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -132,10 +123,7 @@ def get_downloads_request(limit):
     if token is not None :
         try:
             status = get_downloads(int(limit))
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response(response='{"error":"' + status + '"}', status=400)
+            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
