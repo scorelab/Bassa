@@ -27,7 +27,9 @@ class TestFlaskAPIUsingRequests(unittest.TestCase):
         print(resp.status_code)
 	print(resp.json())
         self.assertEqual(resp.json(),{u'auth': u'0'})
+    def test_api_login_incorrectly(self):
+        resp = requests.post('http://localhost:5000/api/login',"user_name=rand&password=paass",headers=headers)
+        print(resp.status_code)
+        self.assertEqual(resp.status_code,403)
 if __name__ == "__main__":
     unittest.main()
-
-			
