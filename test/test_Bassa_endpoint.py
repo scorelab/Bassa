@@ -1,5 +1,4 @@
 import unittest
-from flask_api import FlaskAPI
 import requests
 
 class TestFlaskAPIUsingRequests(unittest.TestCase):
