@@ -1,4 +1,4 @@
-from UserManager import * 
+from UserManager import *
 import unittest
 def username(): 
  return "admin"
@@ -17,4 +17,4 @@ class Test(unittest.TestCase):
     self.assertEqual(False, check_approved(username(), password()))
  def test_Correct_check_approved(self):
     self.assertEqual(True, check_approved(usernamer(), passwordr()))
-unittest.main()  
+unittest.main()
