@@ -1,4 +1,4 @@
-FROM python:3
+FROM node
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
@@ -6,15 +6,15 @@ ARG BUILD_DATE
 ARG VCS_REF
 
 WORKDIR /home/Bassa
-EXPOSE 5000
+
 COPY . .
 
 RUN apt-get update \
-&& ./setup.sh \
-&& python setup.py develop 
+&& npm install -g gulp \
+&& npm install -g bower \
+&& npm install --unsafe-perm
 
-CMD [ "python", "Main.py" ]
-
+CMD ["gulp", "serve"]
 
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
@@ -25,4 +25,4 @@ LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.vendor="Sustainable Computing Research Group" \
       multi.org.label-schema.version="" \
       multi.org.label-schema.schema-version="1.0"
-      
+ 
