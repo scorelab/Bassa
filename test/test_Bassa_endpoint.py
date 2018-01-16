@@ -1,5 +1,4 @@
 import unittest
-from flask_api import FlaskAPI
 import requests
 
 headers = {
@@ -30,5 +29,5 @@ class TestFlaskAPIUsingRequests(unittest.TestCase):
         self.assertEqual(resp.json(),{u'auth': u'0'})
 if __name__ == "__main__":
     unittest.main()
-			
+
 			
