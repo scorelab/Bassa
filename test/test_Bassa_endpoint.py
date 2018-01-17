@@ -19,8 +19,7 @@ payload = {''}
 class TestFlaskAPIUsingRequests(unittest.TestCase):
     def test_api_login_returns_auth_level(self):
         resp = requests.post('http://localhost:5000/api/login',correct_string,headers=headers)
-        def check_valid_auth(self):
-         self.assertEqual(resp.json(),{u'auth': u'0'})
+        self.assertEqual(resp.json(),{u'auth': u'0'})
     def test_api_login_incorrectly_return_403(self):
         resp = requests.post('http://localhost:5000/api/login',incorrect_string,headers=headers)
         self.assertEqual(resp.status_code,403)
