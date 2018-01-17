@@ -1,16 +1,16 @@
 from UserManager import *
 import unittest
-def username(): 
+def username():
  return "admin"
-def password(): 
+def password():
  return "admin"
-def usernamer(): 
+def usernamer():
  return "rand"
-def passwordr(): 
+def passwordr():
  return "pass"
 class Test(unittest.TestCase):
  def test_Incorrect_Login(self):
-    self.assertEqual(False, user_login(username(), password()))
+  self.assertEqual(False, user_login(username(), password()))
  def test_Correct_Login(self):
     self.assertEqual(True, user_login(usernamer(), passwordr()))
  def test_Incorrect_check_approved(self):
