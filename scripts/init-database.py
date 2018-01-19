@@ -29,7 +29,7 @@ def create_database():
     engine.execute("GRANT INSERT, UPDATE, SELECT, DELETE ON "+configs['database']['database_name']+".* TO "+configs['database']['database_user_username']+"@"+configs['database']['database_ip'])
 
 
-def import_SQL():
+def import_sql():
     connection_url = configs['database']['database_type']+'://'+configs['database']['database_user_username']+':'+configs['database']['database_user_password']+'@'+configs['database']['database_ip']+'/'+configs['database']['database_name']
     engine = sqlalchemy.create_engine(connection_url)
     fd = open(path+"/Bassa.sql", 'r')
@@ -46,6 +46,6 @@ def import_SQL():
 if __name__ == "__main__":
     retreive_values()
     create_database()
-    import_SQL()
+    import_sql()
     print "Database (" + configs['database']['database_name'] + ") is now successfuly setup"
 
