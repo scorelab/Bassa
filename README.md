@@ -29,18 +29,16 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 First clone the Repository 
 ``` git clone https://github.com/scorelab/Bassa.git```
 
-![ezgif-3-dc2969d006](https://user-images.githubusercontent.com/28682735/35193720-f472e5bc-fecc-11e7-9d6b-d7b91e3437a0.gif)
-
+![gitclone](https://user-images.githubusercontent.com/28682735/35194406-2f6f08e2-fed9-11e7-8411-86d83bed6507.gif)
 
 Use python 3 instead of Python 2
 
 ```
-  $ ./setup.sh
+  $ sudo sh start.sh
   $ cd components/core/
   $ sudo python setup.py develop
 ```
-![setuppy](https://user-images.githubusercontent.com/28682735/35193732-2bc87fea-fecd-11e7-81fb-ec2e01dc7468.gif)
-
+![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
 
 
 
@@ -66,8 +64,7 @@ mysql -u root -p  Bassa < Bassa.sql
   $ cd components/core/
   $ python Main.py
 ```
-![python3main](https://user-images.githubusercontent.com/28682735/35193724-04a3d84c-fecd-11e7-8a26-543f0f4f0b7f.gif)
-
+![python3main](https://user-images.githubusercontent.com/28682735/35194408-2fce9136-fed9-11e7-80e6-fac5e6f54bc7.gif)
 
 
 ## Bassa UI
@@ -84,7 +81,7 @@ $ npm install
 run `gulp serve`
 
 
-![gulpserve](https://user-images.githubusercontent.com/28682735/35193751-5d641758-fecd-11e7-92bb-74ab812a8a92.gif)
+![gulp_serve](https://user-images.githubusercontent.com/28682735/35194407-2fa172e6-fed9-11e7-9e89-065ecb3cbf87.gif)
 
 
 
