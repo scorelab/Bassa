@@ -26,6 +26,11 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 * Provides admins an interface to deal with inappropriate files
 
 ## Installation
+First clone the Repository 
+``` git clone https://github.com/scorelab/Bassa.git```
+
+![ezgif-3-dc2969d006](https://user-images.githubusercontent.com/28682735/35193720-f472e5bc-fecc-11e7-9d6b-d7b91e3437a0.gif)
+
 
 Use python 3 instead of Python 2
 
@@ -34,6 +39,11 @@ Use python 3 instead of Python 2
   $ cd components/core/
   $ sudo python setup.py develop
 ```
+![setuppy](https://user-images.githubusercontent.com/28682735/35193732-2bc87fea-fecd-11e7-81fb-ec2e01dc7468.gif)
+
+
+
+
 ## Database Setup
 
 1. Type below in a MySql terminal.
@@ -56,6 +66,9 @@ mysql -u root -p  Bassa < Bassa.sql
   $ cd components/core/
   $ python Main.py
 ```
+![python3main](https://user-images.githubusercontent.com/28682735/35193724-04a3d84c-fecd-11e7-8a26-543f0f4f0b7f.gif)
+
+
 
 ## Bassa UI
 
@@ -70,13 +83,26 @@ $ npm install
 ### To start
 run `gulp serve`
 
+
+![gulpserve](https://user-images.githubusercontent.com/28682735/35193751-5d641758-fecd-11e7-92bb-74ab812a8a92.gif)
+
+
+
 In the first time you login, the credentials would be as follows.
 
 username - rand
 password - pass
 
+
+![bassaui](https://user-images.githubusercontent.com/28682735/35193753-667c7e0c-fecd-11e7-918f-13ce1d00d055.gif)
+
+
 ### Make sure you have aria2 installed.
 run `aria2c --enable-rpc`
+
+
+![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
+
 
 ### How to Use Bassa
 * After Setting up Bassa, Login/Register.There are two types of users in Bassa- (1) The Admin and (2) The Normal Users.
