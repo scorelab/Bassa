@@ -4,7 +4,6 @@ node_js:
   - "6.10.0"
 python:
   - "3.6"
-
 sudo: required
 
 services:
