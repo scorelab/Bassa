@@ -18,12 +18,12 @@
 
     <table id="table" class="table table-hover table-bordered signup-requests-table">
         <tbody>
-        <tr ng-repeat="data in signup_requests" ng-hide="num == $index">
+        <tr ng-repeat="data in signup_requests">
             <td data-title="ID">{{$index + 1}}</td>
             <td data-title="Name">{{data.user_name}}</td>
             <td data-title="Email">{{data.email}}</td>
             <td id="approve-btn">
-              <md-button class="md-raised" ng-click="approve(data.user_name); num=$index">
+              <md-button class="md-raised" ng-click="approve(data.user_name)">
                   <i class="material-icons">done</i>
               </md-button>
             </td>
