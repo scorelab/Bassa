@@ -36,7 +36,7 @@ Use python 3 instead of Python 2
 ```
   $ sudo sh start.sh
   $ cd components/core/
-  $ sudo python setup.py develop
+  $ sudo python3 setup.py develop
 ```
 ![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
 
@@ -62,7 +62,7 @@ mysql -u root -p  Bassa < Bassa.sql
 ## Test Server
 ```
   $ cd components/core/
-  $ python Main.py
+  $ python3 Main.py
 ```
 ![python3main](https://user-images.githubusercontent.com/28682735/35194408-2fce9136-fed9-11e7-80e6-fac5e6f54bc7.gif)
 
