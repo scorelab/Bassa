@@ -146,6 +146,19 @@ def get_blocked_users():
             return e[1]
     return "db connection error"
 
+def get_unblocked_users():
+    db = threadpool.connect()
+    if db is not None:
+        cursor =  db.cursor(MySQLdb.cursors.DictCursor)
+        sql = "SELECT user_name, email, auth FROM user WHERE blocked=0;"
+        try:
+            cursor.execute(sql)
+            results = cursor.fetchall()
+            db.close()
+            return results
+        except MySQLdb.Error as e:
+            return e[1]
+
 def block_user(username):
     db = threadpool.connect()
     if db is not None:
