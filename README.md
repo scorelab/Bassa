@@ -37,7 +37,7 @@ First clone the Repository
 Use python 3 instead of Python 2
 
 ```
-  $ sudo sh setup.sh
+  $ ./setup.sh
   $ cd components/core/
   $ sudo python3 setup.py develop
 ```
@@ -110,12 +110,6 @@ run `aria2c --enable-rpc`
 * The organisation admin can start the downloads at a time of his/her liking. 
 * Then the users who had added links for certain files can download them from the local servers at a much higher speed.
 
-### Autoformat JS with Prettier
-
-- [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
-- [Atom Plugin](https://github.com/prettier/prettier-atom)
-
-Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
 
 
 
