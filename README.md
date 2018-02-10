@@ -26,6 +26,9 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 * Provides admins an interface to deal with inappropriate files
 
 ## Installation
+
+Note: Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+
 First clone the Repository 
 ``` git clone https://github.com/scorelab/Bassa.git```
 
