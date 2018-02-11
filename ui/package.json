@@ -5,40 +5,66 @@
   "bugs": "https://github.com/scorelab/Bassa/issues",
   "author": "SCoRe Community",
   "contributors": [
-    "malithsen", 
-    "paarandika", 
-    "rajikaimal", 
-    "saisankargochhayat", 
-    "agentmilindu", 
-    "funkyDunks", 
-    "kmehant", 
-    "padamchopra", 
-    "scorpionhiccup", 
-    "rehrumesh", 
-    "harsh183", 
-    "hmadhawa", 
-    "KaveeshBaddage", 
-    "tharindupr", 
-    "Nuwini", 
-    "uk175", 
-    "lazypanda10117", 
-    "ksoftlabs", 
+    "malithsen",
+    "paarandika",
+    "rajikaimal",
+    "saisankargochhayat",
+    "agentmilindu",
+    "funkyDunks",
+    "iammosespaulr",
+    "kmehant",
+    "padamchopra",
+    "scorpionhiccup",
+    "rehrumesh",
+    "harsh183",
+    "hmadhawa",
+    "KaveeshBaddage",
+    "tharindupr",
+    "Nuwini",
+    "uk175",
+    "lazypanda10117",
+    "ksoftlabs",
     "Thuan2000"
   ],
-  "repository": { 
-   "type": ["git"],
-   "url": "https://github.com/scorelab/Bassa.git"
+  "repository": {
+    "type": [
+      "git"
+    ],
+    "url": "https://github.com/scorelab/Bassa.git"
   },
   "keywords": [
     "Bassa"
-   ],
-   "licenses":   [
-    { "type": "GPL-3.0",
+  ],
+  "licenses": [
+    {
+      "type": "GPL-3.0",
       "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
     }
   ],
+  "dependencies": {
+    "jasmine-core": "^2.5.2"
+  },
   "homepage": "http://www.scorelab.org/Bassa/",
   "devDependencies": {
+    "@angular/cli": "1.1.2",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/language-service": "^4.0.0",
+    "@types/jasmine": "2.5.45",
+    "@types/node": "~6.0.60",
+    "codelyzer": "~3.0.1",
+    "cypress": "^1.4.1",
+    "jasmine-core": "~2.6.2",
+    "jasmine-spec-reporter": "~4.1.0",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^1.2.1",
+    "karma-jasmine": "~0.3.1",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "protractor": "~1.4.0",
+    "ts-node": "~3.0.4",
+    "tslint": "~5.3.2",
+    "typescript": "~2.3.3",
     "bower": "^1.5.2",
     "browser-sync": "~1.7.1",
     "chalk": "~0.5.1",
@@ -70,15 +96,12 @@
     "gulp-useref": "~1.0.2",
     "http-proxy": "~1.7.0",
     "jshint-stylish": "~1.0.0",
-    "karma": "^0.13.22",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-jasmine": "~0.3.1",
     "karma-spec-reporter": "0.0.26",
     "main-bower-files": "~2.4.0",
     "node-sass": "^4.5.0",
+    "jasmine-reporters": "2.0.7",
     "postcss": "^5.1.2",
     "prettier": "^1.2.2",
-    "protractor": "~1.4.0",
     "require-dir": "~0.3.0",
     "uglify-save-license": "~0.4.1",
     "wiredep": "~2.2.0"
@@ -90,8 +113,5 @@
     "init": "npm install",
     "install": "bower --allow-root install",
     "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
-  },
-  "dependencies": {
-    "jasmine-core": "^2.5.2"
   }
 }
