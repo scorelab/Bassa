@@ -50,6 +50,13 @@ describe('Controller: Admin controller', function() {
 
     spyOn(AdminService, 'approve').and.callFake(fakeHttpPromise);
   
+
+    var user = {
+        user_name: 'BassaUser',
+        email: 'user@bassa.com',
+        password: 'bassapass'
+    }
+
     scope.approve();
   
     expect(AdminService.approve).toHaveBeenCalled();
