@@ -57,7 +57,7 @@ describe('Controller: Admin controller', function() {
         password: 'bassapass'
     }
 
-    scope.approve();
+    scope.approve(user);
   
     expect(AdminService.approve).toHaveBeenCalled();
   
