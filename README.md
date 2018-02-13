@@ -90,8 +90,8 @@ run `gulp serve`
 
 In the first time you login, the credentials would be as follows.
 
-username - rand
-password - pass
+- username - rand
+- password - pass
 
 
 ![bassaui](https://user-images.githubusercontent.com/28682735/35193753-667c7e0c-fecd-11e7-918f-13ce1d00d055.gif)
