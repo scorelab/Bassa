@@ -26,6 +26,9 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 * Provides admins an interface to deal with inappropriate files
 
 ## Installation
+
+Note: Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+
 First clone the Repository 
 ``` git clone https://github.com/scorelab/Bassa.git```
 
@@ -34,9 +37,9 @@ First clone the Repository
 Use python 3 instead of Python 2
 
 ```
-  $ sudo sh start.sh
+  $ ./setup.sh
   $ cd components/core/
-  $ sudo python setup.py develop
+  $ sudo python3 setup.py develop
 ```
 ![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
 
@@ -62,7 +65,7 @@ mysql -u root -p  Bassa < Bassa.sql
 ## Test Server
 ```
   $ cd components/core/
-  $ python Main.py
+  $ python3 Main.py
 ```
 ![python3main](https://user-images.githubusercontent.com/28682735/35194408-2fce9136-fed9-11e7-80e6-fac5e6f54bc7.gif)
 
@@ -107,12 +110,6 @@ run `aria2c --enable-rpc`
 * The organisation admin can start the downloads at a time of his/her liking. 
 * Then the users who had added links for certain files can download them from the local servers at a much higher speed.
 
-### Autoformat JS with Prettier
-
-- [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
-- [Atom Plugin](https://github.com/prettier/prettier-atom)
-
-Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
 
 
 
