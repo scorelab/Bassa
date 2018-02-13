@@ -1,6 +1,6 @@
 #!flask/bin/python
 
-from REST import *
+from Server import *
 from ConfReader import check_conf_availability
 import logging
 
