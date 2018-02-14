@@ -61,9 +61,10 @@ def kill():
             p.join()
             jsonreq = json.dumps({'jsonrpc': '2.0', 'id': 'qwer', 'method': 'aria2.pauseAll'})
             jsonreq = jsonreq.encode('ascii')
-            c = urllib.request.urlopen('http://localhost:6800/jsonrpc', jsonreq)
+            req = urllib.request.Request('http://localhost:6800/jsonrpc', jsonreq)
             if verbose:
-                print(c)
+                with urllib.request.urlopen(req) as response:
+                    print(response.read())
         if not p.is_alive():
             return '{"status":"success"}'
         else:
