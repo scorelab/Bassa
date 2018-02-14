@@ -6,8 +6,8 @@ from flask_socketio import SocketIO, join_room
 from Auth import *
 import os
 import sys
-from Routes.index import user_blueprint
-from Routes.index import download_blueprint
+from Routes.Download import download_blueprint
+from Routes.User import user_blueprint
 from gevent import monkey
 
 monkey.patch_all(ssl=False)

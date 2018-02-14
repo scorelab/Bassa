@@ -98,12 +98,12 @@ def add_download_request():
         return '{"error":"token error"}', 403
 
 
-@download_blueprint.route('/api/download/<int:id>', methods=['DELETE'])
-def remove_download_request(id):
+@download_blueprint.route('/api/download/<_id>', methods=['DELETE'])
+def remove_download_request(_id):
     token = token_validator(request.headers['token'])
     if token is not None:
         try:
-            status = remove_download(id, g.user.userName)
+            status = remove_download(_id, g.user.userName)
             if status == "success":
                 resp = Response(response='{"status":"' + status + '"}', status=200)
             else:
@@ -119,13 +119,13 @@ def remove_download_request(id):
         return '{"error":"token error"}', 403
 
 
-@download_blueprint.route('/api/download/rate/<int:id>', methods=['POST'])
-def rate_download_request(id):
+@download_blueprint.route('/api/download/rate/<_id>', methods=['POST'])
+def rate_download_request(_id):
     token = token_validator(request.headers['token'])
     if token is not None:
         data = request.get_json(force=True)
         try:
-            status = rate_download(id, g.user.userName, data['rate'])
+            status = rate_download(_id, g.user.userName, data['rate'])
             if status == "success":
                 resp = Response(response='{"status":"' + status + '"}', status=200)
             else:
@@ -183,12 +183,12 @@ def get_downloads_request(limit):
         return '{"error":"token error"}', 403
 
 
-@download_blueprint.route('/api/download/<int:id>', methods=['GET'])
-def get_download(id):
+@download_blueprint.route('/api/download/<_id>', methods=['GET'])
+def get_download(_id):
     token = token_validator(request.headers['token'])
     if token is not None:
         try:
-            status = get_download_path(int(id))
+            status = get_download_path(int(_id))
             if status is not None and status != "db connection error":
                 if verbose:
                     print(status)

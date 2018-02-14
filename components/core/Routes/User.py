@@ -3,6 +3,7 @@ from flask import Flask, Blueprint
 from flask import request, abort, Response, g
 from Auth import *
 from Models import *
+import logging
 import json
 from EMail import send_mail
 import sys
@@ -64,6 +65,7 @@ def regular_user_request():
             resp = Response(response='{"error":"' + status + '"}', status=400)
     except Exception as e:
         resp = Response(response='{"error":"username exists"}', status=400)
+        logging.exception(e)
     return resp
 
 
