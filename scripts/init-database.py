@@ -41,7 +41,7 @@ def import_sql():
             with engine.connect() as con:
                 con.execute(command+';')
         except Exception as exception:
-            pass;
+            print('init-database: exception: %s ', exception)
 
 if __name__ == "__main__":
     retreive_values()
