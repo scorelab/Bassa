@@ -45,9 +45,10 @@
       });
     };
 
-    $scope.approve = function(username) {
-      AdminService.approve(username).then(function (response) {
-        ToastService.showToast('Approved', username);
+    $scope.approve = function(user) {
+      AdminService.approve(user.user_name).then(function (response) {
+        ToastService.showToast('Approved', user.user_name);
+        $scope.signup_requests.splice(user, 1);
         getRequests();
       }, function(error){
         ToastService.showToast('Oops! Something went wrong');
