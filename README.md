@@ -109,8 +109,13 @@ run `aria2c --enable-rpc`
 * A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away. 
 * The organisation admin can start the downloads at a time of his/her liking. 
 * Then the users who had added links for certain files can download them from the local servers at a much higher speed.
+* You can even watch a video tutorial for the same on [Youtube](https://www.youtube.com/watch?v=NxS8T1EphCA)
+### Autoformat JS with Prettier
 
+- [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
+- [Atom Plugin](https://github.com/prettier/prettier-atom)
 
+Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
 
 
 ### Run UI unit tests
