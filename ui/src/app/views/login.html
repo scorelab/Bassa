@@ -1,32 +1,25 @@
 <div layout="column" layout-align="center center">
-  <div class="alert" ng-if="incorrectCredentials">
-      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      Incorrect Credentials
+    <img class="logo" ng-src="assets/images/logo.png">
+    <div layout="column" class="login-content">
+        <md-input-container class="input-container">
+            <label>User name</label>
+            <input type="text" ng-model="user.user_name" />
+        </md-input-container>
+        <md-input-container class="input-container">
+            <label>Password</label>
+            <input type="password" ng-model="user.password" ng-enter="login()" />
+        </md-input-container>
+        <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
+        <div layout="row">
+            <p>Don't have an account?</p>
+            <a class="" id="signup-button" ng-click="signup()">Signup</a>
+        </div>
+        <br>
     </div>
-  <img class="logo" ng-src="assets/images/logo.png">
-  <div layout="column" class="login-content">
-    <md-input-container class="input-container">
-      <label>User name</label>
-      <input type="text" ng-model="user.user_name"/>
-    </md-input-container>
-    <md-input-container class="input-container">
-      <label>Password</label>
-      <input type="password" ng-model="user.password" ng-enter="login()"/>
-    </md-input-container>
-
-    <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
-    <div layout="row">
-      <p>Don't have an account?</p>
-      <a class="" id="signup-button" ng-click="signup()">Signup</a>
+    <div class="alert" ng-if="incorrectCredentials">
+        <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Incorrect Credentials
     </div>
-    <br>
-  </div>
-  <div class="alert" ng-if="incorrectCredentials">
-  <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span>
-  Incorrect Credentials
-  </div>
-  <div class="alert" ng-if="unApproved">
-  <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span>
-  Please confirm your account
-  </div>
+    <div class="alert" ng-if="unApproved">
+        <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Please confirm your account
+    </div>
 </div>
