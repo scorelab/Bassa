@@ -13,10 +13,6 @@ from EMail import send_mail
 import sys
 from gevent import monkey
 
-dir_path = os.path.abspath(__file__)[:-10]
-sys.path.append(dir_path+'/Routes')
-import index
-
 monkey.patch_all(ssl=False)
 
 server = Flask(__name__)
@@ -46,3 +42,5 @@ def serve_ui(path):
 def serve_ui1():
     return send_file(os.path.dirname(os.path.realpath(__file__))+"/ui/index.html")
 
+# Import routes
+from routes import *
