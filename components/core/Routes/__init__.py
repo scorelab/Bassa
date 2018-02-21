@@ -1,4 +1,4 @@
-'''this directory is for download API endpoint and user API endpoint. Download can be imported simply by 
+'''this directory is for download API endpoint and user API endpoint. Download can be imported simply by
 >> import Routes.Download
 >> import Routes.User
 these files are included with main server using BluePrint in flask, like this
