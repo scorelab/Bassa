@@ -20,8 +20,10 @@
       .loadAllItems()
       .then(function(menuItems) {
         if (UserService.getAuthLevel() !== 0) {
-          for (var index = 0;index<menuItems.length;index++){
-            if (menuItems[index].name === 'Admin'){
+          var index = 0;
+          let no_of_menu_items = menuItems.length;
+          for (; index < no_of_menu_items; index=index+1) {
+            if (menuItems[index].name === 'Admin') {
               menuItems.splice(index, 1);
               break;
             }
