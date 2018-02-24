@@ -2,6 +2,7 @@ dist: trusty
 language: node_js
 node_js:
   - "6.10.0"
+  - "8"
 python:
   - "3.6"
 sudo: required
@@ -19,10 +20,14 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   
 script: 
-  - ./setup.sh 
-  - cd ui && npm install && npm test
+  - ./setup.sh
+  - pip install pylint 
+  - cd components
+  - pylint -E core
+  - cd core
+  - python setup.py test
   - cd $TRAVIS_BUILD_DIR
-  - cd components/core && python setup.py test
+  - cd ui && npm install && npm test
   - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa  .
 
 after_success:
