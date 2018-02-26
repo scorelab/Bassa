@@ -45,5 +45,5 @@ do
 	main_directory=$line
 done <"$main_file"
 rm -rf main_directory.txt
-sudo echo "export PATH=\"$main_directory:$""PATH\"" >> ~/.bashrc
+echo "export PATH=\"$main_directory:$""PATH\"" | sudo tee -a ~/.bashrc > /dev/null
 source ~/.bashrc
