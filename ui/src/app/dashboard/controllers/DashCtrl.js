@@ -56,7 +56,6 @@
     $scope.removeLink = function (id) {
       // Shows window confirmation before deleting download.
       // Using angular in-built dialog box
-      
       var confirm = $mdDialog.confirm()
         .title(' Do you want to stop the download')
         .textContent('You can\'t start this download back.\n')
@@ -71,7 +70,7 @@
               ToastService.showToast("Download started. Entry cannot be deleted.");
             })},
         function (){
-        
+        // on click no
         });
     };
     getActiveDownloads();
