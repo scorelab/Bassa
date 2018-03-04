@@ -3,7 +3,6 @@
   angular
     .module('app')
     .controller('DashCtrl', [ '$scope','$window','ToastService', 'DashService', 'UserService', 'BassaUrl','$mdDialog', DashCtrl]);
-  
   function DashCtrl($scope, $window , ToastService, DashService, UserService, BassaUrl, $mdDialog) {
     var socket = io.connect(BassaUrl + '/progress');
     $scope.dlink = {link: ''};
