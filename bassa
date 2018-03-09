@@ -48,7 +48,7 @@ start(){
 	fi
 }
 stop(){
-	echo -ne '\e[31mstoping.'
+	echo -ne '\e[31mTerminating.'
 
 	# just to look beautiful
 
@@ -59,34 +59,33 @@ stop(){
 	done
 
 	# kill the existaing process or may not exist
-
-	pkill -f "python3"
+    BASEDIR=$(dirname "$0")
+    PYSERVER="$BASEDIR""/components/core/Main.py"
+	pkill -f "python3 $PYSERVER"
+	pkill -f "python $PYSERVER"
 	pkill -f "gulp serve"
+	pkill -f "gulp"
 	pkill -f "aria2c --enable-rpc"
 
 	# remove the log files, after stopping bassa
 
-	BASEDIR=$(dirname "$0")
-	UISERVER="$BASEDIR/ui"
 	rm -rf "$BASEDIR""/python-server.log"
 	rm -rf "$UISERVER""/gulp-serve.log"
 	rm -rf "$UISERVER""/aria2c.log"
-	echo -e 'stopped successfully\e[0m'
+	echo -e 'Terminated successfully\e[0m'
 }
 restart(){
 	stop
 	start
 }
 status(){
-	# check the server status through log file existance
-	BASEDIR=$(dirname "$0")
-	UISERVER="$BASEDIR/ui"
-	if [ -e "$BASEDIR""/python-server.log" ]
-	then
-		echo "active"
-	else
-		echo "inactive"
-	fi
+	# check the server status through ps and grep tools
+	status_check_py_two=$( ps -ef | grep -v grep | grep "Main.py" )
+	if [ "$status_check_py_two" != "" ]; then
+	    echo "active"
+    else
+        echo "inactive"
+    fi
 }
 case $1 in 
 	start)
@@ -108,9 +107,8 @@ case $1 in
 		fi
 		;;
 	status)
-		BASEDIR=$(dirname "$0")
-		UISERVER="$BASEDIR/ui"
-		if [ -f "$BASEDIR""/python-server.log" ]
+		check_status=$( status )
+		if [ "$check_status" == "active" ]
 		then
 			echo -e "\e[32mActive, stats can be seen in relative files \n python-server.log \n gulp-serve.log \n aria2c.log\e[0m"
 		else
