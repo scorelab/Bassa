@@ -2,9 +2,9 @@
   'use strict';
   angular
     .module('app')
-    .controller('AdminCtrl', [ '$scope', '$mdDialog','ToastService', 'AdminService', 'UtilityService', AdminCtrl]);
+    .controller('AdminCtrl', [ '$scope', '$mdDialog', 'ToastService', 'AdminService', 'UtilityService', AdminCtrl]);
 
-  function AdminCtrl($scope, $mdDialog,ToastService, AdminService, UtilityService) {
+  function AdminCtrl($scope, $mdDialog, ToastService, AdminService, UtilityService) {
 
     $scope.signup_requests = [];
     $scope.usageChartData = [];
