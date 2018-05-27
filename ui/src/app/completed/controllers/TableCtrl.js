@@ -2,9 +2,9 @@
   'use strict';
   angular
     .module('app')
-    .controller('TableCtrl', [ '$scope', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
+    .controller('TableCtrl', [ '$scope', 'BassaUrl', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
 
-  function TableCtrl($scope, ToastService, TableService, UtilityService) {
+  function TableCtrl($scope, BassaUrl, ToastService, TableService, UtilityService) {
     $scope.downloads = [];
     var fileTypeArray = ['_blank', '_page', 'aac', 'ai', 'aiff', 'avi', 'bmp',
         'c', 'cpp', 'css', 'csv', 'dat', 'dmg', 'doc', 'dotx', 'dwg',
@@ -72,6 +72,9 @@
         }else{
             return name;
         }
+    };
+    $scope.startDownload = function (downloadGID) {
+        window.location.href = BassaUrl+'/api/get/file?gid='+downloadGID;
     }
 
   }
