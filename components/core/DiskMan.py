@@ -24,5 +24,8 @@ def remove_files(days, rate):
     if verbose:
         print("files to be removed", files)
     for file in files:
-        os.unlink(file[0])
+        try:
+            os.unlink(file[0])
+        except FileNotFoundError:
+            print('following file was not found on his path, removing match from database', file[0])
         set_delete_status(file[0])
