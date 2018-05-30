@@ -31,11 +31,9 @@
         if($scope.isGridOn) {
             document.getElementById('grid-button').innerText = 'view_module';
             $scope.isGridOn = false;
-            $scope.$apply();
         }else{
             document.getElementById('grid-button').innerText = 'view_list';
             $scope.isGridOn = true;
-            $scope.$apply();
         }
     };
     $scope.getImage = function (fileName) {
