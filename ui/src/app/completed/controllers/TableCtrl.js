@@ -31,11 +31,9 @@
         if($scope.isGridOn) {
             document.getElementById('grid-button').innerText = 'view_module';
             $scope.isGridOn = false;
-            $scope.$apply();
         }else{
             document.getElementById('grid-button').innerText = 'view_list';
             $scope.isGridOn = true;
-            $scope.$apply();
         }
     };
     $scope.getImage = function (fileName) {
@@ -74,7 +72,12 @@
         }
     };
     $scope.startDownload = function (downloadGID) {
-        window.location.href = BassaUrl+'/api/get/file?gid='+downloadGID;
+        let token = window.localStorage.getItem("Token");
+        if(token) {
+            window.location.href = BassaUrl + '/api/get/file?gid=' + downloadGID + "&token=" + token;
+        }else{
+            ToastService.showToast("Unable to process your download request")
+        }
     }
 
   }
