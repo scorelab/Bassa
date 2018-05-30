@@ -4,7 +4,6 @@ node_js:
   - "6.10.0"
 python:
   - "3.6"
-
 sudo: required
 
 services:
@@ -24,10 +23,12 @@ script:
   - cd ui && npm install && npm test
   - cd $TRAVIS_BUILD_DIR
   - cd components/core && python setup.py test
-  - docker build -t scorelab/bassa .
+  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa  .
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+  - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
     docker push scoreucsc/bassa;
+    curl -X POST 'https://hooks.microbadger.com/images/scoreucsc/bassa/Wbi5zehDMooS3ri2bgC8LETGGuQ=';
     fi
+

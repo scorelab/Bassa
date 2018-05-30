@@ -1,12 +1,12 @@
 #!flask/bin/python
 
-from REST import *
+from Server import socketio, server
 from ConfReader import check_conf_availability
 import logging
 
 
 def main():
-    socketio.run(server)
+    socketio.run(server, host='0.0.0.0', port=5000)
     # server.run(debug=True)
 
 
