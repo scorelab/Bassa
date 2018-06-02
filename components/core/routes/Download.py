@@ -1,7 +1,3 @@
-import sys, os
-dir_path = os.path.abspath(__file__)[:-19]
-sys.path.append(dir_path)
-
 from flask import Flask
 from flask.ext.cors import CORS
 from flask import send_file, send_from_directory
@@ -15,6 +11,7 @@ from multiprocessing import Process
 from DownloadDaemon import starter
 from EMail import send_mail
 from gevent import monkey
+from Server import *
 
 @server.route('/download/start')
 def start():
@@ -68,7 +65,7 @@ def add_download_request():
             else:
                 newDownload = Download(data['link'], g.user.userName)
                 status = add_download(newDownload)
-		resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
+                resp = Response(response='{"status":"'+ status + '"}', status=200 if status == "success" else 400)
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -123,7 +120,10 @@ def get_downloads_request(limit):
     if token is not None :
         try:
             status = get_downloads(int(limit))
-            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status),status=200)
+            else:
+                resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
