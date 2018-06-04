@@ -6,14 +6,6 @@
 
   function TableCtrl($scope, ToastService, TableService, UtilityService) {
     $scope.downloads = [];
-    var fileTypeArray = ['_blank', '_page', 'aac', 'ai', 'aiff', 'avi', 'bmp',
-        'c', 'cpp', 'css', 'csv', 'dat', 'dmg', 'doc', 'dotx', 'dwg',
-        'dxf', 'eps', 'exe', 'flv', 'gif', 'h', 'hpp', 'html',
-        'ics', 'iso', 'java', 'jpg', 'js', 'key', 'less', 'mid',
-        'mp3', 'mp4', 'mpg', 'odf', 'ods', 'odt', 'otp', 'ots',
-        'ott', 'pdf', 'php', 'png', 'ppt', 'psd', 'py', 'qt',
-        'rar', 'rb', 'rtf', 'sass', 'scss', 'sql', 'tga', 'tgz',
-        'tiff', 'txt', 'wav', 'xls', 'xlsx', 'xml', 'yml', 'zip'];
     var setSize = function(lst) {
       lst.data.forEach(function(download) {
         download.size = UtilityService.formatBytes(download.size);
@@ -57,19 +49,6 @@
     function isExtensionMatch(extensionName) {
         var checkExtension = fileTypeArray.indexOf(extensionName);
         return checkExtension !== -1;
-    }
-
-    $scope.formatFileName = function (name) {
-        var extensionName = getExtension(name);
-        if (extensionName === '_page') {
-            extensionName = "";
-        }
-        if(name.length >= 30){
-            name = name.split('.')[0].slice(0, 30) + "...";
-            return name + extensionName;
-        }else{
-            return name;
-        }
     }
 
   }
