@@ -1,4 +1,4 @@
-var fileTypeArray = ['_blank', '_page', 'aac', 'ai', 'aiff', 'avi', 'bmp',
+var fileTypeArray = ['aac', 'ai', 'aiff', 'avi', 'bmp',
     'c', 'cpp', 'css', 'csv', 'dat', 'dmg', 'doc', 'dotx', 'dwg',
     'dxf', 'eps', 'exe', 'flv', 'gif', 'h', 'hpp', 'html',
     'ics', 'iso', 'java', 'jpg', 'js', 'key', 'less', 'mid',
