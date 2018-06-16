@@ -52,6 +52,11 @@
         });
       }
     };
+    
+    $scope.addDownload = function(keyEvent) {
+  if (keyEvent.which === 13)
+    $scope.addLink();
+  }
     var getActiveDownloads = function() {
       DashService.getDownloads().then(function (response) {
         var data = response.data;

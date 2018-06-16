@@ -1,7 +1,3 @@
-import sys, os
-dir_path = os.path.abspath(__file__)[:-15]
-sys.path.append(dir_path)
-
 from flask import Flask
 from flask.ext.cors import CORS
 from flask import send_file, send_from_directory
@@ -12,7 +8,7 @@ from Models import *
 from DownloadManager import *
 import urllib.request, urllib.error, urllib.parse, _thread
 from gevent import monkey
-
+from Server import *
 
 @server.route('/api/login', methods=['POST'])
 def login():
@@ -117,7 +113,10 @@ def get_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_users()
-            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status),status=200)
+            else:
+                resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -134,7 +133,10 @@ def get_user_signup_requests():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_signup_requests()
-            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status),status=200)
+            else:
+                resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -168,7 +170,10 @@ def get_blocked_users_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_blocked_users()
-            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status),status=200)
+            else:
+                resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -222,7 +227,10 @@ def get_downloads_user_request(limit):
     if token is not None :
         try:
             status = get_downloads_user(g.user.userName, int(limit))
-            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status),status=200)
+            else:
+                resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
@@ -240,7 +248,10 @@ def get_topten_heaviest_users():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         try:
             status = get_heavy_users()
-            resp = Response(response=((json.dumps(status),status=200) if not isinstance(status, str) else ('{"error":"' + status + '"}', status=400)))
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status),status=200)
+            else:
+                resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
             resp = Response(response='{"error":"' + e.message + '"}', status=400)
         resp.headers['token'] = token
