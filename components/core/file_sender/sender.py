@@ -5,7 +5,6 @@ from Main import logging
 
 @server.route("/api/get/file", methods=['GET'])
 def send_file_from_path():
-    # TODO :: Add Authorization to the request
     try:
         gid = request.args.get('gid')
         logging.info('User asked for file, having GID ' + gid)
