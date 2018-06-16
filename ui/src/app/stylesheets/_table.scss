@@ -228,4 +228,10 @@ $table-border-color:            #e0e0e0;
   display: inline-block;
   margin: 5px;
 }
+.file-name {
+  line-height: .9em;
+  height: 1em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 
