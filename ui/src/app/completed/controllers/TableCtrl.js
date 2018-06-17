@@ -2,9 +2,9 @@
   'use strict';
   angular
     .module('app')
-    .controller('TableCtrl', [ '$scope', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
+    .controller('TableCtrl', [ '$scope', 'BassaUrl', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
 
-  function TableCtrl($scope, ToastService, TableService, UtilityService) {
+  function TableCtrl($scope, BassaUrl, ToastService, TableService, UtilityService) {
     $scope.downloads = [];
     $scope.isGridVisible = false;
     var setSize = function(lst) {
@@ -19,11 +19,14 @@
     }, function(error){
       ToastService.showToast('Oops! Something went wrong fetching data');
     });
+    $scope.startDownload = function (downloadGID) {
+      window.location.href = BassaUrl+'/api/get/file?gid='+downloadGID;
+    }
     $scope.getImage = function (fileName) {
       var fileExtensionName = getExtension(fileName);
       return "../../../assets/images/file-images/"+fileExtensionName+".png";
     };
-
+    
     function getExtension(fileName){
       var fileExtension = fileName.split('.');
       var fileExtensionName ;
