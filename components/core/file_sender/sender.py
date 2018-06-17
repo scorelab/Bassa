@@ -19,6 +19,6 @@ def send_file_from_path():
         return send_file(filename_or_fp=download_path, attachment_filename=download_name,
                          as_attachment=True)
     except Exception as e:
-        logging.error("File sending has a exception. We got :: %s on file sending" % e)
+        logging.error("File sending has a exception. When sending file, we got :: %s" % e)
         return Response("File you are trying to access is not available to us. Please ask admin to check the server",
                         status=200)
