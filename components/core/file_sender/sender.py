@@ -14,7 +14,7 @@ def send_file_from_path():
             download_path = get_download_path(id)
             download_name = get_download_name_from_id(id)
         except Exception as e:
-            logging.error(" get file API (/api/get/file) got wrong arguments, thrown an error :: %s" % e)
+            logging.error(" get file API (/api/file) got wrong arguments, thrown an error :: %s" % e)
             return Response("error", status=200)
 
         try:

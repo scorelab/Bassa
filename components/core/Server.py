@@ -44,7 +44,3 @@ def serve_ui1():
 
 # Import routes
 from routes import *
-from file_sender import sender
-
-# register endpoints
-server.add_url_rule('/api/get/file', 'send_file_from_path', sender.send_file_from_path, methods=['GET'])
