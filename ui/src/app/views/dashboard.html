@@ -1,9 +1,9 @@
 <div layout-gt-md="column" layout-align="center">
 
   <md-content class="add-download-box" >
-    <md-input-container flex class="downlod-input-box">
+    <md-input-container flex class="downlod-input-box" ng-keyup="addDownload($event)">
         <label>Add download</label>
-        <input ng-model="dlink.link" name="taskText" type="text" required>
+        <input ng-model="dlink.link" name="taskText" type="text" required >
     </md-input-container>
     <md-button class="md-fab md-wayrn md-mini" ng-click="addLink()">
         <i class="material-icons">add</i>
