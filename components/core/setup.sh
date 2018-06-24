@@ -20,19 +20,6 @@ echo "Installing libmysqlclient"
 sudo apt-get install libmysqlclient-dev
 echo "libmysqlclient installed"
 
-echo "Installing node"
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs
-echo "NodeJS installed"
-
-echo "Installing bower globally"
-sudo npm install -g bower
-echo "bower installed"
-
-echo "Installing gulp globally"
-sudo npm install -g gulp
-echo "gulp installed"
-
 # save the directory for further uses
 pwd > main_directory.txt
 

@@ -1,4 +1,13 @@
-FROM python:3
+FROM python:3-alpine as builder
+
+WORKDIR /home/Bassa
+COPY . .
+
+RUN ls && pip install pylint \
+&& pylint -E .
+
+
+FROM python:3-slim
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
@@ -9,9 +18,12 @@ WORKDIR /home/Bassa
 EXPOSE 5000
 COPY . .
 
+
 RUN apt-get update \
 && ./setup.sh \
-&& python setup.py develop 
+&& python setup.py test \
+&& python setup.py develop \
+&& aria2c --enable-rpc
 
 CMD [ "python", "Main.py" ]
 
