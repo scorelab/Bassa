@@ -21,6 +21,7 @@ before_install:
   
 script: 
   - ./setup.sh
+  - pip install --upgrade pip
   - pip install pylint 
   - cd components
   - pylint -E core
