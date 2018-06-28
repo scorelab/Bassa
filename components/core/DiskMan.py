@@ -2,7 +2,7 @@ import os
 import time
 import sys
 from DownloadManager import get_to_delete, set_delete_status
-from Main import logging
+import logging
 
 SECS_PER_DAY=86400
 verbose = False
