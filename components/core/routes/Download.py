@@ -162,3 +162,5 @@ def get_download(id):
 
 # register endpoints
 server.add_url_rule('/api/file', 'send_file_from_path', sender.send_file_from_path, methods=['GET'])
+server.add_url_rule('/api/compress', 'start_compression', sender.start_compression, methods=['POST'])
+server.add_url_rule('/api/compression-progress', 'get_compression_progress', sender.check_compression_progress, methods=['GET'])
