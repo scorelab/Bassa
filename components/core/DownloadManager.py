@@ -392,7 +392,8 @@ def set_compression_progress(comp_id, status, **kwargs):
 		if kwargs is None:
 			sql = "UPDATE compression SET progress = {} WHERE id = '{}'".format(status, comp_id)
 		else:
-			sql = "UPDATE compression SET progress = {}, completed_time = {} WHERE id = '{}'".format(status, kwargs['completed_time'], comp_id)
+			sql = "UPDATE compression SET progress = {}, completed_time = {} WHERE id = '{}'".format(status, kwargs[
+				'completed_time'], comp_id)
 		try:
 			cursor.execute(sql, )
 			db.commit()
@@ -428,7 +429,8 @@ def insert_compression_process(comp_id, start_time, completed_time, is_deleted):
 	db = threadpool.connect()
 	if db is not None:
 		cursor = db.cursor(MySQLdb.cursors.DictCursor)
-		sql = "INSERT INTO compression (`id`, `progress`, `start_time`, `completed_time`, `deleted`) VALUES ('{}', 0, {}, {}, {} )".format(comp_id, start_time, completed_time, is_deleted)
+		sql = "INSERT INTO compression (`id`, `progress`, `start_time`, `completed_time`, `deleted`) VALUES ('{}', 0, {}, {}, {} )".format(
+			comp_id, start_time, completed_time, is_deleted)
 		try:
 			cursor.execute(sql, )
 			db.commit()
