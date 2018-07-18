@@ -1,12 +1,16 @@
 FROM node:9 as builder
 
 WORKDIR /home/Bassa
-COPY . .
 
 RUN ls \
 && npm install -g bower \
 && npm install -g gulp \
-&& yarn install
+&& npm link gulp
+
+COPY . .
+
+RUN yarn install \
+&&  gulp
 
 FROM nginx:alpine
 
