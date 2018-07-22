@@ -1,7 +1,7 @@
 from flask import Response, request, send_file
 from DownloadManager import get_id_from_gid, get_download_path, get_download_name_from_id
 import logging
-from Server import token_validator
+from utils.token_utils import token_validator
 
 
 def send_file_from_path():
