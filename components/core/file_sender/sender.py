@@ -45,7 +45,7 @@ def get_zip_path(file_name):
 	tmp_dir = conf_json['tmp_folder']
 	if not os.path.exists(tmp_dir):  # check tmp directory exists or not
 		os.makedirs(tmp_dir)
-	zip_path = tmp_dir + '/' + file_name_formatter(file_name) + '.zip'
+	zip_path = os.path.join(tmp_dir , file_name_formatter(file_name) + '.zip')
 	return zip_path
 
 
