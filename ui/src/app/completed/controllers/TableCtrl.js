@@ -20,7 +20,12 @@
       ToastService.showToast('Oops! Something went wrong fetching data');
     });
     $scope.startDownload = function (downloadGID) {
-      window.location.href = BassaUrl+'/api/get/file?gid='+downloadGID;
+      let token = window.localStorage.getItem("Token");
+      if(token) {
+        window.location.href = BassaUrl + '/api/file?gid=' + downloadGID + "&token=" + token;
+      }else{
+        ToastService.showToast("Unable to process your download request")
+      }
     }
     $scope.getImage = function (fileName) {
       var fileExtensionName = getExtension(fileName);
@@ -46,3 +51,4 @@
     }
   }
 })();
+
