@@ -8,7 +8,6 @@ import json
 
 
 def send_file_from_path():
-	print("I got the download request man")
 	token = None
 	if request.args.get('share') is not None:
 		token = 'sample-token-for-sharing-feature'
