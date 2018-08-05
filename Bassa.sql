@@ -25,6 +25,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `compression`
+--
+
+CREATE TABLE `compression` (
+  `id` varchar(255) NOT NULL,
+  `progress` tinyint(4) DEFAULT NULL,
+  `start_time` bigint(20) DEFAULT NULL,
+  `completed_time` bigint(20) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `download`
 --
 

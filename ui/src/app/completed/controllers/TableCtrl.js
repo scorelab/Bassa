@@ -2,11 +2,18 @@
   'use strict';
   angular
     .module('app')
-    .controller('TableCtrl', [ '$scope', 'BassaUrl', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
+    .controller('TableCtrl', [ '$scope', '$mdToast','BassaUrl', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
 
-  function TableCtrl($scope, BassaUrl, ToastService, TableService, UtilityService) {
+  function TableCtrl($scope, $mdToast,BassaUrl, ToastService, TableService, UtilityService) {
     $scope.downloads = [];
     $scope.isGridVisible = false;
+    $scope.zipProcessCounter = 0;
+    $scope.zipToast =
+      $mdToast.simple()
+            .content('Zipping Files')
+            .hideDelay(0)
+            .action('OK')
+            .position('bottom right');
     var setSize = function(lst) {
       lst.data.forEach(function(download) {
         download.size = UtilityService.formatBytes(download.size);
@@ -20,13 +27,52 @@
       ToastService.showToast('Oops! Something went wrong fetching data');
     });
     $scope.startDownload = function (downloadGID) {
+      $scope.zipProcessCounter--;
       let token = window.localStorage.getItem("Token");
+      if($scope.zipProcessCounter <= 0) {
+        $mdToast.hide($scope.zipToast);
+      }
       if(token) {
         window.location.href = BassaUrl + '/api/file?gid=' + downloadGID + "&token=" + token;
       }else{
         ToastService.showToast("Unable to process your download request")
       }
-    }
+    };
+    $scope.compressFiles = function(listOfGid){
+      TableService.startCompression(listOfGid).then(function (response) {
+        if(response.data['process_id'] != null) {
+          $scope.zipProcessCounter++;
+          if(response.data['progress'] === 1){
+            $scope.startDownload(response.data['process_id']);
+            return;
+          }
+          compressionProgressHandler(response.data['process_id']);
+        }else{
+          ToastService.showToast('Oops! Something went wrong fetching data');
+          return;
+        }
+        $mdToast.show($scope.zipToast).then(function (toastResponse) {
+        if(toastResponse === 'ok'){
+          ToastService.showToast('Download will start in a while');
+        }
+      });
+      }, function(error){
+        ToastService.showToast('Oops! Something went wrong fetching data');
+      });
+    };
+    var compressionProgressHandler = function(downloadGid){
+      var processInterval = setInterval(function () {
+        TableService.compressionProgress(downloadGid).then(function (response){
+          let progress = response.data['progress'];
+          if(progress != null && progress === 1){
+            clearInterval(processInterval);
+            $scope.startDownload(downloadGid);
+          }
+        }, function(error){
+        ToastService.showToast('Oops! Something went wrong fetching data');
+      });
+      }, 5000);
+    };
     $scope.getImage = function (fileName) {
       var fileExtensionName = getExtension(fileName);
       return "../../../assets/images/file-images/"+fileExtensionName+".png";
