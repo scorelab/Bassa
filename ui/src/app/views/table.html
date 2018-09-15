@@ -18,7 +18,7 @@
             <td data-title="Issue">{{data.download_name}}</td>
             <td data-title="Progress">{{data.size}}</td>
             <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"></td>
-            <td><button ng-click="startDownload(data.gid)">Download</button></td>
+            <td><button ng-click="compressFiles([data.gid])">Download</button></td>
         </tr>
         </tbody>
     </table>
@@ -32,7 +32,7 @@
                     <p class="file-name">{{download.download_name}}</p>
                 </div>
             </md-card-content>
-            <button class="md-raised md-primary md-button md-ink-ripple button-design" ng-click="startDownload(download.gid)">
+            <button class="md-raised md-primary md-button md-ink-ripple button-design" ng-click="compressFiles([download.gid])">
                 Download
             </button>
         </md-card>
