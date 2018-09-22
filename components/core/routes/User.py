@@ -6,7 +6,7 @@ from Models import *
 from DownloadManager import *
 import _thread
 from utils.token_utils import token_validator
-from utils.app_constants import server_secret_key
+from utils.app_constants import SERVER_SECRET_KEY
 
 
 def login():
@@ -15,7 +15,7 @@ def login():
     if user_login(userName, password):
         if check_approved(userName, password):
             user = get_user(userName)
-            token = generate_auth_token(user, server_secret_key)
+            token = generate_auth_token(user, SERVER_SECRET_KEY)
             resp = Response(response='{"auth":"'+ str(user.auth) + '"}',status=200)
             resp.headers['token'] = token
             resp.headers['Access-Control-Expose-Headers'] = 'token'
