@@ -1,1 +1,1 @@
-server_secret_key = "123456789"
+SERVER_SECRET_KEY = "123456789"
