@@ -5,7 +5,7 @@ from DownloadManager import *
 import json, urllib.request, urllib.error, urllib.parse
 from multiprocessing import Process
 from DownloadDaemon import starter
-from utils.app_constants import server_secret_key
+from utils.app_constants import SERVER_SECRET_KEY
 from utils.token_utils import token_validator
 from initializer import socketio
 
@@ -13,7 +13,7 @@ from initializer import socketio
 def start():
 	try:
 		token = request.headers['key']
-		if str(token) != server_secret_key:
+		if str(token) != SERVER_SECRET_KEY:
 			return "{'error':'not authorized'}", 403
 		global p
 		p = Process(target=starter, args=(socketio,))
@@ -26,7 +26,7 @@ def start():
 def kill():
 	try:
 		token = request.headers['key']
-		if str(token) != server_secret_key:
+		if str(token) != SERVER_SECRET_KEY:
 			return "{'error':'not authorized'}", 403
 		if p is not None:
 			p.terminate()
