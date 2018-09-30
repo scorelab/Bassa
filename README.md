@@ -78,6 +78,7 @@ This issue can be solved in one of two ways:
 1. Either downgrade the MySQL Server to 5.7.x.
 2. Change the password encryption method for MySQL Server.
 Refer this : https://stackoverflow.com/questions/49194719/authentication-plugin-caching-sha2-password-cannot-be-loaded
+
 The first method is easier.
 
 
