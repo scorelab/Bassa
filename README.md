@@ -62,12 +62,16 @@ mysql -u root -p  Bassa < Bassa.sql
 
 3. Open components/core/DBCon.py and setup database username and password.
 
-NOTE : On Windows Machine, the MySQL Server version 8.x introduces something called caching_sha2_password' plugin that does not work with the existing codebase and gives the follwing error :
-
+NOTE : On Windows Machine, the **MySQL Server version 8.x** introduces something called **'caching_sha2_password'** plugin that does not work with the existing codebase and gives the follwing error :
+```
 raise exc.InvalidRequestError("This connection is closed")
 sqlalchemy.exc.InvalidRequestError: This connection is closed
+```
 
-The exact issue being : "Authentication plugin 'caching_sha2_password' cannot be loaded."
+The exact issue being : 
+```
+"Authentication plugin 'caching_sha2_password' cannot be loaded."
+```
 
 This issue can be solved in one of two ways:
 
