@@ -27,7 +27,10 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 
 ## Installation
 
-Note: Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+Note: 
+* Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+* MacOS users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/MacOS-Installation-Guide).
+
 
 First clone the Repository 
 ``` git clone https://github.com/scorelab/Bassa.git```
