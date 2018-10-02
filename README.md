@@ -63,8 +63,15 @@ mysql -u root -p  Bassa < Bassa.sql
 3. Open components/core/DBCon.py and setup database username and password.
 
 The required changes in DBCon.py would look like :
+
+If the environment variables are being used, modify as following :
 ```
-_db=MySQLdb.connect(host="localhost", user="YOUR_USERNAME", passwd="YOUR_PASSWORD",db= "Bassa")
+_db=MySQLdb.connect("db", os.environ.get('YOUR_DB_USERNAME'), os.environ.get('YOUR_DB_PASSWORD'), os.environ.get('Bassa'))
+```
+
+If the environment variables are not configured and hardcoded strings are being used, replace as :
+```
+_db=MySQLdb.connect(host="localhost", user="YOUR_DB_USERNAME", passwd="YOUR_DB_PASSWORD",db= "Bassa")
 ```
 
 ## Test Server
