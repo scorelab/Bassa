@@ -60,8 +60,14 @@ create database Bassa
 mysql -u root -p  Bassa < Bassa.sql
 ```
 
-3. Open components/core/DBCon.py and setup database username and password.
-
+3.If the environment variables are being used, modify as following :git 
+ ```
+_db=MySQLdb.connect("db", os.environ.get('YOUR_DB_USERNAME'), os.environ.get('YOUR_DB_PASSWORD'), os.environ.get('Bassa'))
+```
+ If the environment variables are not configured and hardcoded strings are being used, replace as :
+```
+_db=MySQLdb.connect(host="localhost", user="YOUR_DB_USERNAME", passwd="YOUR_DB_PASSWORD",db= "Bassa")
+```
 
 ## Test Server
 ```
