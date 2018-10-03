@@ -75,8 +75,12 @@
 
       if(deleteDownload){
         DashService.removeDownload(id).then(function(response){
-          ToastService.showToast("Download removed");
-          $scope.downloads.splice(index, 1);},
+          if(response.status === 200){
+            $scope.downloads.splice(index, 1);
+            ToastService.showToast("Download removed");
+          }else{
+            ToastService.showToast("Download could not be removed. Please try again!");
+          } },
           function (error){
           ToastService.showToast("Download started. Entry cannot be deleted.");
         });
