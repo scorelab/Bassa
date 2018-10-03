@@ -32,3 +32,18 @@ echo "bower installed"
 echo "Installing gulp globally"
 sudo npm install -g gulp
 echo "gulp installed"
+
+# save the directory for further uses
+pwd > main_directory.txt
+
+echo "Adding path to bashrc file"
+main_file="main_directory.txt"
+main_directory=""
+while IFS= read line
+do
+	echo "$line"
+	main_directory=$line
+done <"$main_file"
+rm -rf main_directory.txt
+echo "export PATH=\"$main_directory:$""PATH\"" | sudo tee -a ~/.bashrc > /dev/null
+source ~/.bashrc
