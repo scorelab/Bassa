@@ -10,7 +10,7 @@ start(){
 	if [ "$check_status" == "inactive" ]
 	then
 		echo -ne '\e[32mstarting...'
-		# this one is just to look good 
+		# this one is just to look good
 		for number in {1..6}
 		do
 			echo -ne '.'
@@ -35,7 +35,7 @@ start(){
 			echo "" > "$UISERVER""/gulp-serve.log"
 			echo "" > "$UISERVER""/aria2c.log"
 		fi
-		
+
 		# making process in backgroud using nohup
 
 		nohup python3 "$PYSERVER" &>> "$BASEDIR""/python-server.log" &
@@ -87,9 +87,18 @@ status(){
         echo "inactive"
     fi
 }
-case $1 in 
+case $1 in
 	start)
-		echo 'Bassa is on the way'
+	echo -e "  \e[33m
+██████╗  █████╗ ███████╗███████╗ █████╗
+██╔══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗
+██████╔╝███████║███████╗███████╗███████║
+██╔══██╗██╔══██║╚════██║╚════██║██╔══██║
+██████╔╝██║  ██║███████║███████║██║  ██║
+╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝"
+	echo "Bassa is on the way
+	"
+
 		start
 		;;
 	stop)
@@ -106,6 +115,10 @@ case $1 in
 		restart
 		fi
 		;;
+ -h)
+ 	echo "Usage: bassa {start|stop|restart|status}" >&2
+	echo
+	;;
 	status)
 		check_status=$( status )
 		if [ "$check_status" == "active" ]
