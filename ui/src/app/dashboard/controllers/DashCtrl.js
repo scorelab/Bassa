@@ -69,14 +69,14 @@
       });
     }
 
-    $scope.removeLink = function (id) {
+    $scope.removeLink = function (index, id) {
       // Shows window confirmation before deleting download.
       var deleteDownload = $window.confirm('Confirm download task deletion !');
 
       if(deleteDownload){
         DashService.removeDownload(id).then(function(response){
           ToastService.showToast("Download removed");
-          getActiveDownloads();},
+          $scope.downloads.splice(index, 1);},
           function (error){
           ToastService.showToast("Download started. Entry cannot be deleted.");
         });
