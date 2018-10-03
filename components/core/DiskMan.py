@@ -2,6 +2,7 @@ import os
 import time
 import sys
 from DownloadManager import get_to_delete, set_delete_status
+import logging
 
 SECS_PER_DAY=86400
 verbose = False
@@ -24,5 +25,9 @@ def remove_files(days, rate):
     if verbose:
         print("files to be removed", files)
     for file in files:
-        os.unlink(file[0])
+        try:
+            os.unlink(file[0])
+        except FileNotFoundError:
+            logging.error('Following file was not found on this path :: %s , removing the match from the database' %
+                          file[0])
         set_delete_status(file[0])
