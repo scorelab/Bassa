@@ -1,10 +1,7 @@
 from flask import Response, request, send_file, jsonify
 from DownloadManager import get_id_from_gid, get_download_path, get_download_name_from_id, get_compression_progress
 import logging
-from Server import token_validator
-import subprocess
-import os
-import json
+from utils.token_utils import token_validator
 
 
 def send_file_from_path():
@@ -21,7 +18,7 @@ def send_file_from_path():
 			download_path = get_zip_path(gid)
 		except Exception as e:
 			logging.error(" get file API (/api/file) got wrong arguments, thrown an error :: %s" % e)
-			return Response("error", status=200)
+			return Response("error", status=400)
 		
 		try:
 			return send_file(filename_or_fp=download_path, attachment_filename=file_name,
@@ -29,7 +26,7 @@ def send_file_from_path():
 		except Exception as e:
 			logging.error("File sending has a exception. When sending file, we got :: %s" % e)
 			return Response("File you are trying to access is not available to us. Please ask admin to check the server"
-							, status=200)
+							, status=404)
 	else:
 		return Response("Invalid Token in request", 403)
 
@@ -49,7 +46,7 @@ def get_zip_path(file_name):
 	tmp_dir = conf_json['tmp_folder']
 	if not os.path.exists(tmp_dir):  # check tmp directory exists or not
 		os.makedirs(tmp_dir)
-	zip_path = tmp_dir + '/' + file_name_formatter(file_name) + '.zip'
+	zip_path = os.path.join(tmp_dir , file_name_formatter(file_name) + '.zip')
 	return zip_path
 
 
