@@ -31,6 +31,7 @@ Note: Windows users can check the installation guide [here](https://github.com/s
 
 First clone the Repository 
 ``` git clone https://github.com/scorelab/Bassa.git```
+``` cd Bassa```
 
 ![gitclone](https://user-images.githubusercontent.com/28682735/35194406-2f6f08e2-fed9-11e7-8411-86d83bed6507.gif)
 
