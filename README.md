@@ -45,9 +45,9 @@ Use python 3 instead of Python 2
 
 Bassa has 4 main compoenents, 
 1. Database
-2. BAssa API
-3. Bass UI
-4. aira2
+2. Bassa API
+3. Bassa UI
+4. aria2
 
 
 ## Database Setup
