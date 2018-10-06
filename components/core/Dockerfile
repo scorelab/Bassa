@@ -7,7 +7,7 @@ RUN ls && pip install pylint \
 && pylint -E .
 
 
-FROM python:3-slim
+FROM python:3.7
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
@@ -21,11 +21,10 @@ COPY . .
 
 RUN apt-get update \
 && ./setup.sh \
-&& python setup.py test \
-&& python setup.py develop \
-&& aria2c --enable-rpc
+# && python3 setup.py test \ disabing temporary
+&& python3 setup.py develop
 
-CMD [ "python", "Main.py" ]
+CMD [ "./run.sh"]
 
 
 LABEL multi.org.label-schema.name="Bassa" \
