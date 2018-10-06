@@ -2,9 +2,8 @@
 
 [![Build Status](https://travis-ci.org/scorelab/Bassa.svg?branch=master)](https://travis-ci.org/scorelab/Bassa)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7de63c7b9a69448787e8014a12a260b1)](https://www.codacy.com/app/SCoRe-Lab/Bassa?utm_source=github.com&utm_medium=referral&utm_content=scorelab/Bassa&utm_campaign=badger)
-[![Docker Build Status](https://img.shields.io/docker/build/scoreucsc/bassa.svg)]()
-[![PyPI](https://img.shields.io/pypi/dm/Bassa.svg)](https://pypi.python.org/pypi)
-[![PyPI](https://img.shields.io/pypi/v/Bassa.svg)](https://pypi.python.org/pypi)
+[![Docker Build](https://img.shields.io/docker/automated/scoreucsc/bassa.svg)]()
+[![PyPI](https://img.shields.io/pypi/v/Bassa.svg)](https://pypi.python.org/pypi/bassa)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/scorelab/scorelab)
 [![](https://images.microbadger.com/badges/image/scoreucsc/bassa.svg)](https://microbadger.com/images/scoreucsc/bassa "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/scoreucsc/bassa.svg)](https://microbadger.com/images/scoreucsc/bassa "Get your own version badge on microbadger.com")
@@ -12,7 +11,7 @@
 
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
-# About 
+# About
 Bassa solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.
 
 ## Main functionalities
@@ -29,7 +28,7 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 
 Note: Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
 
-First clone the Repository 
+First clone the Repository
 ``` git clone https://github.com/scorelab/Bassa.git```
 
 ![gitclone](https://user-images.githubusercontent.com/28682735/35194406-2f6f08e2-fed9-11e7-8411-86d83bed6507.gif)
@@ -38,6 +37,7 @@ Use python 3 instead of Python 2
 
 ```
   $ ./setup.sh
+
   $ cd components/core/
   $ sudo python3 setup.py develop
 ```
