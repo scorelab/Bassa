@@ -3,6 +3,8 @@ import shutil
 import inspect
 import platform
 from setuptools import setup
+from tests.Bassa_endpoint_tests import *
+from tests.login_test import *
 
 try:
     from pip.req import parse_requirements
