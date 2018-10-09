@@ -15,7 +15,7 @@
       <!-- <div class="table-responsive-vertical md-whiteframe-z1"> -->
     <table id="table" class="table table-hover table-bordered">
         <thead>
-        <tr ng-repeat="data in downloads">
+        <tr ng-repeat="data in downloads track by $index">
             <td id="vertalign" data-title="ID">{{$index + 1}}</td>
             <td id="vertalign" data-title="Issue">{{data.download_name}}</td>
             <td id="vertalign" data-title="Progress">
@@ -24,7 +24,7 @@
                 value="{{data.progress}}">
               </md-progress-linear>
             </td>
-            <td><md-button class="md-fab md-warn md-mini" ng-click="removeLink(data.id,$event)">
+            <td><md-button class="md-fab md-warn md-mini" ng-click="removeLink($index, data.id,$event)">
                 <i class="material-icons">delete</i>
                 </md-button>
             </td>
