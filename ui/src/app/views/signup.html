@@ -13,7 +13,7 @@
     </div>
 
     <div class="group" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
-      <input type="password" class="form-control inputStyle" placeholder="Password" name="password" ng-model="user.password" ng-minLength="8" required"/><span class="highlight"></span><span class="bar"></span>
+      <input type="password" class="form-control inputStyle" placeholder="Password" name="password" ng-model="user.password" ng-minLength="8" required/><span class="highlight"></span><span class="bar"></span>
       <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Please Enter at least 8 characters</p>
     </div>
 
