@@ -74,12 +74,12 @@ The required changes in DBCon.py would look like :
 
 If the environment variables are being used, modify as following :
 ```
-_db=MySQLdb.connect("db", os.environ.get('YOUR_DB_USERNAME'), os.environ.get('YOUR_DB_PASSWORD'), os.environ.get('Bassa'))
+_db=MySQLdb.connect("db", os.environ.get('YOUR_DB_USERNAME'), os.environ.get('YOUR_DB_PASSWORD'), os.environ.get('YOUR_DB_NAME'))
 ```
 
 If the environment variables are not configured and hardcoded strings are being used, replace as :
 ```
-_db=MySQLdb.connect(host="localhost", user="YOUR_DB_USERNAME", passwd="YOUR_DB_PASSWORD",db= "Bassa")
+_db=MySQLdb.connect(host="localhost", user="YOUR_DB_USERNAME", passwd="YOUR_DB_PASSWORD",db= "YOUR_DB_NAME")
 ```
 
 ## Bassa API
