@@ -30,3 +30,7 @@
 * Environment name and version (e.g. Chrome 39, node.js 5.4):
 * Operating System and version (desktop or mobile):
 * Link to your project:
+
+
+# Pull Requests to this issue
+If you are planning to create a PR for this issue, please make sure you first discuss with the maintainers of the project about ths issue well and get the 'Go' from them first.
