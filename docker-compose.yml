@@ -3,7 +3,7 @@ services:
   api:
     build: components/core/
     ports:
-      - 5000:5000
+      - 5001:5000
     depends_on:
       - db
     environment:
@@ -25,6 +25,8 @@ services:
     restart: always
     volumes:
       - data-volume:/var/lib/mysql
+      - ./.docker/volumes/mysql:/docker-entrypoint-initdb.d
+      - ./db_schema/:/tmp/schema
     ports:
       - 3306:3306
     environment:
