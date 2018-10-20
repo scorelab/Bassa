@@ -12,7 +12,7 @@
 
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
-# About 
+# Details 
 Bassa solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.
 
 ## Main functionalities
