@@ -1,4 +1,4 @@
-CONTRIBUTORS
-============
+# CONTRIBUTORS
 
- - Milindu Sanoj Kumarage (agentmilindu)
+- Milindu Sanoj Kumarage (agentmilindu)
+- Łukasz Myśliwiec (TheLukaszNs)
