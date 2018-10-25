@@ -2,4 +2,5 @@ CONTRIBUTORS
 ============
 
  - Milindu Sanoj Kumarage (agentmilindu)
-Test (change)
+another test [Git]: getting started with remotes
+
