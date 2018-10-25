@@ -97,7 +97,12 @@
   },
   "Resources":{
     "ECSCluster":{
-      "Type":"AWS::ECS::Cluster"
+      "Type":"AWS::ECS::Cluster",
+      "Properties": {
+        "ClusterName": {
+          "Ref": "AWS::StackName"
+        }
+      }
     },
     "EcsSecurityGroup":{
       "Type":"AWS::EC2::SecurityGroup",
