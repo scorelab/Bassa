@@ -8,6 +8,7 @@ Create required resources for deployment.
 
 ###Create a ECS cluster
 Export following environment variables with appropriate values.
+`PROJECT_ROOT` should be the root path of your Bassa project folder. 
 
 ```bash
 export PROJECT_ROOT=.
