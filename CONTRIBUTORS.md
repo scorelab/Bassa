@@ -2,4 +2,4 @@ CONTRIBUTORS
 ============
 
  - Milindu Sanoj Kumarage (agentmilindu)
- - Vishal Kumar (vishalx360)
+ - Malith Senaweera (malithsen)
