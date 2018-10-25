@@ -3,6 +3,14 @@
 Bassa can be deployed completely on AWS using theses scripts. 
 Can be used for both deployment and production. 
 
+##Prerequisite
+AWS CLI is needed for CloudFormation Templates deployment. 
+Install AWS CLI with following scipt.
+
+```bash
+bash scripts/aws/scripts/install_aws_linux.sh
+```
+
 ##Infrastructure
 Create required resources for deployment.
 
