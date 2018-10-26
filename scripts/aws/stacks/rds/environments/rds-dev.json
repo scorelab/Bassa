@@ -10,9 +10,5 @@
   {
     "ParameterKey": "DBPassword",
     "ParameterValue": "12345678"
-  },
-  {
-    "ParameterKey": "VpcId",
-    "ParameterValue": "vpc-83ced0f8"
   }
 ]
