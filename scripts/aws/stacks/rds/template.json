@@ -41,8 +41,21 @@
       "Description": "Database storage capacity",
       "Type": "String"
     },
+    "VpcId":{
+      "Type":"AWS::EC2::VPC::Id",
+      "Description":"Select a VPC that allows instances to access the Internet."
+    }
   },
   "Resources": {
+    "SecurityGroup":{
+      "Type":"AWS::EC2::SecurityGroup",
+      "Properties":{
+        "GroupDescription":"ECS Security Group",
+        "VpcId":{
+          "Ref":"VpcId"
+        }
+      }
+    },
     "DBInstance" : {
       "Type": "AWS::RDS::DBInstance",
       "Properties": {
@@ -53,6 +66,7 @@
         "DBInstanceClass"   : { "Ref" : "DBClass" },
         "AllocatedStorage"  : { "Ref" : "DBAllocatedStorage" },
         "MasterUserPassword": { "Ref" : "DBPassword" },
+        "VPCSecurityGroups" : [ { "Fn::GetAtt": [ "SecurityGroup", "GroupId" ] } ]
       }
     }
   },
