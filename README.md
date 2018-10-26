@@ -16,17 +16,20 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 
 ## Main functionalities
 * Provides an interface for users to add their downloads as links or torrent magnet links
-* Provide users  an interface to view and download the files in local server
-* Provide a rating system to users to rate the files residing in local server
+* Provide users with an interface to view and download the files in the local server
+* Provide a rating system for users to rate the files residing in local server
 * Automatically start and stop downloading in given time frame
 * Automatically clean the disks and make room for new downloads
-* Notify user when his/her download is completed
+* Notify the users when his/her download is completed
 * Mark inappropriate downloads
-* Provides admins an interface to deal with inappropriate files
+* Provides admins with an interface to deal with inappropriate files
 
 ## Installation
 
-Note: Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+Note: 
+* Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+* MacOS users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/MacOS-Installation-Guide).
+
 
 First clone the Repository
 ``` git clone https://github.com/scorelab/Bassa.git```
@@ -44,6 +47,11 @@ Use python 3 instead of Python 2
 ```
 ![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
 
+Bassa has 4 main compoenents, 
+1. Database
+2. Bassa API
+3. Bassa UI
+4. aria2
 
 
 ## Database Setup
@@ -63,7 +71,7 @@ mysql -u root -p  Bassa < Bassa.sql
 3. Open components/core/DBCon.py and setup database username and password.
 
 
-## Test Server
+## Bassa API
 ```
   $ cd components/core/
   $ python3 Main.py
@@ -88,8 +96,7 @@ run `gulp serve`
 ![gulp_serve](https://user-images.githubusercontent.com/28682735/35194407-2fa172e6-fed9-11e7-9e89-065ecb3cbf87.gif)
 
 
-
-In the first time you login, the credentials would be as follows.
+In the first time you log in, the credentials would be as follows.
 
 - username - rand
 - password - pass
@@ -98,29 +105,26 @@ In the first time you login, the credentials would be as follows.
 ![bassaui](https://user-images.githubusercontent.com/28682735/35193753-667c7e0c-fecd-11e7-918f-13ce1d00d055.gif)
 
 
-### Make sure you have aria2 installed.
+## Make sure you have aria2 installed.
 run `aria2c --enable-rpc`
+
+Read more on installing `aria2` [here](https://aria2.github.io/manual/en/html/README.html)
 
 
 ![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
 
 
 ### How to Use Bassa
-* After Setting up Bassa, Login/Register.There are two types of users in Bassa- (1) The Admin and (2) The Normal Users.
-* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away.
-* The organisation admin can start the downloads at a time of his/her liking.
+* After Setting up Bassa, Login/Register.
+  There are two types of users in Bassa
+  1. The Admin
+  2. The Normal Users
+* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away. 
+* The organisation admin can start the downloads at a time of his/her liking. 
 * Then the users who had added links for certain files can download them from the local servers at a much higher speed.
 * You can even watch a video tutorial for the same on [Youtube](https://www.youtube.com/watch?v=NxS8T1EphCA)
-### Autoformat JS with Prettier
-
-- [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
-- [Atom Plugin](https://github.com/prettier/prettier-atom)
-
-Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
 
 
-### Run UI unit tests
-```
-	$ cd ui/
-	$ npm test OR $ yarn test
-```
+# Developers
+
+Please go through the developer guides in [Bassa wiki](https://github.com/scorelab/Bassa/wiki)
