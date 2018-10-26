@@ -41,24 +41,28 @@
       "Description": "Database storage capacity",
       "Type": "String"
     },
-    "VpcId":{
-      "Type":"AWS::EC2::VPC::Id",
-      "Description":"Select a VPC that allows instances to access the Internet."
+    "SecurityGroupId":{
+      "Type":"String",
+      "Description":"Security group ID of the source EC2 instance"
     }
   },
   "Resources": {
     "SecurityGroup":{
-      "Type":"AWS::EC2::SecurityGroup",
-      "Properties":{
-        "GroupDescription":"ECS Security Group",
-        "VpcId":{
-          "Ref":"VpcId"
-        }
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription": "Open database for access",
+        "SecurityGroupIngress" : [{
+          "IpProtocol" : "tcp",
+          "FromPort" : "3306",
+          "ToPort" : "3306",
+          "SourceSecurityGroupId" : { "Ref" : "SecurityGroupId" }
+        }]
       }
     },
     "DBInstance" : {
       "Type": "AWS::RDS::DBInstance",
       "Properties": {
+        "DBInstanceIdentifier": { "Ref": "AWS::StackName" },
         "DBName"            : { "Ref" : "DBName" },
         "Engine"            : "MySQL",
         "MultiAZ"           : { "Ref": "MultiAZDatabase" },

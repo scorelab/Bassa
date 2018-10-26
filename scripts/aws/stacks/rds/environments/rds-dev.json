@@ -12,7 +12,7 @@
     "ParameterValue": "12345678"
   },
   {
-    "ParameterKey": "VpcId",
-    "ParameterValue": "vpc-83ced0f8"
+    "ParameterKey": "SecurityGroupId",
+    "ParameterValue": "sg-001a4b6bc37468093"
   }
 ]
