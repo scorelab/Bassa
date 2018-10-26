@@ -1,0 +1,99 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "ScoreLab RDS",
+  "Parameters": {
+    "DBName": {
+      "Description": "Name of the Database",
+      "Type": "String",
+      "MinLength": "1",
+      "MaxLength": "15"
+    },
+    "DBUser": {
+      "NoEcho": "true",
+      "Description": "Username for database",
+      "Type": "String",
+      "MinLength": "4",
+      "MaxLength": "10"
+    },
+    "DBPassword": {
+      "NoEcho": "true",
+      "Description": "Password for database",
+      "Type": "String",
+      "MinLength": "8",
+      "MaxLength": "15"
+    },
+    "MultiAZDatabase": {
+      "Default": "false",
+      "Description": "Multiple Availability zone deployment",
+      "AllowedValues": [
+        "true",
+        "false"
+      ],
+      "Type": "String"
+    },
+    "DBClass": {
+      "Default": "db.t2.micro",
+      "Description": "Database instance class",
+      "Type": "String"
+    },
+    "DBAllocatedStorage": {
+      "Default": "100",
+      "Description": "Database storage capacity",
+      "Type": "String"
+    },
+    "VpcId":{
+      "Type":"AWS::EC2::VPC::Id",
+      "Description":"Select a VPC that allows instances to access the Internet."
+    }
+  },
+  "Resources": {
+    "SecurityGroup":{
+      "Type":"AWS::EC2::SecurityGroup",
+      "Properties":{
+        "GroupDescription":"ECS Security Group",
+        "VpcId":{
+          "Ref":"VpcId"
+        }
+      }
+    },
+    "DBInstance" : {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "DBName"            : { "Ref" : "DBName" },
+        "Engine"            : "MySQL",
+        "MultiAZ"           : { "Ref": "MultiAZDatabase" },
+        "MasterUsername"    : { "Ref" : "DBUser" },
+        "DBInstanceClass"   : { "Ref" : "DBClass" },
+        "AllocatedStorage"  : { "Ref" : "DBAllocatedStorage" },
+        "MasterUserPassword": { "Ref" : "DBPassword" },
+        "VPCSecurityGroups" : [ { "Fn::GetAtt": [ "SecurityGroup", "GroupId" ] } ]
+      }
+    }
+  },
+  "Outputs": {
+    "Hostname": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Fn::GetAtt": [
+                "DBInstance",
+                "Endpoint.Address"
+              ]
+            },
+            ":",
+            {
+              "Fn::GetAtt": [
+                "DBInstance",
+                "Endpoint.Port"
+              ]
+            }
+          ]
+        ]
+      },
+      "Description": "Endpoint to access RDS instance"
+    }
+  }
+}
