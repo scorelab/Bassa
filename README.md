@@ -114,6 +114,12 @@ Read more on installing `aria2` [here](https://aria2.github.io/manual/en/html/RE
 ![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
 
 
+## Using Docker-Compose
+
+Run the `docker-compose` at the project directory to deploy the core API, UI and the DB.
+
+`$ docker-compose up`
+
 ### How to Use Bassa
 * After Setting up Bassa, Login/Register.
   There are two types of users in Bassa
