@@ -1,22 +1,99 @@
+<script>
+    /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+<style>
+    /* Dropdown Button */
+    /*.dropbtn {
+        background-color: #3498DB;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }*/
+    /* Dropdown button on hover & focus */
+    /*.dropbtn:hover,
+    .dropbtn:focus {
+        background-color: #2980B9;
+    }*/
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+    /* Links inside the dropdown */
+    .dropdown-content span {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    /* Change color of dropdown links on hover */
+    .dropdown-content span:hover {
+        background-color: #ddd
+    }
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {
+        display: block;
+    }
+</style>
 <div class="table-responsive-vertical md-whiteframe-z1">
     <table id="table" class="table table-hover table-bordered">
         <thead>
-        <tr>
-            <th>#</th>
-            <th>User</th>
-            <th>Download name</th>
-            <th>Size</th>
-            <th>Completed time</th>
-        </tr>
+            <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Download name</th>
+                <th>Details</th>
+            </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="data in downloads">
-            <td data-title="ID">{{$index + 1}}</td>
-            <td data-title="User">{{data.user_name}}</td>
-            <td data-title="Issue">{{data.download_name}}</td>
-            <td data-title="Progress">{{data.size}}</td>
-            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"</td>
-        </tr>
+            <tr ng-repeat="data in downloads">
+                <td data-title="ID">{{$index + 1}}</td>
+                <td data-title="User">{{data.user_name}}</td>
+                <td data-title="Issue">{{data.download_name}}</td>
+                <td>
+                    <div class="dropdown">
+                        <button ng-click="myFunction(data.id)" class="dropbtn md-raised md-primary md-button md-ink-ripple">
+                            Details
+                        </button>
+                        <div id="{{data.id}}" class="dropdown-content">
+                            <span>{{data.size}}</span>
+                            <span>{{ (data.completed_time*1000) | date : "MMM d, y h:mm a" }}</span>
+                            <span>
+                                <button onclick="" class="md-raised md-warn md-button md-ink-ripple">
+                                    DELETE
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <!--<td data-title="Progress">{{data.size}}</td>
+                <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"></td>-->
+            </tr>
         </tbody>
     </table>
 </div>
