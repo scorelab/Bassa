@@ -1,22 +1,141 @@
+
 <div class="table-responsive-vertical md-whiteframe-z1">
     <table id="table" class="table table-hover table-bordered">
         <thead>
         <tr>
             <th>#</th>
             <th>User</th>
-            <th>Download name</th>
-            <th>Size</th>
+	    <th>Download name</th>
+            <th>More</th>
             <th>Completed time</th>
         </tr>
         </thead>
         <tbody>
+
         <tr ng-repeat="data in downloads">
+
+		
             <td data-title="ID">{{$index + 1}}</td>
-            <td data-title="User">{{data.user_name}}</td>
-            <td data-title="Issue">{{data.download_name}}</td>
-            <td data-title="Progress">{{data.size}}</td>
-            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"</td>
+            <td data-title="User">{{data.user_name}} </td>
+	  <td class="part" data-title="Issue">{{data.download_name}}</td>
+	    <td data-title="More"><div class="dropdown">
+  <button class="dropbtn">Details</button>
+  <div class="dropdown-content">
+    <li class="edit"><i class="fa fa-file"></i> FileSize : {{data.size}}</l1>
+    <li class="edit"><i class="fa fa-cloud-download"></i> Downloaded On : {{ (data.completed_time*1000) | date : "h:mm a d MMM, y " }}</li>
+    <li onclick="remove()" id="remove" class="edit"><i class="fa fa-trash"></i> Remove</li>
+  </div>
+</div></td>
+            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"></td>
         </tr>
         </tbody>
     </table>
 </div>
+<style>
+.edit {
+list-style-type: none;
+padding:10px;
+}
+.dropbtn {
+    background-color:rgb(231,87,83);
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {border:none;background-color: rgb(231,87,83);}
+.dropbtn::-moz-focus-inner {
+border:0;
+}
+.fa {
+color:rgb(231,87,83);
+}
+
+.but::-moz-focus-inner {
+  border: 0;
+}
+
+
+.but {
+border:none;
+outline:none;
+color:rgb(231,87,83);
+}
+.part {
+height:50px;
+-webkit-transition: all 0.5s ease;  
+  -moz-transition: all 0.5s ease;  
+  -o-transition: all 0.5s ease;  
+  -ms-transition: all 0.5s ease;  
+  transition: all 0.5s ease;
+}
+.part-active {
+height:80px;
+}
+
+.info {
+text-align:center;
+padding-right:20px;
+display:inline-block;
+opacity:0;
+
+  -webkit-transition: all 0.5s ease;  
+  -moz-transition: all 0.5s ease;  
+  -o-transition: all 0.5s ease;  
+  -ms-transition: all 0.5s ease;  
+  transition: all 0.5s ease;
+}
+#remove {
+cursor:pointer;
+transition: all 0.2s ease;
+}
+#remove:hover {
+color:black;
+}
+#remove:active {
+color:orange;
+}
+.info-active {
+text-align:center;
+padding-right:20px;
+display:inline-block;
+opacity:1;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+$(".but").click(function() {
+  $('.info').toggleClass('info-active');
+  $('.part').toggleClass('part-active');
+});
+function remove() {
+var question = confirm("Are you sure you want to delete this file ?");
+}
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
