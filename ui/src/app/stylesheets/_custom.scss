@@ -70,6 +70,11 @@ body {
   background-color: $warning-color;
 }
 
+.bassa-red-background {
+  background-color: $warning-color !important;
+}
+
+
 // panel-widget
 .panel-widget {
   background-color: white;
