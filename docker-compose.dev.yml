@@ -1,6 +1,6 @@
 version: "3"
 services:
-  api:
+  bassa-api:
     build: components/core/
     ports:
       - 5000:5000
