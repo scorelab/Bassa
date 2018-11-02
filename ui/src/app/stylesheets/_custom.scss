@@ -74,6 +74,73 @@ body {
   background-color: $warning-color !important;
 }
 
+.bassa-red-color {
+  color: $warning-color !important;
+}
+
+
+/*/// Completed Downloads Table - Display extra info ///*/
+
+.information {
+  position: relative;
+  top:25px;
+  right:620px;
+  padding-left: 25px;
+  padding-top: 2px;
+}
+
+@media (max-width: 760px) {
+  .information {
+    left:10px;
+  }
+}
+
+.info-div-active {
+  width:650px;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: opacity 2s ease-in;
+  -moz-transition: opacity 2s ease-in;
+  -ms-transition: opacity 2s ease-in;
+  -o-transition: opacity 2s ease-in;
+  transition: opacity 2s ease-in;
+  opacity: 1;
+
+}
+
+.info-div-inactive {
+  display: none;
+  opacity: 0;
+
+  
+}
+
+
+.info-icon {
+  padding-bottom: 1%;
+}
+
+.dropdown-inactive {
+  position: relative;
+
+}
+
+.dropdown-active {
+  height:80px;
+}
+
+#remove {
+cursor:pointer;
+transition: all 0.2s ease;
+}
+#remove:hover {
+color:black;
+}
+#remove:active {
+color:orange;
+}
+
+/* End of css for completed donwloads table */
 
 // panel-widget
 .panel-widget {
