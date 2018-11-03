@@ -6,9 +6,9 @@
 
   function TableCtrl($scope, ToastService, TableService, UtilityService) {
     $scope.downloads = [];
-    $scope.defaultIcon = "arrow_drop_down";
-    $scope.defaultDropdownClass = "dropdown-inactive"
-    $scope.defaultInfoDivClass = "info-div-inactive"
+    $scope.defaultIcon = 'arrow_drop_down';
+    $scope.defaultDropdownClass = 'dropdown-inactive';
+    $scope.defaultInfoDivClass = 'info-div-inactive';
     var setSize = function(lst) {
       lst.data.forEach(function(download) {
         download.size = UtilityService.formatBytes(download.size);
@@ -16,21 +16,21 @@
       return lst;
     };
 
-    $scope.toggleInfo = function(viewModel) {
+    $scope.toggleInfo = function toggleInfo(viewModel) {
       this.switchIcon(viewModel);
       this.dropDownDiv(viewModel);
       this.quickInfo(viewModel);
 
-    }
+    };
 
-  //Switches icon for red dropdown arrow
-    $scope.switchIcon = function(viewModel) {
-      var default_icon = "arrow_drop_down"
-      var active_icon = "arrow_drop_up"
-      if (viewModel.icon === default_icon) {
-        viewModel.icon = active_icon;
+    //  Switches icon for red dropdown arrow
+    $scope.switchIcon = function switchIcon(viewModel) {
+      const defaultIcon = 'arrow_drop_down';
+      const activeIcon = 'arrow_drop_up';
+      if (viewModel.icon === defaultIcon) {
+        viewModel.icon = activeIcon;
       } else {
-        viewModel.icon = default_icon;
+        viewModel.icon = defaultIcon;
       }
     };
     //Expands the div (changes css height)
