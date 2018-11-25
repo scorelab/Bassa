@@ -1,26 +1,35 @@
-(function(){
+(function () {
   'use strict';
   angular
     .module('app')
     .controller('LoginCtrl', ['$scope', '$state', 'UserService', LoginCtrl]);
 
   function LoginCtrl($scope, $state, UserService) {
+    $scope.type = 'password';
+    $scope.toggleType = function () {
+      if ($scope.type == 'text') {
+        $scope.type = 'password';
+      } else {
+        $scope.type = 'text';
+      }
+    }
+
     $scope.user = {};
-    $scope.login = function(){
+    $scope.login = function () {
       $scope.incorrectCredentials = false;
       $scope.unApproved = false;
-      UserService.login($scope.user, function(status) {
+      UserService.login($scope.user, function (status) {
         if (status.state == 200) {
           $state.go('home.dashboard');
-        } else if(status.state == 401) {
+        } else if (status.state == 401) {
           $scope.unApproved = true;
-        } else if(status.state == 403) {
+        } else if (status.state == 403) {
           $scope.incorrectCredentials = true;
         }
-       });
+      });
     };
 
-    $scope.signup = function() {
+    $scope.signup = function () {
       $state.go('signup');
     };
 
@@ -28,3 +37,4 @@
   }
 
 })();
+

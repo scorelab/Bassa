@@ -7,8 +7,10 @@
         </md-input-container>
         <md-input-container class="input-container">
             <label>Password</label>
-            <input type="password" ng-model="user.password" ng-enter="login()" />
+            <input ng-model="user.password" ng-enter="login()" type="{{ type }}" />
+            <md-icon ng-click="toggleType()">{{type == 'password' ? 'visibility_off' : 'visibility'}}</md-icon>
         </md-input-container>
+
         <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
         <div layout="row">
             <p>Don't have an account?</p>
@@ -17,9 +19,13 @@
         <br>
     </div>
     <div class="alert" ng-if="incorrectCredentials">
-        <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Incorrect Credentials
+        <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Incorrect
+        Credentials
     </div>
     <div class="alert" ng-if="unApproved">
-        <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Please confirm your account
+        <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Please confirm
+        your account
     </div>
 </div>
+
+
