@@ -14,12 +14,12 @@
 
     $scope.type = 'password';
     $scope.toggleType = function () {
-      if ($scope.type == 'text') {
+      if ($scope.type === 'text') {
         $scope.type = 'password';
       } else {
         $scope.type = 'text';
       }
-    }
+    };
 
 
     $scope.incorrectCredentials = false;
