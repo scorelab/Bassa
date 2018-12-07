@@ -26,28 +26,34 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 
 ## Installation
 
-Note: 
+Note:
 * Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
-* MacOS users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/MacOS-Installation-Guide).
-
 
 First clone the Repository
-``` git clone https://github.com/scorelab/Bassa.git```
-``` cd Bassa```
+`git clone https://github.com/scorelab/Bassa.git`
+`cd Bassa`
 
 ![gitclone](https://user-images.githubusercontent.com/28682735/35194406-2f6f08e2-fed9-11e7-8411-86d83bed6507.gif)
 
 Use python 3 instead of Python 2
 
 ```
-  $ ./setup.sh
-
-  $ cd components/core/
+  $ cd setup
+  $ ./setup.sh OR ./setup_OSX.sh (Depending on your OS environment)
+  $ cd ../components/core/
   $ sudo python3 setup.py develop
 ```
+
+In case of the error `my_config.h file not found` install the dependencies manually by
+
+```
+  $ cd components/core
+  $ pip3 install -r requirements.txt
+```  
+
 ![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
 
-Bassa has 4 main compoenents, 
+Bassa has 4 main compoenents,
 1. Database
 2. Bassa API
 3. Bassa UI
@@ -56,19 +62,30 @@ Bassa has 4 main compoenents,
 
 ## Database Setup
 
-1. Type below in a MySql terminal.
+1. Set a password for the root user (if not already set)
+
+```
+mysqladmin -u root password <your-password>
+```
+2. Start the MySQL terminal
+
+```
+mysql -u root -p
+```
+
+3. Type below in a MySQL terminal.
 
 ```
 create database Bassa
 ```
 
-2. Type below in the root of project.
+4. Type below in the root of project.
 
 ```
 mysql -u root -p  Bassa < Bassa.sql
 ```
 
-3. Open components/core/DBCon.py and setup database username and password.
+5. Open components/core/DBCon.py and setup database username and password.
 
 
 ## Bassa API
@@ -125,8 +142,8 @@ Run the `docker-compose` at the project directory to deploy the core API, UI and
   There are two types of users in Bassa
   1. The Admin
   2. The Normal Users
-* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away. 
-* The organisation admin can start the downloads at a time of his/her liking. 
+* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away.
+* The organisation admin can start the downloads at a time of his/her liking.
 * Then the users who had added links for certain files can download them from the local servers at a much higher speed.
 * You can even watch a video tutorial for the same on [Youtube](https://www.youtube.com/watch?v=NxS8T1EphCA)
 
