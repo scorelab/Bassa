@@ -52,7 +52,7 @@
         });
       }
     };
-    
+
     $scope.addDownload = function(keyEvent) {
   if (keyEvent.which === 13)
     $scope.addLink();
@@ -88,7 +88,7 @@
      };
 
     getActiveDownloads();
-    
+
   }
 
 })();
