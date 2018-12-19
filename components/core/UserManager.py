@@ -202,6 +202,20 @@ def approve_user(username):
         return "success"
     return "db connection error"
 
+def decline_user_request(username):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "DELETE FROM user WHERE user_name=%s;"
+        try:
+            cursor.execute(sql, username)
+            db.commit()
+        except MySQLdb.Error as e:
+            db.rollback()
+            return e[1]
+        return "success"
+    return "db connection error"
+
 def get_heavy_users():
     db = threadpool.connect()
     if db is not None:
