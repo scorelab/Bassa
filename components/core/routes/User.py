@@ -158,24 +158,6 @@ def approve_user_request(username):
         return '{"error":"token error"}', 403
 
 
-@server.route('/api/user/declineRequest/<string:username>', methods=['POST'])
-def decline_userRequest(username):
-    token = token_validator(request.headers['token'])
-    if token is not None and g.user.auth == AuthLeval.ADMIN:
-        try:
-            status = decline_user_request(username)
-            resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
-        except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-@server.route('/api/user/blocked', methods=['GET'])
 def get_blocked_users_request():
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:

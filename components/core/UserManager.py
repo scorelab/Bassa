@@ -178,7 +178,7 @@ def get_signup_requests():
     db = threadpool.connect()
     if db is not None:
         cursor =  db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT user_name, email FROM user WHERE approved=0;"
+        sql = "SELECT user_name, email FROM user WHERE approved=0 AND blocked=0;"
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
@@ -195,20 +195,6 @@ def approve_user(username):
         sql = "UPDATE user SET approved=%s WHERE user_name=%s;"
         try:
             cursor.execute(sql, (1, username))
-            db.commit()
-        except MySQLdb.Error as e:
-            db.rollback()
-            return e[1]
-        return "success"
-    return "db connection error"
-
-def decline_user_request(username):
-    db = threadpool.connect()
-    if db is not None:
-        cursor = db.cursor()
-        sql = "DELETE FROM user WHERE user_name=%s;"
-        try:
-            cursor.execute(sql, username)
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()

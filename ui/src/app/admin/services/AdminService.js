@@ -39,7 +39,7 @@
     var decline = function (username) {
       return $http({
         method: 'POST',
-        url: BassaUrl + '/api/user/declineRequest/' + username,
+        url: BassaUrl + '/api/user/block/' + username,
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       });
     }
