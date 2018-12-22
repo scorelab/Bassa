@@ -178,7 +178,7 @@ def get_signup_requests():
     db = threadpool.connect()
     if db is not None:
         cursor =  db.cursor(MySQLdb.cursors.DictCursor)
-        sql = "SELECT user_name, email FROM user WHERE approved=0;"
+        sql = "SELECT user_name, email FROM user WHERE approved=0 AND blocked=0;"
         try:
             cursor.execute(sql)
             results = cursor.fetchall()

@@ -56,7 +56,7 @@ server.add_url_rule(rule='/api/user/approve/<string:username>', endpoint='approv
 					view_func=User.approve_user_request, methods=['POST'])
 server.add_url_rule(rule='/api/user/blocked', endpoint='get_blocked_users_request',
 					view_func=User.get_blocked_users_request, methods=['GET'])
-server.add_url_rule(rule='/api/user/blocked/<string:username>', endpoint='block_user_request',
+server.add_url_rule(rule='/api/user/block/<string:username>', endpoint='block_user_request',
 					view_func=User.block_user_request, methods=['POST'])
 server.add_url_rule(rule='/api/user/blocked/<string:username>', endpoint='unblock_user_request',
 					view_func=User.unblock_user_request, methods=['DELETE'])
