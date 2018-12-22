@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
 
+### Mac Junk ###
+.DS_Store
+
 ### Node ###
 # Logs
 logs
