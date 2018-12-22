@@ -41,6 +41,6 @@ then
 	npm install -g gulp
 	echo "gulp installed"
 else
-	echo "Please run as root to proceed with installations... \n1. Type in: su\n2. Enter your password\n3. Execute: sh setup.sh"
+	printf "Please run as root to proceed with installations... \n1. Type in: su\n2. Enter your password\n3. Execute: sh setup.sh\n"
 	exit
 fi
