@@ -1,8 +1,8 @@
-#!/bin/bash
+if ! [ $(id -u) = 0 ]; then
+   	printf "Please run as root to proceed with installations... \n1. Type in: su\n2. Enter your password\n3. Execute: sh setup.sh\n"
 
-if [ $USER = "root" ]
-then 
-	echo "Starting Installation..."
+else
+   	echo "Starting Installation..."
 
 	echo "Udating package list and Pre-installed package versions"
 	apt-get update && apt-get upgrade
@@ -40,7 +40,4 @@ then
 	echo "Installing gulp globally"
 	npm install -g gulp
 	echo "gulp installed"
-else
-	printf "Please run as root to proceed with installations... \n1. Type in: su\n2. Enter your password\n3. Execute: sh setup.sh\n"
-	exit
 fi
