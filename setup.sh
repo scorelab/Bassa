@@ -1,3 +1,4 @@
+#!/bin/sh
 if ! [ $(id -u) = 0 ]; then
    	printf "Please run as root to proceed with installations... \n1. Type in: su\n2. Enter your password\n3. Execute: sh setup.sh\n"
 
