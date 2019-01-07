@@ -22,13 +22,16 @@
     <md-toolbar layout="row" layout-align="center center">
         <section layout-align="start center" layout-fill flex>
         </section>
+        <section layout-align="center center">
+          <p>Hi {{username}}</p>
+        </section>
         <section layout-align="end center">
             <md-menu md-offset="0 20">
                 <md-button class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">
                 <i class="material-icons">menu</i>
                 </md-button>
-                <md-menu-content width="3">
-                    <md-menu-item><md-button ng-click="logout()" ui-sref="login">Log out from {{ username }} </md-button></md-menu-item>
+                <md-menu-content width="2">
+                    <md-menu-item><md-button ng-click="logout()" ui-sref="login">Logout <i class="fa fa-power-off" style="color:maroon"></i> </md-button></md-menu-item>
                 </md-menu-content>
             </md-menu>
         </section>

@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `compression`
 --
 
-CREATE TABLE `compression` (
+CREATE TABLE IF NOT EXISTS `compression` (
   `id` varchar(255) NOT NULL,
   `progress` tinyint(4) DEFAULT NULL,
   `start_time` bigint(20) DEFAULT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `compression` (
 -- Table structure for table `download`
 --
 
-CREATE TABLE `download` (
+CREATE TABLE IF NOT EXISTS `download` (
   `id` bigint(20) NOT NULL,
   `link` text NOT NULL,
   `user_name` varchar(256) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `download` (
 -- Table structure for table `rate`
 --
 
-CREATE TABLE `rate` (
+CREATE TABLE IF NOT EXISTS `rate` (
   `user_name` varchar(256) NOT NULL,
   `id` bigint(20) NOT NULL,
   `rate` tinyint(1) NOT NULL
@@ -75,7 +75,7 @@ CREATE TABLE `rate` (
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `user_name` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   `auth` tinyint(11) NOT NULL,
