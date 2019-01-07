@@ -131,6 +131,26 @@ Read more on installing `aria2` [here](https://aria2.github.io/manual/en/html/RE
 ![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
 
 
+## Running Tests
+
+### API Tests
+* Make sure the python server is working and you have an open connection to the database.
+* Open the python console in your terminal by running the command `python3`.
+* In the console that opens, import the test files, like so:
+
+```
+ from tests.Bassa_endpoint_test import *
+ from tests.login_test import *
+```
+
+### UI Tests
+
+```
+cd ui
+npm test OR yarn test
+```
+
+
 ## Using Docker-Compose
 
 Run the `docker-compose` at the project directory to deploy the core API, UI and the DB.
