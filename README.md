@@ -26,14 +26,14 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 
 ## Installation
 
-Note: 
+Note:
 * Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
 * MacOS users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/MacOS-Installation-Guide).
 
 
 First clone the Repository
-``` git clone https://github.com/scorelab/Bassa.git```
-``` cd Bassa```
+`git clone https://github.com/scorelab/Bassa.git`
+`cd Bassa`
 
 ![gitclone](https://user-images.githubusercontent.com/28682735/35194406-2f6f08e2-fed9-11e7-8411-86d83bed6507.gif)
 
@@ -47,7 +47,7 @@ Use python 3 instead of Python 2
 ```
 ![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
 
-Bassa has 4 main compoenents, 
+Bassa has 4 main compoenents,
 1. Database
 2. Bassa API
 3. Bassa UI
@@ -114,6 +114,26 @@ Read more on installing `aria2` [here](https://aria2.github.io/manual/en/html/RE
 ![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
 
 
+## Running Tests
+
+### API Tests
+* Make sure the python server is working and you have an open connection to the database.
+* Open the python console in your terminal by running the command `python3`.
+* In the console that opens, import the test files, like so:
+
+```
+ from tests.Bassa_endpoint_test import *
+ from tests.login_test import *
+```
+
+### UI Tests
+
+```
+cd ui
+npm test OR yarn test
+```
+
+
 ## Using Docker-Compose
 
 Run the `docker-compose` at the project directory to deploy the core API, UI and the DB.
@@ -125,8 +145,8 @@ Run the `docker-compose` at the project directory to deploy the core API, UI and
   There are two types of users in Bassa
   1. The Admin
   2. The Normal Users
-* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away. 
-* The organisation admin can start the downloads at a time of his/her liking. 
+* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away.
+* The organisation admin can start the downloads at a time of his/her liking.
 * Then the users who had added links for certain files can download them from the local servers at a much higher speed.
 * You can even watch a video tutorial for the same on [Youtube](https://www.youtube.com/watch?v=NxS8T1EphCA)
 

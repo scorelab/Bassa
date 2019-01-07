@@ -60,10 +60,13 @@
     var getActiveDownloads = function() {
       DashService.getDownloads().then(function (response) {
         var data = response.data;
-        $scope.downloads = _.filter(data, function(d) {return d.status==0});
-        $scope.downloads = _.map($scope.downloads, function(element) {
-             return _.extend({}, element, {progress: 0});
-        });
+        $scope.downloads = _.reduce(data, function(queue, d) {
+            if (d.status == 0) {
+              let object = _.extend({}, d, {progress: 0});
+              queue.push(object)
+              return queue;
+            }
+        }, []);
       }, function(error){
         ToastService.showToast("Oops! Something went wrong when fetching data");
       });
