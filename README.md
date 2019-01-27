@@ -159,7 +159,8 @@ Please go through the developer guides in [Bassa wiki](https://github.com/scorel
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. <img src="https://opencollective.com/Bassa/contributors.svg?width=890&button=false" />
+This project exists thanks to all the people who contribute. 
+<img src="https://opencollective.com/Bassa/contributors.svg?width=890&button=false" />
 
 
 ## Backers
