@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 echo "Finding the package manager"
 APT_GET_CMD=$(which apt-get)
 PACMAN_CMD=$(which pacman)
@@ -15,4 +16,3 @@ else
     echo "Please manually install packages in package-list-aptget file"
     exit 1;
 fi
-

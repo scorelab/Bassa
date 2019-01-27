@@ -15,7 +15,7 @@ OSX_CONFDIR  = os.path.expanduser('~') + '/.config/bassa/'
 def read(file_name):
     return open(os.path.join(os.path.dirname(__file__), file_name)).read()
 
-base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+base_dir = os.path.dirname(os.path.abspath(__file__))
 requirements_path = os.path.join(base_dir, 'requirements.txt')
 
 install_reqs = parse_requirements(requirements_path, session=False)

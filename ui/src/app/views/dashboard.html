@@ -1,9 +1,9 @@
 <div layout-gt-md="column" layout-align="center">
 
   <md-content class="add-download-box" >
-    <md-input-container flex class="downlod-input-box">
+    <md-input-container flex class="downlod-input-box" ng-keyup="addDownload($event)">
         <label>Add download</label>
-        <input ng-model="dlink.link" name="taskText" type="url" required>
+        <input ng-model="dlink.link" name="taskText" type="text" required >
     </md-input-container>
     <md-button class="md-fab md-wayrn md-mini" ng-click="addLink()">
         <i class="material-icons">add</i>
@@ -16,13 +16,17 @@
     <table id="table" class="table table-hover table-bordered">
         <thead>
         <tr ng-repeat="data in downloads">
-            <td data-title="ID">{{$index + 1}}</td>
-            <td data-title="Issue">{{data.download_name}}</td>
-            <td data-title="Progress">
+            <td id="vertalign" data-title="ID">{{$index + 1}}</td>
+            <td id="vertalign" data-title="Issue">{{data.download_name}}</td>
+            <td id="vertalign" data-title="Progress">
               <md-progress-linear
                 md-mode="determinate"
                 value="{{data.progress}}">
               </md-progress-linear>
+            </td>
+            <td><md-button class="md-fab md-warn md-mini" ng-click="removeLink(data.id,$event)">
+                <i class="material-icons">delete</i>
+                </md-button>
             </td>
         </tr>
         </tbody>
