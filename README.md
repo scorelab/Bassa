@@ -8,6 +8,8 @@
 [![](https://images.microbadger.com/badges/image/scoreucsc/bassa.svg)](https://microbadger.com/images/scoreucsc/bassa "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/scoreucsc/bassa.svg)](https://microbadger.com/images/scoreucsc/bassa "Get your own version badge on microbadger.com")
 [![](https://images.microbadger.com/badges/commit/scoreucsc/bassa.svg)](https://microbadger.com/images/scoreucsc/bassa "Get your own commit badge on microbadger.com")
+[![Backers on Open Collective](https://opencollective.com/Bassa/backers/badge.svg)](#backers) 
+[![Sponsors on Open Collective](https://opencollective.com/Bassa/sponsors/badge.svg)](#sponsors) 
 
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
@@ -133,7 +135,6 @@ cd ui
 npm test OR yarn test
 ```
 
-
 ## Using Docker-Compose
 
 Run the `docker-compose` at the project directory to deploy the core API, UI and the DB.
@@ -154,3 +155,33 @@ Run the `docker-compose` at the project directory to deploy the core API, UI and
 # Developers
 
 Please go through the developer guides in [Bassa wiki](https://github.com/scorelab/Bassa/wiki)
+
+
+## Contributors
+
+This project exists thanks to all the people who contribute. <img src="https://opencollective.com/Bassa/contributors.svg?width=890&button=false" />
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/Bassa#backer)]
+
+<a href="https://opencollective.com/Bassa#backers" target="_blank"><img src="https://opencollective.com/Bassa/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/Bassa#sponsor)]
+
+<a href="https://opencollective.com/Bassa/sponsor/0/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/1/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/2/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/3/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/4/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/5/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/6/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/7/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/8/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/9/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/9/avatar.svg"></a>
+
+
