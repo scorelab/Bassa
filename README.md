@@ -27,13 +27,24 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 
 ## Installation
 
+Note: Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+
+First clone the Repository 
+``` git clone https://github.com/scorelab/Bassa.git```
+
+![gitclone](https://user-images.githubusercontent.com/28682735/35194406-2f6f08e2-fed9-11e7-8411-86d83bed6507.gif)
+
 Use python 3 instead of Python 2
 
 ```
   $ ./setup.sh
   $ cd components/core/
-  $ sudo python setup.py develop
+  $ sudo python3 setup.py develop
 ```
+![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
+
+
+
 ## Database Setup
 
 1. Type below in a MySql terminal.
@@ -54,8 +65,10 @@ mysql -u root -p  Bassa < Bassa.sql
 ## Test Server
 ```
   $ cd components/core/
-  $ python Main.py
+  $ python3 Main.py
 ```
+![python3main](https://user-images.githubusercontent.com/28682735/35194408-2fce9136-fed9-11e7-80e6-fac5e6f54bc7.gif)
+
 
 ## Bassa UI
 
@@ -70,27 +83,39 @@ $ npm install
 ### To start
 run `gulp serve`
 
+
+![gulp_serve](https://user-images.githubusercontent.com/28682735/35194407-2fa172e6-fed9-11e7-9e89-065ecb3cbf87.gif)
+
+
+
 In the first time you login, the credentials would be as follows.
 
-username - rand
-password - pass
+- username - rand
+- password - pass
+
+
+![bassaui](https://user-images.githubusercontent.com/28682735/35193753-667c7e0c-fecd-11e7-918f-13ce1d00d055.gif)
+
 
 ### Make sure you have aria2 installed.
 run `aria2c --enable-rpc`
+
+
+![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
+
 
 ### How to Use Bassa
 * After Setting up Bassa, Login/Register.There are two types of users in Bassa- (1) The Admin and (2) The Normal Users.
 * A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away. 
 * The organisation admin can start the downloads at a time of his/her liking. 
 * Then the users who had added links for certain files can download them from the local servers at a much higher speed.
-
+* You can even watch a video tutorial for the same on [Youtube](https://www.youtube.com/watch?v=NxS8T1EphCA)
 ### Autoformat JS with Prettier
 
 - [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
 - [Atom Plugin](https://github.com/prettier/prettier-atom)
 
 Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
-
 
 
 ### Run UI unit tests
