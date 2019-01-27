@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo "Installing pip"
+sudo pacman -S python-pip
+echo "pip installed"
+
+echo "Installing setuptools"
+sudo pacman -S python-setuptools
+echo "pip installed"
+
+echo "Installing Aria2"
+sudo pacman -S aria2
+echo "Aria2 installed"
+
+echo "Installing mysql-server"
+sudo pacman -S mysql
+echo "mysql-server installed"
+
+echo "Installing libmysqlclient"
+sudo pacman -S libmysqlclient
+echo "libmysqlclient installed"
+
+echo "Installing node"
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+echo "NodeJS installed"
+
+echo "Installing bower globally"
+sudo npm install -g bower
+echo "bower installed"
+
+echo "Installing gulp globally"
+sudo npm install -g gulp
+echo "gulp installed"
