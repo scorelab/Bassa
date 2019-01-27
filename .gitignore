@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
 
+### Mac Junk ###
+.DS_Store
+
 ### Node ###
 # Logs
 logs
@@ -225,5 +228,10 @@ tags
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+### IDEs
+
+.idea/*
+.vscode/*
 
 # End of https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
