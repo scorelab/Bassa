@@ -157,20 +157,20 @@ Run the `docker-compose` at the project directory to deploy the core API, UI and
 Please go through the developer guides in [Bassa wiki](https://github.com/scorelab/Bassa/wiki)
 
 
-## Contributors
+# Contributors
 
 This project exists thanks to all the people who contribute. 
-<img src="https://opencollective.com/Bassa/contributors.svg?width=890&button=false" />
+<a href="https://opencollective.com/Bassa#contributors" target="_blank"><img src="https://opencollective.com/Bassa/contributors.svg?width=890&button=false" /></a>
 
 
-## Backers
+# Backers
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/Bassa#backer)]
 
 <a href="https://opencollective.com/Bassa#backers" target="_blank"><img src="https://opencollective.com/Bassa/backers.svg?width=890"></a>
 
 
-## Sponsors
+# Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/Bassa#sponsor)]
 
