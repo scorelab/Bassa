@@ -159,6 +159,8 @@ Please go through the developer guides in [Bassa wiki](https://github.com/scorel
 
 # Contributors
 
+NOTE: Please make Pull Requests against `develop` branch because as of now `master` branch is used for version release purpose.
+
 This project exists thanks to all the people who contribute. 
 <a href="https://opencollective.com/Bassa#contributors" target="_blank"><img src="https://opencollective.com/Bassa/contributors.svg?width=890&button=false" /></a>
 
