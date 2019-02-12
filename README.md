@@ -26,6 +26,9 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 * Provides admins an interface to deal with inappropriate files
 
 ## Installation
+
+Note: Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+
 First clone the Repository 
 ``` git clone https://github.com/scorelab/Bassa.git```
 
@@ -34,9 +37,9 @@ First clone the Repository
 Use python 3 instead of Python 2
 
 ```
-  $ sudo sh setup.sh
+  $ ./setup.sh
   $ cd components/core/
-  $ sudo python setup.py develop
+  $ sudo python3 setup.py develop
 ```
 ![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
 
@@ -62,7 +65,7 @@ mysql -u root -p  Bassa < Bassa.sql
 ## Test Server
 ```
   $ cd components/core/
-  $ python Main.py
+  $ python3 Main.py
 ```
 ![python3main](https://user-images.githubusercontent.com/28682735/35194408-2fce9136-fed9-11e7-80e6-fac5e6f54bc7.gif)
 
@@ -87,8 +90,8 @@ run `gulp serve`
 
 In the first time you login, the credentials would be as follows.
 
-username - rand
-password - pass
+- username - rand
+- password - pass
 
 
 ![bassaui](https://user-images.githubusercontent.com/28682735/35193753-667c7e0c-fecd-11e7-918f-13ce1d00d055.gif)
@@ -106,14 +109,13 @@ run `aria2c --enable-rpc`
 * A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away. 
 * The organisation admin can start the downloads at a time of his/her liking. 
 * Then the users who had added links for certain files can download them from the local servers at a much higher speed.
-
+* You can even watch a video tutorial for the same on [Youtube](https://www.youtube.com/watch?v=NxS8T1EphCA)
 ### Autoformat JS with Prettier
 
 - [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
 - [Atom Plugin](https://github.com/prettier/prettier-atom)
 
 Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
-
 
 
 ### Run UI unit tests
