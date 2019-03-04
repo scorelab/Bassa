@@ -120,6 +120,6 @@ Find more plugins [here](https://github.com/prettier/prettier#editor-integration
 
 ### Run UI unit tests
 ```
-	$ cd ui/
-	$ npm test OR $ yarn test 
+$ cd ui/
+$ npm test OR $ yarn test 
 ```
