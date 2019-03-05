@@ -60,6 +60,7 @@ mysql -u root -p  Bassa < Bassa.sql
 ```
 
 3. Open components/core/DBCon.py and setup database username and password.
+   Edit the variables like this _```db=MySQLdb.connect("localhost", "root", "pass","Bassa")```
 
 
 ## Test Server
