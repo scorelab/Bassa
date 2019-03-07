@@ -1,34 +1,24 @@
-#!/bin/bash
+#!/bin/sh
 
-echo "Installing pip"
-sudo apt-get install -y python3-pip
-echo "pip installed"
+if ! [ $(id -u) = 0 ]; then
+   	printf "Please run as root to proceed with installations... \n1. Type in: su\n2. Enter your password\n3. Execute: sh setup.sh\n"
 
-echo "Installing setuptools"
-sudo apt-get install -y python3-setuptools
-echo "pip installed"
+else
+   	echo "Starting Installation..."
 
-echo "Installing Aria2"
-sudo apt-get install -y aria2
-echo "Aria2 installed"
+    echo "Finding the package manager"
+    APT_GET_CMD=$(which apt-get)
+    PACMAN_CMD=$(which pacman)
 
-echo "Installing mysql-server"
-sudo apt-get install -y mysql-server
-echo "mysql-server installed"
+    if [ ! -z $APT_GET_CMD ]; then
+        echo -e "apt-get found\n"
+        ./package-list-aptget
 
-echo "Installing libmysqlclient"
-sudo apt-get install libmysqlclient-dev
-echo "libmysqlclient installed"
-
-echo "Installing node"
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs
-echo "NodeJS installed"
-
-echo "Installing bower globally"
-sudo npm install -g bower
-echo "bower installed"
-
-echo "Installing gulp globally"
-sudo npm install -g gulp
-echo "gulp installed"
+    elif [ ! -z $PACMAN_CMD ]; then
+        echo -e "pacman found\n"
+        ./package-list-pacman
+    else
+        echo "Please manually install packages in package-list-aptget file"
+        exit 1;
+    fi
+fi
