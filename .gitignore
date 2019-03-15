@@ -227,6 +227,6 @@ tags
 .history
 
 ### Intellij IDEA ###
-.idea/
+.idea/*
 
 # End of https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
