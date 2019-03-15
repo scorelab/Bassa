@@ -28,6 +28,6 @@ angular.module('app')
       //   $scope.unApproved=true;
       // }
       return res;
-    },
+    }
   };
 }]);

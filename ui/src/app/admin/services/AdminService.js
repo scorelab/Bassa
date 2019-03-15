@@ -26,7 +26,7 @@
         method: 'GET',
         url: BassaUrl + '/api/user/requests'
       });
-    }
+    };
 
     var approve = function(username) {
       return $http({
@@ -34,14 +34,14 @@
         url: BassaUrl + '/api/user/approve/' + username,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
-    }
+    };
 
     var getHeavyUsers = function() {
       return $http({
         method: 'GET',
         url: BassaUrl + '/api/user/heavy'
       });
-    }
+    };
 
     return {
       startDownloads : startDownloads,

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "Installing node modules"
 npm install
 

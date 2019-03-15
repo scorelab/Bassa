@@ -42,6 +42,6 @@
         ToastService.showToast('Please ensure entered details are correct');
       }
     };
-  };
+  }
 
 })();

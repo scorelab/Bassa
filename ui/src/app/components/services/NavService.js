@@ -23,7 +23,7 @@
         name: 'Admin',
         icon: 'person',
         sref: '.admin'
-      },
+      }
     ];
 
     return {

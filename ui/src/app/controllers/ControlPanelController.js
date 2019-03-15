@@ -18,6 +18,7 @@
 
         function performProgress() {
             vm.showProgress = true;
+            var interval;
             interval = $interval(function() {
                 vm.determinateValue += 1;
                 if (vm.determinateValue > 100) {

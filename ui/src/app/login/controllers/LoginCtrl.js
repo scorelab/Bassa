@@ -10,11 +10,11 @@
       $scope.incorrectCredentials = false;
       $scope.unApproved = false;
       UserService.login($scope.user, function(status) {
-        if (status.state == 200) {
+        if (status.state === 200) {
           $state.go('home.dashboard');
-        } else if(status.state == 401) {
+        } else if(status.state === 401) {
           $scope.unApproved = true;
-        } else if(status.state == 403) {
+        } else if(status.state === 403) {
           $scope.incorrectCredentials = true;
         }
        });

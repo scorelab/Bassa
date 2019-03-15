@@ -47,7 +47,7 @@
         }
 
         function toggleAll() {
-            if (remaining() == 0) {
+            if (remaining() === 0) {
                 angular.forEach(vm.todos, function (todo) {
                     todo.done = false;
                 });

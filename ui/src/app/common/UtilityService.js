@@ -8,7 +8,7 @@
 
     var formatBytes = function(bytes) {
 
-      if(bytes == 0) return '0 Byte';
+      if(bytes === 0) return '0 Byte';
       var k = 1000,
           dm = 3,
           sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],

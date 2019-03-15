@@ -80,7 +80,7 @@
     var cleanUpStorage = function() {
       localStorage.setItem('Token', '');
       localStorage.setItem('UserName', '');
-    }
+    };
 
     var getToken = function(){
       return localStorage.getItem('Token');

@@ -10,7 +10,7 @@
     var setSize = function(lst) {
       lst.data.forEach(function(download) {
         download.size = UtilityService.formatBytes(download.size);
-      })
+      });
       return lst;
     };
 
