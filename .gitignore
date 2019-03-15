@@ -226,4 +226,7 @@ tags
 !.vscode/extensions.json
 .history
 
+### Intellij IDEA ###
+.idea/
+
 # End of https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
