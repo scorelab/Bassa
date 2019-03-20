@@ -83,7 +83,7 @@ def add_regular_user(user):
         try:
             cursor.execute(sql, (user.userName, user.password, user.auth, user.email))
             db.commit()
-        except MySQLdb.IntegrityError as e:
+        except MySQLdb.IntegrityError:
             db.rollback()
             return "username taken"
         return "success"
