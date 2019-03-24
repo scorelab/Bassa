@@ -38,7 +38,7 @@ def regular_user_request():
         else:
             resp = Response(response='{"error":"' + status + '"}', status=400)
     except Exception as e:
-        resp = Response(response='{"error":"username exists"}', status=400)
+        resp = Response(response='{"error":"Connection error"}', status=500)
     return resp
 
 
