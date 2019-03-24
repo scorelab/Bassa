@@ -52,27 +52,32 @@ Use python 3 instead of Python 2
 Bassa has 4 main compoenents,
 1. Database
 2. Bassa API
-3. Bassa UI
-4. aria2
+3. aria2
+4. Bassa UI
 
 
 ## Database Setup
 
-1. Type below in a MySql terminal.
+1.Type below in a MySql terminal.
 
 ```
 create database Bassa
 ```
 
-2. Type below in the root of project.
+2.Type below in the root of project.
 
 ```
 mysql -u root -p  Bassa < Bassa.sql
 ```
 
-3. Open components/core/DBCon.py and setup database username and password.
-
-
+3.Open components/core/DBCon.py and setup database username and password.
+```
+_db=MySQLdb.connect("db", os.environ.get('YOUR_DB_USERNAME'), os.environ.get('YOUR_DB_PASSWORD'), os.environ.get('Bassa'))
+```
+If you don't have environment variables setup, you can use the following line with hard coded values for testing purposes
+```
+_db=MySQLdb.connect(host="localhost", user="YOUR_DB_USERNAME", passwd="YOUR_DB_PASSWORD",db= "Bassa")
+```
 ## Bassa API
 ```
   $ cd components/core/
@@ -80,6 +85,13 @@ mysql -u root -p  Bassa < Bassa.sql
 ```
 ![python3main](https://user-images.githubusercontent.com/28682735/35194408-2fce9136-fed9-11e7-80e6-fac5e6f54bc7.gif)
 
+## Run aria2 
+run `aria2c --enable-rpc`
+
+Read more on installing `aria2` [here](https://aria2.github.io/manual/en/html/README.html)
+
+
+![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
 
 ## Bassa UI
 
@@ -105,16 +117,6 @@ In the first time you log in, the credentials would be as follows.
 
 
 ![bassaui](https://user-images.githubusercontent.com/28682735/35193753-667c7e0c-fecd-11e7-918f-13ce1d00d055.gif)
-
-
-## Make sure you have aria2 installed.
-run `aria2c --enable-rpc`
-
-Read more on installing `aria2` [here](https://aria2.github.io/manual/en/html/README.html)
-
-
-![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
-
 
 ## Running Tests
 
