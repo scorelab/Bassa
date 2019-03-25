@@ -1,0 +1,18 @@
+[
+  {
+    "ParameterKey": "DBName",
+    "ParameterValue": "Bassa"
+  },
+  {
+    "ParameterKey": "DBUser",
+    "ParameterValue": "root"
+  },
+  {
+    "ParameterKey": "DBPassword",
+    "ParameterValue": "12345678"
+  },
+  {
+    "ParameterKey": "SecurityGroupId",
+    "ParameterValue": "sg-001a4b6bc37468093"
+  }
+]
