@@ -6,7 +6,11 @@ APT_GET=$(which apt-get)
 PACMAN=$(which pacman)
 BREW=$(which brew)
 
+<<<<<<< HEAD
 using_yum() {
+=======
+install_yum() {
+>>>>>>> 7d10d6c9af12951d1dab8d0b009a6ac0df0df3e0
    # Documented for centOS 7
    # Updating yum
    echo "Setting up yum"
@@ -65,7 +69,11 @@ using_yum() {
    echo "gulp installed"
 }
 
+<<<<<<< HEAD
 using_dnf() {
+=======
+install_dnf() {
+>>>>>>> 7d10d6c9af12951d1dab8d0b009a6ac0df0df3e0
    echo "Installing pip"
    dnf install python-pip #Python 2
    dnf install python3    #Python 3
@@ -112,7 +120,11 @@ using_dnf() {
    npm install -g gulp
    echo "gulp installed"
 }
+<<<<<<< HEAD
 using_apt() {
+=======
+install_apt() {
+>>>>>>> 7d10d6c9af12951d1dab8d0b009a6ac0df0df3e0
    #!/bin/bash
 
    echo "Installing pip"
@@ -148,7 +160,11 @@ using_apt() {
    npm install -g gulp
    echo "gulp installed"
 }
+<<<<<<< HEAD
 using_pacman() {
+=======
+install_pacman() {
+>>>>>>> 7d10d6c9af12951d1dab8d0b009a6ac0df0df3e0
    #updating pacman
    pacman -Syy
    pacman -Su
@@ -194,7 +210,11 @@ using_pacman() {
    echo "gulp installed"
 
 }
+<<<<<<< HEAD
 using_brew() {
+=======
+install_brew() {
+>>>>>>> 7d10d6c9af12951d1dab8d0b009a6ac0df0df3e0
    echo "Installing Homebrew"
    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
    echo "Homebrew Installed"
@@ -226,6 +246,7 @@ using_brew() {
    echo "Gulp Installed"
 }
 
+<<<<<<< HEAD
 if [ ! -z $APT_GET ]; then
    using_apt
 elif [ ! -z $DNF ]; then
@@ -236,6 +257,18 @@ elif [ ! -z $PACMAN ]; then
    using_pacman
 elif [ ! -z $BREW ]; then
    using_brew
+=======
+if [ ! -z $APT_GET_CMD ]; then
+   install_apt
+elif [ ! -z $DNF_CMD ]; then
+   install_dnf
+elif [ ! -z $YUM_CMD ]; then
+   install_yum
+elif [ ! -z $PACMAN_CMD ]; then
+   install_pacman
+elif [ ! -z $BREW ]; then
+   install_brew
+>>>>>>> 7d10d6c9af12951d1dab8d0b009a6ac0df0df3e0
 else
    echo "Failed"
    exit 1
