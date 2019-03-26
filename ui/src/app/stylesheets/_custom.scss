@@ -197,6 +197,14 @@ md-backdrop.md-sidenav-backdrop {
 
 .login-content{
   width: 23%;
+   @media screen and (max-width: 400px ) {
+    width: 70%;
+  }
+}
+.logo{
+ @media screen and (max-width: 400px ) {
+    width: 34%;
+  }
 }
 
 .login-button{

@@ -5,9 +5,10 @@ _db=None
 
 def get_db_con () :
     global _db
+    print("###")
     if _db==None:
         try:
-            _db=MySQLdb.connect("db", os.environ.get('BASSA_DB_USERNAME'), os.environ.get('BASSA_DB_PASSWORD'), os.environ.get('BASSA_DB_NAME'))
+            _db=MySQLdb.connect(host="localhost", user="root", passwd="password",db= "Bassa")
             return _db
         except:
             return None
