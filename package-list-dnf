@@ -1,0 +1,47 @@
+#!/bin/bash
+
+echo "Installing pip"
+dnf install python-pip #Python 2
+dnf install python3    #Python 3
+echo "pip installed"
+
+echo "Upgrading setuptools"
+dnf upgrade python-setuptools
+echo "setuptools upgraded"
+
+echo "Installing Aria2"
+yum install aria2
+echo "Aria2 installed"
+
+echo "Installing mysql-server"
+## Fedora 29 ##
+dnf install https://dev.mysql.com/get/mysql80-community-release-fc29-1.noarch.rpm
+# choose accordingly
+## Fedora 28 ##
+#dnf install https://dev.mysql.com/get/mysql80-community-release-fc28-1.noarch.rpm
+
+## Fedora 27 ##
+#dnf install https://dev.mysql.com/get/mysql80-community-release-fc27-1.noarch.rpm
+
+dnf install mysql-community-server
+systemctl start mysqld.service ## use restart after update
+systemctl enable mysqld.service
+echo "mysql-server installed"
+
+echo "Installing libmysqlclient"
+yum install mysql-devel
+echo "libmysqlclient installed"
+
+echo "Installing node"
+dnf install -y gcc-c++ make
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
+dnf install nodejs
+echo "NodeJS installed"
+
+echo "Installing bower globally"
+npm install -g bower
+echo "bower installed"
+
+echo "Installing gulp globally"
+npm install -g gulp
+echo "gulp installed"
