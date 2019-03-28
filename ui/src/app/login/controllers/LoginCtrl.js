@@ -24,19 +24,12 @@
       $state.go('signup');
     };
 
-    $scope.toggle = function () {
-      let x = document.getElementsByClassName("login-container")[0];
-      x.id = "temp_id";
-      let y = document.getElementById("temp_id").style.backgroundColor;
-      if(document.getElementById("temp_id").style.backgroundColor === "rgb(25, 34, 60)")
-      {
-        document.getElementById("temp_id").style.backgroundColor="#fff";
-      }
-      else
-      {
-        document.getElementById("temp_id").style.backgroundColor="#19223c";
-      }
-    }
+    $scope.toggle = function toggleTheme() {
+      const x = document.getElementsByClassName('login-container')[0];
+      x.id = 'temp_id';
+      if (document.getElementById('temp_id').style.backgroundColor === 'rgb(25, 34, 60)') { document.getElementById('temp_id').style.backgroundColor = '#fff'; }
+      else { document.getElementById('temp_id').style.backgroundColor = '#19223c'; }
+    };
 
     UserService.cleanUpStorage();
   }
