@@ -191,12 +191,24 @@ md-backdrop.md-sidenav-backdrop {
   cursor: pointer;
 }
 
+.login-container{
+  background: #fff;
+}
+
+.label-styles{
+  color: #757575;
+}
+
 .input-container{
   margin:1px;
 }
 
 .login-content{
   width: 23%;
+}
+
+.toggle-button{
+  background:#ff6600;
 }
 
 .login-button{
