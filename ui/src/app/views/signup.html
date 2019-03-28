@@ -1,4 +1,4 @@
-<div layout="column" layout-align="center center" class="">
+<div layout="column" layout-align="center center" class="sign">
   <h1 class="md-display-2 login-heading">Sign up for Bassa</h1>
 
   <form name="loginForm" novalidate>
@@ -11,7 +11,7 @@
       <input type="email" class="form-control inputStyle" placeholder="Email" name="email" ng-model="user.email" required/><span class="highlight"></span><span class="bar"></span>
       <p class="help-block" ng-if="loginForm.email.$invalid && loginForm.email.$dirty">Please Enter a valid email address</p>
     </div>
-
+ 
     <div class="group" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
       <input type="password" class="form-control inputStyle" placeholder="Password" name="password" ng-model="user.password" ng-minLength="8" required"/><span class="highlight"></span><span class="bar"></span>
       <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Please Enter at least 8 characters</p>

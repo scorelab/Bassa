@@ -176,8 +176,21 @@ md-backdrop.md-sidenav-backdrop {
   width: 10%;
 }
 
+.sign{
+  margin-top:7%;
+}
+
 .login-heading {
   margin-top: 0px;
+  padding:10px;
+  font-size:40px;
+  margin-bottom:-20px;
+  @media screen and (max-width: 400px){
+    margin-top:34%;
+    font-size: 30px;
+    padding:5%;
+    margin-bottom:-10px;
+  }
 }
 
 #signup-button{
