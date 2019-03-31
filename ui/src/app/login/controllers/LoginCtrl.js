@@ -1,3 +1,4 @@
+/* global document */
 (function(){
   'use strict';
   angular
@@ -25,12 +26,11 @@
     };
 
     $scope.toggle = function toggleTheme() {
-      const x = document.getElementsByClassName('login-container')[0];  /* trying to get login page parent node */
+      const x = document.getElementsByClassName('login-container')[0]; /* trying to get login page parent node */
       x.id = 'temp_id';
       if (document.getElementById('temp_id').style.backgroundColor === 'rgb(25, 34, 60)') { /* checking if present mode is dark */
         document.getElementById('temp_id').style.backgroundColor = '#fff'; /* If it is true, then change it to light theme */
-      }
-      else { document.getElementById('temp_id').style.backgroundColor = '#19223c'; }
+      } else { document.getElementById('temp_id').style.backgroundColor = '#19223c'; }
     };
 
     UserService.cleanUpStorage();
