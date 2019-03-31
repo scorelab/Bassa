@@ -92,6 +92,7 @@
     "karma-chrome-launcher": "^2.0.0",
     "karma-cli": "~1.0.1",
     "karma-coverage-istanbul-reporter": "^1.2.1",
+    "karma-firefox-launcher": "^1.1.0",
     "karma-jasmine": "~0.3.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-spec-reporter": "0.0.26",
@@ -113,6 +114,6 @@
   "scripts": {
     "init": "npm install",
     "install": "bower --allow-root install",
-    "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
+    "test": "./node_modules/.bin/karma start --single-run --browsers Chrome,Firefox"
   }
 }

@@ -7,12 +7,13 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers : ['Chrome', 'Firefox'],
 
     reporters: ['spec'],
 
     plugins : [
         'karma-chrome-launcher',
+        'karma-firefox-launcher',
         'karma-jasmine',
         'karma-spec-reporter'
     ],
