@@ -7,15 +7,15 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome', 'Firefox'],
+    browsers : ['Chrome','Firefox'],
 
     reporters: ['spec'],
 
     plugins : [
-        'karma-chrome-launcher',
-        'karma-firefox-launcher',
-        'karma-jasmine',
-        'karma-spec-reporter'
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-jasmine',
+      'karma-spec-reporter'
     ],
     files: [
       'bower_components/jquery/dist/jquery.js',
