@@ -25,18 +25,15 @@
       $state.go('signup');
     };
 
-    $scope.onChange = function(cbState) {
-      //console.log(cbState)
-      let x = document.getElementsByClassName("parent-container")[0];
-      x.id = "temp_id";
-      if(cbState === true) {
-        //console.log('true value')
-        document.getElementById("temp_id").style.backgroundColor="#19223c";
+    $scope.onChange = function toggleTheme (cbState) {
+      const x = document.getElementsByClassName('parent-container')[0];
+      x.id = 'temp_id';
+      if (cbState === true) {
+        document.getElementById('temp_id').style.backgroundColor = '#19223c';
       } else {
-        //console.log('false value')
-        document.getElementById("temp_id").style.backgroundColor="#fff";
+        document.getElementById('temp_id').style.backgroundColor = '#fff';
       }
-    }
+    };
 
     UserService.cleanUpStorage();
   }
