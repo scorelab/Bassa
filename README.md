@@ -65,6 +65,7 @@ create database Bassa
 2.Type below in the root of project.
 
 ```
+cd db_schema
 mysql -u root -p  Bassa < Bassa.sql
 ```
 
