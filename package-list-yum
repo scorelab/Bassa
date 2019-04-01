@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Documented for centOS 7
+# Updating yum
+echo "Setting up yum"
+yum -y update
+yum -y install yum-utils
+yum -y groupinstall development
+echo "yum is ready"
+
+#Installing Python
+echo "Installing Python"
+yum install centos-release-scl
+yum install rh-python36
+scl enable rh-python36 bash
+python --version
+echo "Python successfully installed"
+
+#Installing pip
+echo "Installing pip"
+yum install epel-release -y
+yum install python-pip
+echo "pip successfully installed"
+
+#Installing setup tools
+echo "Installing setuptools"
+wget http://pypi.python.org/packages/source/s/setuptools/setuptools-1.1.6.tar.gz --no-check-certificate
+tar xf setuptools-1.1.6.tar.gz
+cd setuptools-1.1.6
+python3.3 setup.py install
+echo "setuptools installed"
+
+echo "Installing Aria2"
+yum --enablerepo=rpmforge install aria2 -y
+echo "Aria2 installed"
+
+echo "Installing mysql-server"
+rpm -ivh https://repo.mysql.com//mysql57-community-release-el7-11.noarch.rpm
+yum install mysql-server -y
+echo "mysql-server installed"
+
+echo "Installing libmysqlclient"
+yum install mysql-devel -y
+echo "libmysqlclient installed"
+
+echo "Installing node"
+yum install -y gcc-c++ make
+curl -sL https://rpm.nodesource.com/setup_6.x | sudo -E bash -
+yum install nodejs
+echo "NodeJS installed"
+
+echo "Installing bower globally"
+npm install -g bower
+echo "bower installed"
+
+echo "Installing gulp globally"
+npm install -g gulp
+echo "gulp installed"

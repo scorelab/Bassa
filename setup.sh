@@ -1,24 +1,48 @@
 #!/bin/sh
 
+YUM=$(which yum)
+DNF=$(which dnf)
+APT_GET=$(which apt-get)
+PACMAN=$(which pacman)
+BREW=$(which brew)
+
+# Variable for package manager used by the user
+PACKAGE_MANAGER="package_manager"
+
 if ! [ $(id -u) = 0 ]; then
-   	printf "Please run as root to proceed with installations... \n1. Type in: su\n2. Enter your password\n3. Execute: sh setup.sh\n"
+   printf "Please run as root to proceed with installations... \n1. Type in: su\n2. Enter your password\n3. Execute: sh setup.sh\n"
 
 else
-   	echo "Starting Installation..."
+   echo "Starting dependency installation..."
+   echo "Finding the package manager"
 
-    echo "Finding the package manager"
-    APT_GET_CMD=$(which apt-get)
-    PACMAN_CMD=$(which pacman)
+   if [ ! -z $APT_GET ]; then
+      echo -e "apt-get found\n"
+      PACKAGE_MANAGER="apt-get"
+      ./package-list-aptget
 
-    if [ ! -z $APT_GET_CMD ]; then
-        echo -e "apt-get found\n"
-        ./package-list-aptget
+   elif [ ! -z $PACMAN ]; then
+      echo -e "pacman found\n"
+      PACKAGE_MANAGER="pacman"
+      ./package-list-pacman
 
-    elif [ ! -z $PACMAN_CMD ]; then
-        echo -e "pacman found\n"
-        ./package-list-pacman
-    else
-        echo "Please manually install packages in package-list-aptget file"
-        exit 1;
-    fi
+   elif [ ! -z $DNF ]; then
+      echo -e "dnf found\n"
+      PACKAGE_MANAGER="dnf"
+      ./package-list-dnf
+
+   elif [ ! -z $YUM ]; then
+      echo -e "yum found\n"
+      PACKAGE_MANAGER="yum"
+      ./package-list-yum
+
+   elif [ ! -z $BREW ]; then
+      echo -e "brew found\n"
+      PACKAGE_MANAGER="brew"
+      ./package-list-brew
+
+   else
+      echo "Please manually install packages in package-list-$PACKAGE_MANAGER file"
+      exit 1
+   fi
 fi
