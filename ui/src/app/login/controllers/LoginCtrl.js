@@ -25,7 +25,7 @@
       $state.go('signup');
     };
 
-    $scope.onChange = function toggleTheme (cbState) {
+    $scope.onChange = function toggleTheme(cbState) {
       const x = document.getElementsByClassName('parent-container')[0];
       x.id = 'temp_id';
       if (cbState === true) {
