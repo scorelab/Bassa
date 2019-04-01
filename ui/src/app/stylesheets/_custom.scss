@@ -17,6 +17,14 @@ body {
   color: $text-color;
 }
 
+.dark-theme-switch {
+  float: right;
+  padding-right: 50px;
+}
+
+.parent-container {
+  background: #fff;
+}
 .toolbar-button {
   min-width: 20px;
 }
@@ -192,7 +200,8 @@ md-backdrop.md-sidenav-backdrop {
 }
 
 .login-container{
-  background: #fff;
+  background: transparent;
+  margin-top: 100px;
 }
 
 .label-styles{

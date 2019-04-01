@@ -1,28 +1,32 @@
-<div class="login-container" layout="column" layout-align="center center">
-    <img class="logo" ng-src="assets/images/logo.png">
-    <div layout="column" class="login-content">
-        <md-input-container class="input-container">
-            <label class="label-styles">User name</label>
-            <input type="text" ng-model="user.user_name" />
-        </md-input-container>
-        <md-input-container class="input-container">
-            <label class="label-styles">Password</label>
-            <input type="password" ng-model="user.password" ng-enter="login()" />
-        </md-input-container>
-        <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
-        <div layout="row">
-            <p>Don't have an account?</p>
-            <a class="" id="signup-button" ng-click="signup()">Signup</a>
+<div class="parent-container">
+        <div class="dark-theme-switch">
+            <md-switch ng-model="data.cb1" aria-label="Switch" float="right" ng-Change="onChange(data.cb1)">
+                Dark Theme
+            </md-switch>
         </div>
-        <md-button class="md-accent md-raised toggle-button" ng-click="toggle()">
-            <div class="label">toggle theme</div>
-        </md-button>
-        <br>
-    </div>
-    <div class="alert" ng-if="incorrectCredentials">
-        <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Incorrect Credentials
-    </div>
-    <div class="alert" ng-if="unApproved">
-        <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Please confirm your account
+    <div class="login-container" layout="column" layout-align="center center">
+        <img class="logo" ng-src="assets/images/logo.png">
+        <div layout="column" class="login-content">
+            <md-input-container class="input-container">
+                <label class="label-styles">User name</label>
+                <input type="text" ng-model="user.user_name" />
+            </md-input-container>
+            <md-input-container class="input-container">
+                <label class="label-styles">Password</label>
+                <input type="password" ng-model="user.password" ng-enter="login()" />
+            </md-input-container>
+            <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
+            <div layout="row">
+                <p>Don't have an account?</p>
+                <a class="" id="signup-button" ng-click="signup()">Signup</a>
+            </div>
+            <br>
+        </div>
+        <div class="alert" ng-if="incorrectCredentials">
+            <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Incorrect Credentials
+        </div>
+        <div class="alert" ng-if="unApproved">
+            <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Please confirm your account
+        </div>
     </div>
 </div>
