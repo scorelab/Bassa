@@ -21,7 +21,7 @@ services:
     labels:
       com.example.description: "Docker container for Bassa UI"
   db:
-    image: mysql
+    image: mysql:5.7
     restart: always
     volumes:
       - data-volume:/var/lib/mysql
