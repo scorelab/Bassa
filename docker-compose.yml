@@ -35,5 +35,13 @@ services:
       MYSQL_USER: ${BASSA_DB_USERNAME}
       MYSQL_PASSWORD: ${BASSA_DB_PASSWORD}
 
+  proxy:
+    build: ui/proxy/
+    container_name: proxy
+    ports:
+      - 80:80
+    links:
+      - web
+
 volumes:
   data-volume:
