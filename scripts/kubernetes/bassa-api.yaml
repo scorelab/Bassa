@@ -20,6 +20,13 @@ spec:
         ports:
         - containerPort: 5000
           protocol: TCP
+        env:
+        - name: BASSA_DB_NAME
+          value: "Bassa"
+        - name: BASSA_DB_USERNAME
+          value: "testuser" # can implement kubernetes secrets
+        - name: BASSA_DB_PASSWORD
+          value: "testpassword" # can implement kubernetes secrets
 ---
 kind: Service
 apiVersion: v1
