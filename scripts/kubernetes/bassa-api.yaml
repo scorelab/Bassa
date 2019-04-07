@@ -23,10 +23,17 @@ spec:
         env:
         - name: BASSA_DB_NAME
           value: "Bassa"
-        - name: BASSA_DB_USERNAME
-          value: "testuser" # can implement kubernetes secrets
+        - name: BASSA_DB_USERNAME  # implemented kubernetes secrets
+          valueFrom:
+            secretKeyRef:
+              name: bassa-secrets
+              key: username
         - name: BASSA_DB_PASSWORD
-          value: "testpassword" # can implement kubernetes secrets
+          valueFrom:
+          secretKeyRef:
+              name: bassa-secrets
+              key: password
+          
 ---
 kind: Service
 apiVersion: v1
