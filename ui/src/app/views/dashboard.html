@@ -10,12 +10,12 @@
     </md-button>
   </md-content>
 
-  <div ng-if="data?.length > 0">
+  <div ng-if="queuedDownloads.length > 0">
     <md-content class="downloads md-padding table-responsive-vertical" >
-      <h4 class="panel-widget-tittle"> On going downloads</h4>
+      <h4 class="panel-widget-title"> On going downloads</h4>
       <table id="table" class="table table-hover table-bordered">
           <thead>
-          <tr ng-repeat="data in downloads track by $index">
+          <tr ng-repeat="data in queuedDownloads">
               <td id="vertalign" data-title="ID">{{$index + 1}}</td>
               <td id="vertalign" data-title="Issue">{{data.download_name}}</td>
               <td id="vertalign" data-title="Progress">
@@ -34,7 +34,7 @@
     </md-content>
   </div>
 
-  <div ng-if="!data.length == true">
+  <div ng-if="data.length == 0">
     <md-content class="no-data-content" >
       <h4>There are no queued downloads, please add some!</h4>
     </md-content>

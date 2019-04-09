@@ -8,6 +8,7 @@
     var socket = io.connect(BassaUrl + '/progress');
     $scope.dlink = {link: ''};
     $scope.downloads = [];
+    $scope.queuedDownloads = [];
     $scope.username = UserService.getUsername();
 
     socket.on('connect', function(){
@@ -63,8 +64,7 @@
         $scope.downloads = _.reduce(data, function(queue, d) {
             if (d.status == 0) {
               let object = _.extend({}, d, {progress: 0});
-              queue.push(object)
-              return queue;
+              $scope.queuedDownloads.push(object)
             }
         }, []);
       }, function(error){
@@ -79,7 +79,7 @@
       if(deleteDownload){
         DashService.removeDownload(id).then(function(response){
           if(response.status === 200){
-            $scope.downloads.splice(index, 1);
+            $scope.queuedDownloads.splice(index, 1);
             ToastService.showToast("Download removed");
           }else{
             ToastService.showToast("Download could not be removed. Please try again!");
