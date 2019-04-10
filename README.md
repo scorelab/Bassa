@@ -28,9 +28,8 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 
 ## Installation
 
-Note: Users can check the installation guide here [Windows](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide), [Linux](https://github.com/scorelab/Bassa/wiki/Linux-Installation-Guide), [MacOS](https://github.com/scorelab/Bassa/wiki/MacOS-Installation-Guide)
-
-
+Note:
+* Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
 
 First clone the Repository
 `git clone https://github.com/scorelab/Bassa.git`
@@ -41,7 +40,7 @@ First clone the Repository
 Use python 3 instead of Python 2
 
 ```
-  $ ./setup.sh
+  $ sudo ./setup.sh
 
   $ cd components/core/
   $ sudo python3 setup.py develop
@@ -66,6 +65,7 @@ create database Bassa
 2.Type below in the root of project.
 
 ```
+cd db_schema
 mysql -u root -p  Bassa < Bassa.sql
 ```
 
