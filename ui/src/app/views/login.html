@@ -8,7 +8,7 @@
         <md-input-container class="input-container">
             <label>Password</label>
             <input type="{{ typePassword ? 'text' : 'password' }}" name="password"  ng-model="user.password" ng-enter="login()" />
-            <md-icon ng-click="togglePassword()">{{typePassword ? 'visibility_off' : 'visibility'}}</md-icon>
+            <md-icon ng-click="togglePassword()">{{typePassword ? 'visibility' : 'visibility_off'}}</md-icon>
         </md-input-container>
         <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
         <div layout="row">
