@@ -1,6 +1,6 @@
 <div layout-gt-md="column" layout-align="center">
 
-  <md-content class="md-padding" layout="row" layout-sm="column">
+  <md-content class="md-padding" layout="row" layout-sm="column" md-theme="{{addTheme}}">
       <md-subheader class="md-primary">Start/Kill all downloads</md-subheader>
 
       <br>
@@ -14,12 +14,12 @@
   </md-content>
 
   <div ng-if="data?.length > 0">
-   <md-content class="block md-padding table-responsive-vertical" >
+   <md-content class="block md-padding table-responsive-vertical" md-theme="{{addTheme}}">
       <md-subheader class="md-primary">Signup requests</md-subheader>
 
       <table id="table" class="table table-hover table-bordered signup-requests-table">
           <tbody>
-          <tr ng-repeat="data in signup_requests">
+          <tr class="row-entry" ng-repeat="data in signup_requests">
               <td data-title="ID">{{$index + 1}}</td>
               <td data-title="Name">{{data.user_name}}</td>
               <td data-title="Email">{{data.email}}</td>
@@ -36,12 +36,12 @@
   </div>
 
   <div ng-if="!data.length == true">
-    <md-content class="no-data-content" >
+    <md-content class="no-data-content" md-theme="{{addTheme}}">
       <h4>There are no pending signup requests!</h4>
     </md-content>
   </div>
 
-  <md-content class="block md-padding table-responsive-vertical" >
+  <md-content class="block md-padding table-responsive-vertical" md-theme="{{addTheme}}">
     <md-subheader class="md-primary">Usage of top heaviest users</md-subheader>
     <nvd3 options="chartOptions" data="usageChartData"></nvd3>
   </md-content>

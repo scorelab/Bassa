@@ -1,3 +1,4 @@
+/* global document */
 (function(){
   'use strict';
   angular
@@ -15,6 +16,13 @@
     $scope.toggleRightSidebar = toggleRightSidebar;
     $scope.logout = logout;
     $scope.username =  UserService.getUsername();
+    const x = document.getElementsByClassName('parent-container')[0];
+    x.id = 'temp_parent_id';
+    const isDarkThemeOn = sessionStorage.getItem('isDarkThemeOn');
+    if(isDarkThemeOn === 'true') {
+      document.getElementById('temp_parent_id').style.backgroundColor = '#404040';
+      $scope.sidenavTheme = 'dark';
+    }
 
     navService
       .loadAllItems()

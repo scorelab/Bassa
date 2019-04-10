@@ -22,9 +22,29 @@ body {
   padding-right: 50px;
 }
 
+.login-class {
+  margin-top:0px;
+  display: inline-block;
+  align-items: center;
+  background: #fff;
+}
+
 .parent-container {
   background: #fff;
 }
+
+.row-entry {
+  background: #fff;
+}
+
+.complete-downloads-row-entry {
+  background-color: #fff;
+}
+
+.queued-download-row-entry {
+  background-color: #fff;  
+}
+
 .toolbar-button {
   min-width: 20px;
 }

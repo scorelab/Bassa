@@ -5,33 +5,35 @@
         <md-button ng-show="isShowingCheckbox" ng-click="deselectAll()"><i class="material-icons ng-scope">check_circle_outline</i></md-button>
         <md-button ng-show="isShowingCheckbox" ng-click="selectAll()"><i class="material-icons ng-scope">check_circle</i></md-button>
     </div>
-    <table id="table" class="table table-hover table-bordered" ng-show="!isGridVisible">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>User</th>
-            <th>Download name</th>
-            <th>Size</th>
-            <th>Completed time</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="data in downloads" ng-click="onFileItemClick()">
-            <td data-title="ID">{{$index + 1}}</td>
-            <td data-title="User">{{data.user_name}}</td>
-            <td data-title="Issue">{{data.download_name}}</td>
-            <td data-title="Progress">{{data.size}}</td>
-            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"></td>
-            <td><button ng-click="compressFiles([data.gid])">Download</button></td>
-            <td><md-checkbox ng-show="isShowingCheckbox" ng-model="data.checked" ng-change="selectThisItem(data)"></md-checkbox></td>
-        </tr>
-        </tbody>
-    </table>
+    <md-content md-theme="{{addTheme}}">
+        <table id="table" class="table table-hover table-bordered" ng-show="!isGridVisible">
+            <thead>
+            <tr class="complete-downloads-row-entry">
+                <th>#</th>
+                <th>User</th>
+                <th>Download name</th>
+                <th>Size</th>
+                <th>Completed time</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="complete-downloads-row-entry" ng-repeat="data in downloads" ng-click="onFileItemClick()" emit-last-repeater-element>
+                <td data-title="ID">{{$index + 1}}</td>
+                <td data-title="User">{{data.user_name}}</td>
+                <td data-title="Issue">{{data.download_name}}</td>
+                <td data-title="Progress">{{data.size}}</td>
+                <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"></td>
+                <td><button ng-click="compressFiles([data.gid])">Download</button></td>
+                <td><md-checkbox ng-show="isShowingCheckbox" ng-model="data.checked" ng-change="selectThisItem(data)"></md-checkbox></td>
+            </tr>
+            </tbody>
+        </table>
+    </md-content>
 </div>
 
 <div ng-if="!data.length == true">
-  <md-content class="no-data-content" >
+  <md-content class="no-data-content" md-theme="{{addTheme}}">
     <h4>There are no completed downloads yet!</h4>
   </md-content>
 </div>

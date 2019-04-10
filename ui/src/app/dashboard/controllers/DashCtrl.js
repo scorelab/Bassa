@@ -1,7 +1,15 @@
+/* global document */
 (function(){
   'use strict';
   angular
     .module('app')
+    .directive('emitLastRepeaterElement', function() {
+      return function(scope) {
+        if(scope.$last) {
+          scope.$emit('LastRepeaterElement')
+        }
+      };
+    })
     .controller('DashCtrl', [ '$scope','$window','ToastService', 'DashService', 'UserService', 'BassaUrl', DashCtrl]);
 
   function DashCtrl($scope, $window , ToastService, DashService, UserService, BassaUrl) {
@@ -11,6 +19,9 @@
     $scope.queuedDownloads = [];
     $scope.username = UserService.getUsername();
 
+    if(sessionStorage.getItem('isDarkThemeOn') === 'true') {
+      $scope.addTheme = 'dark';
+    }
     socket.on('connect', function(){
       socket.emit('join', {room: $scope.username});
     });
@@ -34,6 +45,17 @@
         return false;
         }
     }
+
+    $scope.$on('LastRepeaterElement', function() {
+      if(sessionStorage.getItem('isDarkThemeOn') == 'true')
+      {
+        const rows = document.querySelectorAll('.queued-download-row-entry');
+        for(let i = 0;i < rows.length; i++)
+        {
+          rows[i].style.background = '#303030';
+        }
+      }
+    })
 
     $scope.addLink = function() {
       if ($scope.dlink.link === '' || $scope.dlink.link === undefined || !linkvalidator($scope.dlink.link)) {

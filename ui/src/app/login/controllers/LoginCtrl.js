@@ -7,6 +7,10 @@
 
   function LoginCtrl($scope, $state, UserService) {
     $scope.user = {};
+    sessionStorage.setItem('isDarkThemeOn',false);
+    $scope.data = {
+      cb1: sessionStorage.getItem('isDarkThemeOn')
+    }
     $scope.login = function(){
       $scope.incorrectCredentials = false;
       $scope.unApproved = false;
@@ -26,12 +30,14 @@
     };
 
     $scope.onChange = function toggleTheme(cbState) {
-      const x = document.getElementsByClassName('parent-container')[0];
-      x.id = 'temp_id';
+      const login_class = document.getElementsByClassName('login-class')[0];
+      login_class.id = 'temp_id';
       if (cbState === true) {
-        document.getElementById('temp_id').style.backgroundColor = '#19223c';
+        document.getElementById('temp_id').style.backgroundColor = '#404040';
+        sessionStorage.setItem('isDarkThemeOn', true);
       } else {
         document.getElementById('temp_id').style.backgroundColor = '#fff';
+        sessionStorage.setItem('isDarkThemeOn', false);
       }
     };
 

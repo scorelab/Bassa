@@ -1,7 +1,15 @@
+/* global document */
 (function(){
   'use strict';
   angular
     .module('app')
+    .directive('emitLastRepeaterElement', function() {
+      return function(scope) {
+        if(scope.$last) {
+          scope.$emit('LastRepeaterElement')
+        }
+      }
+    })
     .controller('TableCtrl', [ '$scope', '$mdToast', '$mdDialog','BassaUrl', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
 
   function TableCtrl($scope, $mdToast, $mdDialog, BassaUrl, ToastService, TableService, UtilityService) {
@@ -12,6 +20,9 @@
     $scope.checkedFileArray = [];
     $scope.shareLink = BassaUrl;
     $scope.isShowingCheckbox = false;
+    if(sessionStorage.getItem('isDarkThemeOn') === 'true') {
+      $scope.addTheme = 'dark';
+    }
     let progressDialog = {
       controller: DialogController,
       template: '<md-progress-linear md-mode="indeterminate"/>', // later change it to a template URL
@@ -125,6 +136,20 @@
         };
       }
     }
+
+    $scope.$on('LastRepeaterElement', function() {
+      if(sessionStorage.getItem('isDarkThemeOn') == 'true')
+      {
+        const rows = document.querySelectorAll('.complete-downloads-row-entry');
+        for(let i = 0;i < rows.length; i++)
+        {
+          rows[i].style.background = '#303030';
+        }
+        const table = document.querySelector('.table');
+        table.style.background = '#303030';
+      }
+    });
+
     $scope.deselectAll = function(){
       $scope.isShowingActions = false;
       angular.forEach($scope.downloads, function (item) {

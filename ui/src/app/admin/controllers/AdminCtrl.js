@@ -1,3 +1,4 @@
+/* global document */
 (function(){
   'use strict';
   angular
@@ -8,7 +9,9 @@
 
     $scope.signup_requests = [];
     $scope.usageChartData = [];
-
+    if(sessionStorage.getItem('isDarkThemeOn') === 'true') {
+      $scope.addTheme = 'dark';
+    }
     $scope.chartOptions = {
         chart: {
             type: 'pieChart',
@@ -64,6 +67,12 @@
     this.getHeavyUsers = function() {
       AdminService.getHeavyUsers().then(function (response) {
         $scope.usageChartData = response.data;
+        if(sessionStorage.getItem('isDarkThemeOn') == 'true') {
+          const rows = document.querySelectorAll('.row-entry');
+          for(let i=0;i<rows.length;i++) {
+            rows[i].style.backgroundColor = '#303030';
+          }
+        }
       });
     }
 

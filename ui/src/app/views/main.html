@@ -1,5 +1,5 @@
 <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
-            class="md-whiteframe-z2 md-sidenav-left">
+            class="md-whiteframe-z2 md-sidenav-left" md-theme="{{sidenavTheme}}">
   <md-toolbar md-theme="custom" class="md-hue-1 md-whiteframe-z2">
     <md-button layout="row" layout-align="center center" class="md-toolbar-tools md-warn" onClick="parent.open('https://github.com/scorelab/Bassa')">
     <img class="" src="assets/images/bassa.png">
@@ -37,7 +37,7 @@
         </section>
     </md-toolbar>
 
-    <md-content flex class="md-padding page-content">
+    <md-content flex class="md-padding page-content parent-container">
         <div ui-view></div>
     </md-content>
 </div>
