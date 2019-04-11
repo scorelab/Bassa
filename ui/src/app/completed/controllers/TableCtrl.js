@@ -1,5 +1,5 @@
 /* global document, sessionStorage */
-/*eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }]*/
+/* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
 
 (function(){
   'use strict';
@@ -10,7 +10,7 @@
         if (scope.$last) {
           scope.$emit('LastRepeaterElement')
         }
-      }
+      };
     })
     .controller('TableCtrl', [ '$scope', '$mdToast', '$mdDialog','BassaUrl', 'ToastService', 'TableService', 'UtilityService', TableCtrl]);
 
