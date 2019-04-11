@@ -9,7 +9,7 @@
     $scope.user = {};
     sessionStorage.setItem('isDarkThemeOn', false);
     $scope.data = {
-      cb1: sessionStorage.getItem('isDarkThemeOn')
+      cb1: sessionStorage.getItem('isDarkThemeOn'),
     };
     $scope.login = function(){
       $scope.incorrectCredentials = false;
@@ -36,14 +36,14 @@
       if (cbState === true) {
         document.getElementById('temp_id').style.backgroundColor = '#404040';
         document.getElementById('temp_id').style.color = '#fff';
-        for (let i = inputClass.length - 1; i >= 0; i--) {
+        for (let i =  0; i < inputClass.length; i++) {
           inputClass[i].style.color = '#fff';
         }
         sessionStorage.setItem('isDarkThemeOn', true);
       } else {
         document.getElementById('temp_id').style.backgroundColor = '#fff';
         document.getElementById('temp_id').style.color = '#9e9e9e';
-        for (let i = inputClass.length - 1; i >= 0; i--) {
+        for (let i =  0; i < inputClass.length; i++) {
           inputClass[i].style.color = '#000';
         }
         sessionStorage.setItem('isDarkThemeOn', false);
