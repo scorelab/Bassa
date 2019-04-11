@@ -1,4 +1,6 @@
 /* global document, sessionStorage */
+/*eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }]*/
+
 (function(){
   'use strict';
   angular
@@ -36,14 +38,14 @@
       if (cbState === true) {
         document.getElementById('temp_id').style.backgroundColor = '#404040';
         document.getElementById('temp_id').style.color = '#fff';
-        for (let i =  0; i < inputClass.length; i++) {
+        for (let i = 0; i < inputClass.length; i++) {
           inputClass[i].style.color = '#fff';
         }
         sessionStorage.setItem('isDarkThemeOn', true);
       } else {
         document.getElementById('temp_id').style.backgroundColor = '#fff';
         document.getElementById('temp_id').style.color = '#9e9e9e';
-        for (let i =  0; i < inputClass.length; i++) {
+        for (let i = 0; i < inputClass.length; i++) {
           inputClass[i].style.color = '#000';
         }
         sessionStorage.setItem('isDarkThemeOn', false);

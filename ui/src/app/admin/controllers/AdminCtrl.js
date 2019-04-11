@@ -1,4 +1,6 @@
 /* global document, sessionStorage */
+/*eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }]*/
+
 (function(){
   'use strict';
   angular
