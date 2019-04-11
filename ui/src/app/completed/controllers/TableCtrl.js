@@ -1,11 +1,11 @@
-/* global document */
+/* global document, sessionStorage */
 (function(){
   'use strict';
   angular
     .module('app')
     .directive('emitLastRepeaterElement', function() {
       return function(scope) {
-        if(scope.$last) {
+        if (scope.$last) {
           scope.$emit('LastRepeaterElement')
         }
       }
@@ -20,7 +20,7 @@
     $scope.checkedFileArray = [];
     $scope.shareLink = BassaUrl;
     $scope.isShowingCheckbox = false;
-    if(sessionStorage.getItem('isDarkThemeOn') === 'true') {
+    if (sessionStorage.getItem('isDarkThemeOn') === 'true') {
       $scope.addTheme = 'dark';
     }
     let progressDialog = {
@@ -138,11 +138,9 @@
     }
 
     $scope.$on('LastRepeaterElement', function() {
-      if(sessionStorage.getItem('isDarkThemeOn') == 'true')
-      {
+      if (sessionStorage.getItem('isDarkThemeOn') == 'true') {
         const rows = document.querySelectorAll('.complete-downloads-row-entry');
-        for(let i = 0;i < rows.length; i++)
-        {
+        for (let i = 0; i < rows.length; i++) {
           rows[i].style.background = '#303030';
         }
         const table = document.querySelector('.table');

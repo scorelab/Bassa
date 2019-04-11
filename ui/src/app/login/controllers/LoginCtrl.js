@@ -1,4 +1,4 @@
-/* global document */
+/* global document, sessionStorage */
 (function(){
   'use strict';
   angular
@@ -7,10 +7,10 @@
 
   function LoginCtrl($scope, $state, UserService) {
     $scope.user = {};
-    sessionStorage.setItem('isDarkThemeOn',false);
+    sessionStorage.setItem('isDarkThemeOn', false);
     $scope.data = {
       cb1: sessionStorage.getItem('isDarkThemeOn')
-    }
+    };
     $scope.login = function(){
       $scope.incorrectCredentials = false;
       $scope.unApproved = false;
@@ -30,13 +30,22 @@
     };
 
     $scope.onChange = function toggleTheme(cbState) {
-      const login_class = document.getElementsByClassName('login-class')[0];
-      login_class.id = 'temp_id';
+      const loginClass = document.getElementsByClassName('login-class')[0];
+      loginClass.id = 'temp_id';
+      const inputClass = document.querySelectorAll('.login-input');
       if (cbState === true) {
         document.getElementById('temp_id').style.backgroundColor = '#404040';
+        document.getElementById('temp_id').style.color = '#fff';
+        for (let i = inputClass.length - 1; i >= 0; i--) {
+          inputClass[i].style.color = '#fff';
+        }
         sessionStorage.setItem('isDarkThemeOn', true);
       } else {
         document.getElementById('temp_id').style.backgroundColor = '#fff';
+        document.getElementById('temp_id').style.color = '#9e9e9e';
+        for (let i = inputClass.length - 1; i >= 0; i--) {
+          inputClass[i].style.color = '#000';
+        }
         sessionStorage.setItem('isDarkThemeOn', false);
       }
     };

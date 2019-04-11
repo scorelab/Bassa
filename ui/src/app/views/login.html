@@ -9,11 +9,11 @@
         <div layout="column" class="login-content">
             <md-input-container class="input-container">
                 <label class="label-styles">User name</label>
-                <input type="text" ng-model="user.user_name" />
+                <input class="login-input" type="text" ng-model="user.user_name" />
             </md-input-container>
             <md-input-container class="input-container">
                 <label class="label-styles">Password</label>
-                <input type="password" ng-model="user.password" ng-enter="login()" />
+                <input class="login-input" type="password" ng-model="user.password" ng-enter="login()" />
             </md-input-container>
             <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
             <div layout="row">

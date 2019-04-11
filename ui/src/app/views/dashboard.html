@@ -15,7 +15,7 @@
       <h4 class="panel-widget-title"> On going/Queued downloads</h4>
       <table id="table" class="table table-hover table-bordered">
           <thead>
-          <tr ng-repeat="data in queuedDownloads" class="queued-download-row-entry" emit-last-repeater-element>
+          <tr ng-repeat="data in queuedDownloads track by $index" class="queued-download-row-entry" emit-last-repeater-element>
               <td id="vertalign" data-title="ID">{{$index + 1}}</td>
               <td id="vertalign" data-title="Issue">{{data.download_name}}</td>
               <td id="vertalign" data-title="Progress">

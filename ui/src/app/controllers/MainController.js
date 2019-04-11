@@ -1,4 +1,4 @@
-/* global document */
+/* global document, sessionStorage */
 (function(){
   'use strict';
   angular
@@ -19,7 +19,7 @@
     const x = document.getElementsByClassName('parent-container')[0];
     x.id = 'temp_parent_id';
     const isDarkThemeOn = sessionStorage.getItem('isDarkThemeOn');
-    if(isDarkThemeOn === 'true') {
+    if (isDarkThemeOn === 'true') {
       document.getElementById('temp_parent_id').style.backgroundColor = '#404040';
       $scope.sidenavTheme = 'dark';
     }

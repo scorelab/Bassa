@@ -1,11 +1,11 @@
-/* global document */
+/* global document, sessionStorage */
 (function(){
   'use strict';
   angular
     .module('app')
     .directive('emitLastRepeaterElement', function() {
       return function(scope) {
-        if(scope.$last) {
+        if (scope.$last) {
           scope.$emit('LastRepeaterElement')
         }
       };
@@ -17,9 +17,10 @@
     $scope.dlink = {link: ''};
     $scope.downloads = [];
     $scope.queuedDownloads = [];
+    $scope.isNewLinkAdded = false;
     $scope.username = UserService.getUsername();
 
-    if(sessionStorage.getItem('isDarkThemeOn') === 'true') {
+    if (sessionStorage.getItem('isDarkThemeOn') === 'true') {
       $scope.addTheme = 'dark';
     }
     socket.on('connect', function(){
@@ -47,11 +48,10 @@
     }
 
     $scope.$on('LastRepeaterElement', function() {
-      if(sessionStorage.getItem('isDarkThemeOn') == 'true')
+      if (sessionStorage.getItem('isDarkThemeOn') == 'true')
       {
         const rows = document.querySelectorAll('.queued-download-row-entry');
-        for(let i = 0;i < rows.length; i++)
-        {
+        for (let i = 0; i < rows.length; i++) {
           rows[i].style.background = '#303030';
         }
       }
@@ -64,6 +64,7 @@
         DashService.addDownload($scope.dlink).then(function (response) {
           $scope.dlink.link = '';
           ToastService.showToast("Link added");
+           $scope.isNewLinkAdded = true;
           getActiveDownloads();
         }, function(error){
           $scope.dlink.link = '';
@@ -83,12 +84,16 @@
     var getActiveDownloads = function() {
       DashService.getDownloads().then(function (response) {
         var data = response.data;
-        $scope.downloads = _.reduce(data, function(queue, d) {
-            if (d.status == 0) {
-              let object = _.extend({}, d, {progress: 0});
-              $scope.queuedDownloads.push(object)
-            }
-        }, []);
+        if (!$scope.isNewLinkAdded) {
+          $scope.downloads = _.reduce(data, function(queue, d) {
+              if (d.status == 0) {
+                  let object = _.extend({}, d, {progress: 0});
+                  $scope.queuedDownloads.push(object);
+              }
+          }, []);
+        } else {
+          $scope.queuedDownloads.push(data[data.length-1])
+        }
       }, function(error){
         ToastService.showToast("Oops! Something went wrong when fetching data");
       });
