@@ -19,7 +19,7 @@
         }
        });
     };
-    $scope.togglePassword = function() {
+    $scope.togglePassword = function () {
       $scope.typePassword = !$scope.typePassword;
     };
     $scope.signup = function() {
