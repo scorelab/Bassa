@@ -3,11 +3,11 @@
     <div layout="column" class="login-content">
         <md-input-container class="input-container">
             <label>User name</label>
-            <input type="text" ng-model="user.user_name" />
+            <input type="text" required ng-model="user.user_name" />
         </md-input-container>
         <md-input-container class="input-container">
             <label>Password</label>
-            <input type="password" ng-model="user.password" ng-enter="login()" />
+            <input type="password" required ng-model="user.password" ng-enter="login()" />
         </md-input-container>
         <md-button class="md-raised md-primary login-button" ng-click="login()" ng-disabled="user.password=='' || user.user_name==''">Login</md-button>
         <div layout="row">
