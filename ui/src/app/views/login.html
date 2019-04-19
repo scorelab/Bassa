@@ -9,7 +9,7 @@
             <label>Password</label>
             <input type="password" ng-model="user.password" ng-enter="login()" />
         </md-input-container>
-        <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
+        <md-button class="md-raised md-primary login-button" ng-click="login()" ng-disabled="user.password=='' || user.user_name==''">Login</md-button>
         <div layout="row">
             <p>Don't have an account?</p>
             <a class="" id="signup-button" ng-click="signup()">Signup</a>
