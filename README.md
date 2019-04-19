@@ -40,7 +40,7 @@ First clone the Repository
 Use python 3 instead of Python 2
 
 ```
-  $ ./setup.sh
+  $ sudo ./setup.sh
 
   $ cd components/core/
   $ sudo python3 setup.py develop
@@ -65,6 +65,7 @@ create database Bassa
 2.Type below in the root of project.
 
 ```
+cd db_schema
 mysql -u root -p  Bassa < Bassa.sql
 ```
 
