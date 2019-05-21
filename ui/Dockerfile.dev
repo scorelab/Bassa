@@ -1,4 +1,4 @@
-FROM node
+FROM ubuntu
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
@@ -9,12 +9,21 @@ WORKDIR /home/Bassa
 
 COPY . .
 
-RUN apt-get update \
-&& npm install -g gulp \
-&& npm install -g bower \
-&& npm install --unsafe-perm
+EXPOSE 3000
 
-CMD ["gulp", "serve"]
+RUN apt-get update \ 
+&& apt-get install curl -y \
+&& apt install nodejs npm -y \
+&& npm install bower \
+&& npm install gulp \
+&& npm install -g gulp \
+&& npm install --global gulp-cli \
+&& npm install yarn -g \
+&& apt-get install yarn -y \
+&& apt remove cmdtest -y \
+&& apt-get install git -y && yarn install
+
+CMD [ "gulp", "serve" ]
 
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
@@ -25,4 +34,3 @@ LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.vendor="Sustainable Computing Research Group" \
       multi.org.label-schema.version="" \
       multi.org.label-schema.schema-version="1.0"
- 
