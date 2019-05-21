@@ -1,7 +1,7 @@
 #!/bin/bash
-
+echo "Setting things to install Bassa..."
 echo "Installing Homebrew"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/usr/bin/ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 echo "Homebrew Installed"
 
 echo "Installing python3 and pip"
@@ -29,3 +29,6 @@ echo "Installing Gulp"
 npm install -g gulp
 npm install -g gulp-cli
 echo "Gulp Installed"
+
+brew update
+echo "Finshed required components installation !"
