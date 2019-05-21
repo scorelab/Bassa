@@ -1,8 +1,12 @@
 #!/bin/bash
 echo "Setting things to install Bassa..."
+
 echo "Installing Homebrew"
 /usr/bin/ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 echo "Homebrew Installed"
+
+#checking brew installation
+brew doctor
 
 echo "Installing python3 and pip"
 brew install python3
