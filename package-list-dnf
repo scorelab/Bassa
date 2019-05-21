@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Setting things to install Bassa..."
 
 echo "Installing pip"
 dnf install python-pip #Python 2
@@ -45,3 +46,6 @@ echo "bower installed"
 echo "Installing gulp globally"
 npm install -g gulp
 echo "gulp installed"
+
+dnf check-update
+echo "Finshed required components installation !"
