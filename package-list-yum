@@ -1,14 +1,12 @@
 #!/bin/bash
+echo "Setting things to install Bassa..."
 
-# Documented for centOS 7
-# Updating yum
 echo "Setting up yum"
 yum -y update
 yum -y install yum-utils
 yum -y groupinstall development
 echo "yum is ready"
 
-#Installing Python
 echo "Installing Python"
 yum install centos-release-scl
 yum install rh-python36
@@ -16,13 +14,11 @@ scl enable rh-python36 bash
 python --version
 echo "Python successfully installed"
 
-#Installing pip
 echo "Installing pip"
 yum install epel-release -y
 yum install python-pip
 echo "pip successfully installed"
 
-#Installing setup tools
 echo "Installing setuptools"
 wget http://pypi.python.org/packages/source/s/setuptools/setuptools-1.1.6.tar.gz --no-check-certificate
 tar xf setuptools-1.1.6.tar.gz
@@ -56,3 +52,6 @@ echo "bower installed"
 echo "Installing gulp globally"
 npm install -g gulp
 echo "gulp installed"
+
+yum check-update
+echo "Finshed required components installation !"
