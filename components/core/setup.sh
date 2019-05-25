@@ -20,7 +20,7 @@ apt-get install -y mysql-server
 echo "mysql-server installed"
 
 echo "Installing libmysqlclient"
-apt-get install libmysqlclient-dev
+apt-get install -y libmysqlclient-dev
 echo "libmysqlclient installed"
 
 echo save the directory for further uses
