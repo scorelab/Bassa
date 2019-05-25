@@ -1,0 +1,16 @@
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+
+import CompletedFile from '../components/CompletedFile';
+
+export const fileObject = {
+	id: '1',
+	user: 'some_user_name',
+	name: 'some_file_name',
+	size: '120.23 KB',
+	time: 'some_hours_ago'
+}
+
+storiesOf('CompletedFile', module)
+.add('default', () => <CompletedFile file={fileObject} onDownload={action('download')}/>)
