@@ -50,11 +50,13 @@ function BassaAppBar(props) {
           <TextField 
             id="username"
             variant="outlined"
-            style={{background:'#625042', color:'#fff'}}
+            style={{background:'#fff'}}
             label="Username" />&nbsp;&nbsp;
           <TextField 
             id="password"
             type="password"
+            variant="outlined"
+            style={{background:'#fff'}}
             label="Password" />&nbsp;&nbsp;
 	        <Button size="small" variant="contained" color="primary">Login</Button>
 	      </Toolbar>
