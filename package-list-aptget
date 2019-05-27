@@ -1,5 +1,7 @@
 #!/bin/bash
-echo "Setting things to install Bassa..."
+echo "Preparing to install Bassa..."
+
+sudo apt-get update
 
 echo "Installing pip"
 sudo apt-get install python3-pip
@@ -33,5 +35,4 @@ echo "Installing gulp globally"
 sudo npm install -g gulp
 echo "gulp installed"
 
-sudo apt-get update
-echo "Finshed required components installation !"
+echo "Finshed installing required components !"
