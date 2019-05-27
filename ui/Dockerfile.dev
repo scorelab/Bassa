@@ -5,12 +5,16 @@ MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 ARG BUILD_DATE
 ARG VCS_REF
 
+
 WORKDIR /home/Bassa
 
+# importing complete ui component
 COPY . .
 
+# exposing necessary port
 EXPOSE 3000
 
+# installing all necessary packages for Bassa web
 RUN apt-get update \ 
 && apt-get install curl -y \
 && apt install nodejs npm -y \
@@ -23,8 +27,10 @@ RUN apt-get update \
 && apt remove cmdtest -y \
 && apt-get install git -y && yarn install
 
+# To start Bassa web server
 CMD [ "gulp", "serve" ]
 
+# labels to dockerfile
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
       multi.org.label-schema.url="https://github.com/scorelab/Bassa/wiki" \
