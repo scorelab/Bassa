@@ -1,5 +1,8 @@
 #!/bin/bash
-echo "Setting things to install Bassa..."
+echo "Preparing to install Bassa..."
+
+sudo pacman -Syu
+
 echo "Installing pip"
 sudo pacman -S python-pip
 echo "pip installed"
@@ -32,5 +35,4 @@ echo "Installing gulp globally"
 sudo npm install -g gulp
 echo "gulp installed"
 
-sudo pacman -Syu
-echo "Finshed required components installation !"
+echo "Finshed installing required components !"
