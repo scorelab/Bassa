@@ -1,24 +1,24 @@
 #!/bin/bash
 echo "Preparing to install Bassa..."
 
-dnf update
+dnf -y update
 
 echo "Installing pip"
-dnf install python-pip #Python 2
-dnf install python3    #Python 3
+dnf -y install python-pip #Python 2
+dnf -y install python3    #Python 3
 echo "pip installed"
 
 echo "Upgrading setuptools"
-dnf upgrade python-setuptools
+dnf -y upgrade python-setuptools
 echo "setuptools upgraded"
 
 echo "Installing Aria2"
-yum install aria2
+yum -y install aria2
 echo "Aria2 installed"
 
 echo "Installing mysql-server"
 ## Fedora 29 ##
-dnf install https://dev.mysql.com/get/mysql80-community-release-fc29-1.noarch.rpm
+dnf -y install https://dev.mysql.com/get/mysql80-community-release-fc29-1.noarch.rpm
 # choose accordingly
 ## Fedora 28 ##
 #dnf install https://dev.mysql.com/get/mysql80-community-release-fc28-1.noarch.rpm
@@ -26,19 +26,19 @@ dnf install https://dev.mysql.com/get/mysql80-community-release-fc29-1.noarch.rp
 ## Fedora 27 ##
 #dnf install https://dev.mysql.com/get/mysql80-community-release-fc27-1.noarch.rpm
 
-dnf install mysql-community-server
+dnf -y install mysql-community-server
 systemctl start mysqld.service ## use restart after update
 systemctl enable mysqld.service
 echo "mysql-server installed"
 
 echo "Installing libmysqlclient"
-yum install mysql-devel
+yum -y install mysql-devel
 echo "libmysqlclient installed"
 
 echo "Installing node"
-dnf install -y gcc-c++ make
+dnf -y install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
-dnf install nodejs
+dnf -y install nodejs
 echo "NodeJS installed"
 
 echo "Installing bower globally"
