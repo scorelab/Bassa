@@ -1,8 +1,13 @@
 #!/bin/bash
+echo "Preparing to install Bassa..."
 
 echo "Installing Homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 echo "Homebrew Installed"
+
+#checking brew installation
+brew doctor
+brew update
 
 echo "Installing python3 and pip"
 brew install python3
@@ -13,6 +18,8 @@ brew install aria2
 echo "Aria2 Installed"
 
 echo "Installing and starting MySQL"
+#adding mysql-pkgconfig
+brew install pkgconfig
 brew install mysql
 brew services start mysql
 echo "MySQL Installed and Started"
@@ -29,3 +36,5 @@ echo "Installing Gulp"
 npm install -g gulp
 npm install -g gulp-cli
 echo "Gulp Installed"
+
+echo "Finshed required components installation !"
