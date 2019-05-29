@@ -34,6 +34,7 @@ services:
       MYSQL_DATABASE: ${BASSA_DB_NAME}
       MYSQL_USER: ${BASSA_DB_USERNAME}
       MYSQL_PASSWORD: ${BASSA_DB_PASSWORD}
+      BASSA_DB_NAME: ${BASSA_DB_NAME}
 
 volumes:
   data-volume:
