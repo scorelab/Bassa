@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { object } from '@storybook/addon-knobs';
 
 import CompletedFileList from '../containers/CompletedFileList';
 
@@ -37,5 +38,5 @@ export const completedList = [
 storiesOf('CompletedList', module)
 .add('empty', () => <CompletedFileList files={[]} />)
 .add('loading', () => <CompletedFileList files={[]} loading={true} />)
-.add('default', () => <CompletedFileList files={completedList} />)
-.add('limited list', () => <CompletedFileList files={completedList} limit={2} />)
+.add('default', () => <CompletedFileList files={object('list', completedList)} />)
+.add('limited list', () => <CompletedFileList files={object('list', completedList.slice(0,2))} limit={2} />)

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+//MUI imports
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -10,7 +11,6 @@ import QueuedFile from '../components/QueuedFile';
 const styles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 560,
   },
   button: {
     margin: theme.spacing.unit

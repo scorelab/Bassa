@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //MUI imports
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -20,10 +20,10 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing(3),
     overflowX: 'auto',
   },
   row: {
@@ -38,10 +38,10 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     fontSize:20
   }
-});
+}));
 
-function QueuedFile(props) {
-  const { classes } = props;
+const QueuedFile = (props) => {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Table>
@@ -72,4 +72,4 @@ QueuedFile.propTypes = {
 };
 
 
-export default withStyles(styles)(QueuedFile);
+export default QueuedFile;

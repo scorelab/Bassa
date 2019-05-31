@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //MUI imports
-import {withStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -13,10 +13,14 @@ import TextField from '@material-ui/core/TextField';
 //Logo import
 import logo from '../logo.png';
 
-const styles = {
+const colours = {
+  somewhat_brown: '#625042',
+  white: '#fff'
+}
+
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#ff5500'
   },
   grow: {
     flexGrow: 1,
@@ -33,15 +37,15 @@ const styles = {
     width: 60,
     height: 60,
   },
-};
+}));
 
-function BassaAppBar(props) {
-  const { classes } = props;
+const BassaAppBar = (props) => {
+  const classes = useStyles();
 
   if (!props.isloggedIn) {
   	return (
 	  <div className={classes.root}>
-	    <AppBar position="static" style={{background: '#625042'}}>
+	    <AppBar position="static" style={{background: colours.somewhat_brown}}>
 	      <Toolbar>
 		    <Avatar alt="Bassa" src={logo} className={classes.bigAvatar} />
 	        <Typography variant="h4" color="inherit" className={classes.grow}>
@@ -49,15 +53,17 @@ function BassaAppBar(props) {
 	        </Typography>
           <TextField 
             id="username"
+            margin="normal"
             variant="outlined"
-            style={{background:'#fff'}}
-            label="Username" />&nbsp;&nbsp;
+            style={{background:colours.white}}
+            placeholder="Username" />&nbsp;&nbsp;
           <TextField 
             id="password"
             type="password"
             variant="outlined"
-            style={{background:'#fff'}}
-            label="Password" />&nbsp;&nbsp;
+            margin="normal"
+            style={{background:colours.white}}
+            placeholder="Password" />&nbsp;&nbsp;
 	        <Button size="small" variant="contained" color="primary">Login</Button>
 	      </Toolbar>
 	    </AppBar>
@@ -66,7 +72,7 @@ function BassaAppBar(props) {
   }
   return (
   	<div className={classes.root}>
-      <AppBar position="static" style={{background: '#625042'}}>
+      <AppBar position="static" style={{background: colours.somewhat_brown}}>
         <Toolbar>
 	      <Avatar alt="Bassa" src={logo} className={classes.avatar} />
           <Typography variant="h6" color="inherit" className={classes.grow}>
@@ -86,4 +92,4 @@ BassaAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BassaAppBar);
+export default BassaAppBar;
