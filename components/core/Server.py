@@ -68,3 +68,5 @@ server.add_url_rule(rule='/api/user/heavy', endpoint='get_topten_heaviest_users'
 # file sending endpoints
 server.add_url_rule(rule='/api/file', endpoint='send_file_from_path', view_func=sender.send_file_from_path,
 					methods=['GET'])
+server.add_url_rule('/api/compress', 'start_compression', sender.start_compression, methods=['POST'])
+server.add_url_rule('/api/compression-progress', 'get_compression_progress', sender.check_compression_progress, methods=['GET'])
