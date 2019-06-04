@@ -1,5 +1,5 @@
 # Pulling ubuntu bionic as base image
-FROM ubuntu:18.04
+FROM alpine:edge
 
 # Defining dockerfile maintainer
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
@@ -7,12 +7,10 @@ MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 ARG BUILD_DATE
 ARG VCS_REF
 
-
-# Installing Aria2c RPC server
-RUN apt-get update && \
-    apt-get install aria2 -y  && \ 
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Installing aria2c
+RUN apk update && \
+	apk add --no-cache --update bash aria2 && \
+    rm -rf /var/cache/apk/*
 
 # Exposing port where the RPC server listens
 EXPOSE 6800
