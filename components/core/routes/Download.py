@@ -33,7 +33,6 @@ def kill():
 			p.join()
 			jsonreq = json.dumps({'jsonrpc': '2.0', 'id': 'qwer', 'method': 'aria2.pauseAll'})
 			jsonreq = jsonreq.encode('ascii')
-			# c = urllib.request.urlopen('http://localhost:6800/jsonrpc', jsonreq)
 			c = urllib.request.urlopen(conf['aria_server'], jsonreq)
 			if verbose:
 				print(c)
