@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 //MUI imports
 import {makeStyles} from '@material-ui/core/styles';
@@ -43,6 +42,7 @@ const BassaAppBar = (props) => {
   const classes = useStyles();
 
   if (!props.isloggedIn) {
+    //If the user is not logged in, then return component for logged out user
   	return (
 	  <div className={classes.root}>
 	    <AppBar position="static" style={{background: colours.somewhat_brown}}>
@@ -53,12 +53,14 @@ const BassaAppBar = (props) => {
 	        </Typography>
           <TextField 
             id="username"
+            data-test="input-username"
             margin="normal"
             variant="outlined"
             style={{background:colours.white}}
             placeholder="Username" />&nbsp;&nbsp;
           <TextField 
             id="password"
+            data-test="input-password"
             type="password"
             variant="outlined"
             margin="normal"
@@ -70,6 +72,7 @@ const BassaAppBar = (props) => {
 	  </div>
   	)
   }
+  //Else return component for logged in user
   return (
   	<div className={classes.root}>
       <AppBar position="static" style={{background: colours.somewhat_brown}}>
@@ -78,18 +81,13 @@ const BassaAppBar = (props) => {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Bassa
           </Typography>
-          <Button size="small" color="inherit">Dashboard</Button>
-          <Button size="small" color="inherit">Admin</Button>
-          <Button size="small" color="inherit">Logout</Button>
+          <Button data-test="button-dashboard" size="small" color="inherit">Dashboard</Button>
+          <Button data-test="button-admin" size="small" color="inherit">Admin</Button>
+          <Button data-test="button-logout" size="small" color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </div>
   )
 }
-
-
-BassaAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default BassaAppBar;

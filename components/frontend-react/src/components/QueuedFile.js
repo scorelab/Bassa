@@ -24,7 +24,7 @@ const CustomTableCell = withStyles(theme => ({
 const styles = makeStyles(theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing(3),
     overflowX: 'auto',
   },
   row: {
@@ -32,11 +32,8 @@ const styles = makeStyles(theme => ({
       backgroundColor: theme.palette.background.default,
     },
   },
-  button: {
-    margin: theme.spacing.unit
-  },
   icon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(2),
     fontSize:20
   },
   fab: {
@@ -61,7 +58,7 @@ const QueuedFile = (props) => {
               {props.name}
             </CustomTableCell>
             <CustomTableCell align="right">
-              <Fab size="small" aria-label="Delete" className={classes.fab} onClick={props.onDelete}>
+              <Fab data-test="button-delete" size="small" aria-label="Delete" className={classes.fab} onClick={props.onDelete}>
                 <DeleteIcon />
               </Fab>
             </CustomTableCell>
@@ -73,7 +70,6 @@ const QueuedFile = (props) => {
 }
 
 QueuedFile.propTypes = {
-  classes: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   onDelete: PropTypes.func
 };

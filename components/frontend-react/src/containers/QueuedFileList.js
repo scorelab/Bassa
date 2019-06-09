@@ -13,10 +13,10 @@ const styles = theme => ({
     width: '100%',
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(2)
   },
   icon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(2),
     fontSize:20
   }
 });
@@ -25,24 +25,24 @@ class CompletedFileList extends React.Component {
 
   renderDownloadedList = () => {
     if (this.props.loading) {
-      return <Typography variant="h5" color="inherit">Loading...</Typography>
+      return <Typography data-test="text-loading" variant="h5" color="inherit">Loading...</Typography>
     } else if (this.props.files.length === 0) {
-      return <Typography variant="h5" color="inherit">No queued downloads</Typography>
+      return <Typography data-test="text-empty" variant="h5" color="inherit">No queued downloads</Typography>
     } else {
         if (this.props.limit) {
           const list = this.props.files.slice(0,this.props.limit);
-          return (
-            list.map((row,id) => (
-                <QueuedFile key={id} index={id} name={row} onDelete={this.handleDelete(id)} />
-            ))
-          )
+          return this.renderList(list);
         }
-      return (
-        this.props.files.map((row,id) => (
-            <QueuedFile key={id} index={id} name={row} onDelete={() => this.handleDelete(id)}/>
-        ))
-      )
+      return this.renderList(this.props.files);
     }
+  }
+
+  renderList = (list) => {
+  	return (
+      list.map((row,id) => (
+      	<QueuedFile data-test="element-item" key={id} index={id} name={row} onDelete={() => {this.handleDelete(row.id)}}/>
+      ))
+    )
   }
 
   handleDelete = (id) => {

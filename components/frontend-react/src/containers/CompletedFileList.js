@@ -23,10 +23,10 @@ const styles = theme => ({
     },
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(2)
   },
   icon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(2),
     fontSize:20
   }
 });
@@ -35,9 +35,9 @@ class CompletedFileList extends React.Component {
 
   renderDownloadedList = () => {
   	if (this.props.loading) {
-      return <Typography variant="h5" color="inherit">Loading...</Typography>
+      return <Typography data-test="text-loading" variant="h5" color="inherit">Loading...</Typography>
     } else if (this.props.files.length === 0) {
-      return <Typography variant="h5" color="inherit">No completed downloads</Typography>
+      return <Typography data-test="text-empty" variant="h5" color="inherit">No completed downloads</Typography>
     } else {
         if (this.props.limit) {
           const list = this.props.files.slice(0,this.props.limit);
@@ -54,7 +54,7 @@ class CompletedFileList extends React.Component {
   renderList = (list) => {
   	return (
       list.map((row,id) => (
-      	<CompletedFile key={id} file={row} onDownload={() => {this.handleDownloadButton(row.id)}}/>
+      	<CompletedFile data-test="element-item" key={id} file={row} onDownload={() => {this.handleDownloadButton(row.id)}}/>
       ))
     )
   }
@@ -71,6 +71,10 @@ class CompletedFileList extends React.Component {
 
 CompletedFileList.propTypes = {
 	classes: PropTypes.object.isRequired,
+}
+
+CompletedFileList.defaultProps = {
+  files: []
 }
 
 export default withStyles(styles)(CompletedFileList);

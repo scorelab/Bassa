@@ -26,7 +26,7 @@ const styles = theme => ({
     marginTop: 20
   },
   paper: {
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
     textAlign: 'center',
     maxHeight: 500,
     overflow: 'auto',

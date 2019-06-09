@@ -32,10 +32,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(2)
   },
   icon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(2),
     fontSize:20
   }
 }));
@@ -55,7 +55,7 @@ const QueuedFile = (props) => {
             <CustomTableCell align="left">{props.file.size}</CustomTableCell>
             <CustomTableCell align="left">{props.file.time}</CustomTableCell>
             <CustomTableCell align="left">
-              <Button variant="outlined" size="small" color="primary" className="button" onClick={props.onDownload}>
+              <Button data-test="button-download" variant="outlined" size="small" color="primary" className={classes.button} onClick={props.onDownload}>
               <SaveIcon className="icon" /> Download
             </Button>
             </CustomTableCell>
@@ -67,7 +67,6 @@ const QueuedFile = (props) => {
 }
 
 QueuedFile.propTypes = {
-  classes: PropTypes.object.isRequired,
   file: PropTypes.object
 };
 
