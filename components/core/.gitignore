@@ -5,3 +5,4 @@ sdist/
 dist/
 *.pyc
 /27-sdist
+*.log
