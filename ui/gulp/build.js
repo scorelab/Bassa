@@ -8,7 +8,7 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-const uglify = require('gulp-uglify').default;
+const uglify = require('gulp-uglify-es').default;
 
 gulp.task('partials', function () {
   return gulp.src([
