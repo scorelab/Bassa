@@ -76,12 +76,64 @@ CREATE TABLE IF NOT EXISTS `rate` (
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   `auth` tinyint(11) NOT NULL,
   `email` varchar(256) NOT NULL,
   `blocked` tinyint(1) NOT NULL DEFAULT '0',
   `approved` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `workspace`
+--
+
+CREATE TABLE IF NOT EXISTS `workspace` (
+  `id` bigint(20) NOT NULL, AUTO_INCREMENT
+  `name` varchar(256) NOT NULL,
+  `user_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project`
+--
+
+CREATE TABLE IF NOT EXISTS `project` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) NOT NULL,
+  `workspace_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `folder`
+--
+
+CREATE TABLE IF NOT EXISTS `folder` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) NOT NULL,
+  `workspace_id` bigint(20) NOT NULL
+  `project_id` bigint(20) NOT NULL
+  `folder_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `file`
+--
+
+CREATE TABLE IF NOT EXISTS `file` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) NOT NULL,
+  `project_id` bigint(20) NOT NULL
+  `folder_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
