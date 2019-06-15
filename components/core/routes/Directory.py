@@ -8,7 +8,7 @@ from utils.token_utils import token_validator
 ##################### workspace endpoints ######################
 
 def fetch_workspaces(user_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = get_workspaces(user_id)
@@ -27,7 +27,7 @@ def fetch_workspaces(user_id):
         return '{"error":"token error"}', 403
 
 def fetch_workspace(workspace_id, user_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = get_workspace_by_id(workspace_id, user_id)
@@ -46,7 +46,7 @@ def fetch_workspace(workspace_id, user_id):
         return '{"error":"token error"}', 403
 
 def add_workspace(name, user_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = create_workspace(name, user_id)
@@ -62,7 +62,7 @@ def add_workspace(name, user_id):
         return '{"error":"token error"}', 403
 
 def edit_workspace(name, workspace_id, user_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = update_workspace(name, workspace_id, user_id)
@@ -82,7 +82,7 @@ def edit_workspace(name, workspace_id, user_id):
 
 
 def fetch_projects(workspace_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = get_projects(workspace_id)
@@ -101,7 +101,7 @@ def fetch_projects(workspace_id):
         return '{"error":"token error"}', 403
 
 def fetch_project(project_id, workspace_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = get_project_by_id(project_id, workspace_id)
@@ -120,7 +120,7 @@ def fetch_project(project_id, workspace_id):
         return '{"error":"token error"}', 403
 
 def add_project(name, workspace_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = create_project(name, workspace_id)
@@ -136,7 +136,7 @@ def add_project(name, workspace_id):
         return '{"error":"token error"}', 403
 
 def edit_project(name, project_id, workspace_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = update_project(name, project_id, workspace_id)
@@ -156,7 +156,7 @@ def edit_project(name, project_id, workspace_id):
 
 
 def fetch_folders(workspace_id, project_id, folder_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = get_folders(workspace_id, project_id, folder_id)
@@ -174,11 +174,11 @@ def fetch_folders(workspace_id, project_id, folder_id):
     else:
         return '{"error":"token error"}', 403
 
-def fetch_folder(id, folder_id, project_id, workspace_id):
-     token = token_validator(request.headers['token'])
+def fetch_folder(id):
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
-            status = get_folder_by_id(id, folder_id, project_id, workspace_id)
+            status = get_folder_by_id(id)
             if not isinstance(status, str):
                 resp = Response(response=json.dumps(status), status=200)
             else:
@@ -194,7 +194,7 @@ def fetch_folder(id, folder_id, project_id, workspace_id):
         return '{"error":"token error"}', 403
 
 def add_folder(name, folder_id, project_id, workspace_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = create_folder(name, folder_id, project_id, workspace_id)
@@ -210,7 +210,7 @@ def add_folder(name, folder_id, project_id, workspace_id):
         return '{"error":"token error"}', 403
 
 def edit_folder(name, folder_id, project_id, workspace_id):
-     token = token_validator(request.headers['token'])
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = update_folder(name, folder_id, project_id, workspace_id)

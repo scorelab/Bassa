@@ -101,7 +101,7 @@ def create_project(name, workspace_id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql = "INSERT into project (name, workspace_id) VALUES(%s, %s);"
+        sql = "INSERT INTO project (name, workspace_id) VALUES(%s, %s);"
         try:
             cursor.execute(sql, (name, workspace_id))
             db.commit()
@@ -132,7 +132,7 @@ def get_folders(workspace_id, project_id, folder_id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql = "SELECT id, name FROM project WHERE workspace_id=%s AND project_id=%s AND folder_id=%s;"
+        sql = "SELECT id, name FROM folder WHERE workspace_id=%s AND project_id=%s AND folder_id=%s;"
         try:
             cursor.execute(sql, (workspace_id, project_id, folder_id))
             results = cursor.fetchall()
@@ -142,13 +142,13 @@ def get_folders(workspace_id, project_id, folder_id):
             return e
     return 'db connection error'
 
-def get_folder_by_id(id, folder_id, project_id, workspace_id):
+def get_folder_by_id(id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql = "SELECT id, name FROM project WHERE id=%s AND folder_id=%s, project_id=%s, workspace_id=%s;"
+        sql = "SELECT id, name, workspace_id, project_id, folder_id FROM folder WHERE id=%s;"
         try:
-            cursor.execute(sql, (folder_id, project_id, workspace_id))
+            cursor.execute(sql, (id))
             results = cursor.fetchall()
             db.close()
             return results
@@ -160,7 +160,7 @@ def create_folder(name, folder_id, project_id, workspace_id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql = "INSERT into project (name, folder_id, project_id, workspace_id) VALUES(%s, %s, %s, %s, %s);"
+        sql = "INSERT INTO folder (name, folder_id, project_id, workspace_id) VALUES(%s, %s, %s, %s);"
         try:
             cursor.execute(sql, (name, folder_id, project_id, workspace_id))
             db.commit()
@@ -174,7 +174,7 @@ def update_folder(name, id, folder_id, project_id, workspace_id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql = "UPDATE project SET name=%s where id=%s AND folder_id=%s AND project_id=%s AND workspace_id=%s;"
+        sql = "UPDATE folder SET name=%s where id=%s AND folder_id=%s AND project_id=%s AND workspace_id=%s;"
         try:
             cursor.execute(sql, (name, id, folder_id, project_id, workspace_id))
             db.commit()
