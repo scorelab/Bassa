@@ -76,13 +76,14 @@ CREATE TABLE IF NOT EXISTS `rate` (
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) AUTO_INCREMENT NOT NULL,
   `user_name` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   `auth` tinyint(11) NOT NULL,
   `email` varchar(256) NOT NULL,
   `blocked` tinyint(1) NOT NULL DEFAULT '0',
-  `approved` tinyint(1) NOT NULL DEFAULT '0'
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
+  unique key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -92,9 +93,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 CREATE TABLE IF NOT EXISTS `workspace` (
-  `id` bigint(20) NOT NULL, AUTO_INCREMENT
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
-  `user_id` bigint(20) NOT NULL
+  `user_id` bigint(20) NOT NULL,
+  primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -106,7 +108,8 @@ CREATE TABLE IF NOT EXISTS `workspace` (
 CREATE TABLE IF NOT EXISTS `project` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
-  `workspace_id` bigint(20) NOT NULL
+  `workspace_id` bigint(20) NOT NULL,
+  primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -118,9 +121,10 @@ CREATE TABLE IF NOT EXISTS `project` (
 CREATE TABLE IF NOT EXISTS `folder` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
-  `workspace_id` bigint(20) NOT NULL
-  `project_id` bigint(20) NOT NULL
-  `folder_id` bigint(20) NOT NULL
+  `workspace_id` bigint(20) NOT NULL,
+  `project_id` bigint(20) NOT NULL,
+  `folder_id` bigint(20) NOT NULL,
+  primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -132,8 +136,9 @@ CREATE TABLE IF NOT EXISTS `folder` (
 CREATE TABLE IF NOT EXISTS `file` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
-  `project_id` bigint(20) NOT NULL
-  `folder_id` bigint(20) NOT NULL
+  `project_id` bigint(20) NOT NULL,
+  `folder_id` bigint(20) NOT NULL,
+  primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -171,6 +176,7 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_name`),
   ADD UNIQUE KEY `user_name` (`user_name`),
   ADD UNIQUE KEY `email` (`email`);
+
 
 --
 -- AUTO_INCREMENT for dumped tables
