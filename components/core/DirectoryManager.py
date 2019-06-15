@@ -115,9 +115,68 @@ def update_project(name, id, workspace_id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
-        sql = "UPDATE project SET name=%s where id=%s AND workspace_id=%s;"
+        sql = "UPDATE project SET name=%s WHERE id=%s AND workspace_id=%s;"
         try:
             cursor.execute(sql, (name, id, workspace_id))
+            db.commit()
+        except MySQLdb.Error as e:
+            db.rollback()
+            return e
+        return 'success'
+    return 'db connection error'
+
+
+##################### folder helper functions ######################
+
+def get_folders(workspace_id='0', project_id='0', folder_id='0'):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "SELECT id, name FROM project WHERE workspace_id=%s AND project_id=%s AND folder_id=%s;"
+        try:
+            cursor.execute(sql, (workspace_id, project_id, folder_id))
+            results = cursor.fetchall()
+            db.close()
+            return results
+        except MySQLdb.Error as e:
+            return e
+    return 'db connection error'
+
+def get_folder_by_id(id, folder_id='0', project_id='0', workspace_id='0'):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "SELECT id, name FROM project WHERE id=%s AND folder_id=%s, project_id=%s, workspace_id=%s;"
+        try:
+            cursor.execute(sql, (folder_id, project_id, workspace_id))
+            results = cursor.fetchall()
+            db.close()
+            return results
+        except MySQLdb.Error as e:
+            return e
+    return 'db connection error'
+
+def create_folder(name, folder_id='0', project_id='0', workspace_id='0'):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "INSERT into project (name, folder_id, project_id, workspace_id) VALUES(%s, %s, %s, %s, %s);"
+        try:
+            cursor.execute(sql, (name, folder_id, project_id, workspace_id))
+            db.commit()
+        except MySQLdb.Error as e:
+            db.rollback()
+            return e
+        return 'success'
+    return 'db connection error'
+
+def update_folder(name, id, folder_id='0', project_id='0', workspace_id='0'):
+    db = threadpool.connect()
+    if db is not None:
+        cursor = db.cursor()
+        sql = "UPDATE project SET name=%s where id=%s AND folder_id=%s AND project_id=%s AND workspace_id=%s;"
+        try:
+            cursor.execute(sql, (name, id, folder_id, project_id, workspace_id))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
