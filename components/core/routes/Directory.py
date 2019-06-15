@@ -77,7 +77,9 @@ def edit_workspace(name, workspace_id, user_id):
     else:
         return '{"error":"token error"}', 403
 
+
 ##################### project endpoints ######################
+
 
 def fetch_projects(workspace_id):
      token = token_validator(request.headers['token'])
@@ -148,3 +150,78 @@ def edit_project(name, project_id, workspace_id):
         return '{"error":"not authorized"}', 403
     else:
         return '{"error":"token error"}', 403
+
+
+##################### folder endpoints ######################
+
+
+def fetch_folders(workspace_id, project_id, folder_id):
+     token = token_validator(request.headers['token'])
+    if token is not None:
+        try:
+            status = get_folders(workspace_id, project_id, folder_id)
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status), status=200)
+            else:
+                resp = Response('{"error":"' + status + '"}', status=400)
+        except Exception as e:
+            resp = Response('{"error":"' + str(e) + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
+
+def fetch_folder(id, folder_id, project_id, workspace_id):
+     token = token_validator(request.headers['token'])
+    if token is not None:
+        try:
+            status = get_folder_by_id(id, folder_id, project_id, workspace_id)
+            if not isinstance(status, str):
+                resp = Response(response=json.dumps(status), status=200)
+            else:
+                resp = Response('{"error":"' + status + '"}', status=400)
+        except Exception as e:
+            resp = Response('{"error":"' + str(e) + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
+
+def add_folder(name, folder_id, project_id, workspace_id):
+     token = token_validator(request.headers['token'])
+    if token is not None:
+        try:
+            status = create_folder(name, folder_id, project_id, workspace_id)
+            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
+        except Exception as e:
+            resp = Response('{"error":"' + str(e) + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
+
+def edit_folder(name, folder_id, project_id, workspace_id):
+     token = token_validator(request.headers['token'])
+    if token is not None:
+        try:
+            status = update_folder(name, folder_id, project_id, workspace_id)
+            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
+        except Exception as e:
+            resp = Response('{"error":"' + str(e) + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
+

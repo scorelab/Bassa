@@ -88,3 +88,13 @@ server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/add/<string:name>'
 					view_func=Directory.add_project, methods=['POST'])
 server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/<string:project_id>/edit/<string:name>', endpoint='edit_project',
 					view_func=Directory.edit_project, methods=['POST'])
+
+# folder endpoints
+server.add_url_rule(rule='/api/user/folder/w/<string:workspace_id>/p/<string:project_id>/f/<string:folder_id>', endpoint='fetch_folders',
+					view_func=Directory.fetch_folders, methods=['GET'])
+server.add_url_rule(rule='/api/user/folder/<string:id>/w/<string:workspace_id>/p/<string:project_id>/f/<string:folder_id>', endpoint='fetch_folder',
+					view_func=Directory.fetch_folder, methods=['GET'])
+server.add_url_rule(rule='/api/user/folder/<string:name>/w/<string:workspace_id>/p/<string:project_id>/f/<string:folder_id>/add', endpoint='add_folder',
+					view_func=Directory.add_folder, methods=['POST'])
+server.add_url_rule(rule='/api/user/folder/<string:name>/w/<string:workspace_id>/p/<string:project_id>/f/<string:folder_id>/edit', endpoint='edit_folder',
+					view_func=Directory.edit_folder, methods=['POST'])

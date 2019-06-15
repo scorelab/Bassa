@@ -128,7 +128,7 @@ def update_project(name, id, workspace_id):
 
 ##################### folder helper functions ######################
 
-def get_folders(workspace_id='0', project_id='0', folder_id='0'):
+def get_folders(workspace_id, project_id, folder_id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
@@ -142,7 +142,7 @@ def get_folders(workspace_id='0', project_id='0', folder_id='0'):
             return e
     return 'db connection error'
 
-def get_folder_by_id(id, folder_id='0', project_id='0', workspace_id='0'):
+def get_folder_by_id(id, folder_id, project_id, workspace_id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
@@ -156,7 +156,7 @@ def get_folder_by_id(id, folder_id='0', project_id='0', workspace_id='0'):
             return e
     return 'db connection error'
 
-def create_folder(name, folder_id='0', project_id='0', workspace_id='0'):
+def create_folder(name, folder_id, project_id, workspace_id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
@@ -170,7 +170,7 @@ def create_folder(name, folder_id='0', project_id='0', workspace_id='0'):
         return 'success'
     return 'db connection error'
 
-def update_folder(name, id, folder_id='0', project_id='0', workspace_id='0'):
+def update_folder(name, id, folder_id, project_id, workspace_id):
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
