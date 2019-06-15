@@ -78,6 +78,8 @@ server.add_url_rule(rule='/api/user/<string:user_id>/w/add/<string:name>', endpo
 					view_func=Directory.add_workspace, methods=['POST'])
 server.add_url_rule(rule='/api/user/<string:user_id>/w/<string:workspace_id>/edit/<string:name>', endpoint='edit_workspace',
 					view_func=Directory.edit_workspace, methods=['POST'])
+server.add_url_rule(rule='/api/user/<string:user_id>/w/delete/<string:workspace_id>', endpoint='remove_workspace',
+					view_func=Directory.remove_workspace, methods=['DELETE'])
 
 # project endpoints
 server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p', endpoint='fetch_projects',
@@ -88,6 +90,8 @@ server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/add/<string:name>'
 					view_func=Directory.add_project, methods=['POST'])
 server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/<string:project_id>/edit/<string:name>', endpoint='edit_project',
 					view_func=Directory.edit_project, methods=['POST'])
+server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/delete/<string:project_id>', endpoint='remove_project',
+					view_func=Directory.remove_project, methods=['DELETE'])
 
 # folder endpoints
 server.add_url_rule(rule='/api/user/folder/<string:id>', endpoint='fetch_folder',
@@ -98,3 +102,5 @@ server.add_url_rule(rule='/api/user/folder/<string:name>/w/<string:workspace_id>
 					view_func=Directory.add_folder, methods=['POST'])
 server.add_url_rule(rule='/api/user/folder/<string:name>/w/<string:workspace_id>/p/<string:project_id>/f/<string:folder_id>/edit', endpoint='edit_folder',
 					view_func=Directory.edit_folder, methods=['POST'])
+server.add_url_rule(rule='/api/user/folder/<string:folder_id>/delete', endpoint='remove_folder',
+					view_func=Directory.remove_folder, methods=['DELETE'])

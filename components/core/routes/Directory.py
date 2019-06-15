@@ -77,6 +77,22 @@ def edit_workspace(name, workspace_id, user_id):
     else:
         return '{"error":"token error"}', 403
 
+def remove_workspace(workspace_id, user_id):
+    token = request.headers['token']
+    if token is not None:
+        try:
+            status = delete_workspace(workspace_id, user_id)
+            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
+        except Exception as e:
+            resp = Response('{"error":"' + str(e) + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
+
 
 ##################### project endpoints ######################
 
@@ -140,6 +156,22 @@ def edit_project(name, project_id, workspace_id):
     if token is not None:
         try:
             status = update_project(name, project_id, workspace_id)
+            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
+        except Exception as e:
+            resp = Response('{"error":"' + str(e) + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
+
+def remove_project(project_id, workspace_id):
+    token = token_validator(request.headers['token'])
+    if token is not None:
+        try:
+            status = delete_project(project_id, workspace_id)
             resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
         except Exception as e:
             resp = Response('{"error":"' + str(e) + '"}', status=400)
@@ -225,3 +257,18 @@ def edit_folder(name, folder_id, project_id, workspace_id):
     else:
         return '{"error":"token error"}', 403
 
+def remove_folder(folder_id):
+    token = token_validator(request.headers['token'])
+    if token is not None:
+        try:
+            status = delete_folder(folder_id)
+            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
+        except Exception as e:
+            resp = Response('{"error":"' + str(e) + '"}', status=400)
+        resp.headers['token'] = token
+        resp.headers['Access-Control-Expose-Headers'] = 'token'
+        return resp
+    elif token is not None:
+        return '{"error":"not authorized"}', 403
+    else:
+        return '{"error":"token error"}', 403
