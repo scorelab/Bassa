@@ -3,7 +3,7 @@ from flask import send_file, send_from_directory
 from flask_socketio import join_room
 import os
 from file_sender import sender
-from routes import User, Download
+from routes import User, Download, Directory
 
 
 # socket connections
@@ -68,3 +68,23 @@ server.add_url_rule(rule='/api/user/heavy', endpoint='get_topten_heaviest_users'
 # file sending endpoints
 server.add_url_rule(rule='/api/file', endpoint='send_file_from_path', view_func=sender.send_file_from_path,
 					methods=['GET'])
+
+# directory structure endpoints
+server.add_url_rule(rule='/api/user/<string:user_id>/w', endpoint='fetch_workspaces',
+					view_func=Directory.fetch_workspaces, methods=['GET'])
+server.add_url_rule(rule='/api/user/<string:user_id>/w/<string:workspace_id>', endpoint='fetch_workspace',
+					view_func=Directory.fetch_workspace, methods=['GET'])
+server.add_url_rule(rule='/api/user/<string:user_id>/w/add/<string:name>', endpoint='add_workspace',
+					view_func=Directory.add_workspace, methods=['POST'])
+server.add_url_rule(rule='/api/user/<string:user_id>/w/<string:workspace_id>/edit/<string:name>', endpoint='edit_workspace',
+					view_func=Directory.edit_workspace, methods=['POST'])
+
+
+server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p', endpoint='fetch_projects',
+					view_func=Directory.fetch_projects, methods=['GET'])
+server.add_url_rule(rule='/api/user/w/<string:workspace_id/p/<string:project_id>', endpoint='fetch_project',
+					view_func=Directory.fetch_project, methods=['GET'])
+server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/add/<string:name>', endpoint='add_project',
+					view_func=Directory.add_project, methods=['POST'])
+server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/<string:project_id>/edit/<string:name>', endpoint='edit_project',
+					view_func=Directory.edit_project, methods=['POST'])
