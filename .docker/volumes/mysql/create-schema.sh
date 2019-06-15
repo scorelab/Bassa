@@ -4,7 +4,8 @@ SCHEMA_DIR=/tmp/schema
 
 mysql_exec=( mysql -uroot -p${MYSQL_ROOT_PASSWORD} )
 
-if [[-z "$BASSA_DB_NAME" ]]
+if [[ -z "$BASSA_DB_NAME" ]]
+then
     echo "BASSA_DB_NAME is not defined."
     exit 1
 fi
