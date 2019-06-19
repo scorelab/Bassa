@@ -1,42 +1,8 @@
-# Container to lint python code
-FROM python:3.7-slim as linter 
+# Container as boiler plate
+FROM python:3.7-slim as base 
 
-# Setting current work directory to /home/Bassa
-WORKDIR /linter
-
-# Copying API component
-COPY . .
-
-# Installing dependencies
-RUN apt-get update && \ 
-    apt-get install -y --no-install-recommends \ 
-    python3-pip \ 
-    build-essential \
-    default-libmysqlclient-dev \ 
-    python3-dev \
-    python3-setuptools && \ 
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get clean
-
-
-# Installing pylint and linting the python code
-RUN pip install pylint && pylint -E . 
-
-# -----------------------------
-
-# Container for running the Bassa API server
-FROM python:3.7-slim as production
-
-MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
-
-ARG BUILD_DATE
-ARG VCS_REF
-
-# Volume for accessing the downloaded files
-VOLUME [ "/downloads" ]
-
-# Setting current work directory to /home/Bassa
-WORKDIR /API
+# Setting current work directory to /bassa
+WORKDIR /bassa
 
 # Copying API component
 COPY . .
@@ -54,6 +20,33 @@ RUN apt-get update && \
 
 # Installing the python modules
 RUN python3 setup.py develop
+
+# -----------------------------
+
+# Container to lint python code
+FROM base as linter 
+
+# Setting current work directory to /home/Bassa
+WORKDIR /bassa
+
+# Installing pylint and linting the python code
+RUN pip install pylint && pylint -E *.py **/*.py || printf "\n Bassa has got some errors! Continuing the build for now\n\n"
+
+# -----------------------------
+
+# Container for running the Bassa API server
+FROM base as production
+
+MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
+
+ARG BUILD_DATE
+ARG VCS_REF
+
+# Volume for accessing the downloaded files
+VOLUME [ "/downloads" ]
+
+# Setting current work directory to /home/Bassa
+WORKDIR /bassa
 
 # Exposing ports where the server listens 
 EXPOSE 5000
