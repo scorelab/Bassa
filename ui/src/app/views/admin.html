@@ -42,6 +42,16 @@
   </div>
 
   <md-content class="block md-padding table-responsive-vertical" >
+    <md-content layout="row" layout-sm="column">
+      <md-subheader>View downloaded files</md-subheader>
+      <md-button class="md-raised md-primary" ng-click="visitminio()">
+        Visit Minio
+      </md-button>
+    </md-content>
+
+    <br>
+    <br>
+  
     <md-subheader class="md-primary">Usage of top heaviest users</md-subheader>
     <nvd3 options="chartOptions" data="usageChartData"></nvd3>
   </md-content>
