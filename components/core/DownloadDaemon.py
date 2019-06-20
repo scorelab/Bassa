@@ -7,6 +7,7 @@ from Models import Status, Download
 from EMail import send_mail
 from DiskMan import *
 from ConfReader import get_conf_reader
+from fileminio import *
 
 import websocket
 import sys
@@ -120,6 +121,10 @@ class MessageHandler():
                     download_id = get_id_from_gid(gid)
                     username = get_username_from_gid(gid)
                     send_status(download_id, completedLength, raw_size, username)
+                    file_name = path[-1]
+                    fpath = data['result']['files'][0]['path'].split('/')
+                    file_path=("/".join(fpath))
+                    send_file_details(file_name, file_path)
                     # msg='Your download '+path[-1]+' is completed.'
                     # send_mail([get_download_email(data['result']['gid'])],msg)
             elif 'method' in data:
@@ -212,6 +217,14 @@ def find_supported_handler(download):
         if handler.isSupported(download):
             return handler
     return None
+
+
+def send_file_details(file_name, file_path):
+    m_fname = file_name
+    m_fpath = file_path
+    upload_to_minio(m_fname, m_fpath)
+    print("File uploaded to minio/bassa successfully !")
+
 
 def on_message(ws, message):
     global handler, folder_size, mHandler, messageQueue
