@@ -55,6 +55,11 @@
       });
     };
 
+    $scope.visitminio = function() {
+      ToastService.showToast('Opening Minio...');
+      AdminService.visitMinio()
+    };
+
     this.getRequests = function() {
       AdminService.getSignupRequests().then(function (response) {
         $scope.signup_requests = response.data;
