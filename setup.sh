@@ -15,6 +15,12 @@ if ! [ $(id -u) = 0 ]; then
 else
    echo "Starting dependency installation..."
    echo "Finding the package manager"
+   
+   echo "Installing minio-py libraries"
+   git clone https://github.com/minio/minio-py
+   cd minio-py
+   python setup.py install
+   echo "minio-py libraries installed"
 
    if [ ! -z $APT_GET ]; then
       echo -e "apt-get found\n"
