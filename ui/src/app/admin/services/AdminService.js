@@ -43,11 +43,19 @@
       });
     }
 
+    var visitMinio = function() {
+      var url = 'http://192.168.43.195:9000'
+      setTimeout(function(){
+        window.open(url, '_blank');
+         },1100)
+    };
+
     return {
       startDownloads : startDownloads,
       killDownloads : killDownloads,
       getSignupRequests : getSignupRequests,
       approve: approve,
+      visitMinio : visitMinio,
       getHeavyUsers: getHeavyUsers
     };
   }
