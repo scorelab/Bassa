@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const QueuedFile = (props) => {
+const CompletedFile = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -66,9 +66,9 @@ const QueuedFile = (props) => {
   )
 }
 
-QueuedFile.propTypes = {
+CompletedFile.propTypes = {
   file: PropTypes.object
 };
 
 
-export default QueuedFile;
+export default CompletedFile;

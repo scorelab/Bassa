@@ -66,7 +66,7 @@ const BassaAppBar = (props) => {
             margin="normal"
             style={{background:colours.white}}
             placeholder="Password" />&nbsp;&nbsp;
-	        <Button size="small" variant="contained" color="primary">Login</Button>
+	        <Button size="large" variant="contained" color="primary">Login</Button>
 	      </Toolbar>
 	    </AppBar>
 	  </div>

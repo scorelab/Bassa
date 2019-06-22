@@ -6,25 +6,22 @@ import { fileObject } from '../stories/CompletedFile.stories';
 
 const clickDownloadFn = jest.fn();
 
-const setupComponent = props => {
-  const component = shallow(<CompletedFile {...props} />);
-  return component;
-}
-
 const findByTestAttr = (component, attr) => {
-  const wrapper = component.find(`[data-test='${attr}']`);
-  return wrapper;
+  const wrappr = component.find(`[data-test='${attr}']`);
+  return wrappr;
 }
 
 describe('Completed single file component', () => {
+
+  let component;
+  beforeEach(() => component = shallow(<CompletedFile file={fileObject} onDownload={clickDownloadFn()} />));
+
   it('should match with its snapshot', () => {
-    const component = setupComponent({file: fileObject});
     expect(component).toMatchSnapshot();
   });
   
   it('should call onDownload function on click', () => {
-    const component = setupComponent({file: fileObject, onDownload:clickDownloadFn()});
-    const wrapper = findByTestAttr(component, 'button-download');
+    let wrapper = findByTestAttr(component, 'button-download');
     wrapper.simulate('click');
     expect(clickDownloadFn).toHaveBeenCalled();
   })

@@ -54,7 +54,7 @@ const QueuedFile = (props) => {
         <TableBody>
           <TableRow>
             <CustomTableCell>{props.index + 1}</CustomTableCell>
-            <CustomTableCell className="row" component="th" scope="row">
+            <CustomTableCell className={classes.row} component="th" scope="row">
               {props.name}
             </CustomTableCell>
             <CustomTableCell align="right">

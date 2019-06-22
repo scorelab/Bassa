@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { array } from '@storybook/addon-knobs';
 
 import { dummyFiles } from './QueuedFileList.stories';
-import Queued from '../containers/Queued';
+import Queued from '../containers/QueuedComponent';
 
-storiesOf('Queued', module)
+storiesOf('Queued Component', module)
 .add('default', () => <Queued queuedList={array('List', dummyFiles)} />)
