@@ -26,7 +26,7 @@ RUN python3 setup.py develop
 # Container to lint python code
 FROM base as linter 
 
-# Setting current work directory to /home/Bassa
+# Setting current work directory to /Bassa
 WORKDIR /bassa
 
 # Installing pylint and linting the python code
@@ -45,7 +45,7 @@ ARG VCS_REF
 # Volume for accessing the downloaded files
 VOLUME [ "/downloads" ]
 
-# Setting current work directory to /home/Bassa
+# Setting current work directory to /Bassa
 WORKDIR /bassa
 
 # Exposing ports where the server listens 
