@@ -44,7 +44,7 @@
     }
 
     var visitMinio = function() {
-      var url = 'http://192.168.43.195:9000'
+      var url = 'http://10.61.32.83:9000'
       setTimeout(function(){
         window.open(url, '_blank');
          },1100)
