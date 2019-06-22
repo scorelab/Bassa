@@ -51,7 +51,7 @@ const PendingSignupRequests = (props) => {
               <CustomTableCell align="left">{index+1}</CustomTableCell>
               <CustomTableCell align="left">{elem.name}</CustomTableCell>
               <CustomTableCell align="left">{elem.email}</CustomTableCell>
-              <CustomTableCell align="left">
+              <CustomTableCell align="right">
                 <FAB data-test="button-approve" className={classes.button} onClick={props.onSubmit}><DoneIcon/></FAB>
               </CustomTableCell>
           </TableRow>

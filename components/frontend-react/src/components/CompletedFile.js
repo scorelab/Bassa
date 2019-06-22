@@ -54,7 +54,7 @@ const CompletedFile = (props) => {
             <CustomTableCell align="left">{props.file.name}</CustomTableCell>
             <CustomTableCell align="left">{props.file.size}</CustomTableCell>
             <CustomTableCell align="left">{props.file.time}</CustomTableCell>
-            <CustomTableCell align="left">
+            <CustomTableCell align="right">
               <Button data-test="button-download" variant="outlined" size="small" color="primary" className={classes.button} onClick={props.onDownload}>
               <SaveIcon className="icon" /> Download
             </Button>
