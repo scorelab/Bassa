@@ -1,11 +1,9 @@
-from flask import Response, request
 from DownloadDaemon import *
 from minio import Minio
 from minio.error import ResponseError
 from DownloadManager import *
 from DBCon import *
 import sys
-import sqlalchemy.pool as pool
 
 client = Minio('localhost:9000', secure=False,
                access_key='bassa',
