@@ -1,0 +1,214 @@
+# Main config file for icon theme.
+theme = "hugo-icon"
+baseURL = "https://www.example.com/"
+languageCode = "en-AU"
+title = "Bassa"
+
+# Metadata
+[params]
+  author = "Mehant Kammakomati"
+  description = "Website for Bassa Web Applicaton"
+
+
+[params.hero]
+  img = "images/bg.jpg"
+  title = "**Automated Download Queue** for Communities to take the best use of Internet bandwidth"
+  software = ""
+
+# Navigation section
+[params.nav]
+  mission = "About"
+  services = "Documentation"
+  team = "Usage guide"
+  contact = "Community"
+  # Include logo instead if HOME:
+  logo = "https://github.com/scorelab/Bassa/blob/develop/ui/src/assets/images/logo.png?raw=true"
+
+# Mission section
+[params.mission]
+  enable = true
+
+  [params.mission.images]
+    enable = true
+
+    [[params.mission.images.list]]
+      img = "images/img_3.jpg"
+    [[params.mission.images.list]]
+      img = "images/img_2.jpg"
+    [[params.mission.images.list]]
+      img = "images/img_1.jpg"
+    [[params.mission.images.list]]
+      img = "images/img_4.jpg"
+
+  [[params.mission.item]]
+    weight = 1
+    title = ""
+    subtitle = "**Automated Download Queue** for Communities to take the best use of Internet bandwidth"
+    description = "**Bassa** solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.</p><ul class='checked'><li>Provides an interface for users to add their downloads as links or torrent magnet links</li><br><li>Provide users with an interface to view and download the files in the local server</li><br><li>Provide a rating system for users to rate the files residing in local server.</li><br><li>Automatically start and stop downloading in given time frame</li><br><li>Automatically clean the disks and make room for new downloads</li><br><li>Notify the users when his/her download is completed</li><br><li>Mark inappropriate downloads</li><br><li>Provides admins with an interface to deal with inappropriate files</li></ul><p><a href='#' class='btn btn-success fh5co-content-nav' data-nav-section='services'>Install Bassa</a>"
+
+  
+# Services section
+[params.services]
+  enable = true
+  video = false
+  vidlink = "https://vimeo.com/channels/staffpicks/93951774"
+
+  [[params.services.item]]
+    weight = 1
+    name = "Docker"
+    title = "Docker" 
+    subtitle = "**Setup Bassa using Docker (Recommended)**"
+    description = "Install and Setup [Docker](https://docs.docker.com/), [Docker Compose](https://docs.docker.com/compose/install/) and [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) on your machine. Run this command to check if you have installed properly.<br> ```docker -v && docker-compose -v && git --version``` <br><br> Download **Bassa** git repository <br> ``` git clone https://github.com/scorelab/Bassa && cd Bassa``` <br><br> Start **Bassa** <br> ``` docker-compose up --build ``` <br> You might need to wait for several minutes for the first time installation but later on startups would be faster. Now go to `http://localhost:3000` and you should be able to use **Bassa** locally." 
+
+  [[params.services.item]]
+    weight = 2
+    name = "MacOS"
+    title = "MacOS"
+    subtitle = "**Setup Bassa manually on MacOS machine**"
+    description = "Download **Bassa** git repository <br> ``` git clone https://github.com/scorelab/Bassa && cd Bassa``` <br><br> Install dependency software to run Bassa locally. <br> `sudo ./setup.sh` <br><br> Install python modules for Bassa API server <br> `cd components/core && python3 setup.py develop` <br> <br> Back to the root folder: Start MySQL and create a table named **Bassa** <br>`brew services start mysql` <br> `mysql -u root -p` <br> `mysql>> Create Database Bassa;` <br> `mysql>> exit` <br><br> Insert database schema <br> `cd db_schema && mysql -u root -p  Bassa < Bassa.sql` "
+
+  [[params.services.item]]
+    weight = 3
+    name = "Linux"
+    title = "Linux"
+    subtitle = "**Automated Download Queue** for Communities to take the best use of Internet bandwidth"
+    description = "**Bassa** solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.</p><ul class='checked'><li>Provides an interface for users to add their downloads as links or torrent magnet links</li><br><li>Provide users with an interface to view and download the files in the local server</li><br><li>Provide a rating system for users to rate the files residing in local server.</li><br><li>Automatically start and stop downloading in given time frame</li><br><li>Automatically clean the disks and make room for new downloads</li><br><li>Notify the users when his/her download is completed</li><br><li>Mark inappropriate downloads</li><br><li>Provides admins with an interface to deal with inappropriate files</li></ul><p><a href='#' class='btn btn-success fh5co-content-nav' data-nav-section='services'>Install Bassa</a>"
+
+  [[params.services.item]]
+    weight = 4
+    name="windows"
+    title = "Windows OS"
+    subtitle = "**Automated Download Queue** for Communities to take the best use of Internet bandwidth"
+    description = "**Bassa** solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.</p><ul class='checked'><li>Provides an interface for users to add their downloads as links or torrent magnet links</li><br><li>Provide users with an interface to view and download the files in the local server</li><br><li>Provide a rating system for users to rate the files residing in local server.</li><br><li>Automatically start and stop downloading in given time frame</li><br><li>Automatically clean the disks and make room for new downloads</li><br><li>Notify the users when his/her download is completed</li><br><li>Mark inappropriate downloads</li><br><li>Provides admins with an interface to deal with inappropriate files</li></ul><p><a href='#' class='btn btn-success fh5co-content-nav' data-nav-section='services'>Install Bassa</a>"
+
+  
+# Work section
+[params.work]
+  enable = false
+
+  [[params.work.item]]
+    title = "Consectetur adipisicing"
+    subtitle = "Web Design"
+    img = "images/img_1.jpg"
+
+  [[params.work.item]]
+    title = "Consectetur adipisicing"
+    subtitle = "Web Design"
+    img = "images/img_2.jpg"
+
+  [[params.work.item]]
+    title = "Consectetur adipisicing"
+    subtitle = "Web Design"
+    img = "images/img_3.jpg"
+
+  [[params.work.item]]
+    title = "Consectetur adipisicing"
+    subtitle = "Web Design"
+    img = "images/img_2.jpg"
+
+  [[params.work.item]]
+    title = "Consectetur adipisicing"
+    subtitle = "Web Design"
+    img = "images/img_3.jpg"
+
+  [[params.work.item]]
+    title = "Consectetur adipisicing"
+    subtitle = "Web Design"
+    img = "images/img_2.jpg"
+
+  [[params.work.item]]
+    title = "Consectetur adipisicing"
+    subtitle = "Web Design"
+    img = "images/img_3.jpg"
+
+  [[params.work.item]]
+    title = "Consectetur adipisicing"
+    subtitle = "Web Design"
+    img = "images/img_4.jpg"
+
+# Team section
+[params.team]
+  enable = true
+  title = "Meet The Team"
+  description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nam itaque ipsam iste provident quo ipsam iste provident."
+
+  [[params.team.item]]
+    name = "Jean Doe"
+    position = "Chief legend"
+    description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nam itaque ipsam iste provident quo ipsam iste provident."
+    img = "images/person1.jpg"
+    email = "#"
+    telephone = "#"
+    facebook = "#"
+    twitter = "#"
+    dribbble = "#"
+    instagram = "#"
+    github = "#"
+    linkedin = "#"
+    whatsapp = "#"
+
+  [[params.team.item]]
+    name = "Alice Doe"
+    position = "Chief overlord"
+    description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nam itaque ipsam iste provident quo ipsam iste provident."
+    img = "images/person2.jpg"
+    email = "#"
+    telephone = "#"
+    facebook = "#"
+    twitter = "#"
+    dribbble = "#"
+    instagram = "#"
+    github = "#"
+    whatsapp = "#"
+
+  [[params.team.item]]
+    name = "John Doe"
+    position = "Chief haranguer"
+    description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nam itaque ipsam iste provident quo ipsam iste provident."
+    img = "images/person3.jpg"
+    email = "#"
+    telephone = "#"
+    facebook = "#"
+    twitter = "#"
+    dribbble = "#"
+    instagram = "#"
+    github = "#"
+    whatsapp = "#"
+
+  # [[params.team.item]]
+  #   name = "Jason Doe"
+  #   position = "Chief haranguer"
+  #   description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nam itaque ipsam iste provident quo ipsam iste provident."
+  #   img = "images/person3.jpg"
+  #   email = "#"
+  #   telephone = "#"
+  #   facebook = "#"
+  #   twitter = "#"
+  #   dribbble = "#"
+  #   instagram = "#"
+  #   github = "#"
+  #   whatsapp = "#"
+
+# Contact section
+[params.contact]
+  enable = true
+  title = "Get In Touch"
+  message = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet nam itaque ipsam iste provident quo ipsam iste provident."
+  name_placeholder = "Your name"
+  email_placeholder = "Your email"
+  email_disclaimer = "We'll never share your email with anyone else."
+  message_placeholder = "Please enter a message."
+  button_text = "Submit"
+
+# Footer section
+# Note here that the copyright and attribution statement must remain as part of the license agreement. If you wish to remove this, please contact freehtml5 and pay for a professional license.
+[params.footer]
+  enable = true
+  note = "<p><small>&copy; 2016 Free HTML5 Template. All Rights Reserved. <br> Designed by <a href='http://freehtml5.co/' target='_blank'>FreeHTML5.co</a> Demo Images: <a href='http://pexels.com/' target='_blank'>Pexels</a><br>Hugo port by <a href='https://github.com/SteveLane/' target='_blank'>SteveLane</a></small></p>"
+  github = "#"
+  twitter = "#"
+  facebook = "#"
+  vine = "#"
+  linkedin = "#"
+  instagram = "#"
+  

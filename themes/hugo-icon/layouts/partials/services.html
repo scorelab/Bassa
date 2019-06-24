@@ -1,0 +1,55 @@
+<hr>
+<div id="fh5co-about" data-section="services">
+  
+  <div class="container">
+      <div class="fh5co-tabs-container">
+          <center><p style="color: rgb(0, 0, 0); font-family: Roboto; font-size: 25px">INSTALLATION GUIDE</p></center>
+
+	<ul class="fh5co-tabs fh5co-four">
+	  {{ range .Site.Params.services.item }}
+	  {{ if eq .weight 1}}<li class="active">{{ else }}<li>{{ end }}
+	    <a href="#" data-tab={{ .name }}>{{ .title | markdownify }}</a>  
+	  </li>
+	  {{ end }}
+	</ul>
+
+	{{ range .Site.Params.services.item }}
+	{{ if eq .weight 1}}
+	<div class="fh5co-tab-content active" data-tab-content={{ .name }}>
+	{{ else }}
+	<div class="fh5co-tab-content" data-tab-content={{ .name }}>
+	{{ end }}
+	  <h2 style="color: black; font-family: Roboto" >{{ .subtitle | markdownify }}</h2>
+	  <p style="color: black; font-family: Roboto">{{ .description | markdownify }}</p>
+	</div>
+	{{ end }}
+
+
+</div>
+    
+  </div>
+  
+
+</div> <!-- END fh5co-about -->
+
+<hr>
+
+  
+  <div class="container">
+      <div class="fh5co-tabs-container">
+          <center><p style="color: rgb(0, 0, 0); font-family: Roboto; font-size: 25px"> BASSA ARCHITECTURE</p> <br>
+            <img src="images/arch.jpg" class="img-responsive" />  <br> 
+            
+          </center>
+          <p style="color: rgb(0, 0, 0); font-family: Roboto; font-size: 20px"> 
+              Bassa has four important components. Bassa API server is written in python as a flask application. Bassa Web Client is written in Angular and we are shifting to React this summer.</p>
+
+
+
+
+
+</div>
+    
+  </div>
+  
+

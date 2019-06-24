@@ -1,0 +1,46 @@
+<div id="fh5co-contact" data-section="contact">
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+      {{ with .Site.Params.contact }}
+      <h2>{{ .title }}</h2>
+      <p>{{ .message | markdownify }}</p>
+      {{ end }}
+    </div>
+    <form name="contact-form" netlify-honeypot="_gotcha" action="thank-you" netlify>
+      <div class="row">
+	<div class="col-md-6">
+	  <div class="form-group">
+	    <!-- <label for="inputName">First name</label> -->
+		  {{ with .Site.Params.contact }}
+	    <input type="text" class="form-control" id="inputName" placeholder="{{ .name_placeholder }}" name="_name">
+		  {{ end }}
+	  </div>
+	</div>
+	<div class="col-md-6">
+	  <div class="form-group">
+			{{ with .Site.Params.contact }}
+	    <input type="email" class="form-control" id="inputEmail" placeholder="{{ .email_placeholder }}" name="_replyto" required>
+	    <small id="emailHelp" class="form-text text-muted">{{ .email_disclaimer }}</small>
+		  {{ end }}
+	  </div>
+	</div>
+	<div class="col-md-12">
+	  <div class="form-group">
+		  {{ with .Site.Params.contact }}
+	    <textarea class="form-control" id="inputBody" cols="30" rows="7" placeholder="{{ .message_placeholder }}" name="message"></textarea>
+		  {{ end }}
+	  </div>
+	</div>
+	<div class="col-md-12">
+	  <div class="form-group">
+	    <input type="hidden" name="_subject" value="New website query">
+	    <input type="text" name="_gotcha" style="display:none">
+	    <button type="submit" class="btn btn-primary btn-outline" value="Send">{{ with .Site.Params.contact }}{{ .button_text }}{{ end }}</button>
+	    <!-- <input type="submit" name="submit" value="Send message" class="btn btn-primary btn-outline"> -->
+	  </div>
+	</div>
+      </div>
+
+    </form>
+  </div>
+</div>
