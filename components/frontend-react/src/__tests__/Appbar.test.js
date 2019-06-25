@@ -2,24 +2,25 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Appbar from '../components/Appbar';
 
-const setupComponent = props => {
-  const component = shallow(<Appbar {...props} />);
-  return component;
-}
-
 const findByTestAttr = (component, attr) => {
   const wrapper = component.find(`[data-test='${attr}']`);
   return wrapper;
 }
 
 describe('Appbar Component Testing', () => {
+  let component;
+  beforeEach(() => component = shallow(<Appbar />));
+
   it('should match with its snapshot', () => {
-    const component = setupComponent()
     expect(component).toMatchSnapshot();
   });
+  
   describe('User is logged in', () => {
+    
+    let component;
+    beforeEach(() => component = shallow(<Appbar isloggedIn={true} />));
+
     it('should display logged in view', () => {
-      const component = setupComponent({isloggedIn: true});
       const buttonLogout = findByTestAttr(component, 'button-logout');
       const buttonDashboard = findByTestAttr(component, 'button-dashboard');
       const buttonAdmin = findByTestAttr(component, 'button-admin');
@@ -31,8 +32,11 @@ describe('Appbar Component Testing', () => {
   });
 
   describe('User is logged out', () => {
+
+    let component;
+    beforeEach(() => component = shallow(<Appbar isloggedIn={false} />));
+
     it('should display logged out view', () => {
-      const component = setupComponent({isloggedIn: false});
       const inputUsername = findByTestAttr(component, 'input-username');
       const inputPassword = findByTestAttr(component, 'input-password');
       

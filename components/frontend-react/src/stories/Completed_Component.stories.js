@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { object } from '@storybook/addon-knobs';
 
 import { completedList } from './CompletedFileList.stories';
-import Completed from '../containers/Completed';
+import Completed from '../containers/CompletedComponent';
 
-storiesOf('Completed', module)
+storiesOf('Completed Component', module)
 .add('default', () => <Completed completedList={object('List', completedList)} />)

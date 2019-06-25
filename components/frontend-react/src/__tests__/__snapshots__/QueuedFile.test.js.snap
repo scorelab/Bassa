@@ -11,7 +11,7 @@ exports[`Single queued file component should match with its snapshot 1`] = `
           NaN
         </WithStyles(WithStyles(ForwardRef(TableCell)))>
         <WithStyles(WithStyles(ForwardRef(TableCell)))
-          className="row"
+          className="makeStyles-row-2"
           component="th"
           scope="row"
         >

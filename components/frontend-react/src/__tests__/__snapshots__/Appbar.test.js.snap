@@ -54,7 +54,7 @@ exports[`Appbar Component Testing should match with its snapshot 1`] = `
         
       <WithStyles(ForwardRef(Button))
         color="primary"
-        size="small"
+        size="large"
         variant="contained"
       >
         Login

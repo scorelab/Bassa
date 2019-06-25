@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const QueuedFile = (props) => {
+const CompletedFile = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -54,7 +54,7 @@ const QueuedFile = (props) => {
             <CustomTableCell align="left">{props.file.name}</CustomTableCell>
             <CustomTableCell align="left">{props.file.size}</CustomTableCell>
             <CustomTableCell align="left">{props.file.time}</CustomTableCell>
-            <CustomTableCell align="left">
+            <CustomTableCell align="right">
               <Button data-test="button-download" variant="outlined" size="small" color="primary" className={classes.button} onClick={props.onDownload}>
               <SaveIcon className="icon" /> Download
             </Button>
@@ -66,9 +66,9 @@ const QueuedFile = (props) => {
   )
 }
 
-QueuedFile.propTypes = {
+CompletedFile.propTypes = {
   file: PropTypes.object
 };
 
 
-export default QueuedFile;
+export default CompletedFile;
