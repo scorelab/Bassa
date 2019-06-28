@@ -43,8 +43,8 @@ const useStyles = makeStyles(theme => ({
 const UserSignup = (props) => {
 
   const handleSubmitButton = (event) => {
-    event.preventDefault()
-    props.onClickSubmit()
+    event.preventDefault();
+    props.onClickSubmit();
   }
   const classes = useStyles();
   return (

@@ -25,40 +25,48 @@ exports[`Appbar Component Testing should match with its snapshot 1`] = `
       >
         Bassa
       </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(TextField))
-        data-test="input-username"
-        id="username"
-        margin="normal"
-        placeholder="Username"
-        style={
-          Object {
-            "background": "#fff",
-          }
-        }
-        variant="outlined"
-      />
-        
-      <WithStyles(ForwardRef(TextField))
-        data-test="input-password"
-        id="password"
-        margin="normal"
-        placeholder="Password"
-        style={
-          Object {
-            "background": "#fff",
-          }
-        }
-        type="password"
-        variant="outlined"
-      />
-        
-      <WithStyles(ForwardRef(Button))
-        color="primary"
-        size="large"
-        variant="contained"
+      <form
+        onSubmit={[Function]}
       >
-        Login
-      </WithStyles(ForwardRef(Button))>
+        <WithStyles(ForwardRef(TextField))
+          data-test="input-username"
+          id="username"
+          margin="normal"
+          onChange={[Function]}
+          placeholder="Username"
+          style={
+            Object {
+              "background": "#fff",
+            }
+          }
+          variant="outlined"
+        />
+          
+        <WithStyles(ForwardRef(TextField))
+          data-test="input-password"
+          id="password"
+          margin="normal"
+          onChange={[Function]}
+          placeholder="Password"
+          style={
+            Object {
+              "background": "#fff",
+            }
+          }
+          type="password"
+          variant="outlined"
+        />
+          
+        <WithStyles(ForwardRef(Button))
+          className="makeStyles-menuButton-3"
+          color="primary"
+          size="large"
+          type="submit"
+          variant="contained"
+        >
+          Login
+        </WithStyles(ForwardRef(Button))>
+      </form>
     </WithStyles(ForwardRef(Toolbar))>
   </WithStyles(ForwardRef(AppBar))>
 </div>
