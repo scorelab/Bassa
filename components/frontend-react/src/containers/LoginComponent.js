@@ -6,8 +6,6 @@ import Appbar from '../components/Appbar';
 import BassaIntroBox from '../components/BassaIntroBox';
 import UserSignup from '../components/UserSignup';
 
-const APIURL = "http://0.0.0.0:5000/api";
-
 const LoginComponent = () => {
 
   const handleClickSubmit = () => {
@@ -19,10 +17,9 @@ const LoginComponent = () => {
     let formData = new FormData();
     formData.set("user_name", username);
     formData.set("password", pass);
-    
     axios({
       method: 'post',
-      url: `${APIURL}/login`,
+      url: `${process.env.REACT_APP_API_URL}/api/login`,
       data: formData
       },
       {
@@ -38,7 +35,7 @@ const LoginComponent = () => {
     //Testing a GET request
     axios({
       method: 'get',
-      url: `${APIURL}/user`,
+      url: `${process.env.REACT_APP_API_URL}/api/user`,
       headers: {'token': `${token}`}
       })
     .then(res => console.log(res))
