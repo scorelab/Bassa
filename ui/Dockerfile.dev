@@ -1,34 +1,25 @@
-FROM ubuntu:18.04
+FROM node:8-alpine
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 ARG BUILD_DATE
 ARG VCS_REF
 
+WORKDIR /ui
 
-WORKDIR /home/Bassa
-
-# importing complete ui component
+# Copying UI contents into container
 COPY . .
 
-# exposing necessary port
+# Exposing port for accessing the web interface 
 EXPOSE 3000
 
-# installing all necessary packages for Bassa web
-RUN apt-get update \ 
-&& apt-get install curl -y \
-&& apt install nodejs npm -y \
-&& npm install bower \
-&& npm install gulp \
-&& npm install -g gulp \
-&& npm install --global gulp-cli \
-&& npm install yarn -g \
-&& apt-get install yarn -y \
-&& apt remove cmdtest -y \
-&& apt-get install git -y && yarn install
+# Installing node modules
+RUN apk update && \
+    npm install && \
+    npm install --global bower gulp-cli
 
-# To start Bassa web server
-CMD [ "gulp", "serve" ]
+# Starting gulp server
+CMD ["gulp", "serve"]
 
 # labels to dockerfile
 LABEL multi.org.label-schema.name="Bassa" \
