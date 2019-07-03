@@ -1,32 +1,60 @@
-FROM python:3-alpine as builder
+# Container as boiler plate
+FROM python:3.7-slim as base 
 
-WORKDIR /home/Bassa
+# Setting current work directory to /bassa
+WORKDIR /bassa
+
+# Copying API component
 COPY . .
 
-RUN ls && pip install pylint \
-&& pylint -E .
+# Installing dependencies
+RUN apt-get update && \ 
+    apt-get install -y --no-install-recommends \ 
+    python3-pip \ 
+    build-essential \
+    default-libmysqlclient-dev \ 
+    python3-dev \
+    python3-setuptools && \ 
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
 
+# Installing the python modules
+RUN python3 setup.py develop
 
-FROM python:3.7
+# -----------------------------
+
+# Container to lint python code
+FROM base as linter 
+
+# Setting current work directory to /Bassa
+WORKDIR /bassa
+
+# Installing pylint and linting the python code
+RUN pip install pylint && pylint -E *.py **/*.py || printf "\n Bassa has got some errors! Continuing the build for now\n\n"
+
+# -----------------------------
+
+# Container for running the Bassa API server
+FROM base as production
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 ARG BUILD_DATE
 ARG VCS_REF
 
-WORKDIR /home/Bassa
+# Volume for accessing the downloaded files
+VOLUME [ "/downloads" ]
+
+# Setting current work directory to /Bassa
+WORKDIR /bassa
+
+# Exposing ports where the server listens 
 EXPOSE 5000
-COPY . .
 
+# Start the Bassa API server
+CMD [ "python3", "Main.py" ]
 
-RUN apt-get update \
-&& ./setup.sh \
-# && python3 setup.py test \ disabing temporary
-&& python3 setup.py develop
-
-CMD [ "./run.sh"]
-
-
+# Adding data as docker labels
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
       multi.org.label-schema.url="https://github.com/scorelab/Bassa/wiki" \
@@ -36,4 +64,3 @@ LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.vendor="Sustainable Computing Research Group" \
       multi.org.label-schema.version="" \
       multi.org.label-schema.schema-version="1.0"
-      
