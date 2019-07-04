@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //MUI imports
 import {makeStyles} from '@material-ui/core/styles';
@@ -25,8 +25,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    margin: theme.spacing(2),
+    marginTop: theme.spacing(3)
   },
   avatar: {
     margin: 10,
@@ -41,6 +41,22 @@ const useStyles = makeStyles(theme => ({
 const BassaAppBar = (props) => {
   const classes = useStyles();
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleUserField = (event) => {
+    setUsername(event.target.value);
+  }
+
+  const handlePassField = (event) => {
+    setPassword(event.target.value);
+  }
+
+  const handleLoginButton = (event) => {
+    event.preventDefault();
+    props.onClickLogin(username, password);
+  }
+
   if (!props.isloggedIn) {
     //If the user is not logged in, then return component for logged out user
   	return (
@@ -51,22 +67,26 @@ const BassaAppBar = (props) => {
 	        <Typography variant="h4" color="inherit" className={classes.grow}>
 	          Bassa
 	        </Typography>
-          <TextField 
-            id="username"
-            data-test="input-username"
-            margin="normal"
-            variant="outlined"
-            style={{background:colours.white}}
-            placeholder="Username" />&nbsp;&nbsp;
-          <TextField 
-            id="password"
-            data-test="input-password"
-            type="password"
-            variant="outlined"
-            margin="normal"
-            style={{background:colours.white}}
-            placeholder="Password" />&nbsp;&nbsp;
-	        <Button size="large" variant="contained" color="primary">Login</Button>
+          <form onSubmit={handleLoginButton}>
+            <TextField 
+              id="username"
+              data-test="input-username"
+              margin="normal"
+              variant="outlined"
+              onChange={handleUserField}
+              style={{background:colours.white}}
+              placeholder="Username" />&nbsp;&nbsp;
+            <TextField 
+              id="password"
+              data-test="input-password"
+              type="password"
+              variant="outlined"
+              onChange={handlePassField}
+              margin="normal"
+              style={{background:colours.white}}
+              placeholder="Password" />&nbsp;&nbsp;
+            <Button type="submit" className={classes.menuButton} size="large" variant="contained" color="primary">Login</Button>
+          </form>
 	      </Toolbar>
 	    </AppBar>
 	  </div>
