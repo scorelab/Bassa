@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 //MUI imports
 import {makeStyles} from '@material-ui/core/styles';
@@ -57,6 +58,26 @@ const BassaAppBar = (props) => {
     props.onClickLogin(username, password);
   }
 
+  const handleNavigationButtons = (route) => {
+    switch(route){
+      case 'logout':
+        sessionStorage.removeItem('token');
+        props.history.push('/');
+        break;
+
+      case 'home':
+        props.history.push('/home');
+        break;
+
+      case 'admin':
+        props.history.push('/admin');
+        break;
+
+      default:
+        break;
+    }
+  }
+
   if (!props.isloggedIn) {
     //If the user is not logged in, then return component for logged out user
   	return (
@@ -101,13 +122,13 @@ const BassaAppBar = (props) => {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Bassa
           </Typography>
-          <Button data-test="button-dashboard" size="small" color="inherit">Dashboard</Button>
-          <Button data-test="button-admin" size="small" color="inherit">Admin</Button>
-          <Button data-test="button-logout" size="small" color="inherit">Logout</Button>
+          <Button onClick={() => handleNavigationButtons('home')} data-test="button-dashboard" size="small" color="inherit">Dashboard</Button>
+          <Button onClick={() => handleNavigationButtons('admin')} data-test="button-admin" size="small" color="inherit">Admin</Button>
+          <Button onClick={() => handleNavigationButtons('logout')} data-test="button-logout" size="small" color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </div>
   )
 }
 
-export default BassaAppBar;
+export default withRouter(BassaAppBar);

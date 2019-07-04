@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import Appbar from '../components/Appbar';
 
@@ -23,6 +24,28 @@ const styles = theme => ({
 })
 
 class QueuedComponent extends React.Component{
+  constructor(){
+    super();
+    this.state = {
+      loading: true,
+      files:[]
+    }
+  }
+
+  componentWillMount() {
+    let token = sessionStorage.getItem('token');
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_URL}/api/user/downloads/1`,
+      headers: {'token': `${token}`}
+    })
+    .then(res => {
+      let array = res.data.filter(file => file.status === 0);
+      this.setState({files: array});
+    })
+    .catch(err => console.log(err));
+  }
+
   render() {
   	const { classes } = this.props;
     return (
@@ -37,7 +60,7 @@ class QueuedComponent extends React.Component{
               <Typography variant="h5" gutterBottom>
                 List of files required to be downloaded
               </Typography>
-              <QueuedList files={this.props.queuedList}/>
+              <QueuedList files={this.state.files}/>
             </Paper>
           </div>        
       </div>

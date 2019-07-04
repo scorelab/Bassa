@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes  from 'prop-types';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 //Component imports
 import Appbar from '../components/Appbar';
@@ -58,6 +60,40 @@ const styles = theme => ({
 })
 
 class Dashboard extends React.Component {
+
+  constructor(){
+    super();
+    this.state = {
+      completedList:[],
+      queuedList:[]
+    }
+  }
+
+  componentWillMount() {
+    let token = sessionStorage.getItem('token');
+    axios({
+      method:'get',
+      url: `${process.env.REACT_APP_API_URL}/api/user/downloads/1`,
+      headers: {'token': `${token}`}
+    })
+    .then( res => {
+      let completedList = res.data.filter(file => file.status === 3);
+      let queuedList = res.data.filter(file => file.status === 0);
+      this.setState({completedList, queuedList})
+    })
+    .catch(err => console.log(err))
+  }
+
+  renderCompletedDownloads = () => {
+    if(this.state.completedList.length !== 0)
+    {
+      return <CompletedFileList files={this.state.completedList} limit={20} />
+    }
+    else
+    {
+      return <div>Loading...</div>
+    }
+  }
   render() {
     const { classes } = this.props;
   	return (
@@ -83,10 +119,10 @@ class Dashboard extends React.Component {
               <Card className={classes.card}>
                 <Typography variant="h5">
                   Completed Downloads&nbsp;
-                  <Button size="small" variant="outlined" color="primary">show all</Button>
+                  <Link to='/completed'><Button size="small" variant="outlined" color="primary">show all</Button></Link>
                 </Typography>
               </Card>
-              <CompletedFileList files={this.props.completedList} limit={20} />
+              {this.renderCompletedDownloads()}
             </Paper>
           </Grid>
           <Grid item xs={6} sm={6}>
@@ -94,10 +130,10 @@ class Dashboard extends React.Component {
               <Card className={classes.card}>
                 <Typography variant="h5">
                   In Queue&nbsp;
-                  <Button size="small" variant="outlined" color="primary">show all</Button>
+                  <Link to='/queued'><Button size="small" variant="outlined" color="primary">show all</Button></Link>
                 </Typography>
               </Card>
-              <QueuedFileList files={this.props.queuedList} limit={20} />
+              <QueuedFileList files={this.state.queuedList} limit={20} />
             </Paper>
           </Grid>
         </Grid>

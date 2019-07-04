@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import bassaImg from '../../public/bassa.png';
+import bassaImg from '../bassa.png';
 
 const BassaGitHubRepoLink = "https://github.com/scorelab/Bassa"
 
@@ -23,14 +23,14 @@ const BassaIntroBox = () => {
   return (
     <Box className={classes.root}>
       <img alt="bassa" src={bassaImg} className={classes.image} /><br/>
-      <Typography variant="p">
+      <Typography variant="body1">
         Automated Download Queue for Enterprise to take the best use of Internet bandwidth.
       </Typography><br/><br/>
-      <Typography variant="p">
+      <Typography variant="body1">
         Bassa solves the problem of wasting Internet bandwidth by queuing a download if it is larger than a given
         threshold value in high traffic and when the traffic is low, it completes the download of the files.
       </Typography><br/><br/>
-      <Typography variant="p">
+      <Typography variant="body1">
         For more details, click <a href={BassaGitHubRepoLink}>here</a>
       </Typography>
     </Box>
