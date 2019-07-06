@@ -49,11 +49,11 @@ const CompletedFile = (props) => {
           <TableRow>
             <CustomTableCell>{props.file.id}</CustomTableCell>
             <CustomTableCell className="row" component="th" scope="row">
-              {props.file.user}
+              {props.file.user_name}
             </CustomTableCell>
-            <CustomTableCell align="left">{props.file.name}</CustomTableCell>
-            <CustomTableCell align="left">{props.file.size}</CustomTableCell>
-            <CustomTableCell align="left">{props.file.time}</CustomTableCell>
+            <CustomTableCell align="left">{props.file.download_name}</CustomTableCell>
+            <CustomTableCell align="left">{props.file.size/1024} KB</CustomTableCell>
+            <CustomTableCell align="left">{props.file.completed_time}</CustomTableCell>
             <CustomTableCell align="right">
               <Button data-test="button-download" variant="outlined" size="small" color="primary" className={classes.button} onClick={props.onDownload}>
               <SaveIcon className="icon" /> Download

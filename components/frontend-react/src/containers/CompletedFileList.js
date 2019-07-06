@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 //MUI imports
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 //Component import
@@ -30,7 +29,7 @@ class CompletedFileList extends React.Component {
     this.state = {list:[]}
   }
 
-  componentDidMount(){
+  componentWillMount(){
     let CompletedFileList = this.props.files;
     for (let index = 0; index < CompletedFileList.length; index++) {
       let element = CompletedFileList[index];
@@ -40,18 +39,12 @@ class CompletedFileList extends React.Component {
     this.setState({list: CompletedFileList});
   }
 
-  renderDownloadedList = () => {
-  	if (this.props.loading) {
-      return <Typography data-test="text-loading" variant="h5" color="inherit">Loading...</Typography>
-    } else if (this.state.list.length === 0) {
-      return <Typography data-test="text-empty" variant="h5" color="inherit">No completed downloads</Typography>
-    } else {
-        if (this.props.limit) {
-          const list = this.state.list.slice(0,this.props.limit);
-          return this.renderList(list)
-        }
-      return this.renderList(this.props.files)  
+  renderDownloadedList = () => { 	
+    if (this.props.limit) {
+      const list = this.state.list.slice(0,this.props.limit);
+      return this.renderList(list)
     }
+    return this.renderList(this.state.list)
   }
 
   handleDownloadButton = (id) => {
@@ -93,7 +86,7 @@ class CompletedFileList extends React.Component {
   }
 
   render() {
-  	const {classes} = this.props;
+    const {classes} = this.props;
   	return (
   	  <div className={classes.root}>
         <Button
@@ -118,8 +111,5 @@ CompletedFileList.propTypes = {
 	classes: PropTypes.object.isRequired,
 }
 
-CompletedFileList.defaultProps = {
-  files: []
-}
 
 export default withStyles(styles)(CompletedFileList);

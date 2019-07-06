@@ -21,7 +21,7 @@ const styles = theme => ({
   }
 });
 
-class CompletedFileList extends React.Component {
+class QueuedFileList extends React.Component {
 
   renderDownloadedList = () => {
     if (this.props.loading) {
@@ -40,7 +40,7 @@ class CompletedFileList extends React.Component {
   renderList = (list) => {
   	return (
       list.map((row,id) => (
-      	<QueuedFile data-test="element-item" key={id} index={id} name={row} onDelete={() => {this.handleDelete(row.id)}}/>
+      	<QueuedFile data-test="element-item" key={id} index={id} name={row.download_name} onDelete={() => {this.handleDelete(row.id)}}/>
       ))
     )
   }
@@ -59,8 +59,8 @@ class CompletedFileList extends React.Component {
   }
 }
 
-CompletedFileList.propTypes = {
+QueuedFileList.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(CompletedFileList);
+export default withStyles(styles)(QueuedFileList);
