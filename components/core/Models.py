@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 class User:
     def __init__(self, id, userName, password, auth, email):
         self.id=id
@@ -6,42 +8,43 @@ class User:
         self.auth=auth
         self.email=email
 
+
 class AuthLeval:
     ADMIN, STUDENT, ACADEMIC, NONACADEMIC= list(range(4))
 
-class Workspace:
-    def __init__(self, id, name, user_id):
-        self.id=id
-        self.name=name
-        self.user_id=user_id
 
-class Project:
-    def __init__(self, id, name, workspace_id):
-        self.id=id
-        self.name=name
-        self.workspace_id=workspace_id
+class EntityInterface(ABC):
 
-class Folder:
-    def __init__(self, id, name, workspace_id, project_id, folder_id):
-        self.id=id
-        self.name=name
-        self.workspace_id=workspace_id
-        self.project_id=project_id
-        self.folder_id=folder_id
+    @abstractmethod
+    def create(self, entity: EntityInterface):
+        """
+        creates an entity to the parent.
+        """
 
-class File:
-    def __init__(self, id, name, project_id, folder_id):
-        self.id=id
-        self.name=name
-        self.project_id=project_id
-        self.folder_id=folder_id
+    @abstractmethod
+    def delete(self, entity: EntityInterface):
+        """
+        deletes an entity from the parent.
+        """
 
-class ACL:
-    def __init__(self, user_id, file_id, folder_id, permissions):
-        self.user_id=user_id
-        self.folder_id=folder_id
-        self.file_id-file_id
-        self.permissions=permissions
+    @abstractmethod
+    def update(self, entity: EntityInterface):
+        """
+        updates an entity of the parent.
+        """
+
+    @abstractmethod
+    def get(self, entity: EntityInterface):
+        """
+        gets an entity of the parent.
+        """
+
+    @abstractmethod
+    def get_all(self, entity: EntityInterface):
+        """
+        gets all entities of the parent.
+        """
+
 
 class Download:
     def __init__(self, link, userName, id=None):
@@ -49,8 +52,10 @@ class Download:
         self.userName=userName
         self.id=id
         self.gid=None
+
     def __str__(self):
         return "id: %s, user: %s, link: %s, gid: %s" % (self.id, self.userName, self.link, self.gid)
+
 
 class Status:
 

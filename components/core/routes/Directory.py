@@ -1,7 +1,7 @@
 from flask import json
 from flask import request, Response, g
 from Models import *
-from DirectoryManager import *
+from DirectoryManager import Folder, File
 from utils.token_utils import token_validator
 
 
@@ -78,7 +78,7 @@ def edit_workspace(name, workspace_id, user_id):
         return '{"error":"token error"}', 403
 
 def remove_workspace(workspace_id, user_id):
-    token = request.headers['token']
+    token = token_validator(request.headers['token'])
     if token is not None:
         try:
             status = delete_workspace(workspace_id, user_id)
@@ -187,11 +187,12 @@ def remove_project(project_id, workspace_id):
 ##################### folder endpoints ######################
 
 
-def fetch_folders(workspace_id, project_id, folder_id):
+def fetch_folders(folder_id):
     token = token_validator(request.headers['token'])
     if token is not None:
         try:
-            status = get_folders(workspace_id, project_id, folder_id)
+            entity = Folder()
+            status = get_all(folder_id)
             if not isinstance(status, str):
                 resp = Response(response=json.dumps(status), status=200)
             else:
