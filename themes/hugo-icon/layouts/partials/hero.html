@@ -1,0 +1,41 @@
+<div id="fh5co-home" class="js-fullheight-home" data-section="home" style=" background-color: white" data-stellar-background-ratio="1">
+  <div class="container text-center">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:100&display=swap" rel="stylesheet">
+      <div class="js-fullheight-home fh5co-copy">
+  
+          <style>
+             
+              
+              @media screen and (min-width: 601px) {
+                .main {
+                  font-size: 50px;
+                }
+                .software {
+                  font-size: 70px;
+                }
+
+              }
+              
+              @media screen and (max-width: 600px) {
+                .main {
+                  font-size: 30px;
+                }
+                .software {
+                  font-size: 70px;
+                }
+              }
+
+              </style>
+	<div class="js-fullheight-home fh5co-copy-inner">
+    <img src="https://raw.githubusercontent.com/scorelab/Bassa/develop/ui/src/assets/images/bassa.png" style="height: 110px; width:180px"/>
+      <p style="color:black;" class="software">{{ with .Site.Params.hero.software }}{{ . | markdownify }}{{ end }}</p>
+
+    <br>
+    <p style="font-family: 'Roboto' ; color:black " class="main">{{ with .Site.Params.hero.title }}{{ . | markdownify }}{{ end }}</p>
+ <br>
+ <p><a href='#' class='btn btn-success fh5co-content-nav' data-nav-section='mission'>Get Started</a></p>
+	</div>
+      </div>
+
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div id="fh5co-footer">
+  <div class="container">
+    <div class="row">
+      {{ with .Site.Params.footer }}
+      <div class="col-md-6">
+	{{ .note | markdownify }}
+      </div>
+      <div class="col-md-6">
+	<ul class="fh5co-social">
+	  {{ if isset . "github" }}
+	  <li><a href="{{ .github }}"><i class="icon-github"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "twitter" }}
+	  <li><a href="{{ .twitter }}"><i class="icon-twitter"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "facebook" }}
+	  <li><a href="{{ .facebook }}"><i class="icon-facebook"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "vine" }}
+	  <li><a href="{{ .vine }}"><i class="icon-vine"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "linkedin" }}
+	  <li><a href="{{ .linkedin }}"><i class="icon-linkedin"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "instagram" }}
+	  <li><a href="{{ .instagram }}"><i class="icon-instagram"></i></a></li>
+	  {{ end }}
+	</ul>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>

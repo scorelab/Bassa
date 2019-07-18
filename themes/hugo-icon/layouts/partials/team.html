@@ -1,0 +1,49 @@
+<div id="fh5co-team" data-section="team">
+  <div class="container equal">
+    {{ with .Site.Params.team }}
+    <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+      <h2>{{ .title }}</h2>
+      <p>{{ .description | markdownify }}</p>
+    </div>
+    {{ range .item }}
+    <div class="col-md-4 col-xs-12">
+      <div class="person">
+	<img src="{{ .img | absURL }}" alt="" class="img-responsive">
+	<h3>{{ .name }}</h3>
+	<h4>{{ .position }}</h4>
+	<p>{{ .description | markdownify }}</p>
+	<ul class="social">
+	  {{ if isset . "telephone" }}
+	  <li><a href="tel:{{ .telephone }}"><i class="icon-phone"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "email" }}
+	  <li><a href="mailto:{{ .email }}"><i class="icon-envelope"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "facebook" }}
+	  <li><a href="{{ .facebook }}"><i class="icon-facebook"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "twitter" }}
+	  <li><a href="{{ .twitter }}"><i class="icon-twitter"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "dribbble" }}
+	  <li><a href="{{ .dribbble }}"><i class="icon-dribbble"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "instagram" }}
+	  <li><a href="{{ .instagram }}"><i class="icon-instagram"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "github" }}
+	  <li><a href="{{ .github }}"><i class="icon-github"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "linkedin" }}
+	  <li><a href="{{ .linkedin }}"><i class="icon-linkedin"></i></a></li>
+	  {{ end }}
+	  {{ if isset . "whatsapp" }}
+	  <li><a href="{{ .whatsapp }}"><i class="icon-whatsapp"></i></a></li>
+	  {{ end }}
+	</ul>
+      </div>
+    </div>
+    {{ end }}
+    {{ end }}
+  </div>
+</div> <!-- END fh5co-team -->

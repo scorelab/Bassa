@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+  <head>
+    {{ partial "header.html" . }}
+  </head>
+  <body>
+
+    <!-- Loader -->
+    <div class="fh5co-loader"></div>
+    <div class="fh5co-page">
+      <div id="fh5co-container">
+	
+	{{ partial "hero.html" . }}
+	
+	{{ partial "nav.html" . }}
+
+	{{ if .Site.Params.mission.enable }}
+	{{ partial "mission.html" . }}
+	{{ end }}
+	
+	{{ if .Site.Params.services.enable }}
+	{{ partial "services.html" .}}
+	{{ end }}
+	
+	{{ if .Site.Params.work.enable }}
+	{{ partial "gallery.html" .}}
+	{{ end }}
+	
+	{{ if .Site.Params.team.enable }}
+	{{ partial "team.html" .}}
+	{{ end }}
+
+	{{ if .Site.Params.contact.enable }}
+	{{ partial "contact-form.html" .}}
+	{{ end }}
+	
+	{{ if .Site.Params.footer.enable }}
+	{{ partial "footer.html" .}}
+	{{ end }}
+      
+      </div>
+    </div>
+    
+    {{ partial "js.html" .}}
+    
+  </body>
+</html>

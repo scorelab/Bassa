@@ -1,0 +1,27 @@
+<div id="fh5co-about" data-section="mission">
+  <div class="container">
+    
+    
+      
+      
+
+
+	{{ range .Site.Params.mission.item }}
+	{{ if eq .weight 1}}
+	<div class="fh5co-tab-content active" data-tab-content={{ .name }}>
+	{{ end }}
+	  <p style="color: rgb(0, 0, 0); font-family: Roboto; font-size: 30px">{{ .subtitle | markdownify }}</p>
+	  
+	</div>
+	<h2 style="color: rgb(100, 99, 99); font-size: 22px; font-family: Roboto">{{ .description | markdownify }}</h2>
+	{{ end }}
+
+
+      </div>
+      
+
+    
+
+  
+  
+</div> <!-- END fh5co-about -->

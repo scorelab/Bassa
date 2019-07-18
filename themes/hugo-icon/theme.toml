@@ -1,0 +1,18 @@
+name = "Hugo Icon"
+license = "MIT"
+licenselink = "https://github.com/SteveLane/hugo-icon/blob/master/LICENSE.md"
+description = "This is the Icon theme; ported to Hugo by Steve Lane"
+homepage = "https://github.com/SteveLane/hugo-icon/"
+tags = ["icon", "responsive", "single page", "hero", "personal", "company", "agency"]
+features = ["mission", "services", "gallery", "team"]
+min_version = "0.25.1"
+
+[author]
+  name = "Steve Lane"
+  homepage = "https://stevelane.github.io/"
+
+# If porting an existing theme
+[original]
+  author = "freehtml5"
+  name = "icon"
+  homepage = "https://freehtml5.co/icon-free-website-template-using-bootstrap/"
