@@ -69,38 +69,12 @@ server.add_url_rule(rule='/api/user/heavy', endpoint='get_topten_heaviest_users'
 server.add_url_rule(rule='/api/file', endpoint='send_file_from_path', view_func=sender.send_file_from_path,
 					methods=['GET'])
 
-# workspace endpoints
-server.add_url_rule(rule='/api/user/<string:user_id>/w', endpoint='fetch_workspaces',
-					view_func=Directory.fetch_workspaces, methods=['GET'])
-server.add_url_rule(rule='/api/user/<string:user_id>/w/<string:workspace_id>', endpoint='fetch_workspace',
-					view_func=Directory.fetch_workspace, methods=['GET'])
-server.add_url_rule(rule='/api/user/<string:user_id>/w/add/<string:name>', endpoint='add_workspace',
-					view_func=Directory.add_workspace, methods=['POST'])
-server.add_url_rule(rule='/api/user/<string:user_id>/w/<string:workspace_id>/edit/<string:name>', endpoint='edit_workspace',
-					view_func=Directory.edit_workspace, methods=['POST'])
-server.add_url_rule(rule='/api/user/<string:user_id>/w/delete/<string:workspace_id>', endpoint='remove_workspace',
-					view_func=Directory.remove_workspace, methods=['DELETE'])
-
-# project endpoints
-server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p', endpoint='fetch_projects',
-					view_func=Directory.fetch_projects, methods=['GET'])
-server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/<string:project_id>', endpoint='fetch_project',
-					view_func=Directory.fetch_project, methods=['GET'])
-server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/add/<string:name>', endpoint='add_project',
-					view_func=Directory.add_project, methods=['POST'])
-server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/<string:project_id>/edit/<string:name>', endpoint='edit_project',
-					view_func=Directory.edit_project, methods=['POST'])
-server.add_url_rule(rule='/api/user/w/<string:workspace_id>/p/delete/<string:project_id>', endpoint='remove_project',
-					view_func=Directory.remove_project, methods=['DELETE'])
-
-# folder endpoints
-server.add_url_rule(rule='/api/user/folder/<string:id>', endpoint='fetch_folder',
-					view_func=Directory.fetch_folder, methods=['GET'])
-server.add_url_rule(rule='/api/user/folder/w/<string:workspace_id>/p/<string:project_id>/f/<string:folder_id>', endpoint='fetch_folders',
-					view_func=Directory.fetch_folders, methods=['GET'])
-server.add_url_rule(rule='/api/user/folder/<string:name>/w/<string:workspace_id>/p/<string:project_id>/f/<string:folder_id>/add', endpoint='add_folder',
-					view_func=Directory.add_folder, methods=['POST'])
-server.add_url_rule(rule='/api/user/folder/<string:name>/w/<string:workspace_id>/p/<string:project_id>/f/<string:folder_id>/edit', endpoint='edit_folder',
-					view_func=Directory.edit_folder, methods=['POST'])
-server.add_url_rule(rule='/api/user/folder/<string:folder_id>/delete', endpoint='remove_folder',
-					view_func=Directory.remove_folder, methods=['DELETE'])
+# storage entity endpoints
+server.add_url_rule(rule='/api/user/drive/<string:id>', endpoint='fetch_entity',
+					view_func=Directory.fetch_entity, methods=['GET'])
+server.add_url_rule(rule='/api/user/drive/add', endpoint='add_entity',
+					view_func=Directory.add_entity, methods=['POST'])
+server.add_url_rule(rule='/api/user/drive/edit/<string:id>', endpoint='edit_entity',
+					view_func=Directory.edit_entity, methods=['POST'])
+server.add_url_rule(rule='/api/user/drive/remove/<string:id>', endpoint='remove_entity',
+					view_func=Directory.remove_entity, methods=['DELETE'])

@@ -1,88 +1,20 @@
 from flask import json
 from flask import request, Response, g
 from Models import *
-from DirectoryManager import Folder, File
 from utils.token_utils import token_validator
+from utils.entity_utils import entity_type
 
-
-##################### workspace endpoints ######################
-
-def fetch_workspaces(user_id):
+def fetch_entity(id):
     token = token_validator(request.headers['token'])
     if token is not None:
         try:
-            status = get_workspaces(user_id)
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
+            type = request.args.get('type')
+            entity = entity_type(type)
+            fetch_response = entity.get(id)
+            if not isinstance(fetch_response, str):
+                resp = Response(response=json.dumps(fetch_response), status=200)
             else:
-                resp = Response('{"error":"' + status + '"}', status=400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-def fetch_workspace(workspace_id, user_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = get_workspace_by_id(workspace_id, user_id)
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response('{"error":"' + status + '"}', status=400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-def add_workspace(name, user_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = create_workspace(name, user_id)
-            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-def edit_workspace(name, workspace_id, user_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = update_workspace(name, workspace_id, user_id)
-            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-def remove_workspace(workspace_id, user_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = delete_workspace(workspace_id, user_id)
-            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
+                resp = Response('{"error":"' + fetch_response + '"}', status=400)
         except Exception as e:
             resp = Response('{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
@@ -94,85 +26,18 @@ def remove_workspace(workspace_id, user_id):
         return '{"error":"token error"}', 403
 
 
-##################### project endpoints ######################
-
-
-def fetch_projects(workspace_id):
+def add_entity(id):
     token = token_validator(request.headers['token'])
     if token is not None:
+        data = request.get_json(force=True)
         try:
-            status = get_projects(workspace_id)
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response('{"error":"' + status + '"}', status=400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
+            type = request.args.get('type')
+            name = data['name']
+            parent_id = data['parent_id']
+            entity = entity_type(type)
 
-def fetch_project(project_id, workspace_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = get_project_by_id(project_id, workspace_id)
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response('{"error":"' + status + '"}', status=400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-def add_project(name, workspace_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = create_project(name, workspace_id)
-            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-def edit_project(name, project_id, workspace_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = update_project(name, project_id, workspace_id)
-            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-def remove_project(project_id, workspace_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = delete_project(project_id, workspace_id)
-            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
+            add_response = entity.create(name, id, parent_id)
+            resp = Response(response='{"status":"' + add_response + '"}', status=200 if add_response == "success" else 400)
         except Exception as e:
             resp = Response('{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
@@ -184,19 +49,17 @@ def remove_project(project_id, workspace_id):
         return '{"error":"token error"}', 403
 
 
-##################### folder endpoints ######################
-
-
-def fetch_folders(folder_id):
+def edit_entity(id):
     token = token_validator(request.headers['token'])
     if token is not None:
+        data = request.get_json(force=True)
         try:
-            entity = Folder()
-            status = get_all(folder_id)
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response('{"error":"' + status + '"}', status=400)
+            type = request.args.get('type')
+            name = data['name']
+            entity = entity_type(type)
+
+            edit_response = entity.update(name, id)
+            resp = Response(response='{"status":"' + edit_response + '"}', status=200 if edit_response == "success" else 400)
         except Exception as e:
             resp = Response('{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
@@ -207,63 +70,15 @@ def fetch_folders(folder_id):
     else:
         return '{"error":"token error"}', 403
 
-def fetch_folder(id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = get_folder_by_id(id)
-            if not isinstance(status, str):
-                resp = Response(response=json.dumps(status), status=200)
-            else:
-                resp = Response('{"error":"' + status + '"}', status=400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
 
-def add_folder(name, folder_id, project_id, workspace_id):
+def remove_entity(id):
     token = token_validator(request.headers['token'])
     if token is not None:
         try:
-            status = create_folder(name, folder_id, project_id, workspace_id)
-            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-def edit_folder(name, folder_id, project_id, workspace_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = update_folder(name, folder_id, project_id, workspace_id)
-            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
-        except Exception as e:
-            resp = Response('{"error":"' + str(e) + '"}', status=400)
-        resp.headers['token'] = token
-        resp.headers['Access-Control-Expose-Headers'] = 'token'
-        return resp
-    elif token is not None:
-        return '{"error":"not authorized"}', 403
-    else:
-        return '{"error":"token error"}', 403
-
-def remove_folder(folder_id):
-    token = token_validator(request.headers['token'])
-    if token is not None:
-        try:
-            status = delete_folder(folder_id)
-            resp = Response(response='{"status":"' + status + '"}', status=200 if status == "success" else 400)
+            type = request.args.get('type')
+            entity = entity_type(type)
+            delete_response = entity.delete(id)
+            resp = Response(response='{"status":"' + delete_response + '"}', status=200 if delete_response == "success" else 400)
         except Exception as e:
             resp = Response('{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
