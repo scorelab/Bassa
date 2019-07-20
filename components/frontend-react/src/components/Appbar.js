@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutUser } from '../actions/userActions';
 
 //MUI imports
 import {makeStyles} from '@material-ui/core/styles';
@@ -62,6 +64,7 @@ const BassaAppBar = (props) => {
     switch(route){
       case 'logout':
         sessionStorage.removeItem('token');
+        props.logoutUser()
         props.history.push('/');
         break;
 
@@ -131,4 +134,8 @@ const BassaAppBar = (props) => {
   )
 }
 
-export default withRouter(BassaAppBar);
+const mapDispatchToProps = dispatch => ({
+  logoutUser: () => dispatch(logoutUser()),
+})
+
+export default connect(null, mapDispatchToProps)(withRouter(BassaAppBar));

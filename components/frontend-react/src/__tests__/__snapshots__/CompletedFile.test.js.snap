@@ -14,26 +14,21 @@ exports[`Completed single file component should match with its snapshot 1`] = `
           className="row"
           component="th"
           scope="row"
-        >
-          some_user_name
-        </WithStyles(WithStyles(ForwardRef(TableCell)))>
+        />
+        <WithStyles(WithStyles(ForwardRef(TableCell)))
+          align="left"
+        />
         <WithStyles(WithStyles(ForwardRef(TableCell)))
           align="left"
         >
-          some_file_name
+          NaN
+           KB
         </WithStyles(WithStyles(ForwardRef(TableCell)))>
         <WithStyles(WithStyles(ForwardRef(TableCell)))
           align="left"
-        >
-          120.23 KB
-        </WithStyles(WithStyles(ForwardRef(TableCell)))>
+        />
         <WithStyles(WithStyles(ForwardRef(TableCell)))
-          align="left"
-        >
-          some_hours_ago
-        </WithStyles(WithStyles(ForwardRef(TableCell)))>
-        <WithStyles(WithStyles(ForwardRef(TableCell)))
-          align="left"
+          align="right"
         >
           <WithStyles(ForwardRef(Button))
             className="makeStyles-button-3"

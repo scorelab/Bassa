@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { deleteDownload } from '../actions/downloadActions';
 
 //MUI imports
 import { withStyles } from '@material-ui/core/styles';
@@ -46,7 +48,7 @@ class QueuedFileList extends React.Component {
   }
 
   handleDelete = (id) => {
-    console.log('deleting', id)
+    this.props.deleteDownload(id);
   }
 
   render() {
@@ -63,4 +65,8 @@ QueuedFileList.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(QueuedFileList);
+const mapDispatchToProps = dispatch => ({
+  deleteDownload: (id) => dispatch(deleteDownload(id)),
+})
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(QueuedFileList));

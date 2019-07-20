@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -42,19 +42,53 @@ const useStyles = makeStyles(theme => ({
 
 const UserSignup = (props) => {
 
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setconfirmPassword] = useState('');
+
+  const handleTextFields = (event) => {
+    switch(event.target.id)
+    {
+      case 'name':
+        setUsername(event.target.value);
+        return;
+
+      case 'email':
+        setEmail(event.target.value);
+        return;
+
+      case 'pass':
+        setPassword(event.target.value);
+        return;
+
+      case 'c_pass':
+        setconfirmPassword(event.target.value);
+        return;
+
+      default:
+        return;
+    }
+  }
+
   const handleSubmitButton = (event) => {
     event.preventDefault();
-    props.onClickSubmit();
+    let details = {user_name: username, email: email, password: password, confirm_password: confirmPassword};
+    if(password !== confirmPassword)
+    {
+      alert('Passwords do not match');
+    }
+    props.onClickSubmit(details);
   }
   const classes = useStyles();
   return (
     <Container className={classes.container} maxWidth="xs">
       <Typography className={classes.title} variant="h4">Create An Account</Typography>
         <form className={classes.formContainer} onSubmit={(e) => handleSubmitButton(e)}>
-          <input className={classes.inputField} type="text" placeholder="Username" data-test="field-username"/>
-          <input className={classes.inputField} type="text" placeholder="Email" data-test="field-email"/>
-          <input className={classes.inputField} type="text" placeholder="Password" data-test="field-password"/>
-          <input className={classes.inputField} type="text" placeholder="Re-enter Password" data-test="field-re-password"/>
+          <input id="name" className={classes.inputField} type="text" placeholder="Username" onChange={handleTextFields} data-test="field-username"/>
+          <input id="email" className={classes.inputField} type="text" placeholder="Email" onChange={handleTextFields} data-test="field-email"/>
+          <input id="pass" className={classes.inputField} type="text" placeholder="Password" onChange={handleTextFields} data-test="field-password"/>
+          <input id="c_pass" className={classes.inputField} type="text" placeholder="Re-enter Password" onChange={handleTextFields} data-test="field-re-password"/>
           <div className={classes.buttonContainer}>
             <input type="submit"className={classes.button} data-test="button-submit"/>
           </div>

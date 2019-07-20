@@ -1,5 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
 
 import LoginComponent from '../containers/LoginComponent';
 
@@ -10,10 +11,10 @@ const findByTestAttr = (component, attr) => {
 
 describe('Login Component', () => {
   let component;
-  beforeEach(() => component = shallow(<LoginComponent/>));
+  beforeEach(() => component = mount(<BrowserRouter><LoginComponent /></BrowserRouter>));
 
   it('should display appbar with not logged in view', () => {
     let wrapper = findByTestAttr(component, 'component-appbar');
-    expect(wrapper.props().isloggedIn).toBe(false);
+    expect(wrapper.at(0).props().isloggedIn).toBe(false);
   });
 })

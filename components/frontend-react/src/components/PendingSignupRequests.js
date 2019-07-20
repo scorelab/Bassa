@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { approveSignupRequest } from '../actions/userActions';
+
+//MUI imports
 import Box from '@material-ui/core/Box';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -49,10 +53,10 @@ const PendingSignupRequests = (props) => {
           <TableBody>
           <TableRow className={classes.row}>
               <CustomTableCell align="left">{index+1}</CustomTableCell>
-              <CustomTableCell align="left">{elem.name}</CustomTableCell>
+              <CustomTableCell align="left">{elem.user_name}</CustomTableCell>
               <CustomTableCell align="left">{elem.email}</CustomTableCell>
               <CustomTableCell align="right">
-                <FAB data-test="button-approve" className={classes.button} onClick={props.onSubmit}><DoneIcon/></FAB>
+                <FAB data-test="button-approve" className={classes.button} onClick={() => props.onSubmit(elem.user_name)}><DoneIcon/></FAB>
               </CustomTableCell>
           </TableRow>
           </TableBody>
@@ -65,4 +69,8 @@ PendingSignupRequests.propTypes = {
   requestsList: PropTypes.array.isRequired,
 }
 
-export default PendingSignupRequests;
+const mapDispatchToProps = dispatch => ({
+  onSubmit: (username) => dispatch(approveSignupRequest(username))
+})
+
+export default connect(null, mapDispatchToProps)(PendingSignupRequests);

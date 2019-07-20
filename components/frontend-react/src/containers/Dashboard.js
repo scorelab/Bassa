@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes  from 'prop-types';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import { addNewDownload } from '../actions/downloadActions';
 import { Link } from 'react-router-dom';
 
 //Component imports
@@ -61,27 +63,25 @@ const styles = theme => ({
 
 class Dashboard extends React.Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
+      link: '',
       completedList:[],
       queuedList:[]
     }
-  }
-
-  componentWillMount() {
     let token = sessionStorage.getItem('token');
     axios({
-      method:'get',
-      url: `${process.env.REACT_APP_API_URL}/api/user/downloads/1`,
+      method: 'get',
+      url: `${process.env.REACT_APP_API_GET_DOWNLOADS}`,
       headers: {'token': `${token}`}
     })
-    .then( res => {
-      let completedList = res.data.filter(file => file.status === 3);
+    .then(res => {
       let queuedList = res.data.filter(file => file.status === 0);
-      this.setState({completedList, queuedList})
+      let completedList = res.data.filter(file => file.status === 3);
+      this.setState({queuedList: queuedList, completedList: completedList});
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
   }
 
   renderCompletedDownloads = () => {
@@ -94,21 +94,30 @@ class Dashboard extends React.Component {
       return <div>Loading...</div>
     }
   }
+
+  handleLinkField = (event) => {
+    let link = event.target.value;
+    this.setState({link});
+  }
+
+  handleAddButton = () => {
+    this.props.addNewDownload(this.state.link);
+  }
   render() {
     const { classes } = this.props;
   	return (
   	  <div className={classes.root}>
   	    <Appbar isloggedIn={true} />
   	    <Typography variant="h5" className={classes.heading}>
-  	  	  Hi username!
+  	  	  Hi {this.props.username}!
   	  	</Typography>
   	    <Paper className={classes.paperAdd}>
   	      <Typography variant="h5">
   	        ADD DOWNLOAD
   	      </Typography>
           <form>
-            <Input type="text" className={classes.link} placeholder="Enter or paste the link below" />
-            <FAB color="primary" size="small" className={classes.fab} aria-label="add-download">
+            <Input type="text" className={classes.link} value={this.state.link} onChange={this.handleLinkField} placeholder="Enter or paste the link below" />
+            <FAB color="primary" size="small" className={classes.fab} aria-label="add-download" onClick={this.handleAddButton}>
               <AddIcon/>
             </FAB>
           </form>
@@ -146,4 +155,12 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(Dashboard);
+const mapStateToProps = state => ({
+  username: state.userReducer.username
+})
+
+const mapDispatchToProps = dispatch => ({
+  addNewDownload: (link) => dispatch(addNewDownload(link)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Dashboard));

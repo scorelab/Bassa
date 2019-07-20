@@ -30,13 +30,10 @@ class QueuedComponent extends React.Component{
       loading: true,
       files:[]
     }
-  }
-
-  componentWillMount() {
     let token = sessionStorage.getItem('token');
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API_URL}/api/user/downloads/1`,
+      url: `${process.env.REACT_APP_API_URL_GET_DOWNLOADS}`,
       headers: {'token': `${token}`}
     })
     .then(res => {
