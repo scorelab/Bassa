@@ -86,31 +86,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   unique key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `workspace`
---
-
-CREATE TABLE IF NOT EXISTS `workspace` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  primary key (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `project`
---
-
-CREATE TABLE IF NOT EXISTS `project` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) NOT NULL,
-  `workspace_id` bigint(20) NOT NULL,
-  primary key (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -121,9 +96,7 @@ CREATE TABLE IF NOT EXISTS `project` (
 CREATE TABLE IF NOT EXISTS `folder` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
-  `workspace_id` bigint(20) NOT NULL,
-  `project_id` bigint(20) NOT NULL,
-  `folder_id` bigint(20) NOT NULL,
+  `parent_id` bigint(20) NOT NULL,
   primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -136,10 +109,11 @@ CREATE TABLE IF NOT EXISTS `folder` (
 CREATE TABLE IF NOT EXISTS `file` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
-  `project_id` bigint(20) NOT NULL,
-  `folder_id` bigint(20) NOT NULL,
+  `parent_id` bigint(20) NOT NULL,
   primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
 -- Dumping data for table `user`
