@@ -70,11 +70,13 @@ server.add_url_rule(rule='/api/file', endpoint='send_file_from_path', view_func=
 					methods=['GET'])
 
 # storage entity endpoints
+server.add_url_rule(rule='/api/user/drive/<string:id>/children', endpoint='fetch_entity_children',
+					view_func=Directory.fetch_entity_children, methods=['GET'])
 server.add_url_rule(rule='/api/user/drive/<string:id>', endpoint='fetch_entity',
 					view_func=Directory.fetch_entity, methods=['GET'])
-server.add_url_rule(rule='/api/user/drive/add', endpoint='add_entity',
+server.add_url_rule(rule='/api/user/drive/<string:user_id>/add', endpoint='add_entity',
 					view_func=Directory.add_entity, methods=['POST'])
-server.add_url_rule(rule='/api/user/drive/edit/<string:id>', endpoint='edit_entity',
-					view_func=Directory.edit_entity, methods=['POST'])
-server.add_url_rule(rule='/api/user/drive/remove/<string:id>', endpoint='remove_entity',
+server.add_url_rule(rule='/api/user/drive/<string:id>/edit', endpoint='edit_entity',
+					view_func=Directory.edit_entity, methods=['PUT'])
+server.add_url_rule(rule='/api/user/drive/<string:id>/remove', endpoint='remove_entity',
 					view_func=Directory.remove_entity, methods=['DELETE'])

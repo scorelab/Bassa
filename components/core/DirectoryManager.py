@@ -91,7 +91,7 @@ class Folder(EntityInterface):
 
 class File(EntityInterface):
 
-    def create(name, user_id, parent_id):
+    def create(self, name, user_id, parent_id):
         db = threadpool.connect()
         if db is not None:
             cursor = db.cursor()
@@ -105,7 +105,7 @@ class File(EntityInterface):
             return 'success'
         return 'db connection error'
 
-    def delete(id):
+    def delete(self, id):
         db = threadpool.connect()
         if db is not None:
             cursor = db.cursor()
@@ -119,7 +119,7 @@ class File(EntityInterface):
             return 'success'
         return 'db connection error'
 
-    def update(name, id):
+    def update(self, name, id):
         db = threadpool.connect()
         if db is not None:
             cursor = db.cursor()
@@ -133,7 +133,7 @@ class File(EntityInterface):
             return 'success'
         return 'db connection error'
 
-    def get(id):
+    def get(self, id):
         db = threadpool.connect()
         if db is not None:
             cursor = db.cursor()

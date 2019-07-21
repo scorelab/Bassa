@@ -16,31 +16,30 @@ class AuthLeval:
 class EntityInterface(ABC):
 
     @abstractmethod
-    def create(self, entity: EntityInterface):
+    def create(self):
         """
         creates an entity to the parent.
         """
 
     @abstractmethod
-    def delete(self, entity: EntityInterface):
+    def delete(self):
         """
         deletes an entity from the parent.
         """
 
     @abstractmethod
-    def update(self, entity: EntityInterface):
+    def update(self):
         """
         updates an entity of the parent.
         """
 
     @abstractmethod
-    def get(self, entity: EntityInterface):
+    def get(self):
         """
         gets an entity of the parent.
         """
 
-    @abstractmethod
-    def get_all(self, entity: EntityInterface):
+    def get_all(self):
         """
         gets all entities of the parent.
         """
