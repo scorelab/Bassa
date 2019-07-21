@@ -3,7 +3,7 @@ from flask import send_file, send_from_directory
 from flask_socketio import join_room
 import os
 from file_sender import sender
-from routes import User, Download, Directory
+from routes import User, Download, Directory, Acl
 
 
 # socket connections
@@ -84,7 +84,7 @@ server.add_url_rule(rule='/api/user/drive/<string:id>/remove', endpoint='remove_
 					view_func=Directory.remove_entity, methods=['DELETE'])
 
 # acl endpoints
-server.add_url_rule(rule='/api/user/drive/<string:id>/check', endpoint='check_access',
-					view_func=Directory.check_access, methods=['GET'])
+server.add_url_rule(rule='/api/user/drive/<string:id>/check/<string:user_id>', endpoint='check_access',
+					view_func=Acl.check_access, methods=['GET'])
 server.add_url_rule(rule='/api/user/drive/<string:id>/grant', endpoint='grant_access',
-					view_func=Directory.grant_access, methods=['POST'])
+					view_func=Acl.grant_access, methods=['POST'])

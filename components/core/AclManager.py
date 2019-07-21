@@ -6,30 +6,32 @@ conf = get_conf_reader("dl.conf")
 
 threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=20)
 
-def check(id, user_id, entity):
+
+def get_access(id, user_id, entity):
     db = threadpool.connect()
     if db is None:
         return 'db connection error'
     cursor = db.cursor()
-    query = "SELECT access FROM acl WHERE id=%s and user_id=%s and entity_type=%;"
+    query = "SELECT access FROM acl WHERE entity_id=%s and user_id=%s and entity_type=%s;"
     try:
-        cursor.execute(query, (id))
+        cursor.execute(query, (id, user_id, entity))
         results = cursor.fetchall()
         db.close()
         return results
     except MySQLdb.Error as e:
         return e
 
-def grant(id, user_id, entity, access):
+
+def give_access(id, user_name, entity, access):
     db = threadpool.connect()
     if db is None:
         return 'db connection error'
     cursor = db.cursor()
-    query = "INSERT INTO acl (user_id, entity_type, entity_id, access) VALUES (%s, %s, %s, %s);"
+    query = "INSERT INTO acl (user_id, entity_type, entity_id, access) SELECT id, %s, %s, %s FROM user WHERE user_name=%s;"
     try:
-        cursor.execute(query, (user_id, entity, id, access))
+        cursor.execute(query, (entity, id, access, user_name))
         db.commit()
     except MySQLdb.Error as e:
         db.rollback()
-        return e
+        return str(e)
     return 'success'
