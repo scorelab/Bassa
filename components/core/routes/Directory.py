@@ -53,7 +53,8 @@ def add_entity(user_id):
         entity = entity_type(type)
 
         add_response = entity.create(name, user_id, parent_id)
-        resp = Response(response='{"status":"' + add_response + '"}', status=200 if add_response == "success" else 400)
+        resp = Response(response='{"status":"' + add_response + '"}',
+                    status=200 if add_response == "success" else 400)
     except Exception as e:
         resp = Response('{"error":"' + str(e) + '"}', status=400)
     resp.headers['token'] = token
@@ -72,7 +73,8 @@ def edit_entity(id):
         entity = entity_type(type)
 
         edit_response = entity.update(name, id)
-        resp = Response(response='{"status":"' + edit_response + '"}', status=200 if edit_response == "success" else 400)
+        resp = Response(response='{"status":"' + edit_response + '"}',
+                    status=200 if edit_response == "success" else 400)
     except Exception as e:
         resp = Response('{"error":"' + str(e) + '"}', status=400)
     resp.headers['token'] = token
@@ -88,7 +90,8 @@ def remove_entity(id):
         type = request.args.get('type')
         entity = entity_type(type)
         delete_response = entity.delete(id)
-        resp = Response(response='{"status":"' + delete_response + '"}', status=200 if delete_response == "success" else 400)
+        resp = Response(response='{"status":"' + delete_response + '"}',
+                    status=200 if delete_response == "success" else 400)
     except Exception as e:
         resp = Response('{"error":"' + str(e) + '"}', status=400)
     resp.headers['token'] = token
@@ -107,7 +110,8 @@ def move_entity(id):
         entity = entity_type(type)
 
         move_response = entity.move(id, name)
-        resp = Response(response='{"status":"' + move_response + '"}', status=200 if move_response == "success" else 400)
+        resp = Response(response='{"status":"' + move_response + '"}',
+                    status=200 if move_response == "success" else 400)
     except Exception as e:
         resp = Response('{"error":"' + str(e) + '"}', status=400)
     resp.headers['token'] = token

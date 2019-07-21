@@ -29,6 +29,14 @@ class Status:
     DEFAULT, STARTED, DELETED, COMPLETED, ERROR= list(range(5))
 
 
+class ACL:
+    def __init_(self):
+        self.user_id=user_id
+        self.entity_type=entity_type
+        self.entity_id=entity_id
+        self.access=access
+
+
 class EntityInterface(ABC):
 
     def get_all(self):
