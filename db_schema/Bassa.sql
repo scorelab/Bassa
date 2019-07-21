@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `file` (
 
 CREATE TABLE IF NOT EXISTS `acl` (
   `user_id` bigint(20) NOT NULL,
-  `entity_type`, enum('folder', 'file') NOT NULL,
+  `entity_type` enum('fr', 'fl') NOT NULL,
   `entity_id` bigint(20) NOT NULL,
   `access` enum('owner', 'read', 'write') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

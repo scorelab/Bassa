@@ -82,3 +82,9 @@ server.add_url_rule(rule='/api/user/drive/<string:id>/edit', endpoint='edit_enti
 					view_func=Directory.edit_entity, methods=['PUT'])
 server.add_url_rule(rule='/api/user/drive/<string:id>/remove', endpoint='remove_entity',
 					view_func=Directory.remove_entity, methods=['DELETE'])
+
+# acl endpoints
+server.add_url_rule(rule='/api/user/drive/<string:id>/check', endpoint='check_access',
+					view_func=Directory.check_access, methods=['GET'])
+server.add_url_rule(rule='/api/user/drive/<string:id>/grant', endpoint='grant_access',
+					view_func=Directory.grant_access, methods=['POST'])
