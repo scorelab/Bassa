@@ -98,7 +98,8 @@ CREATE TABLE IF NOT EXISTS `folder` (
   `name` varchar(256) NOT NULL,
   `parent_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
-  primary key (`id`)
+  primary key (`id`),
+  unique key (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -113,6 +114,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `parent_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   primary key (`id`)
+  unique key (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

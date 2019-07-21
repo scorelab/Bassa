@@ -74,6 +74,8 @@ server.add_url_rule(rule='/api/user/drive/<string:id>/children', endpoint='fetch
 					view_func=Directory.fetch_entity_children, methods=['GET'])
 server.add_url_rule(rule='/api/user/drive/<string:id>', endpoint='fetch_entity',
 					view_func=Directory.fetch_entity, methods=['GET'])
+server.add_url_rule(rule='/api/user/drive/<string:id>/move', endpoint='move_entity',
+					view_func=Directory.move_entity, methods=['POST'])
 server.add_url_rule(rule='/api/user/drive/<string:user_id>/add', endpoint='add_entity',
 					view_func=Directory.add_entity, methods=['POST'])
 server.add_url_rule(rule='/api/user/drive/<string:id>/edit', endpoint='edit_entity',
