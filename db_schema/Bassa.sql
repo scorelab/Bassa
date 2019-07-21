@@ -141,6 +141,36 @@ INSERT INTO `user` (`user_name`, `password`, `auth`, `email`, `blocked`, `approv
 ('rush', '1a1dc91c907325c69271ddf0c944bc72', 1, 'mgdmadusanka@gmail.com', 0, 0),
 ('tom', '1a1dc91c907325c69271ddf0c944bc72', 0, 'tom@mail.com', 0, 0);
 
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `folder`
+--
+
+INSERT INTO `folder` (`name`, `parent_id`, `user_id`) VALUES
+(`init_folder`, 0, 1),
+(`test_folder`, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `file`
+--
+
+INSERT INTO `file` (`name`, `parent_id`, `user_id`) VALUES
+(`init_file`, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `file`
+--
+
+INSERT INTO `acl` (`user_id`, `entity_type`, `entity_id`, `access`) VALUES
+(2, `fr`, 1, `write`);
+
+-- --------------------------------------------------------
+
 --
 -- Indexes for dumped tables
 --

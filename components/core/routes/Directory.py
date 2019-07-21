@@ -5,7 +5,7 @@ from utils.entity_utils import entity_type
 
 
 def fetch_entity_children(id):
-    token = token_validator(request.headers['token'])
+    token = request.headers['token']
     if token is None:
         return '{"error":"token error"}', 403
     try:
@@ -23,7 +23,7 @@ def fetch_entity_children(id):
 
 
 def fetch_entity(id):
-    token = token_validator(request.headers['token'])
+    token = request.headers['token']
     if token is None:
         return '{"error":"token error"}', 403
     try:
@@ -42,7 +42,7 @@ def fetch_entity(id):
 
 
 def add_entity(user_id):
-    token = token_validator(request.headers['token'])
+    token = request.headers['token']
     if token is None:
         return '{"error":"token error"}', 403
     data = request.get_json(force=True)
@@ -63,7 +63,7 @@ def add_entity(user_id):
 
 
 def edit_entity(id):
-    token = token_validator(request.headers['token'])
+    token = request.headers['token']
     if token is None:
         return '{"error":"token error"}', 403
     data = request.get_json(force=True)
@@ -83,7 +83,7 @@ def edit_entity(id):
 
 
 def remove_entity(id):
-    token = token_validator(request.headers['token'])
+    token = request.headers['token']
     if token is None:
         return '{"error":"token error"}', 403
     try:
@@ -100,7 +100,7 @@ def remove_entity(id):
 
 
 def move_entity(id):
-    token = token_validator(request.headers['token'])
+    token = request.headers['token']
     if token is None:
         return '{"error":"token error"}', 403
     data = request.get_json(force=True)
