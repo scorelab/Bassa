@@ -163,6 +163,5 @@ class TestFlaskAPIUsingRequests(unittest.TestCase):
         self.assertEqual(resp.status_code, 400)
 
 
-
 if __name__ == "__main__":
     unittest.main()

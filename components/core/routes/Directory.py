@@ -27,11 +27,11 @@ def fetch_entity(id):
     if token is None:
         return '{"error":"token error"}', 403
     try:
-        type = request.args.get('type')
-        if not type == 'fr' and not type =='fl':
+        e_type = request.args.get('type')
+        if not e_type == 'fr' and not e_type =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
-        entity = entity_type(type)
+        entity = entity_type(e_type)
         fetch_response = entity.get(id)
         if not isinstance(fetch_response, str):
             resp = Response(response=json.dumps(fetch_response), status=200)
@@ -49,13 +49,13 @@ def add_entity(user_id):
     if token is None:
         return '{"error":"token error"}', 403
     try:
-        type = request.args.get('type')
-        if not type == 'fr' and not type =='fl':
+        e_type = request.args.get('type')
+        if not e_type == 'fr' and not e_type =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
         name = request.form['name']
         parent_id = request.form['parent_id']
-        entity = entity_type(type)
+        entity = entity_type(e_type)
 
         add_response = entity.create(name, user_id, parent_id)
         resp = Response(response='{"status":"' + add_response + '"}',
@@ -72,12 +72,12 @@ def edit_entity(id):
     if token is None:
         return '{"error":"token error"}', 403
     try:
-        type = request.args.get('type')
-        if not type == 'fr' and not type =='fl':
+        e_type = request.args.get('type')
+        if not e_type == 'fr' and not e_type =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
         name = request.form['name']
-        entity = entity_type(type)
+        entity = entity_type(e_type)
 
         edit_response = entity.update(name, id)
         resp = Response(response='{"status":"' + edit_response + '"}',
@@ -94,11 +94,11 @@ def remove_entity(id):
     if token is None:
         return '{"error":"token error"}', 403
     try:
-        type = request.args.get('type')
-        if not type == 'fr' and not type =='fl':
+        e_type = request.args.get('type')
+        if not e_type == 'fr' and not e_type =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
-        entity = entity_type(type)
+        entity = entity_type(e_type)
         delete_response = entity.delete(id)
         resp = Response(response='{"status":"' + delete_response + '"}',
                     status=200 if delete_response == "success" else 500)
@@ -114,12 +114,12 @@ def move_entity(id):
     if token is None:
         return '{"error":"token error"}', 403
     try:
-        type = request.args.get('type')
-        if not type == 'fr' and not type =='fl':
+        e_type = request.args.get('type')
+        if not e_type == 'fr' and not e_type =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
         name = request.form['parent_name']
-        entity = entity_type(type)
+        entity = entity_type(e_type)
 
         move_response = entity.move(id, name)
         resp = Response(response='{"status":"' + move_response + '"}',

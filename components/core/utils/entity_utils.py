@@ -1,10 +1,10 @@
 from managers.DirectoryManager import Folder, File
 
-def entity_type(type):
-    if type == 'fr':
-        instance = Folder()
-    elif type == 'fl':
-        instance = File()
+def entity_type(e_type):
+    if e_type == 'fr':
+        entity_instance = Folder()
+    elif e_type == 'fl':
+        entity_instance = File()
     else:
         raise TypeError('No such entity exists')
-    return instance
+    return entity_instance
