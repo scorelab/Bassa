@@ -31,9 +31,9 @@ def upload_file_to_server(user_id):
         if add_response.status is '500':
             resp = Response(response='{"error":"'+ data['status'] +'"}', status=500)
         elif add_response.status is '400':
-            resp = Response(response='{"error":"'+ data['error'] +'"}', status=500)
-
-        resp = Response(response='{"status":"' + data['status'] + '"}', status=200)
+            resp = Response(response='{"error":"'+ data['error'] +'"}', status=400)
+        else:
+            resp = Response(response='{"status":"' + data['status'] + '"}', status=200)
     except:
         resp = Response('{"error":"' + str(e) + '"}', status=400)
     resp.headers['token'] = token
