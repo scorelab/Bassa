@@ -1,9 +1,6 @@
 from Models import EntityInterface
 from DBCon import *
-from ConfReader import get_conf_reader
 import sqlalchemy.pool as pool
-
-conf = get_conf_reader("dl.conf")
 
 threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=20)
 

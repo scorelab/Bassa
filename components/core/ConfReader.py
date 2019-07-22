@@ -17,11 +17,14 @@ def check_conf_availability():
     """Checks whether the conf files have been properly set. Exits otherwise"""
     dlConf = get_conf_reader('dl.conf')
     emailConf = get_conf_reader('email.conf')
+    upConf = get_conf_reader('up.conf')
 
     if any(val == '' for val in dlConf.values()):
         sys.exit("Please set all the values in dl.conf")
     if any(val == '' for val in emailConf.values()):
         sys.exit("Please set all the values in email.conf")
+    if any(val == '' for val in upConf.values()):
+        sys.exit("Please set all the values in up.conf")
 
 
 def get_conf_reader(confFile):
