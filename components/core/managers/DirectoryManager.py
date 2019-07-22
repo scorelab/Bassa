@@ -24,14 +24,14 @@ class Folder(EntityInterface):
         return 'success'
 
 
-    def delete(self, id):
+    def delete(self, user_id, name):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = "DELETE FROM folder WHERE id=%s OR parent_id=%s;"
+        query = "DELETE FROM folder WHERE user_id=%s AND name=%s;"
         try:
-            cursor.execute(query, (id, id))
+            cursor.execute(query, (user_id, name))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
@@ -121,14 +121,14 @@ class File(EntityInterface):
         return 'success'
 
 
-    def delete(self, id):
+    def delete(self, user_id, name):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = "DELETE FROM file WHERE id=%s OR parent_id=%s;"
+        query = "DELETE FROM file WHERE user_id=%s AND name=%s;"
         try:
-            cursor.execute(query, (id, id))
+            cursor.execute(query, (user_id, name))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()

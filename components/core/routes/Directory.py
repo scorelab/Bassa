@@ -89,17 +89,18 @@ def edit_entity(id):
     return resp
 
 
-def remove_entity(id):
+def remove_entity(user_id):
     token = token_validator(request.headers.get('token'))
     if token is None:
         return '{"error":"token error"}', 403
     try:
         e_type = request.args.get('type')
+        name = request.form.get('name')
         if not e_type == 'fr' and not e_type =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
         entity = entity_type(e_type)
-        delete_response = entity.delete(id)
+        delete_response = entity.delete(user_id, name)
         resp = Response(response='{"status":"' + delete_response + '"}',
                     status=200 if delete_response == "success" else 500)
     except Exception as e:

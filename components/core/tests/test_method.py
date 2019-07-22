@@ -79,13 +79,13 @@ class Test(unittest.TestCase):
     @pytest.mark.run(order=13)
     def test_delete_folder(self):
         entity= folder_instance()
-        response = entity.delete(entity_id())
+        response = entity.delete(user_id(), entity_name('remove'))
         self.assertEqual('success', response)
 
     @pytest.mark.run(order=14)
     def test_delete_file(self):
         entity= file_instance()
-        response = entity.delete(entity_id())
+        response = entity.delete(user_id(), entity_name('remove'))
         self.assertEqual('success', response)
 
 
