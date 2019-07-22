@@ -48,14 +48,13 @@ def add_entity(user_id):
     token = request.headers.get('token')
     if token is None:
         return '{"error":"token error"}', 403
-    data = request.get_json(force=True)
     try:
         type = request.args.get('type')
         if not type == 'fr' or type =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
-        name = data['name']
-        parent_id = data['parent_id']
+        name = request.form['name']
+        parent_id = request.form['parent_id']
         entity = entity_type(type)
 
         add_response = entity.create(name, user_id, parent_id)
@@ -72,13 +71,12 @@ def edit_entity(id):
     token = request.headers.get('token')
     if token is None:
         return '{"error":"token error"}', 403
-    data = request.get_json(force=True)
     try:
         type = request.args.get('type')
         if not type == 'fr' or type =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
-        name = data['name']
+        name = request.form['name']
         entity = entity_type(type)
 
         edit_response = entity.update(name, id)
@@ -115,13 +113,12 @@ def move_entity(id):
     token = request.headers.get('token')
     if token is None:
         return '{"error":"token error"}', 403
-    data = request.get_json(force=True)
     try:
         type = request.args.get('type')
         if not type == 'fr' or type =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
-        name = data['parent_name']
+        name = request.form['parent_name']
         entity = entity_type(type)
 
         move_response = entity.move(id, name)

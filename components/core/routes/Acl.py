@@ -29,14 +29,13 @@ def grant_access(id):
     token = request.headers.get('token')
     if token is None:
         return '{"error":"token error"}', 403
-    data = request.get_json(force=True)
     try:
         entity = request.args.get('type')
         if not entity == 'fr' or entity =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
-        user_name = data['user_name']
-        access = data['access']
+        user_name = request.form['user_name']
+        access = request.form['access']
 
         grant_response = give_access(id, user_name, entity, access)
         resp = Response(response='{"status":"' + grant_response + '"}',
