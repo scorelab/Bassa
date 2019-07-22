@@ -1,5 +1,5 @@
 from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
-from UserManager import *
+from managers.UserManager import *
 
 TIMEOUT = 60 * 60
 

@@ -1,7 +1,7 @@
 from flask import json
 from flask import request, abort, Response, g
 from utils.token_utils import token_validator
-from AclManager import *
+from managers.AclManager import *
 
 
 def check_access(id, user_id):

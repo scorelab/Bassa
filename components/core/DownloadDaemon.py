@@ -2,7 +2,7 @@ import threading
 import queue
 from queue import Queue
 import json, time
-from DownloadManager import *
+from managers.DownloadManager import *
 from Models import Status, Download
 from EMail import send_mail
 from DiskMan import *
@@ -129,7 +129,7 @@ class MessageHandler():
                     get_status(self.ws, None, data['params'][0]['gid'])
                     db_lock.release()
                     messageQueue.task_done()
-            
+
 class RepeatedTimer(object):
     def __init__(self, interval, function, *args, **kwargs):
         self._timer     = None
@@ -243,7 +243,7 @@ def starter(socket):
     handler = Handler(ws)
     # socketio.emit("test", {'data': 'A NEW FILE WAS POSTED'}, namespace='/news')
     threading.Thread(target=handler.start_workers).start()
-    mHandler = MessageHandler(ws) 
+    mHandler = MessageHandler(ws)
     threading.Thread(target=mHandler.start_message_workers).start()
     messageQueue.join()
     ws.run_forever()

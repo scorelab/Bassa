@@ -1,5 +1,5 @@
 from flask import Response, request, send_file, jsonify
-from DownloadManager import get_id_from_gid, get_download_path, get_download_name_from_id, get_compression_progress
+from managers.DownloadManager import get_id_from_gid, get_download_path, get_download_name_from_id, get_compression_progress
 import logging
 from utils.token_utils import token_validator
 
@@ -19,7 +19,7 @@ def send_file_from_path():
 		except Exception as e:
 			logging.error(" get file API (/api/file) got wrong arguments, thrown an error :: %s" % e)
 			return Response("error", status=400)
-		
+
 		try:
 			return send_file(filename_or_fp=download_path, attachment_filename=file_name,
 							 as_attachment=True)
@@ -81,7 +81,7 @@ def start_compression():
 		return jsonify(response_dict)
 	else:
 		return Response("Invalid Token in request", 403)
-	
+
 
 def check_compression_progress():
 	token = token_validator(request.headers['token'])

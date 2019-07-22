@@ -3,7 +3,7 @@ from flask import request, abort, Response, g
 from Auth import *
 from EMail import send_mail
 from Models import *
-from DownloadManager import *
+from managers.DownloadManager import *
 import _thread
 from utils.token_utils import token_validator
 from utils.app_constants import SERVER_SECRET_KEY

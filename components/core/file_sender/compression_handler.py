@@ -3,7 +3,7 @@ import zipfile
 import os
 from os.path import basename
 import logging
-from DownloadManager import set_compression_progress, get_id_from_gid, get_download_path, insert_compression_process
+from managers.DownloadManager import set_compression_progress, get_id_from_gid, get_download_path, insert_compression_process
 import json
 import time
 

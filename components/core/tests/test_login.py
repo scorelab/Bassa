@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from UserManager import *
+from managers.UserManager import *
 import unittest
 
 

@@ -1,5 +1,4 @@
-from DirectoryManager import Folder, File
-
+from managers.DirectoryManager import Folder, File
 
 def entity_type(type):
     if type == 'fr':
