@@ -1,5 +1,6 @@
 import unittest
 import requests
+import pytest
 
 headers = {
 'Host': 'localhost:5000',
@@ -58,106 +59,132 @@ incorrect_params_file = {'type': 'file'}
 
 class TestFlaskAPIUsingRequests(unittest.TestCase):
 
+    @pytest.mark.run(order=1)
     def test_api_login_returns_auth_level(self):
         resp = requests.post('http://localhost:5000/api/login', correct_string, headers=headers)
         self.assertEqual(resp.json(), {'auth':'0'})
 
+    @pytest.mark.run(order=2)
     def test_api_login_incorrectly_return_403(self):
         resp = requests.post('http://localhost:5000/api/login', incorrect_string, headers=headers)
         self.assertEqual(resp.status_code, 403)
 
+    @pytest.mark.run(order=3)
     def test_api_acl_check_access_pass(self):
         resp = requests.get('http://localhost:5000/api/user/drive/'+fr_entity_id+'/check/'+user_id, params=correct_params, headers=headers)
         self.assertEqual(resp.json(),[['write']])
 
+    @pytest.mark.run(order=4)
     def test_api_acl_check_access_fail(self):
         resp = requests.get('http://localhost:5000/api/user/drive/'+fr_entity_id+'/check/'+user_id, params=incorrect_params, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=5)
     def test_api_acl_grant_access_pass(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+fr_entity_id+'/grant', correct_acl_string, params=correct_params, headers=headers)
         self.assertEqual(resp.json(), {'status':'success'})
 
+    @pytest.mark.run(order=6)
     def test_api_acl_grant_access_fail(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+fr_entity_id+'/grant', incorrect_acl_string, params=incorrect_params, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=7)
     def test_api_directory_fetch_entity_folder_pass(self):
         resp = requests.get('http://localhost:5000/api/user/drive/'+fr_entity_id, params=correct_params, headers=headers)
         self.assertEqual(resp.json(), [[1, 'init_folder']])
 
+    @pytest.mark.run(order=8)
     def test_api_directory_fetch_entity_folder_fail(self):
         resp = requests.get('http://localhost:5000/api/user/drive/'+fr_entity_id, params=incorrect_params, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=9)
     def test_api_directory_fetch_entity_file_pass(self):
         resp = requests.get('http://localhost:5000/api/user/drive/'+fl_entity_id, params=correct_params_file, headers=headers)
         self.assertEqual(resp.json(), [[2, 'test_file']])
 
+    @pytest.mark.run(order=10)
     def test_api_directory_fetch_entity_file_fail(self):
         resp = requests.get('http://localhost:5000/api/user/drive/'+fl_entity_id, params=incorrect_params_file, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=11)
     def test_api_directory_add_entity_folder_pass(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+user_id+'/add', add_folder_string, params=correct_params, headers=headers)
         self.assertEqual(resp.json(), {'status':'success'})
 
+    @pytest.mark.run(order=12)
     def test_api_directory_add_entity_folder_fail(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+user_id+'/add', add_folder_string, params=incorrect_params, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=13)
     def test_api_directory_add_entity_file_pass(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+user_id+'/add', add_file_string, params=correct_params_file, headers=headers)
         self.assertEqual(resp.json(), {'status':'success'})
 
+    @pytest.mark.run(order=14)
     def test_api_directory_add_entity_file_fail(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+user_id+'/add', add_file_string, params=incorrect_params_file, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=15)
     def test_api_directory_edit_entity_folder_pass(self):
         resp = requests.put('http://localhost:5000/api/user/drive/'+fr_edit_id+'/edit', edit_folder_string, params=correct_params, headers=headers)
         self.assertEqual(resp.json(), {'status':'success'})
 
+    @pytest.mark.run(order=16)
     def test_api_directory_edit_entity_folder_fail(self):
         resp = requests.put('http://localhost:5000/api/user/drive/'+fr_edit_id+'/edit', edit_folder_string, params=incorrect_params, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=17)
     def test_api_directory_edit_entity_file_pass(self):
         resp = requests.put('http://localhost:5000/api/user/drive/'+fl_edit_id+'/edit', edit_file_string, params=correct_params_file, headers=headers)
         self.assertEqual(resp.json(), {'status':'success'})
 
+    @pytest.mark.run(order=18)
     def test_api_directory_edit_entity_file_fail(self):
         resp = requests.put('http://localhost:5000/api/user/drive/'+fl_edit_id+'/edit', edit_file_string, params=incorrect_params_file, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=19)
     def test_api_directory_remove_entity_folder_pass(self):
         resp = requests.delete('http://localhost:5000/api/user/drive/'+fr_rem_id+'/remove', params=correct_params, headers=headers)
         self.assertEqual(resp.json(), {'status':'success'})
 
+    @pytest.mark.run(order=20)
     def test_api_directory_remove_entity_folder_fail(self):
         resp = requests.delete('http://localhost:5000/api/user/drive/'+fr_rem_id+'/remove', params=incorrect_params, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=21)
     def test_api_directory_remove_entity_file_pass(self):
         resp = requests.delete('http://localhost:5000/api/user/drive/'+fl_rem_id+'/remove', params=correct_params_file, headers=headers)
         self.assertEqual(resp.json(), {'status':'success'})
 
+    @pytest.mark.run(order=22)
     def test_api_directory_remove_entity_file_fail(self):
         resp = requests.delete('http://localhost:5000/api/user/drive/'+fl_rem_id+'/remove', params=incorrect_params_file, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=23)
     def test_api_directory_move_entity_folder_pass(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+fr_move_id+'/move', move_folder_string, params=correct_params, headers=headers)
         self.assertEqual(resp.json(), {'status':'success'})
 
+    @pytest.mark.run(order=24)
     def test_api_directory_move_entity_folder_fail(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+fr_move_id+'/move', move_folder_string, params=incorrect_params, headers=headers)
         self.assertEqual(resp.status_code, 400)
 
+    @pytest.mark.run(order=25)
     def test_api_directory_move_entity_file_pass(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+fl_move_id+'/move', move_file_string, params=correct_params_file, headers=headers)
         self.assertEqual(resp.json(), {'status':'success'})
 
+    @pytest.mark.run(order=26)
     def test_api_directory_move_entity_file_fail(self):
         resp = requests.post('http://localhost:5000/api/user/drive/'+fl_move_id+'/move', move_file_string, params=incorrect_params_file, headers=headers)
         self.assertEqual(resp.status_code, 400)
