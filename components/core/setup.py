@@ -11,6 +11,7 @@ except ImportError:
 
 EMAIL_CONF = 'email.conf'
 DL_CONF = 'dl.conf'
+UP_CONF = 'up.conf'
 LINUX_CONFDIR = os.path.expanduser('~') + '/.config/bassa/'
 WIN_CONFDIR = os.path.expanduser('~') + '/%app_data%/bassa/'
 OSX_CONFDIR  = os.path.expanduser('~') + '/.config/bassa/'
@@ -38,8 +39,10 @@ if not os.path.exists(configdir):
 
 email_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + EMAIL_CONF
 dl_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + DL_CONF
+up_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + UP_CONF
 shutil.copyfile(email_conf_location, configdir + EMAIL_CONF)
 shutil.copyfile(dl_conf_location, configdir + DL_CONF)
+shutil.copyfile(up_conf_location, configdir + UP_CONF)
 
 ###/ Set configs ###
 

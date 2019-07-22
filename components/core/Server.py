@@ -2,8 +2,8 @@ from initializer import server, socketio
 from flask import send_file, send_from_directory
 from flask_socketio import join_room
 import os
-from file_sender import sender
-from routes import User, Download, Directory, Acl
+from file_handler import sender
+from routes import User, Download, Directory, Acl, Upload
 
 
 # socket connections
@@ -88,3 +88,7 @@ server.add_url_rule(rule='/api/user/drive/<string:id>/check/<string:user_id>', e
 					view_func=Acl.check_access, methods=['GET'])
 server.add_url_rule(rule='/api/user/drive/<string:id>/grant', endpoint='grant_access',
 					view_func=Acl.grant_access, methods=['POST'])
+
+# file uploading endpoints
+server.add_url_rule(rule='/api/user/drive/<string:user_id>/upload', endpoint='upload_file_to_server',
+					view_func=Upload.upload_file_to_server, methods=['POST'])
