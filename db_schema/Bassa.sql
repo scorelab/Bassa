@@ -158,7 +158,8 @@ INSERT INTO `folder` (`name`, `parent_id`, `user_id`) VALUES
 --
 
 INSERT INTO `file` (`name`, `parent_id`, `user_id`) VALUES
-(`init_file`, 1, 1);
+(`init_file`, 1, 1),
+(`test_file`, 1, 1);
 
 -- --------------------------------------------------------
 

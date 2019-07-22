@@ -83,7 +83,7 @@ class Folder(EntityInterface):
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
-            return e
+            return str(e)
         return 'success'
 
 
@@ -180,5 +180,5 @@ class File(EntityInterface):
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
-            return e
+            return str(e) 
         return 'success'

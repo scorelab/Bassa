@@ -5,12 +5,12 @@ from AclManager import *
 
 
 def check_access(id, user_id):
-    token = request.headers.get('token')
+    token = token_validator(request.headers.get('token'))
     if token is None:
         return '{"error":"token error"}', 403
     try:
         entity = request.args.get('type')
-        if not entity == 'fr' or entity =='fl':
+        if not entity == 'fr' and not entity =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
         check_response = get_access(id, user_id, entity)
@@ -26,12 +26,12 @@ def check_access(id, user_id):
 
 
 def grant_access(id):
-    token = request.headers.get('token')
+    token = token_validator(request.headers.get('token'))
     if token is None:
         return '{"error":"token error"}', 403
     try:
         entity = request.args.get('type')
-        if not entity == 'fr' or entity =='fl':
+        if not entity == 'fr' and not entity =='fl':
             return Response('{"error":"invalid parameter"}', status=400)
 
         user_name = request.form['user_name']
