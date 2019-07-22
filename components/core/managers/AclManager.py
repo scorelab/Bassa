@@ -19,7 +19,7 @@ def get_access(id, user_id, entity):
         db.close()
         return results
     except MySQLdb.Error as e:
-        return e
+        return str(e)
 
 
 def give_access(id, user_name, entity, access):

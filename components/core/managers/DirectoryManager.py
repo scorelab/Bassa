@@ -23,7 +23,7 @@ class Folder(EntityInterface):
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
-            return e
+            return str(e)
         return 'success'
 
 
@@ -38,7 +38,7 @@ class Folder(EntityInterface):
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
-            return e
+            return str(e)
         return 'success'
 
 
@@ -53,7 +53,7 @@ class Folder(EntityInterface):
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
-            return e
+            return str(e)
         return 'success'
 
 
@@ -69,7 +69,7 @@ class Folder(EntityInterface):
             db.close()
             return results
         except MySQLdb.Error as e:
-            return e
+            return str(e)
 
 
     def move(self, id, parent_name):
@@ -101,7 +101,7 @@ class Folder(EntityInterface):
             db.close()
             return results
         except MySQLdb.Error as e:
-            return e
+            return str(e)
 
 
 ############################### File class ###################################
@@ -120,7 +120,7 @@ class File(EntityInterface):
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
-            return e
+            return str(e)
         return 'success'
 
 
@@ -135,7 +135,7 @@ class File(EntityInterface):
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
-            return e
+            return str(e)
         return 'success'
 
 
@@ -150,7 +150,7 @@ class File(EntityInterface):
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
-            return e
+            return str(e)
         return 'success'
 
 
@@ -166,7 +166,7 @@ class File(EntityInterface):
             db.close()
             return results
         except MySQLdb.Error as e:
-            return e
+            return str(e)
 
 
     def move(self, id, parent_name):
@@ -180,5 +180,5 @@ class File(EntityInterface):
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
-            return str(e) 
+            return str(e)
         return 'success'
