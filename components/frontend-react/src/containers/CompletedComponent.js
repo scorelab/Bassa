@@ -19,11 +19,12 @@ const styles = theme => ({
 })
 
 class CompletedComponent extends React.Component{
-  constructor(){
-    super();
-    this.state = {
-      files: [],
-    }
+  
+  state = {
+    files: [],
+  }
+
+  componentWillMount () {
     let token = sessionStorage.getItem('token')
     axios({
       method:'get',
@@ -39,9 +40,9 @@ class CompletedComponent extends React.Component{
 
   render() {
     const { classes } = this.props;
-    if(this.state.files.length !== 0)
+    const { files } = this.state;
+    if(files.length !== 0)
     {
-      console.log(this.state.files)
       return (
         <div>
           <Appbar isloggedIn={true} />
@@ -54,7 +55,7 @@ class CompletedComponent extends React.Component{
               <Typography variant="h5" gutterBottom >
                 List of downloaded files
               </Typography>
-              <CompletedList files={this.state.files}/>
+              <CompletedList files={files}/>
             </Paper>
           </div>
         </div>

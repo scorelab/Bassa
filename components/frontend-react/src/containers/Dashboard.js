@@ -24,6 +24,9 @@ import Button from '@material-ui/core/Button';
 
 import '../index.css';
 
+const QUEUED = 0;
+const DOWNLOADING = 3;
+
 const styles = theme => ({
   grid: {
     flexGrow: 1,
@@ -63,13 +66,13 @@ const styles = theme => ({
 
 class Dashboard extends React.Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      link: '',
-      completedList:[],
-      queuedList:[]
-    }
+  state = {
+    link: '',
+    completedList:[],
+    queuedList:[]
+  }
+
+  componentWillMount () {
     let token = sessionStorage.getItem('token');
     axios({
       method: 'get',
@@ -77,8 +80,8 @@ class Dashboard extends React.Component {
       headers: {'token': `${token}`}
     })
     .then(res => {
-      let queuedList = res.data.filter(file => file.status === 0);
-      let completedList = res.data.filter(file => file.status === 3);
+      let queuedList = res.data.filter(file => file.status === QUEUED);
+      let completedList = res.data.filter(file => file.status === DOWNLOADING);
       this.setState({queuedList: queuedList, completedList: completedList});
     })
     .catch(err => console.log(err));
@@ -105,6 +108,7 @@ class Dashboard extends React.Component {
   }
   render() {
     const { classes } = this.props;
+    const { link, queuedList } = this.state;
   	return (
   	  <div className={classes.root}>
   	    <Appbar isloggedIn={true} />
@@ -116,7 +120,7 @@ class Dashboard extends React.Component {
   	        ADD DOWNLOAD
   	      </Typography>
           <form>
-            <Input type="text" className={classes.link} value={this.state.link} onChange={this.handleLinkField} placeholder="Enter or paste the link below" />
+            <Input type="text" className={classes.link} value={link} onChange={this.handleLinkField} placeholder="Enter or paste the link below" />
             <FAB color="primary" size="small" className={classes.fab} aria-label="add-download" onClick={this.handleAddButton}>
               <AddIcon/>
             </FAB>
@@ -142,7 +146,7 @@ class Dashboard extends React.Component {
                   <Link to='/queued'><Button size="small" variant="outlined" color="primary">show all</Button></Link>
                 </Typography>
               </Card>
-              <QueuedFileList files={this.state.queuedList} limit={20} />
+              <QueuedFileList files={queuedList} limit={20} />
             </Paper>
           </Grid>
         </Grid>

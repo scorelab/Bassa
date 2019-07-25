@@ -24,12 +24,12 @@ const styles = theme => ({
 })
 
 class QueuedComponent extends React.Component{
-  constructor(){
-    super();
-    this.state = {
-      loading: true,
-      files:[]
-    }
+  
+  state = {
+    files:[]
+  }
+  
+  componentWillMount () {
     let token = sessionStorage.getItem('token');
     axios({
       method: 'get',
@@ -44,7 +44,8 @@ class QueuedComponent extends React.Component{
   }
 
   render() {
-  	const { classes } = this.props;
+    const { classes } = this.props;
+    const { files } = this.state;
     return (
       <div className={classes.root}>
         <Appbar isloggedIn={true} />
@@ -57,7 +58,7 @@ class QueuedComponent extends React.Component{
               <Typography variant="h5" gutterBottom>
                 List of files required to be downloaded
               </Typography>
-              <QueuedList files={this.state.files}/>
+              <QueuedList files={files}/>
             </Paper>
           </div>        
       </div>

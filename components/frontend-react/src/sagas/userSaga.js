@@ -1,7 +1,7 @@
 import { takeLatest, put, call, take } from 'redux-saga/effects';
 import { userActions, downloadActions } from '../constants';
-import { verifyUserCredentials, addNewUser, getSignupRequests, approveSignupRequest, getHeavyUsers } from '../API/Users';
-import { fetchDownloads,  } from '../API/Downloads';
+import { verifyUserCredentials, addNewUser, getSignupRequests, approveSignupRequest, getHeavyUsers } from '../services/Users';
+import { fetchDownloads } from '../services/Downloads';
 
 function* userLoginWorkerSaga (action) {
   const response = yield call(verifyUserCredentials, action);

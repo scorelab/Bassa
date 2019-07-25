@@ -1,5 +1,5 @@
 import { take, takeEvery, put, call } from 'redux-saga/effects';
-import { startAllDownloads, killAllDownloads, addNewDownload, fetchDownloads, deleteDownload } from '../API/Downloads';
+import { startAllDownloads, killAllDownloads, addNewDownload, fetchDownloads, deleteDownload } from '../services/Downloads';
 import { downloadActions } from '../constants';
 
 function* startAllDownloadsWorkerSaga () {

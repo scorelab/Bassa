@@ -7,12 +7,13 @@ import PendingSignupRequests from '../components/PendingSignupRequests';
 import UsageStats from '../components/UsageStats';
 
 const AdminComponent = (props) => {
+  const {startDownloads, killDownloads, requestsList, usageStats} = props;
   return (
     <div>
       <Appbar data-test="component-appbar" isloggedIn={true} />
-      <StartKillDownloads data-test="component-start-kill-downloads" onStart={props.startDownloads} onKill={props.killDownloads} />
-      <PendingSignupRequests data-test="component-pending-signup-requests" requestsList={props.requestsList}/>
-      <UsageStats data-test="component-usage-statistics" data={props.usageStats}/>
+      <StartKillDownloads data-test="component-start-kill-downloads" onStart={startDownloads} onKill={killDownloads} />
+      <PendingSignupRequests data-test="component-pending-signup-requests" requestsList={requestsList}/>
+      <UsageStats data-test="component-usage-statistics" data={usageStats}/>
     </div>
   )
 }

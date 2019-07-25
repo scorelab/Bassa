@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import NameIcon from '@material-ui/icons/SupervisorAccount';
+import LockIcon from '@material-ui/icons/Lock';
+import EmailIcon from '@material-ui/icons/Email';
 import green from '@material-ui/core/colors/green';
 
 const useStyles = makeStyles(theme => ({
@@ -17,8 +23,8 @@ const useStyles = makeStyles(theme => ({
   },
   inputField: {
     width: '80%',
-    padding: 10,
-    margin: 10,
+    padding: 5,
+    margin: 5,
   },
   buttonContainer: {
     padding:10,
@@ -40,58 +46,99 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 const UserSignup = (props) => {
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setconfirmPassword] = useState('');
+  const {
+    values: { user_name, email, password, confirm_password },
+    errors,
+    touched,
+    handleSubmit,
+    handleChange,
+    isValid,
+  } = props;
 
-  const handleTextFields = (event) => {
-    switch(event.target.id)
-    {
-      case 'name':
-        setUsername(event.target.value);
-        return;
-
-      case 'email':
-        setEmail(event.target.value);
-        return;
-
-      case 'pass':
-        setPassword(event.target.value);
-        return;
-
-      case 'c_pass':
-        setconfirmPassword(event.target.value);
-        return;
-
-      default:
-        return;
-    }
-  }
-
-  const handleSubmitButton = (event) => {
-    event.preventDefault();
-    let details = {user_name: username, email: email, password: password, confirm_password: confirmPassword};
-    if(password !== confirmPassword)
-    {
-      alert('Passwords do not match');
-    }
-    props.onClickSubmit(details);
-  }
   const classes = useStyles();
   return (
     <Container className={classes.container} maxWidth="xs">
       <Typography className={classes.title} variant="h4">Create An Account</Typography>
-        <form className={classes.formContainer} onSubmit={(e) => handleSubmitButton(e)}>
-          <input id="name" className={classes.inputField} type="text" placeholder="Username" onChange={handleTextFields} data-test="field-username"/>
-          <input id="email" className={classes.inputField} type="text" placeholder="Email" onChange={handleTextFields} data-test="field-email"/>
-          <input id="pass" className={classes.inputField} type="text" placeholder="Password" onChange={handleTextFields} data-test="field-password"/>
-          <input id="c_pass" className={classes.inputField} type="text" placeholder="Re-enter Password" onChange={handleTextFields} data-test="field-re-password"/>
+        <form className={classes.formContainer} onSubmit={handleSubmit}>
+          <TextField
+            name="user_name"
+            className={classes.inputField}
+            helperText={touched.user_name ? errors.user_name : ""}
+            error={Boolean(errors.user_name)}
+            label="Name"
+            value={user_name}
+            onChange={handleChange}
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <NameIcon/>
+                </InputAdornment>
+              )
+            }}/>
+
+          <TextField
+            name="email"
+            className={classes.inputField}
+            helperText={touched.email ? errors.email : ""}
+            error={Boolean(errors.email)}
+            label="Email"
+            value={email}
+            onChange={handleChange}
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon/>
+                </InputAdornment>
+              )
+            }}/>
+
+          <TextField
+            name="password"
+            className={classes.inputField}
+            type="password"
+            helperText={touched.password ? errors.password : ""}
+            error={Boolean(errors.password)}
+            label="Password"
+            value={password}
+            onChange={handleChange}
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockIcon/>
+                </InputAdornment>
+              )
+            }}/>
+
+          <TextField
+            name="confirm_password"
+            className={classes.inputField}
+            type="password"
+            helperText={touched.confirm_password ? errors.confirm_password : ""}
+            error={Boolean(errors.confirm_password)}
+            label="Confirm Password"
+            value={confirm_password}
+            onChange={handleChange}
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockIcon/>
+                </InputAdornment>
+              )
+            }}/>
           <div className={classes.buttonContainer}>
-            <input type="submit"className={classes.button} data-test="button-submit"/>
+            <Button
+              className={classes.button}
+              type="submit"
+              disabled={!isValid}>Submit</Button>
           </div>
+
         </form>
     </Container>
  )

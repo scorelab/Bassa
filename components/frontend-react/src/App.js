@@ -8,13 +8,13 @@ import Dashboard from './containers/Dashboard';
 import QueuedComponent from './containers/QueuedComponent';
 import CompletedComponent from './containers/CompletedComponent';
 
-const App = (props) => (
+const App = ({isloggedIn}) => (
   <Switch>
-    <Route exact path='/' isloggedIn={props.isloggedIn} component={LoginComponent} />
-    <PrivateRoute exact path='/admin' isloggedIn={props.isloggedIn} component={AdminComponent} />
-    <PrivateRoute exact path='/home' isloggedIn={props.isloggedIn} component={Dashboard} />
-    <PrivateRoute exact path='/queued' isloggedIn={props.isloggedIn} component={QueuedComponent} />
-    <PrivateRoute exact path='/completed' isloggedIn={props.isloggedIn} component={CompletedComponent} />
+    <Route exact path='/' isloggedIn={isloggedIn} component={LoginComponent} />
+    <PrivateRoute exact path='/admin' isloggedIn={isloggedIn} component={AdminComponent} />
+    <PrivateRoute exact path='/home' isloggedIn={isloggedIn} component={Dashboard} />
+    <PrivateRoute exact path='/queued' isloggedIn={isloggedIn} component={QueuedComponent} />
+    <PrivateRoute exact path='/completed' isloggedIn={isloggedIn} component={CompletedComponent} />
   </Switch>
 )
 
