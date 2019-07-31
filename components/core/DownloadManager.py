@@ -441,3 +441,37 @@ def insert_compression_process(comp_id, start_time, completed_time, is_deleted):
 			return e[1]
 		return 0
 	return "db connection error"
+
+def update_minio_indexes(file_name, file_path, gid, completedLength, username, download_id):
+	db = threadpool.connect()
+	if db is not None:
+		cursor = db.cursor()
+		sql = "INSERT into minio(mid, mgid, muser_name, mfile_name, msize, mpath) VALUES(%s, %s, %s, %s, %s, %s);"
+		try:
+			cursor.execute(sql, (download_id, gid, username, file_name, completedLength, file_path))
+			db.commit()
+			cursor.close()
+		except MySQLdb.Error as e:
+			db.rollback()
+			# Shows error thrown up by database
+			print(e)
+
+def get_file_name(id):
+	db = threadpool.connect()
+	if db is not None:
+		cursor = db.cursor(MySQLdb.cursors.DictCursor)
+		sql = "SELECT mfile_name FROM minio WHERE mid='%s';" % id
+		print(sql)
+		try:
+			cursor.execute(sql)
+			if cursor.rowcount == 0:
+				return None
+			results = cursor.fetchone()
+			print(results)
+			file_name = results['mfile_name']
+			db.close()
+			return file_name
+		except MySQLdb.Error as e:
+			print(e)
+			return e[1]
+	return "db connection error"
