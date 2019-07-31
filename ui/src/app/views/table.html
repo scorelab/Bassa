@@ -23,7 +23,7 @@
             <td data-title="Issue">{{data.download_name}}</td>
             <td data-title="Progress">{{data.size}}</td>
             <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"></td>
-            <td><button ng-click="compressFiles([data.gid])">Download</button></td>
+            <td><button ng-click="downloadFromMinio([data.id])">Download</button></td>
             <td><md-checkbox ng-show="isShowingCheckbox" ng-model="data.checked" ng-change="selectThisItem(data)"></md-checkbox></td>
         </tr>
         </tbody>
