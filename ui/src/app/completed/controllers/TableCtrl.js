@@ -193,6 +193,16 @@
     function isExtensionMatch(extensionName) {
       return fileTypeArray.indexOf(extensionName) !== -1;
     }
+
+    $scope.downloadFromMinio = function (downloadId) {
+      ToastService.showToast('Generating download link');
+      TableService.downloadFromMinio(downloadId).then( function(response) {
+        let urlData = response.data;
+        let url = urlData['url'];
+        window.open(url)
+      })
+    };
+
   }
 })();
 

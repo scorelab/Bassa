@@ -7,7 +7,8 @@ from Models import Status, Download
 from EMail import send_mail
 from DiskMan import *
 from ConfReader import get_conf_reader
-from fileminio import *
+from MinioHandler import *
+import logging
 
 import websocket
 import sys
@@ -122,10 +123,9 @@ class MessageHandler():
                     username = get_username_from_gid(gid)
                     send_status(download_id, completedLength, raw_size, username)
                     file_name = path[-1]
-                    fpath = data['result']['files'][0]['path'].split('/')
-                    file_path=("/".join(fpath))
+                    file_path=("/".join(path))
                     send_file_details(file_name, file_path)
-                    send_details_to_minio(file_name, file_path, gid, completedLength, username, download_id)
+                    send_details_to_minio(file_name, file_path, gid, completedLength, username, download_id, raw_size)
                     # msg='Your download '+path[-1]+' is completed.'
                     # send_mail([get_download_email(data['result']['gid'])],msg)
             elif 'method' in data:
@@ -221,21 +221,16 @@ def find_supported_handler(download):
 
 
 def send_file_details(file_name, file_path):
-    m_fname = file_name
-    m_fpath = file_path
-    upload_to_minio(m_fname, m_fpath)
-    print("File uploaded to minio/bassa successfully !")
+    upload_to_minio(file_name, file_path)
+    logging.info("File uploaded to minio/bassa successfully !")
 
 
-def send_details_to_minio(file_name, file_path, gid, completedLength, username, download_id):
-    m_fname = file_name
-    m_fpath = file_path
-    m_gid = gid
-    m_size = completedLength
-    m_username = username
-    m_id = download_id
-    update_minio_indexes(m_fname, m_fpath, m_gid, m_size, m_username, m_id)
-    print("Database table of minio updated successfully !")
+def send_details_to_minio(file_name, file_path, gid, completedLength, username, download_id, fileSize):
+    progress=-1
+    if fileSize>0:
+        progress = int(float(completedLength)/float(fileSize) * 100)
+        update_minio_indexes(file_name, file_path, gid, completedLength, username, download_id)
+        logging.info("Database table of minio updated successfully !")
 
 
 def on_message(ws, message):

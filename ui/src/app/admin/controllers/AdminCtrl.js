@@ -55,7 +55,7 @@
       });
     };
 
-    $scope.visitminio = function() {
+    $scope.visitMinio = function() {
       ToastService.showToast('Opening Minio...');
       AdminService.visitMinio()
     };
