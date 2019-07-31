@@ -43,8 +43,8 @@
       });
     }
 
-    var visitMinio = function () {
-      var url = 'http://10.61.32.83:9000'
+    var visitMinio = function() {
+      var url = 'http://127.0.0.1:9000/'
       setTimeout(function(){
         window.open(url, '_blank');
          },1100)
