@@ -85,6 +85,21 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Table structure for table `minio`
+--
+
+CREATE TABLE IF NOT EXISTS `minio` (
+  `mid` bigint(20) NOT NULL,
+  `mgid` varchar(256) DEFAULT NULL,
+  `muser_name` varchar(256) NOT NULL,
+  `mfile_name` varchar(256) NOT NULL,
+  `msize` varchar(7) NOT NULL DEFAULT '0',
+  `mpath` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Dumping data for table `user`
 --
 
@@ -119,6 +134,14 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_name`),
   ADD UNIQUE KEY `user_name` (`user_name`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `minio`
+--
+ALTER TABLE `minio`
+  ADD PRIMARY KEY (`mid`),
+  ADD UNIQUE KEY `mid` (`mid`),
+  ADD KEY `mfile_name` (`mfile_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
