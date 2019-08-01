@@ -75,7 +75,7 @@ class Folder(EntityInterface):
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = 'UPDATE folder SET parent_id = ( SELECT id FROM folder WHERE name=%s AND user_id=%s ) WHERE user_id=%s AND name=%s;'
+        query = 'UPDATE folder SET parent_id = ( SELECT id FROM ( SELECT * FROM folder ) AS folder WHERE name=%s AND user_id=%s ) WHERE user_id=%s AND name=%s;'
         try:
             cursor.execute(query, (parent_name, user_id, user_id, name))
             db.commit()

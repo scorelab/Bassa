@@ -5,7 +5,7 @@ from utils.entity_utils import entity_type
 
 
 def fetch_entity_children(user_id):
-    token = (request.headers.get('token'))
+    token = token_validator(request.headers.get('token'))
     if token is None:
         return '{"error":"token error"}', 403
     try:
