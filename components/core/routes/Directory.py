@@ -5,13 +5,13 @@ from utils.entity_utils import entity_type
 
 
 def fetch_entity_children(user_id):
-    token = token_validator(request.headers.get('token'))
+    token = (request.headers.get('token'))
     if token is None:
         return '{"error":"token error"}', 403
     try:
         name = request.form['name']
         entity = entity_type('fr')
-        
+
         fetch_response = entity.get_all(user_id, name)
         if not isinstance(fetch_response, str):
             return Response(response=json.dumps(fetch_response), status=200)

@@ -1,5 +1,6 @@
 from Models import EntityInterface
 from DBCon import *
+# from utils.entity_utils import *
 import sqlalchemy.pool as pool
 
 threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=20)
@@ -93,9 +94,25 @@ class Folder(EntityInterface):
         file_query = "SELECT name FROM file WHERE parent_id = ( SELECT id FROM folder WHERE name=%s AND user_id=%s );"
         try:
             cursor.execute(folder_query, (name, user_id))
+            folder_result = cursor.fetchall()
             cursor.execute(file_query, (name, user_id))
-            results = cursor.fetchall()
+            file_result = cursor.fetchall()
             db.close()
+
+            def serialize_results(folder, file):
+                result = list()
+                folder_list = list()
+                file_list = list()
+                for tup in folder:
+                    folder_list.append(tup[0])
+                for tup in file:
+                    file_list.append(tup[0])
+
+                result.append(folder_list)
+                result.append(file_list)
+                return result
+
+            results = serialize_results(folder_result, file_result)
             return results
         except MySQLdb.Error as e:
             return str(e)
