@@ -63,9 +63,19 @@ class Folder(EntityInterface):
         query = "SELECT name FROM folder WHERE user_id=%s AND name=%s;"
         try:
             cursor.execute(query, (user_id, name))
-            results = cursor.fetchall()
+            db_result = cursor.fetchall()
             db.close()
-            return results
+
+            def serialize_results(q_res):
+                result = list()
+                for elem in q_res:
+                    obj = dict()
+                    obj['type'] = 'fr'
+                    obj['name'] = elem[0]
+                    result.append(obj)
+                return result
+
+            return serialize_results(db_result)
         except MySQLdb.Error as e:
             return str(e)
 
@@ -108,8 +118,16 @@ class Folder(EntityInterface):
                 for tup in file:
                     file_list.append(tup[0])
 
-                result.append(folder_list)
-                result.append(file_list)
+                folder_dict = dict()
+                folder_dict['type'] = 'fr'
+                folder_dict['items'] = folder_list
+
+                file_dict = dict()
+                file_dict['type'] = 'fl'
+                file_dict['items'] = file_list
+
+                result.append(folder_dict)
+                result.append(file_dict)
                 return result
 
             results = serialize_results(folder_result, file_result)
@@ -176,9 +194,19 @@ class File(EntityInterface):
         sql = "SELECT name FROM file WHERE user_id=%s AND name=%s;"
         try:
             cursor.execute(sql, (user_id, name))
-            results = cursor.fetchall()
+            db_result = cursor.fetchall()
             db.close()
-            return results
+
+            def serialize_results(q_res):
+                result = list()
+                for elem in q_res:
+                    obj = dict()
+                    obj['type'] = 'fr'
+                    obj['name'] = elem[0]
+                    result.append(obj)
+                return result
+
+            return serialize_results(db_result)
         except MySQLdb.Error as e:
             return str(e)
 
