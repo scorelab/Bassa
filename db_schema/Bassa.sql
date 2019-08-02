@@ -226,6 +226,13 @@ ALTER TABLE `download`
 ALTER TABLE `rate`
   ADD CONSTRAINT `rate_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`),
   ADD CONSTRAINT `rate_ibfk_2` FOREIGN KEY (`id`) REFERENCES `download` (`id`);
+
+--
+-- Constraints for table `file`
+--
+ALTER TABLE `file`
+  ADD FOREIGN KEY (`parent_id`) REFERENCES `folder` (`id`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
