@@ -9,13 +9,13 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
                     $mdIconProvider, $qProvider) {
 
     $qProvider.errorOnUnhandledRejections(false);
-    
+
     $httpProvider.interceptors.push('authorizationInterceptor');
 
     $stateProvider
       .state('home', {
         url: '',
-        templateUrl: 'app/views/main.html',
+        templateUrl: 'app/main.html',
         controller: 'MainController',
         controllerAs: 'vm',
         abstract: true,
@@ -23,7 +23,7 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
       })
       .state('home.dashboard', {
         url: '/dashboard',
-        templateUrl: 'app/views/dashboard.html',
+        templateUrl: 'app/components/core/dashboard/dashboard.html',
         controller: 'DashCtrl',
         authenticate: true,
         data: {
@@ -32,7 +32,7 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
       })
       .state('home.admin', {
         url: '/admin',
-        templateUrl: 'app/views/admin.html',
+        templateUrl: 'app/components/core/admin/admin.html',
         controller: 'AdminCtrl',
         controllerAs: 'vm',
         authenticate: true,
@@ -44,7 +44,7 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
         url: '/table',
         controller: 'TableCtrl',
         controllerAs: 'vm',
-        templateUrl: 'app/views/table.html',
+        templateUrl: 'app/components/core/table/table.html',
         authenticate: true,
         data: {
           title: 'Table'
@@ -54,7 +54,7 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
         url: '/login',
         controller: 'LoginCtrl',
         controllerAs: 'vm',
-        templateUrl: 'app/views/login.html',
+        templateUrl: 'app/components/core/login/login.html',
         authenticate: false,
         data: {
           title: 'Login'
@@ -64,7 +64,7 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
         url: '/signup',
         controller: 'SignupCtrl',
         controllerAs: 'vm',
-        templateUrl: 'app/views/signup.html',
+        templateUrl: 'app/components/core/signup/signup.html',
         authenticate: false,
         data: {
           title: 'Signup'
