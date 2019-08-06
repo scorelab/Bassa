@@ -30,6 +30,7 @@
           setToken(response.headers()['token']);
           setName(credentials.user_name);
           setAuthLevel(response.data.auth);
+          setUserId(response.data.id);
           cb({
             state: response.status
           });
@@ -69,6 +70,10 @@
       return data.authLevel;
     };
 
+    var setUserId = function(id) {
+      localStorage.setItem('UserId', id);
+    };
+
     var setAuthLevel = function(auth) {
       data.authLevel = auth;
     };
@@ -78,9 +83,14 @@
     };
 
     var cleanUpStorage = function() {
+      localStorage.setItem('UserId', '');
       localStorage.setItem('Token', '');
       localStorage.setItem('UserName', '');
     }
+
+    var getUserId = function(){
+      return localStorage.getItem('UserId');
+    };
 
     var getToken = function(){
       return localStorage.getItem('Token');

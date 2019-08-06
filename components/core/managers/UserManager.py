@@ -58,7 +58,7 @@ def get_user(username):
         if data == None:
             return None
         else:
-            return User(data['user_name'], data['password'], data['auth'], data['email'])
+            return User(data['id'], data['user_name'], data['password'], data['auth'], data['email'])
 
 
 def add_user(user):
