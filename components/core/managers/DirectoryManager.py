@@ -25,14 +25,14 @@ class Folder(EntityInterface):
         return 'success'
 
 
-    def delete(self, user_id, name):
+    def delete(self, id, user_id):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = "DELETE FROM folder WHERE user_id=%s AND name=%s;"
+        query = "DELETE FROM folder WHERE id=%s AND user_id=%s;"
         try:
-            cursor.execute(query, (user_id, name))
+            cursor.execute(query, (id, user_id))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
@@ -40,14 +40,14 @@ class Folder(EntityInterface):
         return 'success'
 
 
-    def update(self, new_name, name, user_id):
+    def update(self, new_name, id, user_id):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = "UPDATE folder SET name=%s WHERE user_id=%s AND name=%s;"
+        query = "UPDATE folder SET name=%s WHERE id=%s AND user_id=%s;"
         try:
-            cursor.execute(query, (new_name, user_id, name))
+            cursor.execute(query, (new_name, id, user_id))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
@@ -55,14 +55,14 @@ class Folder(EntityInterface):
         return 'success'
 
 
-    def get(self, name, user_id):
+    def get(self, id, user_id):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = "SELECT name FROM folder WHERE user_id=%s AND name=%s;"
+        query = "SELECT id,name FROM folder WHERE id=%s AND user_id=%s;"
         try:
-            cursor.execute(query, (user_id, name))
+            cursor.execute(query, (id, user_id))
             db_result = cursor.fetchall()
             db.close()
 
@@ -71,7 +71,8 @@ class Folder(EntityInterface):
                 for elem in q_res:
                     obj = dict()
                     obj['type'] = 'fr'
-                    obj['name'] = elem[0]
+                    obj['name'] = elem[1]
+                    obj['id'] = elem[0]
                     result.append(obj)
                 return result
 
@@ -80,14 +81,14 @@ class Folder(EntityInterface):
             return str(e)
 
 
-    def move(self, name, user_id, parent_name):
+    def move(self, id, user_id, parent_name):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = 'UPDATE folder SET parent_id = ( SELECT id FROM ( SELECT * FROM folder ) AS folder WHERE name=%s AND user_id=%s ) WHERE user_id=%s AND name=%s;'
+        query = 'UPDATE folder SET parent_id = ( SELECT id FROM ( SELECT * FROM folder ) AS folder WHERE name=%s AND user_id=%s ) WHERE id=%s AND user_id=%s;'
         try:
-            cursor.execute(query, (parent_name, user_id, user_id, name))
+            cursor.execute(query, (parent_name, user_id, id, user_id))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
@@ -95,17 +96,17 @@ class Folder(EntityInterface):
         return 'success'
 
 
-    def get_all(self, user_id, name):
+    def get_all(self, user_id, id):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        folder_query = "SELECT name FROM folder WHERE parent_id = ( SELECT id FROM folder WHERE name=%s AND user_id=%s );"
-        file_query = "SELECT name FROM file WHERE parent_id = ( SELECT id FROM folder WHERE name=%s AND user_id=%s );"
+        folder_query = "SELECT id,name FROM folder WHERE parent_id=%s AND user_id=%s;"
+        file_query = "SELECT id,name FROM file WHERE parent_id=%s AND user_id=%s;"
         try:
-            cursor.execute(folder_query, (name, user_id))
+            cursor.execute(folder_query, (id, user_id))
             folder_result = cursor.fetchall()
-            cursor.execute(file_query, (name, user_id))
+            cursor.execute(file_query, (id, user_id))
             file_result = cursor.fetchall()
             db.close()
 
@@ -114,9 +115,15 @@ class Folder(EntityInterface):
                 folder_list = list()
                 file_list = list()
                 for tup in folder:
-                    folder_list.append(tup[0])
+                    folder_obj = dict()
+                    folder_obj['id'] = tup[0]
+                    folder_obj['name'] = tup[1]
+                    folder_list.append(folder_obj)
                 for tup in file:
-                    file_list.append(tup[0])
+                    file_obj = dict()
+                    file_obj['id'] = tup[0]
+                    file_obj['name'] = tup[1]
+                    file_list.append(file_obj)
 
                 folder_dict = dict()
                 folder_dict['type'] = 'fr'
@@ -156,14 +163,14 @@ class File(EntityInterface):
         return 'success'
 
 
-    def delete(self, user_id, name):
+    def delete(self, id, user_id):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = "DELETE FROM file WHERE user_id=%s AND name=%s;"
+        query = "DELETE FROM file WHERE id=%s AND user_id=%s;"
         try:
-            cursor.execute(query, (user_id, name))
+            cursor.execute(query, (id, user_id))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
@@ -171,14 +178,14 @@ class File(EntityInterface):
         return 'success'
 
 
-    def update(self, new_name, name, user_id):
+    def update(self, new_name, id, user_id):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = "UPDATE file SET name=%s WHERE user_id=%s AND name=%s;"
+        query = "UPDATE file SET name=%s WHERE id=%s AND user_id=%s;"
         try:
-            cursor.execute(query, (new_name, user_id, name))
+            cursor.execute(query, (new_name, id, user_id))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
@@ -186,14 +193,14 @@ class File(EntityInterface):
         return 'success'
 
 
-    def get(self, name, user_id):
+    def get(self, id, user_id):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        sql = "SELECT name FROM file WHERE user_id=%s AND name=%s;"
+        sql = "SELECT id,name FROM file WHERE id=%s AND user_id=%s;"
         try:
-            cursor.execute(sql, (user_id, name))
+            cursor.execute(sql, (id, user_id))
             db_result = cursor.fetchall()
             db.close()
 
@@ -202,7 +209,8 @@ class File(EntityInterface):
                 for elem in q_res:
                     obj = dict()
                     obj['type'] = 'fr'
-                    obj['name'] = elem[0]
+                    obj['name'] = elem[1]
+                    obj['id'] = elem[0]
                     result.append(obj)
                 return result
 
@@ -211,14 +219,14 @@ class File(EntityInterface):
             return str(e)
 
 
-    def move(self, name, user_id, parent_name):
+    def move(self, id, user_id, parent_name):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = 'UPDATE file SET parent_id = ( SELECT id FROM folder WHERE name=%s AND user_id=%s ) WHERE user_id=%s AND name=%s;'
+        query = 'UPDATE file SET parent_id = ( SELECT id FROM folder WHERE name=%s AND user_id=%s ) WHERE id=%s AND user_id=%s;'
         try:
-            cursor.execute(query, (parent_name, user_id, user_id, name))
+            cursor.execute(query, (parent_name, user_id, id, user_id))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
