@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-    .service('UserService', ['$injector', 'BassaUrl', UserService, AclService]);
+    .service('UserService', ['$injector', 'BassaUrl', UserService, Context]);
 
   function UserService($injector, BassaUrl, AclService){
 
@@ -31,7 +31,7 @@
           setName(credentials.user_name);
           setAuthLevel(response.data.auth);
           setUserId(response.data.id);
-          AclService.clearContext();
+          Context.clearContext();
           cb({
             state: response.status
           });
