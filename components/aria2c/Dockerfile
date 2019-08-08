@@ -1,4 +1,3 @@
-# Pulling ubuntu bionic as base image
 FROM alpine:edge
 
 # Defining dockerfile maintainer
