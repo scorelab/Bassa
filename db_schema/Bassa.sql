@@ -232,6 +232,20 @@ ALTER TABLE `rate`
 --
 ALTER TABLE `file`
   ADD FOREIGN KEY (`parent_id`) REFERENCES `folder` (`id`) ON DELETE CASCADE;
+  ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `folder`
+--
+ALTER TABLE `folder`
+  ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+  --
+  -- Constraints for table `acl`
+  --
+  ALTER TABLE `acl`
+    ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
 
 COMMIT;
 
