@@ -12,8 +12,8 @@
       var user_id = UserService.getUserId()
 
       this.init = function () {
-        $scope.children('0', user_id)
-        console.log('init')
+        $scope.children(0, user_id)
+        console.log(AclService.extractContext())
       }
 
       $scope.children = function (id) {
@@ -25,8 +25,8 @@
             if (elem['type'] == 'fr') $scope.folders = elem['items']
             else if (elem['type'] == 'fl') $scope.files = elem['items']
           })
-          console.log($scope.folders[0])
-          AclService.pushContext(Context.build(id, 'owner'))
+          AclService.pushContext(AclService.Context.build(id, 'owner'))
+          console.log(AclService.extractContext())
         }, function(error) {
           ToastService.showToast(error)
         })

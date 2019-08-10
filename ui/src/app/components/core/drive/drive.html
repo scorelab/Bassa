@@ -1,0 +1,14 @@
+<md-content class="downloads md-padding table-responsive-vertical" >
+  <h4 class="panel-widget-tittle"> Your Drive </h4>
+  <table id="table" class="table table-hover table-bordered">
+      <thead>
+      <tr ng-repeat="folder in folders">
+          <td id="vertalign" data-title="Name">{{folder.name}}</td>
+          <td><md-button class="md-fab md-warn md-mini" ng-click="children(folder.id)">
+              <i class="material-icons">delete</i>
+              </md-button>
+          </td>
+      </tr>
+      </thead>
+  </table>
+</md-content>
