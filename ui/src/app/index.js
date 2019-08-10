@@ -30,6 +30,15 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
           title: 'Dashboard'
         }
       })
+      .state('home.drive', {
+        url: '/drive',
+        templateUrl: 'app/components/core/drive/drive.html',
+        controller: 'drive.ctrl',
+        authenticate: true,
+        data: {
+          title: 'Drive'
+        }
+      })
       .state('home.admin', {
         url: '/admin',
         templateUrl: 'app/components/core/admin/admin.html',
