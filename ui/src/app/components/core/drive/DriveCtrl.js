@@ -2,28 +2,30 @@
   'use strict;'
 
   angular.module('app')
-    .controller('DriveCtrl', [ '$scope', 'ToastService', 'DriveService', 'AclService', DriveCtrl ]);
+    .controller('DriveCtrl', [ '$scope', 'ToastService', 'DriveService', 'AclService', 'UserService', DriveCtrl ]);
 
-    function DriveCtrl($scope, ToastService, DriveService, AclService) {
+    function DriveCtrl($scope, ToastService, DriveService, AclService, UserService) {
 
-      $scope.folder_entities = []
-      $scope.file_entities = []
+      $scope.folders = []
+      $scope.files = []
 
-      user_id = UserService.getUserId()
+      var user_id = UserService.getUserId()
 
       this.init = function () {
         $scope.children('0', user_id)
+        console.log('init')
       }
 
       $scope.children = function (id) {
         DriveService.fetch_entity_children(id, user_id).then(function(response) {
           data = response.data
-          $scope.folder_entities.length = 0
-          $scope.file_entities.length = 0
+          $scope.folders.length = 0
+          $scope.files.length = 0
           data.forEach(function(elem) {
-            if (elem['type'] == 'fr') $scope.folder_entities = elem['items']
-            else if (elem['type'] == 'fl') $scope.file_entities = elem['items']
+            if (elem['type'] == 'fr') $scope.folders = elem['items']
+            else if (elem['type'] == 'fl') $scope.files = elem['items']
           })
+          console.log($scope.folders[0])
           AclService.pushContext(Context.build(id, 'owner'))
         }, function(error) {
           ToastService.showToast(error)
@@ -38,7 +40,7 @@
         })
       }
 
-      $scope.add = function(name, e_type) {
+      $scope.add = function (name, e_type) {
         id = AclService.extractContext().getParentId()
         DriveService.add_entity(user_id, e_type, name, id).then(function(response) {
           if (response.status == 200) {
@@ -50,7 +52,7 @@
         })
       }
 
-      $scope.edit = function(id, e_type, new_name) {
+      $scope.edit = function (id, e_type, new_name) {
         DriveService.edit_entity(id, user_id, e_type, new_name).then(function(response) {
           if (response.status == 200) {
             // reload page, recover state

@@ -1,7 +1,7 @@
 'use strict;'
 
 angular.module('app')
-  .factory('AclService', ['BassaUrl', 'UserService', function(BassaUrl, UserService) {
+  .factory('AclService', ['BassaUrl', function(BassaUrl) {
 
     var AclStack = []
 
@@ -34,7 +34,7 @@ angular.module('app')
     };
 
     function extractContext() {
-      Context element = AclStack.pop()
+      element = AclStack.pop()
       pushContext(element)
       return element
     };

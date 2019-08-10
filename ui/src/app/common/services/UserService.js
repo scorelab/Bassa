@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-    .service('UserService', ['$injector', 'BassaUrl', UserService, AclService]);
+    .service('UserService', ['$injector', 'BassaUrl', 'AclService', UserService]);
 
   function UserService($injector, BassaUrl, AclService){
 
@@ -109,6 +109,7 @@
       cleanUpStorage:cleanUpStorage,
       getUsername:getName,
       getAuthLevel:getAuthLevel,
+      getUserId: getUserId,
       setToken:setToken,
       setUsername:setName,
       setAuthLevel:setAuthLevel

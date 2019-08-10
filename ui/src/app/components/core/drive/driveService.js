@@ -2,10 +2,10 @@
   'use strict;'
 
   angular.module('app')
-    .service('DriveService', ['$http', 'BassaUrl', 'UserService', DriveService]);
+    .service('DriveService', ['$http', 'UserService', 'BassaUrl', DriveService]);
 
     function DriveService($http, UserService, BassaUrl) {
-      user_id = UserService.getUserId()
+      var user_id = UserService.getUserId()
 
       var fetch_entity_children = function(id, user_id) {
         return $http({
@@ -68,6 +68,15 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           data: body
         })
+      }
+
+      return {
+        fetch_entity_children: fetch_entity_children,
+        fetch_entity: fetch_entity,
+        add_entity: add_entity,
+        edit_entity: edit_entity,
+        remove_entity: remove_entity,
+        move_entity: move_entity
       }
     }
 })();

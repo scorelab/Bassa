@@ -33,7 +33,7 @@ angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
       .state('home.drive', {
         url: '/drive',
         templateUrl: 'app/components/core/drive/drive.html',
-        controller: 'drive.ctrl',
+        controller: 'DriveCtrl',
         authenticate: true,
         data: {
           title: 'Drive'
