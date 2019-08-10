@@ -15,6 +15,11 @@
         sref: '.dashboard'
       },
       {
+        name: 'Drive',
+        icon: 'dashboard',
+        sref: '.drive'
+      },
+      {
         name: 'Completed',
         icon: 'view_module',
         sref: '.table'

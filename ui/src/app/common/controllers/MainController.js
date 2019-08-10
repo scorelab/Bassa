@@ -3,11 +3,11 @@
   angular
        .module('app')
        .controller('MainController', [
-          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state','$scope' , 'ToastService', 'UserService',
+          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state','$scope' , 'ToastService', 'UserService', 'AclService'
           MainController
        ]);
 
-  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $scope, ToastService, UserService) {
+  function MainController(navService, $mdSidenav, $mdBottomSheet, $log, $q, $state, $scope, ToastService, UserService, AclService) {
     $scope.menuItems = [ ];
     $scope.selectItem = selectItem;
     $scope.title = $state.current.data.title;
@@ -30,7 +30,12 @@
         $mdSidenav('right').toggle();
     }
 
+    function initDrive() {
+      AclService.clearContext()
+    }
+
     function selectItem (item) {
+      if (item.name == 'Drive') initDrive()
       $scope.title = item.name;
       $scope.showSimpleToast($scope.title);
     }
