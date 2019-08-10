@@ -45,7 +45,7 @@ def fetch_entity(id, user_id):
     return resp
 
 
-def add_entity(user_id):
+def add_entity(id, user_id):
     token = token_validator(request.headers.get('token'))
     if token is None:
         return '{"error":"token error"}', 403
@@ -55,10 +55,9 @@ def add_entity(user_id):
             return Response('{"error":"invalid parameter"}', status=400)
 
         name = request.form['name']
-        parent_id = request.form['parent_id']
         entity = entity_type(e_type)
 
-        add_response = entity.create(name, user_id, parent_id)
+        add_response = entity.create(name, user_id, id)
         resp = Response(response='{"status":"' + add_response + '"}',
                     status=200 if add_response == "success" else 500)
     except Exception as e:
