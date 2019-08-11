@@ -8,12 +8,13 @@
 
       $scope.folders = []
       $scope.files = []
+      $scope.showBackNav = true
 
       var user_id = UserService.getUserId()
 
       this.init = function () {
-        $scope.children(0, user_id)
-        console.log(AclService.extractContext())
+        $scope.children(0)
+        checkBackNav()
       }
 
       $scope.children = function (id) {
@@ -26,7 +27,7 @@
             else if (elem['type'] == 'fl') $scope.files = elem['items']
           })
           AclService.pushContext(AclService.Context.build(id, 'owner'))
-          console.log(AclService.extractContext())
+          checkBackNav()
         }, function(error) {
           ToastService.showToast(error)
         })
@@ -44,7 +45,7 @@
         id = AclService.extractContext().getParentId()
         DriveService.add_entity(user_id, e_type, name, id).then(function(response) {
           if (response.status == 200) {
-            // reload page, recover state
+            $scope.children(id)
             ToastService.showToast('Success')
           }
         }, function(error) {
@@ -55,7 +56,7 @@
       $scope.edit = function (id, e_type, new_name) {
         DriveService.edit_entity(id, user_id, e_type, new_name).then(function(response) {
           if (response.status == 200) {
-            // reload page, recover state
+            $scope.children(id)
             ToastService.showToast('Success')
           }
         }, function(error) {
@@ -66,12 +67,26 @@
       $scope.delete = function(id, e_type) {
         DriveService.remove_entity(id, user_id, e_type).then(function(response) {
           if(response.status == 200) {
-            // reload page, recover state
+            $scope.children(id)
             ToastService.showToast('Success')
           }
         }, function(error) {
             ToastService.showToast(error)
         })
+      }
+
+      $scope.navigateBack = function() {
+        AclService.popContext()
+        current = AclService.extractContext()
+        current_id = AclService.getParentId(current)
+        $scope.children(current_id)
+        checkBackNav()
+      }
+
+      var checkBackNav = function() {
+        current = AclService.extractContext()
+        current_id = AclService.getParentId(current)
+        if (current_id == 0) $scope.showBackNav = false
       }
 
       this.init()
