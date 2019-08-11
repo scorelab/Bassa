@@ -1,27 +1,35 @@
-FROM node:9 as builder
+#----------------------- Builder
+FROM node:8-alpine as builder
 
-WORKDIR /home/Bassa
+# Setting the current work directory to ui
+WORKDIR /ui
 
-RUN ls \
-&& npm install -g bower \
-&& npm install -g gulp \
-&& npm link gulp
-
+# Copying complete ui component in to the container
 COPY . .
 
-RUN yarn install \
-&&  gulp
+# Installing node modules
+RUN apk update && \
+    npm install && \
+    npm install --global bower gulp-cli
 
-FROM nginx:alpine
+# Building the ui component to obtain static files.
+RUN gulp build
+
+#------------------------------ Production
+FROM nginx:alpine as production
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 ARG BUILD_DATE
 ARG VCS_REF
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /home/Bassa/dist /var/www/bassa
+# copy static files
+COPY --from=builder /ui/dist/ /usr/share/nginx/html
 
+# Expose ports
+EXPOSE 80
+
+# Adding metadata as docker labels
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
       multi.org.label-schema.url="https://github.com/scorelab/Bassa/wiki" \
