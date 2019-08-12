@@ -1,3 +1,5 @@
+<hr>
+
 ![logo](http://gdurl.com/7XYK)
 
 [![Build Status](https://travis-ci.org/scorelab/Bassa.svg?branch=master)](https://travis-ci.org/scorelab/Bassa)
@@ -13,10 +15,12 @@
 
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
+<hr>
+
 # About
 Bassa solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.
 
-## Main functionalities
+### Main functionalities
 * Provides an interface for users to add their downloads as links or torrent magnet links
 * Provide users with an interface to view and download the files in the local server
 * Provide a rating system for users to rate the files residing in local server
@@ -26,96 +30,297 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 * Mark inappropriate downloads
 * Provides admins with an interface to deal with inappropriate files
 
-## Installation
+### Architecture
 
-Note:
-* Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+Bassa is a multi-tier application which can serve users through dedicated Web, Android and iOS clients. 
 
-First clone the Repository
-`git clone https://github.com/scorelab/Bassa.git`
-`cd Bassa`
+<br>
 
-![gitclone](https://user-images.githubusercontent.com/28682735/35194406-2f6f08e2-fed9-11e7-8411-86d83bed6507.gif)
+![Bassa Architecture](https://b.imge.to/2019/07/28/kNdAC.png)
 
-Use python 3 instead of Python 2
+<br>
+
+**Components**
+* Bassa API server is implemented as a [flask-socketio](https://flask-socketio.readthedocs.io/en/latest/) server written in Python.
+* Bassa web client is implemented using Angular written in JavaScript. (*Moving to create-react-app very soon*)
+* Bassa [Android and iOS mobile clients](https://github.com/scorelab/Bassa-mobile) are implemented using react native written in JavaScript.
+* Bassa uses MySQL 5.X as database server.
+* Bassa uses [Aria2c RPC server](https://aria2.github.io/) to download files.
+* Bassa can be used with [Minio](https://github.com/minio/minio) file storage server as a file system and also for storing files to Amazon S3 cloud storage.
+<hr>
+
+# Getting Started
+## Installation Guide
+
+### Setting up Bassa using Docker and docker-compose [Recommended]
+In order to setup Bassa using docker, install the latest version of [docker](https://docs.docker.com/install/) with [docker-compose tool](https://docs.docker.com/compose/install/) on your machine.
+Clone the [Bassa GitHub repository](https://github.com/scorelab/Bassa).
+Run the below command to move into the root folder. 
+```
+cd Bassa
+```
+We will be using docker-compose tool to build images and finally spin up all our containers and then we can start using Bassa. *docker-compose configuration file* has configuration for each container and you are free to modify it. You can run the below command. <br>
+
+For development:
+```bash
+docker-compose up -f docker-compose.dev.yml --build
+```
+You can access the Bassa Web Client at port **3000** served by Gulp. <br>
+For production:
+```bash
+docker-compose up --build
+```
+You can access the Bassa Web Client at port **80** served by Nginx. <br>
+You can run a specific container using docker-compose tool. You can do that using the service names. 
+
+| Service   |      Service Name      |
+|----------|:-------------:|
+| API server |  api |
+| Web client |  web   |
+| Database server | db |
+| Aria2c | aria2c |
+
+**Usage**
+```bash
+docker-compose build [SERVICE NAME]
+docker-compose run [SERVICE NAME]
+```
+
+### Setting up Bassa from the source code
+In order to to setup Bassa from the source code, you need a machine with either Linux, MacOS or Windows operating system.
+
+### Setting up Bassa on Linux based operating systems
+
+First clone and move to the project repository 
 
 ```
-  $ sudo ./setup.sh
-
-  $ cd components/core/
-  $ sudo python3 setup.py develop
-```
-![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
-
-Bassa has 4 main compoenents,
-1. Database
-2. Bassa API
-3. aria2
-4. Bassa UI
-
-
-## Database Setup
-
-1.Type below in a MySql terminal.
-
-```
-create database Bassa
+git clone https://github.com/scorelab/Bassa.git && cd Bassa
 ```
 
-2.Type below in the root of project.
-
+Install Bassa dependencies.
 ```
-cd db_schema
+sudo ./setup.sh
+```
+
+#### Setting up Aria2c RPC server
+
+Open a new terminal window, move to downloads folder and start Aria2c server.
+```
+cd downloads/
+aria2c --enable-rpc --rpc-listen-all
+```
+
+#### Setting up Bassa Database
+
+Start the MySQL service on your machine and open the MySQL terminal to type the command for creating the Bassa Database.
+```
+create database Bassa;
+```
+Exit from MySQL terminal and insert the Bassa database schema in to the created database.
+```
+cd db_schema/
 mysql -u root -p  Bassa < Bassa.sql
 ```
+Configure the Bassa database credentials in *components/core/DBCon.py* database connector file.
 
-3.Open components/core/DBCon.py and setup database username and password.
+If the environment variables are being used, modify as following :
+```python
+_db=MySQLdb.connect("db", os.environ.get('YOUR_DB_USERNAME'), os.environ.get('YOUR_DB_PASSWORD'), os.environ.get('Bassa')) 
 ```
-_db=MySQLdb.connect("db", os.environ.get('YOUR_DB_USERNAME'), os.environ.get('YOUR_DB_PASSWORD'), os.environ.get('Bassa'))
-```
-If you don't have environment variables setup, you can use the following line with hard coded values for testing purposes
-```
+
+If the environment variables are not configured and hardcoded strings are being used, replace as :
+```python
 _db=MySQLdb.connect(host="localhost", user="YOUR_DB_USERNAME", passwd="YOUR_DB_PASSWORD",db= "Bassa")
 ```
-## Bassa API
+#### Setting up Bassa API server
+
+Change directory to API code base and install python modules
 ```
-  $ cd components/core/
-  $ python3 Main.py
+cd components/core/ 
+sudo python3 setup.py develop
 ```
-![python3main](https://user-images.githubusercontent.com/28682735/35194408-2fce9136-fed9-11e7-80e6-fac5e6f54bc7.gif)
+Start Bassa API server 
+```
+sudo python3 Main.py
+```
+#### Setting up Bassa Web client and Gulp
 
-## Run aria2 
-run `aria2c --enable-rpc`
+Open a new terminal window, move to UI code base and install node modules.
+```bash
+cd ui/
+sudo npm install
+sudo npm install --global bower gulp-cli
+```
+Start the Bassa Web Client
+```bash 
+gulp serve
+```
+You can access the Bassa Web Client at port **3000**.
 
-Read more on installing `aria2` [here](https://aria2.github.io/manual/en/html/README.html)
 
+### Setting up Bassa on MacOS
 
-![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
-
-## Bassa UI
-
-### Install dependencies with
-
+First clone and move to the project repository 
 
 ```
-$ cd ui/
-$ npm install
+git clone https://github.com/scorelab/Bassa.git && cd Bassa
 ```
 
-### To start
-run `gulp serve`
+Install Bassa dependencies.
+```
+sudo ./setup.sh
+```
 
+#### Setting up Aria2c RPC server
 
-![gulp_serve](https://user-images.githubusercontent.com/28682735/35194407-2fa172e6-fed9-11e7-9e89-065ecb3cbf87.gif)
+Open a new terminal window, move to downloads folder and start Aria2c server.
+```
+cd downloads/
+aria2c --enable-rpc --rpc-listen-all
+```
 
+#### Setting up Bassa Database
 
-In the first time you log in, the credentials would be as follows.
+Start the MySQL service on your machine and open the MySQL terminal to type the command for creating the Bassa Database.
+```
+create database Bassa;
+```
+Exit from MySQL terminal and insert the Bassa database schema in to the created database.
+```
+cd db_schema/
+mysql -u root -p  Bassa < Bassa.sql
+```
+Configure the Bassa database credentials in *components/core/DBCon.py* database connector file.
 
-- username - rand
-- password - pass
+If the environment variables are being used, modify as following :
+```python
+_db=MySQLdb.connect("db", os.environ.get('YOUR_DB_USERNAME'), os.environ.get('YOUR_DB_PASSWORD'), os.environ.get('Bassa')) 
+```
 
+If the environment variables are not configured and hardcoded strings are being used, replace as :
+```python
+_db=MySQLdb.connect(host="localhost", user="YOUR_DB_USERNAME", passwd="YOUR_DB_PASSWORD",db= "Bassa")
+```
+#### Setting up Bassa API server
 
-![bassaui](https://user-images.githubusercontent.com/28682735/35193753-667c7e0c-fecd-11e7-918f-13ce1d00d055.gif)
+Change directory to API code base and install python modules
+```
+cd components/core/ 
+sudo python3 setup.py develop
+```
+Start Bassa API server 
+```
+sudo python3 Main.py
+```
+#### Setting up Bassa Web client and Gulp
+
+Open a new terminal window, move to UI code base and install node modules.
+```bash
+cd ui/
+sudo npm install
+sudo npm install --global bower gulp-cli
+```
+Start the Bassa Web Client
+```bash 
+gulp serve
+```
+You can access the Bassa Web Client at port **3000**.
+
+### Setting up Bassa on Windows operating system
+
+First clone and move to the project repository 
+
+```
+git clone https://github.com/scorelab/Bassa.git && cd Bassa
+```
+
+Install latest [python3](https://www.python.org/downloads/release/python-363/) on your machine. \
+Install latest version of [Aria2](https://aria2.github.io/) and add the executable to the [PATH variable]( https://msdn.microsoft.com/en-us/library/office/ee537574(v=office.14).aspx). \
+Install the [MySQl Server](https://dev.mysql.com/downloads/installer/) and make sure to check MySQL component and C connectors during installation. \
+Install [Node](https://nodejs.org/en/) on your windows machine.\
+
+#### Setting up Aria2c RPC server
+
+Open a new CMD window, move to downloads folder and start Aria2c server.
+```
+cd downloads/
+aria2c --enable-rpc --rpc-listen-all
+```
+
+#### Setting up Bassa Database
+
+Open the MySQL command line client to type the command for creating the Bassa Database.
+```
+create database Bassa;
+```
+Exit from MySQL client and insert the Bassa database schema in to the created database.
+```
+cd db_schema/
+mysql -u root -p  Bassa < Bassa.sql
+```
+Configure the Bassa database credentials in *components/core/DBCon.py* database connector file.
+
+If the environment variables are being used, modify as following :
+```python
+_db=MySQLdb.connect("db", os.environ.get('YOUR_DB_USERNAME'), os.environ.get('YOUR_DB_PASSWORD'), os.environ.get('Bassa')) 
+```
+
+If the environment variables are not configured and hardcoded strings are being used, replace as :
+```python
+_db=MySQLdb.connect(host="localhost", user="YOUR_DB_USERNAME", passwd="YOUR_DB_PASSWORD",db= "Bassa")
+```
+#### Setting up Bassa API server
+
+Change directory to API code base and install python modules
+```
+cd components/core/ 
+sudo python setup.py develop
+```
+Start Bassa API server 
+```
+sudo python Main.py
+```
+#### Setting up Bassa Web client and Gulp
+
+Open a new terminal window, move to UI code base and install node modules.
+```bash
+cd ui/
+sudo npm install
+sudo npm install --global bower gulp-cli
+```
+Start the Bassa Web Client
+```bash 
+gulp serve
+```
+You can access the Bassa Web Client at port **3000**.
+
+## Usage 
+Please use the mock-up username and password to try and develop Bassa.
+
+| Key   |      Value     |
+|----------|:-------------:|
+| user_name |  rand |
+| password |  pass   |
+
+You can even refer to a Video tutorial on how to use Bassa, available on [Youtube](https://youtu.be/NxS8T1EphCA) <br><br>
+Once developed, Bassa will save internet bandwidth by downloading files when the traffic is low. In the current build, you can log in either as a user or as an admin and add links for files to download. The admin can start the downloads as and when he/she likes or when he/she feels that the traffic on the network is low. After the download, the users can get their files from local servers which does not need internet bandwidth.
+
+#### If you’re a user
+- If you’re a new user, you need to sign up first and can only login after the admin has approved your account.
+
+#### If you’re an admin
+- Only an admin account can access the “Admin” tab in Bassa
+- In the admin tab, you have three available processes- <br>
+     **a) Start/Kill downloads-** You can start the downloads queued at the time of your liking <br>
+     **b) Sign up Requests-** As an admin, you need to approve the accounts of all the new users before they can start using Bassa <br>
+     **c) Usage of top heaviest users-** You get access to a graph that shows the usage percentage of the heaviest users
+
+#### Common Functionalities
+- Once logged in, navigate to the dashboard section. You can add a link to a file or a magnet link in the text field labeled “Add download*”. You can then see the link added under the “Ongoing downloads tab” <br>
+- After the admin has approved the download, your file begins to download. It gets saved on the local servers from which you can get your files without the use of external bandwidth <br>
+- In the “Completed” section, you can view all the details of downloads that Bassa has completed till now
+
+Bassa is an essential tool for managing downloads and to make the best use of Internet Bandwidth. It is also compatible with Amazon cloud storage.
 
 ## Running Tests
 
@@ -136,22 +341,14 @@ cd ui
 npm test OR yarn test
 ```
 
-## Using Docker-Compose
+## Troubleshooting
+Incase if you are stuck up with any issues during the setup or usage, look in to the [troubleshooting](https://github.com/scorelab/Bassa/issues/375) list for help or file a new issue on the project repository.
 
-Run the `docker-compose` at the project directory to deploy the core API, UI and the DB.
+<hr>
 
-`$ docker-compose up`
-
-### How to Use Bassa
-* After Setting up Bassa, Login/Register.
-  There are two types of users in Bassa
-  1. The Admin
-  2. The Normal Users
-* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away.
-* The organisation admin can start the downloads at a time of his/her liking.
-* Then the users who had added links for certain files can download them from the local servers at a much higher speed.
-* You can even watch a video tutorial for the same on [Youtube](https://www.youtube.com/watch?v=NxS8T1EphCA)
-
+# Communication
+Feel free to discuss on our [Bassa gitter channel](https://gitter.im/scorelab/Bassa).
+You can also discuss about other projects on [SCoRe Lab gitter channel](https://gitter.im/scorelab/scorelab).
 
 # Developers
 

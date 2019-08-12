@@ -3,7 +3,7 @@ import shutil
 import inspect
 import platform
 from setuptools import setup
-
+import setuptools
 try:
     from pip.req import parse_requirements
 except ImportError:
@@ -52,7 +52,7 @@ setup(
     license="GPL",
     keywords="bassa download queue",
     url="https://github.com/scorelab/Bassa",
-    packages=['tests'],
+    packages=setuptools.find_packages(),
     install_requires=requirements,
     long_description=read('README.md'),
     classifiers=[

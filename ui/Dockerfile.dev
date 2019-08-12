@@ -1,21 +1,27 @@
-FROM node
+FROM node:8-alpine
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 ARG BUILD_DATE
 ARG VCS_REF
 
-WORKDIR /home/Bassa
+WORKDIR /ui
 
+# Copying UI contents into container
 COPY . .
 
-RUN apt-get update \
-&& npm install -g gulp \
-&& npm install -g bower \
-&& npm install --unsafe-perm
+# Exposing port for accessing the web interface 
+EXPOSE 3000
 
+# Installing node modules
+RUN apk update && \
+    npm install && \
+    npm install --global bower gulp-cli
+
+# Starting gulp server
 CMD ["gulp", "serve"]
 
+# labels to dockerfile
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
       multi.org.label-schema.url="https://github.com/scorelab/Bassa/wiki" \
@@ -25,4 +31,3 @@ LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.vendor="Sustainable Computing Research Group" \
       multi.org.label-schema.version="" \
       multi.org.label-schema.schema-version="1.0"
- 

@@ -11,6 +11,9 @@ from initializer import socketio
 from MinioHandler import *
 
 
+conf = get_conf_reader("dl.conf")
+
+
 def start():
 	try:
 		token = request.headers['key']
@@ -34,7 +37,7 @@ def kill():
 			p.join()
 			jsonreq = json.dumps({'jsonrpc': '2.0', 'id': 'qwer', 'method': 'aria2.pauseAll'})
 			jsonreq = jsonreq.encode('ascii')
-			c = urllib.request.urlopen('http://localhost:6800/jsonrpc', jsonreq)
+			c = urllib.request.urlopen(conf['aria_server'], jsonreq)
 			if verbose:
 				print(c)
 		if not p.is_alive():
@@ -154,4 +157,3 @@ def get_file_from_minio(id):
 	except Exception as e:
 		resp = Response(response="{'error':'" + str(e) + "'}", status=400)
 		return resp
-		
