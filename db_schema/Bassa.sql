@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `file` (
 CREATE TABLE IF NOT EXISTS `acl` (
   `user_id` bigint(20) NOT NULL,
   `entity_type` enum('fr', 'fl') NOT NULL,
-  `entity_id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `access` enum('owner', 'read', 'write') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
@@ -167,7 +167,7 @@ INSERT INTO `file` (`name`, `parent_id`, `user_id`) VALUES
 -- Dumping data for table `file`
 --
 
-INSERT INTO `acl` (`user_id`, `entity_type`, `entity_id`, `access`) VALUES
+INSERT INTO `acl` (`user_id`, `entity_type`, `id`, `access`) VALUES
 (2, `fr`, 1, `write`);
 
 -- --------------------------------------------------------

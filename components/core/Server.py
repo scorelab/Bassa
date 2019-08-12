@@ -86,6 +86,8 @@ server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:id>/remove', 
 # acl endpoints
 server.add_url_rule(rule='/api/user/drive/<string:id>/check/<string:user_id>', endpoint='check_access',
 					view_func=Acl.check_access, methods=['GET'])
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/shared', endpoint='get_shared_entities',
+					view_func=Acl.get_shared_entities, methods=['GET'])
 server.add_url_rule(rule='/api/user/drive/<string:id>/grant', endpoint='grant_access',
 					view_func=Acl.grant_access, methods=['POST'])
 

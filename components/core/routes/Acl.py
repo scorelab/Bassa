@@ -45,3 +45,19 @@ def grant_access(id):
     resp.headers['token'] = token
     resp.headers['Access-Control-Expose-Headers'] = 'token'
     return resp
+
+def get_shared_entities(user_id):
+    token = token_validator(request.headers.get('token'))
+    if token is None:
+        return '{"error":"token error"}', 403
+    try:
+        fetch_response = fetch_shared(user_id)
+        if not isinstance(fetch_response, str):
+            return Response(response=json.dumps(fetch_response), status=200)
+        else:
+            resp = Response('{"error":"' + fetch_response + '"}', status=500)
+    except Exception as e:
+        resp = Response('{"error":"' + str(e) + '"}', status=400)
+    resp.headers['token'] = token
+    resp.headers['Access-Control-Expose-Headers'] = 'token'
+    return resp
