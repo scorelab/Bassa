@@ -7,6 +7,13 @@
     function DriveService($http, UserService, BassaUrl) {
       var user_id = UserService.getUserId()
 
+      var fetch_shared = function(user_id) {
+        return $http({
+          method: 'GET',
+          url: BassaUrl + '/api/user/' + user_id + '/drive/shared'
+        })
+      }
+
       var fetch_entity_children = function(id, user_id) {
         return $http({
           method: 'GET',
@@ -71,6 +78,7 @@
       }
 
       return {
+        fetch_shared: fetch_shared,
         fetch_entity_children: fetch_entity_children,
         fetch_entity: fetch_entity,
         add_entity: add_entity,

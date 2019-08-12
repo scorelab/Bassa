@@ -101,12 +101,12 @@ class Folder(EntityInterface):
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        folder_query = "SELECT id,name FROM folder WHERE parent_id=%s AND user_id=%s;"
-        file_query = "SELECT id,name FROM file WHERE parent_id=%s AND user_id=%s;"
+        folder_query = "SELECT id,name FROM folder WHERE parent_id=%s;"
+        file_query = "SELECT id,name FROM file WHERE parent_id=%s;"
         try:
-            cursor.execute(folder_query, (id, user_id))
+            cursor.execute(folder_query, (id))
             folder_result = cursor.fetchall()
-            cursor.execute(file_query, (id, user_id))
+            cursor.execute(file_query, (id))
             file_result = cursor.fetchall()
             db.close()
 

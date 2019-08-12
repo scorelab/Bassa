@@ -1,8 +1,20 @@
 <md-content class="downloads md-padding table-responsive-vertical" >
   <h4 class="panel-widget-tittle"> Your Drive </h4>
+  <md-button class="md-fab md-warn md-mini" ng-click="navigateBack()"><i class="material-icons">back</i></md-button>
   <table id="table" class="table table-hover table-bordered">
       <thead>
-      <tr ng-repeat="folder in folders">
+      <tr ng-repeat="folder in folders track by $index">
+          <td id="vertalign" data-title="Name">{{folder.name}}</td>
+          <td><md-button class="md-fab md-warn md-mini" ng-click="children(folder.id)">
+              <i class="material-icons">delete</i>
+              </md-button>
+          </td>
+      </tr>
+      </thead>
+  </table>
+  <table id="table" class="table table-hover table-bordered">
+      <thead>
+      <tr ng-repeat="folder in sharedFolders track by $index">
           <td id="vertalign" data-title="Name">{{folder.name}}</td>
           <td><md-button class="md-fab md-warn md-mini" ng-click="children(folder.id)">
               <i class="material-icons">delete</i>

@@ -8,13 +8,32 @@
 
       $scope.folders = []
       $scope.files = []
+      $scope.sharedFolders = []
+      $scope.sharedFiles = []
       $scope.showBackNav = true
+      $scope.rootLevel = false
 
       var user_id = UserService.getUserId()
 
       this.init = function () {
         $scope.children(0)
-        checkBackNav()
+        $scope.shared(user_id)
+        checkIfRootLevel()
+      }
+
+      $scope.shared = function (user_id) {
+        DriveService.fetch_shared(user_id).then(function(response) {
+          data = response.data
+          $scope.sharedFolders.length = 0
+          $scope.sharedFiles.length = 0
+          data.forEach(function(elem) {
+            if (elem['type'] == 'fr') $scope.sharedFolders = elem['items']
+            else if (elem['type'] == 'fl') $scope.sharedFiles = elem['items']
+          })
+          checkIfRootLevel()
+        }, function(error) {
+            ToastService.showToast(error)
+        })
       }
 
       $scope.children = function (id) {
@@ -27,14 +46,15 @@
             else if (elem['type'] == 'fl') $scope.files = elem['items']
           })
           AclService.pushContext(AclService.Context.build(id, 'owner'))
-          checkBackNav()
+          checkIfRootLevel()
         }, function(error) {
-          ToastService.showToast(error)
+            ToastService.showToast(error)
         })
       }
 
       $scope.get = function (id, e_type) {
         DriveService.fetch_entity(id, user_id, e_type).then(function(response) {
+          // TODO: Display information/open file
           ToastService.showToast('Success')
         }, function(error) {
             ToastService.showToast(error)
@@ -80,13 +100,17 @@
         current = AclService.extractContext()
         current_id = AclService.getParentId(current)
         $scope.children(current_id)
-        checkBackNav()
+        if (current_id == 0) $scope.shared(user_id)
+        checkIfRootLevel()
       }
 
-      var checkBackNav = function() {
+      var checkIfRootLevel = function() {
         current = AclService.extractContext()
         current_id = AclService.getParentId(current)
-        if (current_id == 0) $scope.showBackNav = false
+        if (current_id == 0) {
+          $scope.showBackNav = false
+          $scope.rootLevel = true
+        }
       }
 
       this.init()
