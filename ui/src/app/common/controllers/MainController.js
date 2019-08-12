@@ -3,7 +3,7 @@
   angular
        .module('app')
        .controller('MainController', [
-          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state','$scope' , 'ToastService', 'UserService',
+          'navService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$state', '$scope', 'ToastService', 'UserService',
           'AclService', MainController
        ]);
 
@@ -32,6 +32,11 @@
 
     function initDrive() {
       AclService.clearContext()
+      $state.transitionTo('home.drive', {}, {
+          reload: true,
+          inherit: false,
+          notify: true
+      });
     }
 
     function selectItem (item) {
