@@ -26,7 +26,7 @@ RUN python3 setup.py develop
 # Container to lint python code
 FROM base as linter 
 
-# Setting current work directory to /Bassa
+# Setting current work directory to /bassa
 WORKDIR /bassa
 
 # Installing pylint and linting the python code
@@ -34,7 +34,7 @@ RUN pip install pylint && pylint -E *.py **/*.py || printf "\n Bassa has got som
 
 # -----------------------------
 
-# Container for running the Bassa API server
+# Container for running the Bassa API productionserver
 FROM base as production
 
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
@@ -45,14 +45,24 @@ ARG VCS_REF
 # Volume for accessing the downloaded files
 VOLUME [ "/downloads" ]
 
-# Setting current work directory to /Bassa
+# Setting current work directory to /bassa
 WORKDIR /bassa
+
+# Install supervisor
+RUN apt-get update && \
+    apt-get -y install supervisor && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
 
 # Exposing ports where the server listens 
 EXPOSE 5000
 
-# Start the Bassa API server
-CMD [ "python3", "Main.py" ]
+# Move the configuration for supervisor to access
+RUN mv ./supervisor_api.conf ../etc/supervisor/conf.d 
+
+# Start the supervisor
+CMD /usr/bin/supervisord -n -c ../etc/supervisor/supervisord.conf
+
 
 # Adding data as docker labels
 LABEL multi.org.label-schema.name="Bassa" \

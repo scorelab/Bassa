@@ -1,6 +1,9 @@
 from flask import Response, request, send_file, jsonify
 from managers.DownloadManager import get_id_from_gid, get_download_path, get_download_name_from_id, get_compression_progress
 import logging
+import os
+import subprocess
+import json
 from utils.token_utils import token_validator
 
 

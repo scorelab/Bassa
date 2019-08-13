@@ -1,27 +1,29 @@
-FROM node:8-alpine
+FROM alpine:edge
 
+# Defining dockerfile maintainer
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
 
 ARG BUILD_DATE
 ARG VCS_REF
 
-WORKDIR /ui
-
-# Copying UI contents into container
-COPY . .
-
-# Exposing port for accessing the web interface 
-EXPOSE 3000
-
-# Installing node modules
+# Installing aria2c
 RUN apk update && \
-    npm install && \
-    npm install --global bower gulp-cli
+	apk add --no-cache --update bash aria2 && \
+    rm -rf /var/cache/apk/*
 
-# Starting gulp server
-CMD ["gulp", "serve"]
+# Exposing port where the RPC server listens
+EXPOSE 6800
 
-# labels to dockerfile
+# Volume for storing the downloaded data
+VOLUME [ "/data" ]   
+
+# Changing the current directory to data so that the files get downloaded there
+WORKDIR /data
+
+# Starting the Aria2c RPC server
+CMD ["aria2c", "--enable-rpc", "--rpc-listen-all"]
+
+# Labels for dockerfile information
 LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
       multi.org.label-schema.url="https://github.com/scorelab/Bassa/wiki" \
@@ -31,3 +33,5 @@ LABEL multi.org.label-schema.name="Bassa" \
       multi.org.label-schema.vendor="Sustainable Computing Research Group" \
       multi.org.label-schema.version="" \
       multi.org.label-schema.schema-version="1.0"
+      
+
