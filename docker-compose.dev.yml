@@ -1,31 +1,65 @@
 version: "3"
 services:
-  bassa-api:
+  api:
     build: components/core/
+    container_name: api
     ports:
       - 5000:5000
+    links:
+      - db
+    volumes:
+      - ./downloads:/downloads
+    environment:
+      BASSA_DB_NAME: Bassa
+      BASSA_DB_USERNAME: bassa
+      BASSA_DB_PASSWORD: bassa@1234
     labels:
-      com.example.description: "Docker container for Bassa UI"
+      com.example.description: "Docker container for Bassa API server"
+
   web:
-    build: ui/
+    build:
+      context: ui/
+      dockerfile: Dockerfile.dev
+    container_name: web
     ports:
       - 3000:3000
+    links:
+      - api
     depends_on:
       - db
     labels:
-      com.example.description: "Docker container for Bassa backend"
+      com.example.description: "Docker container for Bassa Client"
+
+  aria2c:
+    build: components/aria2c/
+    container_name: aria2c
+    links:
+      - api
+    ports:
+      - 6800:6800
+    volumes:
+      - ./downloads:/data
+    restart: always
+    labels:
+      com.example.description: "Docker container for Aria2c RPC server"
+
   db:
-    image: mysql
+    image: mysql:5.7
     restart: always
     volumes:
-      - data-volume:/var/lib/mysql
+      - data-volume:/var/lib/mysql 
+      - ./.docker/volumes/mysql:/docker-entrypoint-initdb.d
+      - ./db_schema/:/tmp/schema/ 
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${BASSA_DB_NAME}
-      MYSQL_USER: ${BASSA_DB_USERNAME}
-      MYSQL_PASSWORD: ${BASSA_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: bassa@1234
+      MYSQL_DATABASE: Bassa
+      MYSQL_USER: bassa
+      MYSQL_PASSWORD: bassa@1234
+      BASSA_DB_NAME: Bassa
+    labels:
+      com.example.description: "Docker container for Bassa Database"
 
 volumes:
   data-volume:
