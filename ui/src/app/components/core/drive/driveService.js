@@ -77,6 +77,28 @@
         })
       }
 
+      var check_access = function(id, user_id, e_type) {
+        return $http({
+          method: 'GET',
+          url: BassaUrl + '/api/user/' + user_id + '/drive/' + id + '/check',
+          params: { type: e_type }
+        })
+      }
+
+      var grant_access = function(id, user_name, e_type, access) {
+        var body = {
+          user_name: user_name,
+          access: access
+        }
+        return $http({
+          method: 'POST',
+          url: BassaUrl + '/api/user/drive/' + id + '/grant',
+          params: { type: e_type },
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          data: body
+        })
+      }
+
       return {
         fetch_shared: fetch_shared,
         fetch_entity_children: fetch_entity_children,
@@ -84,7 +106,9 @@
         add_entity: add_entity,
         edit_entity: edit_entity,
         remove_entity: remove_entity,
-        move_entity: move_entity
+        move_entity: move_entity,
+        check_access: check_access,
+        grant_access: grant_access
       }
     }
 })();

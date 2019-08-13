@@ -9,7 +9,7 @@ def get_access(id, user_id, entity):
     if db is None:
         return 'db connection error'
     cursor = db.cursor()
-    query = "SELECT access FROM acl WHERE id=%s and user_id=%s and entity_type=%s;"
+    query = "SELECT access FROM acl WHERE id=%s AND user_id=%s AND entity_type=%s;"
     try:
         cursor.execute(query, (id, user_id, entity))
         results = cursor.fetchall()
@@ -78,6 +78,6 @@ def fetch_shared(user_id):
             return result
 
         results = serialize_results(folder_result, file_result)
-        return results    
+        return results
     except MySQLdb.Error as e:
         return str(e)

@@ -16,7 +16,7 @@
       <thead>
       <tr ng-repeat="folder in sharedFolders track by $index">
           <td id="vertalign" data-title="Name">{{folder.name}}</td>
-          <td><md-button class="md-fab md-warn md-mini" ng-click="children(folder.id)">
+          <td><md-button class="md-fab md-warn md-mini" ng-click="children(folder.id, folder.access)">
               <i class="material-icons">delete</i>
               </md-button>
           </td>
