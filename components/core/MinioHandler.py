@@ -10,7 +10,7 @@ def upload_to_minio(file_name, file_path):
 	try:
 		bucket_status = client.bucket_exists('bassa')
 		#print(bucket_status)
-		if(bucket_status == False):
+		if not bucket_status:
 			client.make_bucket('bassa')
 		client.fput_object('bassa', file_name, file_path)
 	except ResponseError as err:
