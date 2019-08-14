@@ -2,9 +2,9 @@
   'use strict;'
 
   angular.module('app')
-    .controller('DriveCtrl', [ '$scope', 'ToastService', 'DriveService', 'AclService', 'UserService', DriveCtrl ]);
+    .controller('DriveCtrl', [ '$scope', 'ToastService', 'DriveService', 'AclService', 'UserService', 'UploadService', DriveCtrl ]);
 
-    function DriveCtrl($scope, ToastService, DriveService, AclService, UserService) {
+    function DriveCtrl($scope, ToastService, DriveService, AclService, UserService, UploadService) {
 
       $scope.folders = []
       $scope.files = []
@@ -120,6 +120,20 @@
         $scope.children(current_id, current_access)
         if (current_id == 0) $scope.shared(user_id)
         checkIfRootLevel()
+      }
+
+      $scope.uploadFile = function () {
+        current = AclService.extractContext()
+        current_id = AclService.getParentId(current)
+
+        var file = $scope.fileToUpload
+        UploadService.uploadFile(file, current_id).then(function (response) {
+            $scope.serverResponse = response.data.status
+            ToastService.showToast('Upload successful')
+        }, function (error) {
+            $scope.serverResponse = error
+            ToastService.showToast('Upload failed')
+        })
       }
 
       var checkIfRootLevel = function() {

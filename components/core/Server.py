@@ -94,5 +94,5 @@ server.add_url_rule(rule='/api/user/drive/<string:id>/grant', endpoint='grant_ac
 					view_func=Acl.grant_access, methods=['POST'])
 
 # file uploading endpoints
-server.add_url_rule(rule='/api/user/drive/<string:user_id>/upload', endpoint='upload_file_to_server',
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:parent_id>/upload', endpoint='upload_file_to_server',
 					view_func=Upload.upload_file_to_server, methods=['POST'])

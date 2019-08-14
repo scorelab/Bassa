@@ -1,42 +1,24 @@
 import os
-import cgi
-import cgitb
-import shutil
 from ConfReader import get_conf_reader
 
-cgitb.enable()
 conf = get_conf_reader("up.conf")
 UPLOAD_DIR = conf['upload_folder']
 
-headers = {
-    'Host': 'localhost:5000',
-    'Accept': 'application/json, text/plain, */*',
-    'Accept-Language': 'en-US,en;q=0.5',
-    'Accept-Encoding': 'gzip, deflate',
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Origin': 'http://localhost:3000',
-}
 
-def upload_file_helper(file_field):
+def upload_file_helper(file_data):
     response = dict()
     try:
-        file_form = cgi.FieldStorage()
-        if file_field not in file_form:
-            response['msg'] = 'Invalid input'
-            return response
-
-        file_content = file_form[file_field]
-        if not file_content.file:
+        if not file_data:
             response['msg'] = 'No file found'
             return response
 
-        path = os.path.join(UPLOAD_DIR, file_content.filename)
-
-        with open(path, 'wb') as file_out:
-            shutil.copyfileobj(file_content.file, file_out, conf['size_limit'])
+        name,ext = os.path.splitext(file_data.filename)
+        f_name = name + ext
+        file.save(os.path.join(UPLOAD_DIR, f_name))
 
         response['msg'] = 'success'
-        response['name'] = str(file_content.filename)
+        response['name'] = f_name
+        response['ext'] = ext
         return response
 
     except Exception as e:

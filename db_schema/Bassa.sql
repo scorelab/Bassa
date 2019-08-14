@@ -149,7 +149,9 @@ INSERT INTO `user` (`user_name`, `password`, `auth`, `email`, `blocked`, `approv
 
 INSERT INTO `folder` (`name`, `parent_id`, `user_id`) VALUES
 (`init_folder`, 0, 1),
-(`test_folder`, 0, 1);
+(`test_folder`, 0, 1),
+(`drive_root`, -1, 1);
+UPDATE `folder` SET `id`=0 WHERE `name`='drive_root';
 
 -- --------------------------------------------------------
 
