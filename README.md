@@ -63,7 +63,7 @@ We will be using docker-compose tool to build images and finally spin up all our
 
 For development:
 ```bash
-docker-compose up -f docker-compose.dev.yml --build
+docker-compose -f docker-compose.dev.yml up --build
 ```
 You can access the Bassa Web Client at port **3000** served by Gulp. <br>
 For production:
@@ -88,6 +88,7 @@ docker-compose run [SERVICE NAME]
 
 ### Setting up Bassa from the source code
 In order to to setup Bassa from the source code, you need a machine with either Linux, MacOS or Windows operating system.
+Keep an eye on the configuration files such as dl.conf as they are specific to docker environment.
 
 ### Setting up Bassa on Linux based operating systems
 
