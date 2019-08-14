@@ -13,10 +13,6 @@ services:
       BASSA_DB_NAME: Bassa
       BASSA_DB_USERNAME: bassa
       BASSA_DB_PASSWORD: bassa@1234
-    args:
-      BUILD_DATE: $(date)
-      VCS_REF: $(git rev-parse --short HEAD)
-
 
   web:
     build:
@@ -29,10 +25,6 @@ services:
       - api
     depends_on:
       - db
-    args:
-      BUILD_DATE: $(date)
-      VCS_REF: $(git rev-parse --short HEAD)
-   
 
   aria2c:
     build: components/aria2c/
@@ -44,10 +36,6 @@ services:
     volumes:
       - ./downloads:/data
     restart: always
-    args:
-      BUILD_DATE: $(date)
-      VCS_REF: $(git rev-parse --short HEAD)
-
 
   db:
     image: mysql:5.7
