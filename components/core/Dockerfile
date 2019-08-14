@@ -55,12 +55,12 @@ EXPOSE 5000
 CMD [ "python3", "Main.py" ]
 
 # Adding data as docker labels
-LABEL multi.org.label-schema.name="Bassa" \
-      multi.org.label-schema.description="Bassa provides Automated Download Queue to make the best use of Internet bandwidth" \
-      multi.org.label-schema.url="https://github.com/scorelab/Bassa/wiki" \
-      multi.org.label-schema.vcs-url="https://github.com/scorelab/Bassa" \
-      multi.org.label-schema.vcs-ref=$VCS_REF \
-      multi.org.label-schema.build-date=$BUILD_DATE \
-      multi.org.label-schema.vendor="Sustainable Computing Research Group" \
-      multi.org.label-schema.version="" \
-      multi.org.label-schema.schema-version="1.0"
+LABEL scorelab.bassa.name="Bassa API development server" \
+      scorelab.bassa.description="Dockerfile for Bassa API flask-socketio server" \
+      scorelab.bassa.url="https://github.com/scorelab/Bassa/wiki" \
+      scorelab.bassa.vcs-url="https://github.com/scorelab/Bassa" \
+      scorelab.bassa.vcs-ref=$VCS_REF \
+      scorelab.bassa.build-date=$BUILD_DATE \
+      scorelab.bassa.vendor="Sustainable Computing Research Group" \
+      scorelab.bassa.version="1.0" \
+      scorelab.bassa.schema-version="1.0"
