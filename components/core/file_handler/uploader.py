@@ -14,7 +14,7 @@ def upload_file_helper(file_data):
 
         name,ext = os.path.splitext(file_data.filename)
         f_name = name + ext
-        file.save(os.path.join(UPLOAD_DIR, f_name))
+        file_data.save(os.path.join(UPLOAD_DIR, f_name))
 
         response['msg'] = 'success'
         response['name'] = f_name

@@ -1,7 +1,7 @@
 import json
 import requests
 from flask import request, Response
-from file_handler.uploader import upload_file_helper, headers
+from file_handler.uploader import upload_file_helper
 from managers.DirectoryManager import File
 from utils.token_utils import token_validator
 
@@ -14,9 +14,7 @@ def upload_file_to_server(user_id, parent_id):
 
         file_to_upload = request.files['file']
         e_type = 'fl'
-        token_dict = { 'token': token }
 
-        headers.update(token_dict)
         upload_response = upload_file_helper(file_to_upload)
 
         if not 'msg' in upload_response:

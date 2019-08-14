@@ -66,15 +66,22 @@
         current = AclService.extractContext()
         current_id = AclService.getParentId(current)
         current_access = AclService.getAccessLevel(current)
+
         if (current_access != 'read') {
-          DriveService.add_entity(user_id, e_type, name, current_id).then(function(response) {
-            if (response.status == 200) {
-              $scope.children(current_id,current_access)
-              ToastService.showToast('Success')
+
+            if (e_type == 'fr') {
+              DriveService.add_entity(user_id, e_type, name, current_id).then(function(response) {
+                if (response.status == 200) {
+                  $scope.children(current_id,current_access)
+                  ToastService.showToast('Success')
+                }
+              }, function(error) {
+                  ToastService.showToast(error)
+              })
+            } else {
+                uploadFile(current_id)
             }
-          }, function(error) {
-              ToastService.showToast(error)
-          })
+
         } else {
             ToastService.showToast('You don\'t have permission for this action!')
         }
@@ -122,13 +129,10 @@
         checkIfRootLevel()
       }
 
-      $scope.uploadFile = function () {
-        current = AclService.extractContext()
-        current_id = AclService.getParentId(current)
-
+      var uploadFile = function (parent_id) {
         var file = $scope.fileToUpload
-        UploadService.uploadFile(file, current_id).then(function (response) {
-            $scope.serverResponse = response.data.status
+        UploadService.uploadFile(file, parent_id).then(function (response) {
+            $scope.serverResponse = response
             ToastService.showToast('Upload successful')
         }, function (error) {
             $scope.serverResponse = error
