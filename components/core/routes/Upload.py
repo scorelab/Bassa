@@ -24,7 +24,8 @@ def upload_file_to_server(user_id, parent_id):
             return Response(response='{"error":"' + upload_response['msg'] + '"}', status=400)
 
         name = upload_response['name']
-        add_response = File().create(name, user_id, parent_id)
+        path = upload_response['path']
+        add_response = File().create(name, user_id, parent_id, path)
 
         if add_response is 'success':
             res = Response(response='{"status":"'+ add_response +'", "ext":"'+ upload_response['ext'] +'"}', status=200)

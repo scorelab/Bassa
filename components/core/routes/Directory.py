@@ -51,7 +51,7 @@ def add_entity(id, user_id):
         return '{"error":"token error"}', 403
     try:
         e_type = request.args.get('type')
-        if not e_type == 'fr' and not e_type =='fl':
+        if not e_type == 'fr':
             return Response('{"error":"invalid parameter"}', status=400)
 
         name = request.form['name']

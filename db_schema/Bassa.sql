@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `name` varchar(256) NOT NULL,
   `parent_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
+  `path` varchar(256) NOT NULL,
   primary key (`id`)
   unique key (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -160,8 +161,8 @@ UPDATE `folder` SET `id`=0 WHERE `name`='drive_root';
 --
 
 INSERT INTO `file` (`name`, `parent_id`, `user_id`) VALUES
-(`init_file`, 1, 1),
-(`test_file`, 1, 1);
+(`init_file`, 1, 1, '/path/to/init_file'),
+(`test_file`, 1, 1, '/path/to/test_file');
 
 -- --------------------------------------------------------
 

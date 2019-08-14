@@ -148,14 +148,14 @@ class Folder(EntityInterface):
 
 class File(EntityInterface):
 
-    def create(self, name, user_id, parent_id):
+    def create(self, name, user_id, parent_id, path):
         db = threadpool.connect()
         if db is None:
             return 'db connection error'
         cursor = db.cursor()
-        query = "INSERT INTO file (name, user_id, parent_id) VALUES(%s, %s, %s);"
+        query = "INSERT INTO file (name, user_id, parent_id, path) VALUES(%s, %s, %s, %s);"
         try:
-            cursor.execute(query, (name, user_id, parent_id))
+            cursor.execute(query, (name, user_id, parent_id, path))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
