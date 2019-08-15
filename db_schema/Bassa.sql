@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `user_id` bigint(20) NOT NULL,
   `notif` tinytext,
   primary key(`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
