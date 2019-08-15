@@ -3,7 +3,7 @@ from flask import send_file, send_from_directory
 from flask_socketio import join_room
 import os
 from file_handler import sender
-from routes import User, Download, Directory, Acl, Upload
+from routes import User, Download, Directory, Acl, Upload, Notif
 
 
 # socket connections
@@ -96,3 +96,9 @@ server.add_url_rule(rule='/api/user/drive/<string:id>/grant', endpoint='grant_ac
 # file uploading endpoints
 server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:parent_id>/upload', endpoint='upload_file_to_server',
 					view_func=Upload.upload_file_to_server, methods=['POST'])
+
+# notification endpoints
+server.add_url_rule(rule='/api/user/<string:user_id>/notifications', endpoint='fetch_notifs',
+					view_func=Notif.fetch_notifs, methods=['GET'])
+server.add_url_rule(rule='/api/user/<string:user_name>/notification/add', endpoint='save_notif',
+					view_func=Notif.save_notif, methods=['POST'])

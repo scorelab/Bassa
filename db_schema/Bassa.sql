@@ -134,6 +134,18 @@ CREATE TABLE IF NOT EXISTS `acl` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `user_id` bigint(20) NOT NULL,
+  `notif` tinytext,
+  primary key(`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+-- --------------------------------------------------------
+
+--
 -- Dumping data for table `user`
 --
 
@@ -243,11 +255,17 @@ ALTER TABLE `file`
 ALTER TABLE `folder`
   ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
-  --
-  -- Constraints for table `acl`
-  --
-  ALTER TABLE `acl`
-    ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+--
+-- Constraints for table `acl`
+--
+ALTER TABLE `acl`
+  ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 
 COMMIT;
