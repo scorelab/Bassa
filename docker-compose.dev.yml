@@ -13,8 +13,6 @@ services:
       BASSA_DB_NAME: Bassa
       BASSA_DB_USERNAME: bassa
       BASSA_DB_PASSWORD: bassa@1234
-    labels:
-      com.example.description: "Docker container for Bassa API server"
 
   web:
     build:
@@ -27,8 +25,6 @@ services:
       - api
     depends_on:
       - db
-    labels:
-      com.example.description: "Docker container for Bassa Client"
 
   aria2c:
     build: components/aria2c/
@@ -40,8 +36,6 @@ services:
     volumes:
       - ./downloads:/data
     restart: always
-    labels:
-      com.example.description: "Docker container for Aria2c RPC server"
 
   db:
     image: mysql:5.7
@@ -58,8 +52,6 @@ services:
       MYSQL_USER: bassa
       MYSQL_PASSWORD: bassa@1234
       BASSA_DB_NAME: Bassa
-    labels:
-      com.example.description: "Docker container for Bassa Database"
 
 volumes:
   data-volume:
