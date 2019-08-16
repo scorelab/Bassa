@@ -7,6 +7,7 @@ from Models import Status, Download
 from EMail import send_mail
 from DiskMan import *
 from ConfReader import get_conf_reader
+from managers.NotifManager import *
 
 import websocket
 import sys
@@ -119,6 +120,7 @@ class MessageHandler():
                     set_size(data['result']['gid'], raw_size)
                     download_id = get_id_from_gid(gid)
                     username = get_username_from_gid(gid)
+                    post_notif(username, notif = 'Your download ' + path[-1] + ' has completed')
                     send_status(download_id, completedLength, raw_size, username)
                     # msg='Your download '+path[-1]+' is completed.'
                     # send_mail([get_download_email(data['result']['gid'])],msg)

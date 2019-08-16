@@ -22,6 +22,12 @@
           url: BassaUrl + '/api/user/' + user_name + '/notification/add',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           data: body
+        }).then(function(response) {
+            // handle success
+            return 'success'
+        }).catch(function(error) {
+            console.error(error)
+            return 'Error: ' + error
         })
       }
 

@@ -2,9 +2,9 @@
   'use strict;'
 
   angular.module('app')
-    .controller('DriveCtrl', [ '$scope', 'ToastService', 'DriveService', 'AclService', 'UserService', 'UploadService', DriveCtrl ]);
+    .controller('DriveCtrl', [ '$scope', 'ToastService', 'DriveService', 'AclService', 'UserService', 'UploadService', 'NotifService', DriveCtrl ]);
 
-    function DriveCtrl($scope, ToastService, DriveService, AclService, UserService, UploadService) {
+    function DriveCtrl($scope, ToastService, DriveService, AclService, UserService, UploadService, NotifService) {
 
       $scope.folders = []
       $scope.files = []
@@ -14,6 +14,7 @@
       $scope.rootLevel = false
 
       var user_id = UserService.getUserId()
+      var username = UserService.getUsername()
 
       this.init = function () {
         $scope.children(0)
@@ -127,6 +128,19 @@
         $scope.children(current_id, current_access)
         if (current_id == 0) $scope.shared(user_id)
         checkIfRootLevel()
+      }
+
+      $scope.giveAccess = function(id, grantee, e_type, access) {
+        DriveService.grant_access(id, grantee, e_type, access).then(function(response) {
+          var notif = 'You were granted ' + access + 'access by ' + username
+          if(response.status == 200) {
+            $scope.children(id)
+            ToastService.showToast('Success')
+            NotifService.create_notification(grantee, notif)
+          }
+        }, function(error) {
+            ToastService.showToast(error)
+        })
       }
 
       var uploadFile = function (parent_id) {

@@ -2,37 +2,35 @@
   'use strict;'
 
   angular.module('app')
-    .controller('NotifController', [ '$scope', 'UserService', 'NotifService', NotifController ]);
+    .controller('NotifController', [ '$scope', '$mdDialog', 'UserService', 'NotifService', NotifController ]);
 
-    function NotifController($scope, UserService, NotifService) {
+    function NotifController($scope, $mdDialog, UserService, NotifService) {
 
       $scope.notifs = []
-      $scope.unread = true
+      $scope.unread = false
       user_id = UserService.getUserId()
 
-      this.init = function () {
-        get_notifs(user_id)
-      }
-
-      var generate_notif = function (name, notif) {
-        return NotifService.create_notification(name, notif)
-          .then(function(response) {
-            // handle success
-            return 'success'
-        }).catch(function(error) {
-            // handle error
-            return 'Error:' + error
-        })
+      $scope.checkNotifs = function($mdOpenMenu) {
+        $scope.unread = false
+        $mdOpenMenu()
       }
 
       var get_notifs = function () {
         NotifService.fetch_notifications(user_id).then(function(response) {
+          if(response.data.length > $scope.notifs.length) $scope.unread = true
           $scope.notifs.length = 0
-          $scope.notifs = response.data
+          for (notif in response.data) {
+            $scope.notifs.push(notif[0])
+          }
+        }).catch(function(error) {
+            console.error(error)
+            ToastService.showToast('Couldn\'t load activity')
         })
-        // polling function
+        // poll function every 2 minutes
+        setTimeout(get_notifs, 120000)
       }
 
-      this.init()
+      get_notifs()
+
     }
 })();

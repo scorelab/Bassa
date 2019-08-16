@@ -2,12 +2,13 @@
   'use strict';
   angular
     .module('app')
-    .controller('AdminCtrl', [ '$scope', 'ToastService', 'AdminService', 'UtilityService', AdminCtrl]);
+    .controller('AdminCtrl', [ '$scope', 'ToastService', 'AdminService', 'UtilityService', 'NotifService', 'UserService', AdminCtrl]);
 
-  function AdminCtrl($scope, ToastService, AdminService, UtilityService) {
+  function AdminCtrl($scope, ToastService, AdminService, UtilityService, NotifService, UserService) {
 
     $scope.signup_requests = [];
     $scope.usageChartData = [];
+    var username = UserService.getUsername()
 
     $scope.chartOptions = {
         chart: {
@@ -47,8 +48,12 @@
 
     $scope.approve = function(user) {
       AdminService.approve(user.user_name).then(function (response) {
-        ToastService.showToast('Approved', user.user_name);
-        $scope.signup_requests.splice(user, 1);
+        var notif = 'Your signup request was approved by ' + username
+        if (response.status == 200) {
+          ToastService.showToast('Approved', user.user_name);
+          $scope.signup_requests.splice(user, 1);
+          NotifService.create_notification(user.user_name, notif)
+        }
         getRequests();
       }, function(error){
         ToastService.showToast('Oops! Something went wrong');
