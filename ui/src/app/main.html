@@ -18,22 +18,25 @@
       <md-divider ng-repeat-end></md-divider>
 </md-sidenav>
 
-<div layout="column" flex>
-    <md-toolbar layout="row" layout-align="center center">
+<div ng-controller="NotifController as nf" layout="column" flex>
+    <md-toolbar layout="row" layout-align="end center">
         <section layout-align="start center" layout-fill flex>
+            <p>Hi {{username}}</p>
         </section>
         <section layout-align="center center">
-          <p>Hi {{username}}</p>
-        </section>
-        <section layout-align="end center">
             <md-menu md-offset="0 20">
-                <md-button class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">
-                <i class="material-icons">menu</i>
+                <md-button ng-click="nf.checkNotifs($mdMenu, $event)" class="md-icon-button" aria-label="Open menu">
+                <div ng-if="nf.unread"><i class="material-icons">notifications_active</i></div>
+                <div ng-if="!nf.unread"><i class="material-icons">notifications</i></div>
                 </md-button>
-                <md-menu-content width="2">
-                    <md-menu-item><md-button ng-click="logout()" ui-sref="login">Logout <i class="fa fa-power-off" style="color:maroon"></i> </md-button></md-menu-item>
+                <md-menu-content width="4">
+                    <md-menu-item ng-repeat="notif in nf.notifs"><md-button ng-click="null">{{notif}}</md-button></md-menu-item>
                 </md-menu-content>
             </md-menu>
+        </section>
+        <section layout-align="end center">
+            <md-button ng-click="logout()" ui-sref="login"><i class="fa fa-power-off" style="color:maroon"></i>
+            </md-button>
         </section>
     </md-toolbar>
 
