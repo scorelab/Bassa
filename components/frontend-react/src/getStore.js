@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducers';
@@ -9,7 +10,7 @@ const initialState = {};
 
 export const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
-  
+
   const getMiddleware = () => {
     return applyMiddleware(sagaMiddleware);
   };
@@ -23,4 +24,4 @@ export const configureStore = () => {
   sagaMiddleware.run(rootSaga);
 
   return store;
-}
+};

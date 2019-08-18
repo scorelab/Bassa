@@ -1,7 +1,8 @@
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 
-//MUI imports
+// MUI imports
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,51 +15,57 @@ import red from '@material-ui/core/colors/red';
 const CustomTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    color: theme.palette.common.white
   },
   body: {
-    fontSize: 14,
-  },
+    fontSize: 14
+  }
 }))(TableCell);
 
 const styles = makeStyles(theme => ({
   root: {
     width: '100%',
     marginTop: theme.spacing(3),
-    overflowX: 'auto',
+    overflowX: 'auto'
   },
   row: {
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
+      backgroundColor: theme.palette.background.default
+    }
   },
   icon: {
     marginRight: theme.spacing(2),
-    fontSize:20
+    fontSize: 20
   },
   fab: {
     color: theme.palette.getContrastText(red[500]),
     backgroundColor: red[500],
     '&:hover': {
-      backgroundColor: red[700],
-    },
+      backgroundColor: red[700]
+    }
   }
 }));
 
-
-const QueuedFile = (props) => {
+const QueuedFile = props => {
   const classes = styles();
+  const { index, name, onDelete } = props;
   return (
     <div className={classes.root}>
       <Table>
         <TableBody>
           <TableRow>
-            <CustomTableCell>{props.index + 1}</CustomTableCell>
+            <CustomTableCell>{index + 1}</CustomTableCell>
             <CustomTableCell className={classes.row} component="th" scope="row">
-              {props.name}
+              {name}
             </CustomTableCell>
             <CustomTableCell align="right">
-              <Fab data-test="button-delete" size="small" aria-label="Delete" className={classes.fab} onClick={props.onDelete}>
+              <Fab
+                data-test="button-delete"
+                size="small"
+                aria-label="Delete"
+                className={classes.fab}
+                onClick={onDelete}
+              >
                 <DeleteIcon />
               </Fab>
             </CustomTableCell>
@@ -66,13 +73,11 @@ const QueuedFile = (props) => {
         </TableBody>
       </Table>
     </div>
-  )
-}
-
-QueuedFile.propTypes = {
-  name: PropTypes.string.isRequired,
-  onDelete: PropTypes.func
+  );
 };
 
+QueuedFile.propTypes = {
+  name: PropTypes.string.isRequired
+};
 
 export default QueuedFile;

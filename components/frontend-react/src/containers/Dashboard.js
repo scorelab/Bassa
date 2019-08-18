@@ -1,17 +1,14 @@
+/* eslint-disable no-shadow */
 import React from 'react';
-import PropTypes  from 'prop-types';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { addNewDownload } from '../actions/downloadActions';
 import { Link } from 'react-router-dom';
 
-//Component imports
-import Appbar from '../components/Appbar';
-import CompletedFileList from './CompletedFileList';
-import QueuedFileList from './QueuedFileList';
+// Component imports
 
-//MUI imports
-import { withStyles } from '@material-ui/core/styles'
+// MUI imports
+import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import FAB from '@material-ui/core/Fab';
@@ -21,11 +18,13 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import green from '@material-ui/core/colors/green';
 import Button from '@material-ui/core/Button';
+import QueuedFileList from './QueuedFileList';
+import Appbar from '../components/Appbar';
+import CompletedFileList from './CompletedFileList';
+import { addNewDownload } from '../actions/downloadActions';
 
 import '../index.css';
-
-const QUEUED = 0;
-const DOWNLOADING = 3;
+import SnackbarComponent from '../components/ToastComponent';
 
 const styles = theme => ({
   grid: {
@@ -41,15 +40,15 @@ const styles = theme => ({
     color: theme.palette.text.secondary
   },
   heading: {
-    padding: 20,
+    padding: 20
   },
   paperAdd: {
-    textAlign:'center',
-    paddingBottom: 20,
+    textAlign: 'center',
+    paddingBottom: 20
   },
   link: {
     width: 850,
-    borderTop: 2,
+    borderTop: 2
   },
   fab: {
     marginLeft: 30,
@@ -60,79 +59,110 @@ const styles = theme => ({
     }
   },
   card: {
-    padding:10  
-  },
-})
+    padding: 10
+  }
+});
 
 class Dashboard extends React.Component {
-
   state = {
     link: '',
-    completedList:[],
-    queuedList:[]
-  }
-
-  componentWillMount () {
-    let token = sessionStorage.getItem('token');
-    axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API_GET_DOWNLOADS}`,
-      headers: {'token': `${token}`}
-    })
-    .then(res => {
-      let queuedList = res.data.filter(file => file.status === QUEUED);
-      let completedList = res.data.filter(file => file.status === DOWNLOADING);
-      this.setState({queuedList: queuedList, completedList: completedList});
-    })
-    .catch(err => console.log(err));
-  }
+    hasFetchingDataFailed: false
+  };
 
   renderCompletedDownloads = () => {
-    if(this.state.completedList.length !== 0)
-    {
-      return <CompletedFileList files={this.state.completedList} limit={20} />
+    const { completedDownloads } = this.props;
+    if (completedDownloads.length === 0)
+      return <div> No completed downloads </div>;
+    if (completedDownloads.length !== 0) {
+      return <CompletedFileList files={completedDownloads} limit={20} />;
     }
-    else
-    {
-      return <div>Loading...</div>
-    }
-  }
+    return <div>Loading...</div>;
+  };
 
-  handleLinkField = (event) => {
-    let link = event.target.value;
-    this.setState({link});
-  }
+  handleLinkField = event => {
+    const link = event.target.value;
+    this.setState({ link });
+  };
 
   handleAddButton = () => {
-    this.props.addNewDownload(this.state.link);
-  }
+    const { link } = this.state;
+    const { addNewDownload } = this.props;
+    addNewDownload(link);
+  };
+
+  // eslint-disable-next-line consistent-return
+  renderSnackbar = () => {
+    const { hasFetchingDataFailed } = this.state;
+    const {
+      haveFetchingDownloadsFailed,
+      hasAddingDownloadFailed,
+      errorMessage
+    } = this.props;
+    // the local state "hasFetchingDataFailed" checks: when the component gets mounted,
+    // are we able to fetch files? Whereas, the prop "haveFetchingDownloadsFailed" checks
+    // for all the API requests made to the server via user are we able to fetch files?
+    // Check downloadSaga file in ../sagas to see how they both differ
+    if (hasFetchingDataFailed || haveFetchingDownloadsFailed) {
+      return (
+        <SnackbarComponent
+          variant="error"
+          didEventOccured={hasFetchingDataFailed}
+          message="Error fetching data. Check if server is started and DB is connected"
+        />
+      );
+    }
+    if (hasAddingDownloadFailed) {
+      return (
+        <SnackbarComponent
+          variant="error"
+          didEventOccured={hasAddingDownloadFailed}
+          message={errorMessage}
+        />
+      );
+    }
+  };
+
   render() {
-    const { classes } = this.props;
-    const { link, queuedList } = this.state;
-  	return (
-  	  <div className={classes.root}>
-  	    <Appbar isloggedIn={true} />
-  	    <Typography variant="h5" className={classes.heading}>
-  	  	  Hi {this.props.username}!
-  	  	</Typography>
-  	    <Paper className={classes.paperAdd}>
-  	      <Typography variant="h5">
-  	        ADD DOWNLOAD
-  	      </Typography>
+    const { classes, username, queuedDownloads } = this.props;
+    const { link } = this.state;
+    return (
+      <div className={classes.root}>
+        <Appbar isloggedIn />
+        <Typography variant="h5" className={classes.heading}>
+          Hi {username}!
+        </Typography>
+        <Paper className={classes.paperAdd}>
+          <Typography variant="h5">ADD DOWNLOAD</Typography>
           <form>
-            <Input type="text" className={classes.link} value={link} onChange={this.handleLinkField} placeholder="Enter or paste the link below" />
-            <FAB color="primary" size="small" className={classes.fab} aria-label="add-download" onClick={this.handleAddButton}>
-              <AddIcon/>
+            <Input
+              type="text"
+              className={classes.link}
+              value={link}
+              onChange={this.handleLinkField}
+              placeholder="Enter or paste the link below"
+            />
+            <FAB
+              color="primary"
+              size="small"
+              className={classes.fab}
+              aria-label="add-download"
+              onClick={this.handleAddButton}
+            >
+              <AddIcon />
             </FAB>
           </form>
-  	    </Paper>
+        </Paper>
         <Grid container className={classes.grid} spacing={1}>
-    	    <Grid item xs={6} sm={6}>        
+          <Grid item xs={6} sm={6}>
             <Paper className={classes.paper}>
               <Card className={classes.card}>
                 <Typography variant="h5">
                   Completed Downloads&nbsp;
-                  <Link to='/completed'><Button size="small" variant="outlined" color="primary">show all</Button></Link>
+                  <Link to="/completed">
+                    <Button size="small" variant="outlined" color="primary">
+                      show all
+                    </Button>
+                  </Link>
                 </Typography>
               </Card>
               {this.renderCompletedDownloads()}
@@ -143,28 +173,43 @@ class Dashboard extends React.Component {
               <Card className={classes.card}>
                 <Typography variant="h5">
                   In Queue&nbsp;
-                  <Link to='/queued'><Button size="small" variant="outlined" color="primary">show all</Button></Link>
+                  <Link to="/queued">
+                    <Button size="small" variant="outlined" color="primary">
+                      show all
+                    </Button>
+                  </Link>
                 </Typography>
               </Card>
-              <QueuedFileList files={queuedList} limit={20} />
+              <QueuedFileList files={queuedDownloads} limit={20} />
             </Paper>
           </Grid>
         </Grid>
-  	  </div>
-  	)
+        {this.renderSnackbar()}
+      </div>
+    );
   }
 }
 
 Dashboard.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
+  // eslint-disable-next-line react/forbid-prop-types
+  classes: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
-  username: state.userReducer.username
-})
+  username: state.userReducer.username,
+  queuedDownloads: state.downloadReducer.queuedDownloads,
+  completedDownloads: state.downloadReducer.completedDownloads,
+  haveFetchingDownloadsFailed:
+    state.downloadReducer.haveFetchingDownloadsFailed,
+  hasAddingDownloadFailed: state.downloadReducer.hasAddingDownloadFailed,
+  errorMessage: state.downloadReducer.errorMessage
+});
 
 const mapDispatchToProps = dispatch => ({
-  addNewDownload: (link) => dispatch(addNewDownload(link)),
-})
+  addNewDownload: link => dispatch(addNewDownload(link))
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Dashboard));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Dashboard));
