@@ -172,27 +172,10 @@
       }, 5000);
     };
     $scope.getImage = function (fileName) {
-      var fileExtensionName = getExtension(fileName);
+      var fileExtensionName = UtilityService.getExtension(fileName);
       return "../../../assets/images/file-images/"+fileExtensionName+".png";
     };
     
-    function getExtension(fileName){
-      var fileExtension = fileName.split('.');
-      var fileExtensionName ;
-      if(fileExtension){
-        fileExtensionName = fileExtension[fileExtension.length-1];
-        if(!isExtensionMatch(fileExtensionName)){
-          fileExtensionName = '_page';
-        }
-      }else{
-        fileExtensionName = '_page';
-      }
-      return fileExtensionName;
-    }
-
-    function isExtensionMatch(extensionName) {
-      return fileTypeArray.indexOf(extensionName) !== -1;
-    }
   }
 })();
 

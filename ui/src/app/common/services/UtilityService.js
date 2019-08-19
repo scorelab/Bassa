@@ -6,6 +6,35 @@
 
   function UtilityService(){
 
+    var fileTypeArray = ['aac', 'ai', 'aiff', 'avi', 'bmp',
+        'c', 'cpp', 'css', 'csv', 'dat', 'dmg', 'doc', 'dotx', 'dwg',
+        'dxf', 'eps', 'exe', 'flv', 'gif', 'h', 'hpp', 'html',
+        'ics', 'iso', 'java', 'jpg', 'js', 'key', 'less', 'mid',
+        'mp3', 'mp4', 'mpg', 'odf', 'ods', 'odt', 'otp', 'ots',
+        'ott', 'pdf', 'php', 'png', 'ppt', 'psd', 'py', 'qt',
+        'rar', 'rb', 'rtf', 'sass', 'scss', 'sql', 'tga', 'tgz',
+        'tiff', 'txt', 'wav', 'xls', 'xlsx', 'xml', 'yml', 'zip'];
+
+
+    function isExtensionMatch(extensionName) {
+      return fileTypeArray.indexOf(extensionName) !== -1;
+    }
+
+    var getExtension = function(fileName){
+      var fileExtension = fileName.split('.');
+      var fileExtensionName ;
+      if(fileExtension){
+        fileExtensionName = fileExtension[fileExtension.length-1];
+        if(!isExtensionMatch(fileExtensionName)){
+          fileExtensionName = '_page';
+        }
+      }else{
+        fileExtensionName = '_page';
+      }
+      return fileExtensionName;
+    }
+
+
     var formatBytes = function(bytes) {
 
       if(bytes == 0) return '0 Byte';
@@ -17,6 +46,7 @@
     };
 
     return {
+      getExtension: getExtension,
       formatBytes: formatBytes
     };
 

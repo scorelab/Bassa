@@ -160,6 +160,9 @@
         if (current_id == 0) {
           $scope.showBackNav = false
           $scope.rootLevel = true
+        } else {
+          $scope.showBackNav = true
+          $scope.rootLevel = false
         }
       }
 
