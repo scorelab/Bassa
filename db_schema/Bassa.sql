@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 CREATE TABLE IF NOT EXISTS `folder` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
-  `parent_id` bigint(20) NOT NULL,
+  `parent_id` bigint(20),
   `user_id` bigint(20) NOT NULL,
   primary key (`id`),
   unique key (`name`)
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `parent_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `path` varchar(256) NOT NULL,
-  primary key (`id`)
+  primary key (`id`),
   unique key (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `acl` (
   `entity_type` enum('fr', 'fl') NOT NULL,
   `id` bigint(20) NOT NULL,
   `access` enum('owner', 'read', 'write') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -160,9 +160,9 @@ INSERT INTO `user` (`user_name`, `password`, `auth`, `email`, `blocked`, `approv
 --
 
 INSERT INTO `folder` (`name`, `parent_id`, `user_id`) VALUES
-(`init_folder`, 0, 1),
-(`test_folder`, 0, 1),
-(`drive_root`, -1, 1);
+('init_folder', 0, 1),
+('test_folder', 0, 1),
+('drive_root', NULL, 1);
 UPDATE `folder` SET `id`=0 WHERE `name`='drive_root';
 
 -- --------------------------------------------------------
@@ -171,9 +171,9 @@ UPDATE `folder` SET `id`=0 WHERE `name`='drive_root';
 -- Dumping data for table `file`
 --
 
-INSERT INTO `file` (`name`, `parent_id`, `user_id`) VALUES
-(`init_file`, 1, 1, '/path/to/init_file'),
-(`test_file`, 1, 1, '/path/to/test_file');
+INSERT INTO `file` (`name`, `parent_id`, `user_id`, `path`) VALUES
+('init_file', 1, 1, '/path/to/init_file'),
+('test_file', 1, 1, '/path/to/test_file');
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,7 @@ INSERT INTO `file` (`name`, `parent_id`, `user_id`) VALUES
 --
 
 INSERT INTO `acl` (`user_id`, `entity_type`, `id`, `access`) VALUES
-(2, `fr`, 1, `write`);
+(2, 'fr', 1, 'write');
 
 -- --------------------------------------------------------
 
@@ -245,7 +245,7 @@ ALTER TABLE `rate`
 -- Constraints for table `file`
 --
 ALTER TABLE `file`
-  ADD FOREIGN KEY (`parent_id`) REFERENCES `folder` (`id`) ON DELETE CASCADE;
+  ADD FOREIGN KEY (`parent_id`) REFERENCES `folder` (`id`) ON DELETE CASCADE,
   ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
