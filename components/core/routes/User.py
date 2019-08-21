@@ -3,7 +3,7 @@ from flask import request, abort, Response, g
 from Auth import *
 from EMail import send_mail
 from Models import *
-from DownloadManager import *
+from managers.DownloadManager import *
 import _thread
 from utils.token_utils import token_validator
 from utils.app_constants import SERVER_SECRET_KEY
@@ -16,7 +16,7 @@ def login():
         if check_approved(userName, password):
             user = get_user(userName)
             token = generate_auth_token(user, SERVER_SECRET_KEY)
-            resp = Response(response='{"auth":"'+ str(user.auth) + '"}',status=200)
+            resp = Response(response='{"auth":"'+ str(user.auth) + '", "id":"'+ str(user.id) + '"}',status=200)
             resp.headers['token'] = token
             resp.headers['Access-Control-Expose-Headers'] = 'token'
             return resp
@@ -30,7 +30,7 @@ def login():
 def regular_user_request():
     data = request.get_json(force=True)
     try:
-        newUser = User(data['user_name'], data['password'], 1, data['email'])
+        newUser = User(data['id'], data['user_name'], data['password'], 1, data['email'])
         status = add_regular_user(newUser)
         if status == "success":
             resp = Response(response='{"status": "'+ status + '"}', status=200)
@@ -47,7 +47,7 @@ def add_user_request():
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         data = request.get_json(force=True)
         try:
-            newUser = User(data['user_name'], data['password'], int(data['auth']), data['email'])
+            newUser = User(data['id'], data['user_name'], data['password'], int(data['auth']), data['email'])
             status = add_user(newUser)
             if status == "success":
                 resp = Response(response='{"status": "'+ status + '"}', status=200)
@@ -87,7 +87,7 @@ def update_user_request(username):
     if token is not None and g.user.auth == AuthLeval.ADMIN:
         data = request.get_json(force=True)
         try:
-            newUser = User(data['user_name'], data['password'], int(data['auth']), data['email'])
+            newUser = User(data['id'], data['user_name'], data['password'], int(data['auth']), data['email'])
             status = update_user(newUser, username)
             resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:

@@ -6,8 +6,8 @@ from utils.app_constants import SERVER_SECRET_KEY
 
 def token_validator(token):
     user = verify_auth_token(token, SERVER_SECRET_KEY)
-    if user is not None:
-        g.user = user
-        token = generate_auth_token(user, SERVER_SECRET_KEY)
-        return token
-    return None
+    if user is None:
+        return None
+    g.user = user
+    token = generate_auth_token(user, SERVER_SECRET_KEY)
+    return token

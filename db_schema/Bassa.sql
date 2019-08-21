@@ -76,13 +76,73 @@ CREATE TABLE IF NOT EXISTS `rate` (
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
+  `id` bigint(20) AUTO_INCREMENT NOT NULL,
   `user_name` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   `auth` tinyint(11) NOT NULL,
   `email` varchar(256) NOT NULL,
   `blocked` tinyint(1) NOT NULL DEFAULT '0',
-  `approved` tinyint(1) NOT NULL DEFAULT '0'
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
+  unique key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `folder`
+--
+
+CREATE TABLE IF NOT EXISTS `folder` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) NOT NULL,
+  `parent_id` bigint(20),
+  `user_id` bigint(20) NOT NULL,
+  primary key (`id`),
+  unique key (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `file`
+--
+
+CREATE TABLE IF NOT EXISTS `file` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) NOT NULL,
+  `parent_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `path` varchar(256) NOT NULL,
+  primary key (`id`),
+  unique key (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `acl`
+--
+
+CREATE TABLE IF NOT EXISTS `acl` (
+  `user_id` bigint(20) NOT NULL,
+  `entity_type` enum('fr', 'fl') NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `access` enum('owner', 'read', 'write') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `user_id` bigint(20) NOT NULL,
+  `notif` tinytext
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
 -- Dumping data for table `user`
@@ -92,6 +152,39 @@ INSERT INTO `user` (`user_name`, `password`, `auth`, `email`, `blocked`, `approv
 ('rand', '1a1dc91c907325c69271ddf0c944bc72', 0, 'dilankachathurangi@gmail.com', 0, 1),
 ('rush', '1a1dc91c907325c69271ddf0c944bc72', 1, 'mgdmadusanka@gmail.com', 0, 0),
 ('tom', '1a1dc91c907325c69271ddf0c944bc72', 0, 'tom@mail.com', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `folder`
+--
+
+INSERT INTO `folder` (`name`, `parent_id`, `user_id`) VALUES
+('init_folder', 0, 1),
+('test_folder', 0, 1),
+('drive_root', NULL, 1);
+UPDATE `folder` SET `id`=0 WHERE `name`='drive_root';
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `file`
+--
+
+INSERT INTO `file` (`name`, `parent_id`, `user_id`, `path`) VALUES
+('init_file', 1, 1, '/path/to/init_file'),
+('test_file', 1, 1, '/path/to/test_file');
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `file`
+--
+
+INSERT INTO `acl` (`user_id`, `entity_type`, `id`, `access`) VALUES
+(2, 'fr', 1, 'write');
+
+-- --------------------------------------------------------
 
 --
 -- Indexes for dumped tables
@@ -120,6 +213,7 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `user_name` (`user_name`),
   ADD UNIQUE KEY `email` (`email`);
 
+
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -146,6 +240,33 @@ ALTER TABLE `download`
 ALTER TABLE `rate`
   ADD CONSTRAINT `rate_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`),
   ADD CONSTRAINT `rate_ibfk_2` FOREIGN KEY (`id`) REFERENCES `download` (`id`);
+
+--
+-- Constraints for table `file`
+--
+ALTER TABLE `file`
+  ADD FOREIGN KEY (`parent_id`) REFERENCES `folder` (`id`) ON DELETE CASCADE,
+  ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `folder`
+--
+ALTER TABLE `folder`
+  ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `acl`
+--
+ALTER TABLE `acl`
+  ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

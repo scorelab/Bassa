@@ -1,7 +1,7 @@
 import os
 import time
 import sys
-from DownloadManager import get_to_delete, set_delete_status
+from managers.DownloadManager import get_to_delete, set_delete_status
 import logging
 
 SECS_PER_DAY=86400

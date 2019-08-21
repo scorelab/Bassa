@@ -2,8 +2,8 @@ from initializer import server, socketio
 from flask import send_file, send_from_directory
 from flask_socketio import join_room
 import os
-from file_sender import sender
-from routes import User, Download
+from file_handler import sender
+from routes import User, Download, Directory, Acl, Upload, Notif
 
 
 # socket connections
@@ -66,7 +66,39 @@ server.add_url_rule(rule='/api/user/heavy', endpoint='get_topten_heaviest_users'
 					view_func=User.get_topten_heaviest_users, methods=['GET'])
 
 # file sending endpoints
-server.add_url_rule(rule='/api/file', endpoint='send_file_from_path', view_func=sender.send_file_from_path,
-					methods=['GET'])
+server.add_url_rule(rule='/api/file', endpoint='send_file_from_path', view_func=sender.send_file_from_path, methods=['GET'])
 server.add_url_rule(rule='/api/compress', endpoint='start_compression', view_func=sender.start_compression, methods=['POST'])
 server.add_url_rule(rule='/api/compression-progress', endpoint='get_compression_progress', view_func=sender.check_compression_progress, methods=['GET'])
+
+
+# storage entity endpoints
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:id>/children', endpoint='fetch_entity_children',
+					view_func=Directory.fetch_entity_children, methods=['GET'])
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:id>', endpoint='fetch_entity',
+					view_func=Directory.fetch_entity, methods=['GET'])
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:id>/move', endpoint='move_entity',
+					view_func=Directory.move_entity, methods=['POST'])
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:id>/add', endpoint='add_entity',
+					view_func=Directory.add_entity, methods=['POST'])
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:id>/edit', endpoint='edit_entity',
+					view_func=Directory.edit_entity, methods=['PUT'])
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:id>/remove', endpoint='remove_entity',
+					view_func=Directory.remove_entity, methods=['DELETE'])
+
+# acl endpoints
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:id>/check', endpoint='check_access',
+					view_func=Acl.check_access, methods=['GET'])
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/shared', endpoint='get_shared_entities',
+					view_func=Acl.get_shared_entities, methods=['GET'])
+server.add_url_rule(rule='/api/user/drive/<string:id>/grant', endpoint='grant_access',
+					view_func=Acl.grant_access, methods=['POST'])
+
+# file uploading endpoints
+server.add_url_rule(rule='/api/user/<string:user_id>/drive/<string:parent_id>/upload', endpoint='upload_file_to_server',
+					view_func=Upload.upload_file_to_server, methods=['POST'])
+
+# notification endpoints
+server.add_url_rule(rule='/api/user/<string:user_id>/notifications', endpoint='fetch_notifs',
+					view_func=Notif.fetch_notifs, methods=['GET'])
+server.add_url_rule(rule='/api/user/<string:user_name>/notification/add', endpoint='save_notif',
+					view_func=Notif.save_notif, methods=['POST'])

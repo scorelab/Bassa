@@ -1,7 +1,7 @@
 from flask import send_file
 from flask import request, Response, g
 from Auth import *
-from DownloadManager import *
+from managers.DownloadManager import *
 import json, urllib.request, urllib.error, urllib.parse
 from multiprocessing import Process
 from DownloadDaemon import starter
