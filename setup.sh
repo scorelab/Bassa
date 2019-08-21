@@ -25,8 +25,8 @@ else
    echo "Installing Minio server locally"
    wget https://dl.min.io/server/minio/release/linux-amd64/minio
    chmod +x minio
-   echo "run as root... \n1. Execute : sudo ./minio server /data to run minio server"
-
+   printf "Run as root... \n1. Execute : './minio server /data' to start minio server\n"
+   
    if [ ! -z $APT_GET ]; then
       echo -e "apt-get found\n"
       PACKAGE_MANAGER="apt-get"
