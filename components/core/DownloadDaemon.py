@@ -226,9 +226,7 @@ def send_file_details(file_name, file_path):
 
 
 def send_details_to_minio(file_name, file_path, gid, completedLength, username, download_id, fileSize):
-    progress=-1
     if fileSize>0:
-        progress = int(float(completedLength)/float(fileSize) * 100)
         update_minio_indexes(file_name, file_path, gid, completedLength, username, download_id)
         logging.info("Database table of minio updated successfully !")
 
