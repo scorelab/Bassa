@@ -31,3 +31,8 @@ echo "bower installed"
 echo "Installing gulp globally"
 sudo npm install -g gulp
 echo "gulp installed"
+
+echo "Installing Minio server locally"
+wget https://dl.min.io/server/minio/release/linux-amd64/minio
+chmod +x minio
+printf "Run as root... \n1. Execute : 'export MINIO_ACCESS_KEY=bassa && export MINIO_SECRET_KEY=bassa123 && ./minio server /data' to start minio server\n"
