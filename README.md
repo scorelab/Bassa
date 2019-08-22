@@ -79,6 +79,7 @@ You can run a specific container using docker-compose tool. You can do that usin
 | Web client |  web   |
 | Database server | db |
 | Aria2c | aria2c |
+| Minio server | minio |
 
 **Usage**
 ```bash
@@ -143,6 +144,13 @@ sudo python3 setup.py develop
 Start Bassa API server 
 ```
 sudo python3 Main.py
+```
+#### Setting up Minio server
+
+Execute the following command to start Minio server
+ 
+```
+export MINIO_ACCESS_KEY=bassa && export MINIO_SECRET_KEY=bassa123 && ./minio server /data
 ```
 #### Setting up Bassa Web client and Gulp
 
@@ -213,6 +221,13 @@ Start Bassa API server
 ```
 sudo python3 Main.py
 ```
+#### Setting up Minio server
+
+Execute the following command to start Minio server
+ 
+```
+export MINIO_ACCESS_KEY=bassa && export MINIO_SECRET_KEY=bassa123 && minio server /data
+```
 #### Setting up Bassa Web client and Gulp
 
 Open a new terminal window, move to UI code base and install node modules.
@@ -281,6 +296,18 @@ Start Bassa API server
 ```
 sudo python Main.py
 ```
+#### Setting up Minio server
+
+Download and run Minio.exe using following link
+```
+https://dl.min.io/server/minio/release/windows-amd64/minio.exe
+```
+
+Change the directory to folder where Minio.exe is downloaded and Execute the following command to start Minio server
+ 
+```
+set MINIO_ACCESS_KEY=bassa && set MINIO_SECRET_KEY=bassa123 && minio.exe server /data
+```
 #### Setting up Bassa Web client and Gulp
 
 Open a new terminal window, move to UI code base and install node modules.
@@ -311,10 +338,11 @@ Once developed, Bassa will save internet bandwidth by downloading files when the
 
 #### If you’re an admin
 - Only an admin account can access the “Admin” tab in Bassa
-- In the admin tab, you have three available processes- <br>
+- In the admin tab, you have four available processes- <br>
      **a) Start/Kill downloads-** You can start the downloads queued at the time of your liking <br>
      **b) Sign up Requests-** As an admin, you need to approve the accounts of all the new users before they can start using Bassa <br>
-     **c) Usage of top heaviest users-** You get access to a graph that shows the usage percentage of the heaviest users
+     **c) Usage of top heaviest users-** You get access to a graph that shows the usage percentage of the heaviest users <br>
+     **d) Visit minio-** As an admin, you can visit minio and monitor the downloaded files
 
 #### Common Functionalities
 - Once logged in, navigate to the dashboard section. You can add a link to a file or a magnet link in the text field labeled “Add download*”. You can then see the link added under the “Ongoing downloads tab” <br>
