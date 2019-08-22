@@ -39,6 +39,22 @@ services:
       - ./downloads:/data
     restart: always
 
+  minio:
+    image: minio/minio
+    container_name: minio
+    links:
+      - db
+    ports:
+      - 9000:9000
+    volumes:
+      - data-volume:/data
+    environment:
+      MINIO_ACCESS_KEY: bassa
+      MINIO_SECRET_KEY: bassa123
+    labels:
+      com.example.description: "Docker container for Minio server"
+    command: minio server data/minio/
+
   db:
     image: mysql:5.7
     restart: always
