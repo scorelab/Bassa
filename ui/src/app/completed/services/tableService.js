@@ -26,10 +26,18 @@
       })
     };
 
+    var downloadFromMinio = function(downloadId) {
+      return $http({
+        method: 'GET',
+        url : BassaUrl + '/api/file_from_minio/' + downloadId
+      })
+    };
+
     return {
       getCompletedDownloads : getCompletedDownloads,
       startCompression : startCompression,
-      compressionProgress : compressionProgress
+      compressionProgress : compressionProgress,
+      downloadFromMinio : downloadFromMinio
     };
   }
 })();

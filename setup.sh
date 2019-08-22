@@ -16,6 +16,17 @@ else
    echo "Starting dependency installation..."
    echo "Finding the package manager"
 
+   echo "Installing minio-py libraries"
+   git clone https://github.com/minio/minio-py
+   cd minio-py
+   python setup.py develop
+   echo "minio-py libraries installed"
+
+   echo "Installing Minio server locally"
+   wget https://dl.min.io/server/minio/release/linux-amd64/minio
+   chmod +x minio
+   printf "Run as root... \n1. Execute : './minio server /data' to start minio server\n"
+   
    if [ ! -z $APT_GET ]; then
       echo -e "apt-get found\n"
       PACKAGE_MANAGER="apt-get"

@@ -8,7 +8,11 @@ from DownloadDaemon import starter
 from utils.app_constants import SERVER_SECRET_KEY
 from utils.token_utils import token_validator
 from initializer import socketio
+from MinioHandler import *
+
+
 conf = get_conf_reader("dl.conf")
+
 
 def start():
 	try:
@@ -139,3 +143,17 @@ def get_download(id):
 		return '{"error":"not authorized"}', 403
 	else:
 		return '{"error":"token error"}', 403
+
+
+def get_file_from_minio(id):
+	try:
+		status = get_file_name(int(id))
+		if status is not None and status != "db connection error":
+			minio_file_url = get_file_url(status)
+			jsondata=json.dumps({'url': minio_file_url})
+			return jsondata
+		else:
+			return '{"error":"file not found"}', 404
+	except Exception as e:
+		resp = Response(response="{'error':'" + str(e) + "'}", status=400)
+		return resp

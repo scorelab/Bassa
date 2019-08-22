@@ -39,6 +39,8 @@ server.add_url_rule(rule='/api/downloads/<int:limit>', endpoint='get_downloads_r
 					view_func=Download.get_downloads_request, methods=['GET'])
 server.add_url_rule(rule='/api/download/<int:id>', endpoint='get_download', view_func=Download.get_download,
 					methods=['GET'])
+server.add_url_rule(rule='/api/file_from_minio/<int:id>', endpoint='get_file_from_minio', view_func=Download.get_file_from_minio,
+					methods=['GET'])			
 
 # user action api endpoints
 server.add_url_rule(rule='/api/login', endpoint='login', view_func=User.login, methods=['POST'])
