@@ -1,6 +1,7 @@
 from DownloadDaemon import *
 from minio import Minio
 from minio.error import ResponseError
+import logging
 
 client = Minio('localhost:9000', secure=False,
                access_key='bassa',
@@ -14,7 +15,8 @@ def upload_to_minio(file_name, file_path):
 			client.make_bucket('bassa')
 		client.fput_object('bassa', file_name, file_path)
 	except ResponseError as err:
-		print(err)
+		logging.error(err)
+		return err
 
 def get_file_url(fname):
 	try:

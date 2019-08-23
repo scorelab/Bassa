@@ -3,6 +3,7 @@ from DBCon import *
 import time
 import sys
 import sqlalchemy.pool as pool
+import logging
 
 verbose = False
 
@@ -27,7 +28,7 @@ def add_download(download):
 		except MySQLdb.Error as e:
 			db.rollback()
 			# Shows error thrown up by database
-			print(e)
+			logging.error(e)
 			return e[1]
 		return "success"
 	return "db connection error"
@@ -400,7 +401,7 @@ def set_compression_progress(comp_id, status, **kwargs):
 		except MySQLdb.Error as e:
 			db.rollback()
 			# Shows error thrown up by database
-			print(e)
+			logging.error(e)
 			return e[1]
 		return "success"
 	return "db connection error"
@@ -437,7 +438,7 @@ def insert_compression_process(comp_id, start_time, completed_time, is_deleted):
 		except MySQLdb.Error as e:
 			db.rollback()
 			# Shows error thrown up by database
-			print(e)
+			logging.error(e)
 			return e[1]
 		return 0
 	return "db connection error"
@@ -454,24 +455,28 @@ def update_minio_indexes(file_name, file_path, gid, completedLength, username, d
 		except MySQLdb.Error as e:
 			db.rollback()
 			# Shows error thrown up by database
-			print(e)
+			logging.error(e)
+			return e[1]
+		return 0
+	return "db connection error"
 
 def get_file_name(id):
 	db = threadpool.connect()
 	if db is not None:
 		cursor = db.cursor(MySQLdb.cursors.DictCursor)
 		sql = "SELECT mfile_name FROM minio WHERE mid='%s';" % id
-		print(sql)
+		logging.info(sql)
 		try:
 			cursor.execute(sql)
 			if cursor.rowcount == 0:
 				return None
 			results = cursor.fetchone()
-			print(results)
+			logging.info(results)
 			file_name = results['mfile_name']
 			db.close()
 			return file_name
 		except MySQLdb.Error as e:
-			print(e)
+			logging.error(e)
 			return e[1]
+		return 0
 	return "db connection error"
