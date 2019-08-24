@@ -150,7 +150,9 @@ sudo python3 Main.py
 Execute the following command to start Minio server
  
 ```
-export MINIO_ACCESS_KEY=bassa && export MINIO_SECRET_KEY=bassa123 && ./minio server /data
+export MINIO_ACCESS_KEY=bassa
+export MINIO_SECRET_KEY=bassa123
+./minio server /data
 ```
 #### Setting up Bassa Web client and Gulp
 
@@ -226,7 +228,9 @@ sudo python3 Main.py
 Execute the following command to start Minio server
  
 ```
-export MINIO_ACCESS_KEY=bassa && export MINIO_SECRET_KEY=bassa123 && minio server /data
+export MINIO_ACCESS_KEY=bassa
+export MINIO_SECRET_KEY=bassa123
+minio server /data
 ```
 #### Setting up Bassa Web client and Gulp
 
@@ -306,7 +310,10 @@ https://dl.min.io/server/minio/release/windows-amd64/minio.exe
 Change the directory to folder where Minio.exe is downloaded and Execute the following command to start Minio server
  
 ```
-set MINIO_ACCESS_KEY=bassa && set MINIO_SECRET_KEY=bassa123 && minio.exe server /data
+set MINIO_ACCESS_KEY=bassa
+set MINIO_SECRET_KEY=bassa123
+minio.exe server /data
+
 ```
 #### Setting up Bassa Web client and Gulp
 
