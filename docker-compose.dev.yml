@@ -50,7 +50,7 @@ services:
       MINIO_ACCESS_KEY: bassa
       MINIO_SECRET_KEY: bassa123
     labels:
-      com.example.description: "Docker container for Minio server"
+      org.scorelab.description: "Docker container for Minio server"
     command: minio server data/minio/
     
   db:
