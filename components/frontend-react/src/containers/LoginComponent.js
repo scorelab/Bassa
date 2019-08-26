@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
   password: Yup.string('')
     .min(8, 'Password must contain atleast 8 characters')
     .required('Enter your password'),
-  confirm_password: Yup.string('Enter your password')
+  confirmPassword: Yup.string('Enter your password')
     .required('Confirm your password')
     .oneOf([Yup.ref('password')], 'Password does not match')
 });
@@ -32,6 +32,7 @@ const validationSchema = Yup.object({
 const LoginComponent = props => {
   const handleClickSubmit = details => {
     JSON.stringify(details);
+    console.log(details);
     props.addNewUser(details);
   };
 
@@ -46,7 +47,7 @@ const LoginComponent = props => {
     user_name: '',
     email: '',
     password: '',
-    confirm_password: ''
+    confirmPassword: ''
   };
   const {
     isloggedIn,

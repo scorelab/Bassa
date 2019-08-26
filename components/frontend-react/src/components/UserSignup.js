@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 
 const UserSignup = props => {
   const {
-    values: { user_name, email, password, confirm_password },
+    values: { user_name, email, password, confirmPassword },
     errors,
     touched,
     handleSubmit,
@@ -120,13 +120,13 @@ const UserSignup = props => {
         />
 
         <TextField
-          name="confirm_password"
+          name="confirmPassword"
           className={classes.inputField}
           type="password"
-          helperText={touched.confirm_password ? errors.confirm_password : ''}
-          error={Boolean(errors.confirm_password)}
+          helperText={touched.confirmPassword ? errors.confirmPassword : ''}
+          error={Boolean(errors.confirmPassword)}
           label="Confirm Password"
-          value={confirm_password}
+          value={confirmPassword}
           onChange={handleChange}
           fullWidth
           InputProps={{

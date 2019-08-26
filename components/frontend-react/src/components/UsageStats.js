@@ -17,8 +17,8 @@ const useStyles = makeStyles(() => ({
 const renderActiveShape = props => {
   const RADIAN = Math.PI / 180;
   const {
-    cx,
-    cy,
+    cx, // center's x-coordinate
+    cy, // center's y-coordinate
     midAngle,
     innerRadius,
     outerRadius,
@@ -38,6 +38,14 @@ const renderActiveShape = props => {
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
   const textAnchor = cos >= 0 ? 'start' : 'end';
+
+  /*
+    Notations above represent:
+    sin, cos: -sin(midAngle), -cos(midAngle) = cos(midAngle) used for connecting sx, sy to active sector
+    sx, sy: starting x, y coordinates for path connecting active sector and data displayed
+    mx, my: middle x, y coordinates
+    ex, ey: ending x, y coordinates for the path 
+  */
 
   return (
     <g>
