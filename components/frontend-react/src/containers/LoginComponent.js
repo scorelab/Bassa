@@ -32,7 +32,6 @@ const validationSchema = Yup.object({
 const LoginComponent = props => {
   const handleClickSubmit = details => {
     JSON.stringify(details);
-    console.log(details);
     props.addNewUser(details);
   };
 

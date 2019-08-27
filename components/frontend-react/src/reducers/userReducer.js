@@ -29,7 +29,6 @@ const userReducer = (state = initialState, action) => {
       return { state: initialState, isloggedIn: false };
 
     case userActions.ADD_NEW_USER:
-      console.log(action.details);
       return { ...state, details: action.details };
 
     case userActions.ADD_NEW_USER_FAILED:
