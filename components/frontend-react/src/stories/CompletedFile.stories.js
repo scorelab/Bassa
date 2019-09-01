@@ -5,13 +5,19 @@ import { object } from '@storybook/addon-knobs';
 
 import CompletedFile from '../components/CompletedFile';
 
-export const fileObject = {
-	id: '1',
-	user: 'some_user_name',
-	name: 'some_file_name',
-	size: '120.23 KB',
-	time: 'some_hours_ago'
-}
+const fileObject = {
+  id: '1',
+  user: 'some_user_name',
+  name: 'some_file_name',
+  size: '120.23 KB',
+  time: 'some_hours_ago'
+};
 
-storiesOf('CompletedFile', module)
-.add('default', () => <CompletedFile file={object('file', {...fileObject})} onDownload={action('download')}/>)
+export { fileObject as default };
+
+storiesOf('CompletedFile', module).add('default', () => (
+  <CompletedFile
+    file={object('file', { ...fileObject })}
+    onDownload={action('download')}
+  />
+));

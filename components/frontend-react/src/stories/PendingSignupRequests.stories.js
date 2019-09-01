@@ -4,7 +4,7 @@ import { object } from '@storybook/addon-knobs';
 
 import PendingSignupRequests from '../components/PendingSignupRequests';
 
-export const requestsList = [
+const requestsList = [
   {
     name: 'rush',
     email: 'rush@gmail.com'
@@ -13,7 +13,10 @@ export const requestsList = [
     name: 'rome',
     email: 'rome@gmail.com'
   }
-]
+];
 
-storiesOf('Pending Signup Requests', module)
-.add('default', () => <PendingSignupRequests requestsList={object('list',requestsList)} />)
+export { requestsList as default };
+
+storiesOf('Pending Signup Requests', module).add('default', () => (
+  <PendingSignupRequests requestsList={object('list', requestsList)} />
+));

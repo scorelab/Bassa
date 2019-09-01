@@ -1,73 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Appbar Component Testing should match with its snapshot 1`] = `
-<div
-  className="makeStyles-root-1"
->
-  <WithStyles(ForwardRef(AppBar))
-    position="static"
-    style={
-      Object {
-        "background": "#625042",
-      }
-    }
-  >
-    <WithStyles(ForwardRef(Toolbar))>
-      <WithStyles(ForwardRef(Avatar))
-        alt="Bassa"
-        className="makeStyles-bigAvatar-5"
-        src="logo.png"
-      />
-      <WithStyles(ForwardRef(Typography))
-        className="makeStyles-grow-2"
-        color="inherit"
-        variant="h4"
-      >
-        Bassa
-      </WithStyles(ForwardRef(Typography))>
-      <form
-        onSubmit={[Function]}
-      >
-        <WithStyles(ForwardRef(TextField))
-          data-test="input-username"
-          id="username"
-          margin="normal"
-          onChange={[Function]}
-          placeholder="Username"
-          style={
-            Object {
-              "background": "#fff",
-            }
-          }
-          variant="outlined"
-        />
-          
-        <WithStyles(ForwardRef(TextField))
-          data-test="input-password"
-          id="password"
-          margin="normal"
-          onChange={[Function]}
-          placeholder="Password"
-          style={
-            Object {
-              "background": "#fff",
-            }
-          }
-          type="password"
-          variant="outlined"
-        />
-          
-        <WithStyles(ForwardRef(Button))
-          className="makeStyles-menuButton-3"
-          color="primary"
-          size="large"
-          type="submit"
-          variant="contained"
-        >
-          Login
-        </WithStyles(ForwardRef(Button))>
-      </form>
-    </WithStyles(ForwardRef(Toolbar))>
-  </WithStyles(ForwardRef(AppBar))>
-</div>
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
 `;
