@@ -57,20 +57,17 @@
   if (keyEvent.which === 13)
     $scope.addLink();
   }
-    var getActiveDownloads = function() {
-      DashService.getDownloads().then(function (response) {
-        var data = response.data;
-        $scope.downloads = _.reduce(data, function(queue, d) {
-            if (d.status == 0) {
-              let object = _.extend({}, d, {progress: 0});
-              queue.push(object)
-              return queue;
-            }
-        }, []);
-      }, function(error){
-        ToastService.showToast("Oops! Something went wrong when fetching data");
+  var getActiveDownloads = function() {
+    DashService.getDownloads().then(function (response) {
+      var data = response.data;
+      $scope.filterdownloads = _.filter(data, function(d) {return d.status==0});
+      $scope.downloads = _.map($scope.filterdownloads, function(obj) {
+           return _.extend({}, obj, {progress: 0});
       });
-    }
+    }, function(error){
+      ToastService.showToast("Oops! Something went wrong when fetching data");
+    });
+}
 
     $scope.removeLink = function (index, id) {
       // Shows window confirmation before deleting download.

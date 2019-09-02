@@ -10,7 +10,7 @@
     </md-button>
   </md-content>
 
-  <div ng-if="data?.length > 0">
+  <div ng-if="data.length != 0">
     <md-content class="downloads md-padding table-responsive-vertical" >
       <h4 class="panel-widget-tittle"> On going downloads</h4>
       <table id="table" class="table table-hover table-bordered">
@@ -34,7 +34,7 @@
     </md-content>
   </div>
 
-  <div ng-if="!data.length == true">
+  <div ng-if="data.length == 0">
     <md-content class="no-data-content" >
       <h4>There are no queued downloads, please add some!</h4>
     </md-content>
