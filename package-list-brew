@@ -29,3 +29,7 @@ echo "Installing Gulp"
 npm install -g gulp
 npm install -g gulp-cli
 echo "Gulp Installed"
+
+echo "Installing Minio server locally"
+brew install minio/stable/minio
+printf "Execute : 'export MINIO_ACCESS_KEY=bassa && export MINIO_SECRET_KEY=bassa123 && minio server /data' to start minio server\n"
