@@ -27,8 +27,8 @@ def serve_ui1():
 
 
 # download endpoints
-server.add_url_rule(rule='/download/start', endpoint='start', view_func=Download.start)
-server.add_url_rule(rule='/download/kill', endpoint='kill', view_func=Download.kill)
+server.add_url_rule(rule='/api/download/start', endpoint='start', view_func=Download.start)
+server.add_url_rule(rule='/api/download/kill', endpoint='kill', view_func=Download.kill)
 server.add_url_rule(rule='/api/download', endpoint='add_download_request', view_func=Download.add_download_request,
 					methods=['POST'])
 server.add_url_rule(rule='/api/download/<int:id>', endpoint='remove_download_request',

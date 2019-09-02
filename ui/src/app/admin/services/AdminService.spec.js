@@ -18,7 +18,7 @@ describe("Service: AdminService", function() {
 
   it("should start downloads", function() {
 
-    localHttpBackend.expect("GET", localBassaUrl + "/download/start")
+    localHttpBackend.expect("GET", localBassaUrl + "/api/download/start")
       .respond(201, { "status": "12345" });
 
     AdminService.startDownloads().then(function(response) {
@@ -31,7 +31,7 @@ describe("Service: AdminService", function() {
 
   it("should kill downloads", function() {
     
-    localHttpBackend.expect("GET", localBassaUrl + "/download/kill")
+    localHttpBackend.expect("GET", localBassaUrl + "/api/download/kill")
         .respond(200, { status: "success"});
   
     AdminService.killDownloads().then(function(response) {
