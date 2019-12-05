@@ -3,7 +3,11 @@ import shutil
 import inspect
 import platform
 from setuptools import setup
-from pip.req import parse_requirements
+# https://stackoverflow.com/a/49867265/8222484
+try: # for pip >= 10
+    from pip._internal.req import parse_requirements
+except ImportError: # for pip <= 9.0.3
+    from pip.req import parse_requirements
 
 EMAIL_CONF = 'email.conf'
 DL_CONF = 'dl.conf'
