@@ -21,8 +21,10 @@ apt-get install libmysqlclient-dev
 echo "libmysqlclient installed"
 
 echo "Installing node"
-curl -sL https://deb.nodesource.com/setup_6.x | bash -
-apt-get install -y nodejs
+curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash -
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm install --lts
 echo "NodeJS installed"
 
 echo "Installing bower globally"
