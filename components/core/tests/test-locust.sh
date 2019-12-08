@@ -20,4 +20,4 @@ start_bassa(){
 }
 
 start_locust &
-start_docker
+start_bassa
