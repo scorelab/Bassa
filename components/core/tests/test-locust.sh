@@ -10,7 +10,7 @@ start_locust(){
     fi
 }
 
-start_docker(){
+start_bassa(){
     echo Building and running container
     echo Building from: $PWD...
     docker-compose -f ../../../docker-compose.yml up --build
