@@ -47,7 +47,7 @@ You can learn how to use Bassa as an effective download queue for communities by
 
 ## Developer Guide
 Once you have setup Bassa locally, you can move to our [Developer Guide](https://github.com/scorelab/Bassa/wiki/Bassa:-Developer-Guide) to know more about the project internals.
-
+Please go through [contribution guidelines document](https://github.com/scorelab/Bassa/wiki/Contribution-Guidelines) before making any contributions.
 ## Communication
 Feel free to discuss on our [Bassa gitter channel](https://gitter.im/scorelab/Bassa).
 You can also discuss about other projects on [SCoRe Lab gitter channel](https://gitter.im/scorelab/scorelab).
