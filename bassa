@@ -1,0 +1,136 @@
+#!/bin/bash
+: '
+# python3 Main.py
+# gulp serve
+# arie2c --enable-rpc
+'
+start(){
+	# first check the current status of the server using log file exsitance
+	check_status=$( status )
+	if [ "$check_status" == "inactive" ]
+	then
+		echo -ne '\e[32mstarting...'
+		# this one is just to look good
+		for number in {1..6}
+		do
+			echo -ne '.'
+			sleep .5
+		done
+		# get the base directory of the bassa server files
+
+		BASEDIR=$(dirname "$0")
+		PYSERVER="$BASEDIR/components/core/Main.py"
+		UISERVER="$BASEDIR/ui"
+
+		# this one is to use the temporary folder for extra data
+
+		if [ ! -d "/tmp/bassa" ]; then
+			mkdir /tmp/bassa
+		fi
+
+		# making log file for server
+
+		if [ ! -f "$BASEDIR""/python-server.log" ]; then
+			echo "" > "$BASEDIR""/python-server.log"
+			echo "" > "$UISERVER""/gulp-serve.log"
+			echo "" > "$UISERVER""/aria2c.log"
+		fi
+
+		# making process in backgroud using nohup
+
+		nohup python3 "$PYSERVER" &>> "$BASEDIR""/python-server.log" &
+		cd "$UISERVER"
+		nohup gulp serve &>> "$UISERVER""/gulp-serve.log" &
+		nohup aria2c --enable-rpc &>> "$UISERVER""/aria2c.log" &
+		echo -e 'started successfully\e[0m'
+	else
+		echo -e "\e[32mServer is running successfully\e[0m"
+	fi
+}
+stop(){
+	echo -ne '\e[31mTerminating.'
+
+	# just to look beautiful
+
+	for number in {1..4}
+	do
+		echo -ne '.'
+		sleep .5
+	done
+
+	# kill the existaing process or may not exist
+    BASEDIR=$(dirname "$0")
+    PYSERVER="$BASEDIR""/components/core/Main.py"
+	pkill -f "python3 $PYSERVER"
+	pkill -f "python $PYSERVER"
+	pkill -f "gulp serve"
+	pkill -f "gulp"
+	pkill -f "aria2c --enable-rpc"
+
+	# remove the log files, after stopping bassa
+
+	rm -rf "$BASEDIR""/python-server.log"
+	rm -rf "$UISERVER""/gulp-serve.log"
+	rm -rf "$UISERVER""/aria2c.log"
+	echo -e 'Terminated successfully\e[0m'
+}
+restart(){
+	stop
+	start
+}
+status(){
+	# check the server status through ps and grep tools
+	status_check_py_two=$( ps -ef | grep -v grep | grep "Main.py" )
+	if [ "$status_check_py_two" != "" ]; then
+	    echo "active"
+    else
+        echo "inactive"
+    fi
+}
+case $1 in
+	start)
+	echo -e "  \e[33m
+██████╗  █████╗ ███████╗███████╗ █████╗
+██╔══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗
+██████╔╝███████║███████╗███████╗███████║
+██╔══██╗██╔══██║╚════██║╚════██║██╔══██║
+██████╔╝██║  ██║███████║███████║██║  ██║
+╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝"
+	echo "Bassa is on the way
+	"
+
+		start
+		;;
+	stop)
+		echo 'Are you sure, you want to stop the Bassa server(y/[n])'
+		read input
+		if [ "$input" != "n" ]; then
+		stop
+		fi
+		;;
+	restart)
+		echo 'Are you sure, you want to restart the Bassa server(y/[n])'
+		read input
+		if [ "$input" != "n" ]; then
+		restart
+		fi
+		;;
+ -h)
+ 	echo "Usage: bassa {start|stop|restart|status}" >&2
+	echo
+	;;
+	status)
+		check_status=$( status )
+		if [ "$check_status" == "active" ]
+		then
+			echo -e "\e[32mActive, stats can be seen in relative files \n python-server.log \n gulp-serve.log \n aria2c.log\e[0m"
+		else
+			echo -e "\e[31mBassa is inactive\e[0m"
+			echo "do you want to start the bassa server(y/[n])"
+			read response
+			if [ "$response" != "n" ]; then
+			start
+			fi
+		fi
+		;;
+esac

@@ -251,6 +251,7 @@ md-backdrop.md-sidenav-backdrop {
 #approve-btn {
   padding-top: 0px;
   padding-bottom: 0px;
+  vertical-align: center;
 }
 
 .alert {
@@ -279,9 +280,9 @@ form {
   box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
 }
 
-.group { 
-  position: relative; 
-  margin-bottom: 45px; 
+.group {
+  position: relative;
+  margin-bottom: 45px;
 }
 
 
@@ -295,11 +296,11 @@ form {
 
 .bar:before, .bar:after {
   content: '';
-  height: 2px; 
+  height: 2px;
   width: 0;
-  bottom: 1px; 
+  bottom: 1px;
   position: absolute;
-  background: #757575; 
+  background: #757575;
   transition: all 0.2s ease;
 }
 
@@ -313,9 +314,9 @@ form {
 
 .highlight {
   position: absolute;
-  height: 60%; 
-  width: 100px; 
-  top: 25%; 
+  height: 60%;
+  width: 100px;
+  top: 25%;
   left: 0;
   pointer-events: none;
   opacity: 0.5;
@@ -360,4 +361,18 @@ form {
 
 .inputStyle:focus ~ .highlight {
   animation: inputHighlighter 0.3s ease;
+}
+
+/* no data */
+
+.no-data-content {
+  font-size: 20px;
+  border: black;
+  height: 150px;
+  width: 700px;
+  color: grey;
+  text-align: center;
+  padding-top: 85px;
+  margin-left: 285px;
+  margin-top: 150px;
 }

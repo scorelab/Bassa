@@ -1,0 +1,17 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: bassa-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: bassa-ui
+          servicePort: 80
+      - path: /api/*
+        backend:
+          serviceName: bassa-api
+          servicePort: 5000
