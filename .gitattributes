@@ -199,3 +199,10 @@ makefile       text
 
 ## EXECUTABLES
 *.pyc binary
+
+## LINGUST OVERRIDES
+/Dockerfile.dev linguist-language=dockerfile
+/docker-compose linguist-language=dockerfile
+/Dockerfile linguist-language=dockerfile
+/components/core/Dockerfile.prod linguist-language=dockerfile
+*.dev linguist-language=dockerfile 
