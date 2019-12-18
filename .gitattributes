@@ -200,4 +200,10 @@ makefile       text
 ## EXECUTABLES
 *.pyc binary
 
-
+## LINGUST OVERRIDES
+/components/core/Dockerfile.prod linguist-language=dockerfile
+/ui/Dockerfile.dev linguist-language=dockerfile
+/ui/.bowerrc linguist-language=json
+/ui/yarn.lock linguist-language=json
+/components/core/email.conf linguist-language=json
+/components/core/dl.conf linguist-language=json
