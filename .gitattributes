@@ -1,4 +1,4 @@
-/Dockerfile.dev linguist-language=dockerfile
+ui/Dockerfile.dev linguist-language=dockerfile
+ui/Dockerfile linguist-language=dockerfile
 /docker-compose linguist-language=dockerfile
-/Dockerfile linguist-language=dockerfile
 *.dev linguist-language=dockerfile
