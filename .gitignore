@@ -85,7 +85,6 @@ __pycache__/
 build/
 develop-eggs/
 dist/
-downloads/
 eggs/
 .eggs/
 lib/
@@ -226,4 +225,7 @@ tags
 !.vscode/extensions.json
 .history
 
+###make empty folder in downloads
+downloads/*
+!downloads/.gitkeep 
 # End of https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
