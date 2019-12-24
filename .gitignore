@@ -42,7 +42,6 @@ jspm_packages/
 
 *.log
 components/core/debug-server.log
-downloads/
 
 # UI
 ui/dist
