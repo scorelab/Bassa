@@ -85,7 +85,6 @@ __pycache__/
 build/
 develop-eggs/
 dist/
-downloads/
 eggs/
 .eggs/
 lib/
@@ -225,5 +224,8 @@ tags
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+downloads/*
+!downloads/.gitkeep
 
 # End of https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
