@@ -225,7 +225,13 @@ tags
 !.vscode/extensions.json
 .history
 
-###make empty folder in downloads
+<<<<<<< HEAD
+###make empty downloads folder
 downloads/*
 !downloads/.gitkeep 
+=======
+downloads/*
+!downloads/.gitkeep
+
+>>>>>>> 64856021201e1d728be055e2956ca5a56151a3aa
 # End of https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
