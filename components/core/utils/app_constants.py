@@ -1,1 +1,2 @@
-SERVER_SECRET_KEY = "123456789"
+import os
+SERVER_SECRET_KEY = os.environ.get('BASSA_SERVER_KEY')
