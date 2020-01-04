@@ -1,0 +1,15 @@
+# frontend building stage
+FROM node:12
+WORKDIR /bassa-ui
+COPY package.json .
+COPY package-lock.json .
+RUN npm install
+COPY . .
+RUN npm run build
+
+# setting up the nginx server
+FROM nginx:1.16
+WORKDIR /usr/share/nginx/html
+COPY --from=0 /bassa-ui/build .
+EXPOSE 80
+CMD nginx -g 'daemon off;'
