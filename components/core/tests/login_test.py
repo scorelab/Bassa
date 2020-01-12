@@ -34,5 +34,5 @@ class Test(unittest.TestCase):
     def test_correct_check_approved(self):
         self.assertEqual(True, check_approved(usernamer(), passwordr()))
 
-
-unittest.main()
+if __name__ == "__main__":
+    unittest.main()
