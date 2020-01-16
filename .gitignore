@@ -42,7 +42,7 @@ jspm_packages/
 
 *.log
 components/core/debug-server.log
- 
+downloads/
 
 # UI
 ui/dist
@@ -85,7 +85,7 @@ __pycache__/
 build/
 develop-eggs/
 dist/
- 
+downloads/
 eggs/
 .eggs/
 lib/
@@ -227,6 +227,3 @@ tags
 .history
 
 # End of https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
- 
-# For downloads folder. All files within are ignored  
-downloads/ 
