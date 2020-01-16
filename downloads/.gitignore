@@ -1,3 +1,4 @@
-# Pushed empty folder in the downloads folder 
-# ignore this file 
-!.gitignore
+# Made empty folder(downloads) in the github folder
+
+*
+!.gitignore 
