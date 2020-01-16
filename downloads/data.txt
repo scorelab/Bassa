@@ -1,2 +1,0 @@
-This folder contains downloaded data from Aria2c 
-which is mapped to both Bassa API container and Aria2c RPC server
