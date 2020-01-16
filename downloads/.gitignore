@@ -1,4 +1,3 @@
-# Ignore everything in this directory
-*
-# Except this file
+# Pushed empty folder in the downloads folder 
+# ignore this file 
 !.gitignore
