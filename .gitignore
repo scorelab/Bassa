@@ -229,5 +229,4 @@ tags
 # End of https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
  
 # For downloads folder. All files within are ignored  
-
-dowloads/**/*.*
+downloads/ 
