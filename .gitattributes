@@ -29,6 +29,7 @@
 *.pyc 		binary
 *.pyd		binary
 *.pyo 		binary
+*.lock    binary
 
 ## SOURCE CODE
 *.bat      text eol=crlf
@@ -42,6 +43,7 @@
 *.json     text
 *.jsx      text
 *.less     text
+*.env      text
 *.od       text
 *.onlydata text
 *.php      text
@@ -59,10 +61,13 @@
 *.tsx      text
 *.xml      text
 *.xhtml    text
+*.spec     text
+*.prettierrc   text
 
 ## DOCKER
 *.dockerignore    text
-Dockerfile    text
+Dockerfile        text
+Docker-compose    text
 
 ## DOCUMENTATION
 *.markdown   text
@@ -74,6 +79,8 @@ Dockerfile    text
 *.mdtxt      text
 *.mdtext     text
 *.txt        text
+*.prod       text
+*.sample     text
 AUTHORS      text
 CHANGELOG    text
 CHANGES      text
@@ -104,6 +111,7 @@ TODO         text
 *.tmpl       text
 *.tpl        text
 *.twig       text
+*.dev        text
 
 ## LINTERS
 .csslintrc    text
