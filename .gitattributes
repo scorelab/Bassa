@@ -29,11 +29,13 @@
 *.pyc 		binary
 *.pyd		binary
 *.pyo 		binary
+*.prod    binary
 
 ## SOURCE CODE
 *.bat      text eol=crlf
 *.coffee   text
 *.css      text
+*.env      text
 *.htm      text
 *.html     text
 *.inc      text
@@ -63,8 +65,10 @@
 ## DOCKER
 *.dockerignore    text
 Dockerfile    text
+Docker-compose    text
 
 ## DOCUMENTATION
+*.dev        text
 *.markdown   text
 *.md         text
 *.mdwn       text
@@ -73,6 +77,7 @@ Dockerfile    text
 *.mkdn       text
 *.mdtxt      text
 *.mdtext     text
+*.sample     text
 *.txt        text
 AUTHORS      text
 CHANGELOG    text
