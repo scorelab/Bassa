@@ -34,6 +34,8 @@
 *.bat      text eol=crlf
 *.coffee   text
 *.css      text
+*.conf     linguist-language=xml
+*.env      linguist-language=python
 *.htm      text
 *.html     text
 *.inc      text
@@ -46,6 +48,7 @@
 *.onlydata text
 *.php      text
 *.pl       text
+*.prettierrc   linguist-language=java-script
 *.py       text
 *.rb       text
 *.sass     text
@@ -63,8 +66,11 @@
 ## DOCKER
 *.dockerignore    text
 Dockerfile    text
+*.prod        linguist-language=dockerfile
+*.Docker-compose    linguist-language=dockerfile
 
 ## DOCUMENTATION
+*.dev        text
 *.markdown   text
 *.md         text
 *.mdwn       text
@@ -74,6 +80,7 @@ Dockerfile    text
 *.mdtxt      text
 *.mdtext     text
 *.txt        text
+*.env        text
 AUTHORS      text
 CHANGELOG    text
 CHANGES      text
@@ -162,6 +169,7 @@ makefile       text
 *.mp3  binary
 *.ogg  binary
 *.ra   binary
+*.sample  binary
 
 ## VIDEO
 *.3gpp binary
