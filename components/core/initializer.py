@@ -10,7 +10,7 @@ monkey.patch_all(ssl=False)
 
 server = Flask(__name__)
 server.config['SECRET_KEY'] = SERVER_SECRET_KEY
-socketio = SocketIO(server, debug=True, logger=True, engineio_logger=True, ping_timeout=600)
+socketio = SocketIO(server, cors_allowed_origins="*", debug=True, logger=True, engineio_logger=True, ping_timeout=600)
 cors = CORS(server)
 p = None
 verbose = False
