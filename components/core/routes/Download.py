@@ -20,7 +20,7 @@ def start():
 		if str(token) != SERVER_SECRET_KEY:
 			return "{'error':'not authorized'}", 403
 		global p
-		p = Process(target=starter, args=(socketio,))
+		p = Process(target=starter, args=(socketio))
 		p.start()
 		return '{"status":"' + str(p.pid) + '"}'
 	except Exception as e:
