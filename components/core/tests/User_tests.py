@@ -5,6 +5,13 @@ import unittest
 import Models
 
 
+import unittest
+import testing.mysqld
+
+# Generate Mysqld class which shares the generated database
+Mysqld = testing.mysqld.MysqldFactory(cache_initialized_db=True)
+
+
 class User:
     def __init__(self, userName, email, password, auth):
         self.userName = userName
@@ -26,6 +33,16 @@ class User:
 
 
 class Test(unittest.TestCase):
+    def setUp(self):
+        # Use the generated Mysqld class instead of testing.mysqld.Mysqld
+        self.mysqld = Mysqld()
+
+    def tearDown(self):
+        self.mysqld.stop()
+    
+    def tearDownModule(self):
+        # clear cached database at end of tests
+        Mysqld.clear_cache()
 
     def test_check_existing_username(self):
         self.assertEqual(True, check_user_name('rand'))
@@ -48,7 +65,7 @@ class Test(unittest.TestCase):
                          add_regular_user(user=User('reg', 'emailregular@email.com', '12345678', '0')))
 
     def test_update_user(self):
-        self.assertEqual("success", update_user(user=User('updated_user', 'emailregular@email.com', '12345678', '0'),
+        self.assertEqual("success", update_user(user=User('updated_user', 'emailnormal@email.com', '12345678', '0'),
                                                 username="normal_user"))
 
     def test_remove_user(self):
