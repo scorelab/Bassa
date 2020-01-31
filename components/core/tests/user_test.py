@@ -8,8 +8,8 @@ import Models
 import unittest
 import testing.mysqld
 
-# Generate Mysqld class which shares the generated database
-Mysqld = testing.mysqld.MysqldFactory(cache_initialized_db=True)
+# Generate MYSQLD class which shares the generated database
+MYSQLD = testing.mysqld.MysqldFactory(cache_initialized_db=True)
 
 
 class User:
@@ -34,15 +34,15 @@ class User:
 
 class Test(unittest.TestCase):
     def setUp(self):
-        # Use the generated Mysqld class instead of testing.mysqld.Mysqld
-        self.mysqld = Mysqld()
+        # Use the generated MYSQLD class instead of testing.mysqld
+        self.mysqld = MYSQLD()
 
     def tearDown(self):
         self.mysqld.stop()
     
     def tearDownModule(self):
         # clear cached database at end of tests
-        Mysqld.clear_cache()
+        MYSQLD.clear_cache()
 
     def test_check_existing_username(self):
         self.assertEqual(True, check_user_name('rand'))
