@@ -27,8 +27,8 @@ def serve_ui1():
 
 
 # download endpoints
-server.add_url_rule(rule='/download/start', endpoint='start', view_func=Download.start)
-server.add_url_rule(rule='/download/kill', endpoint='kill', view_func=Download.kill)
+server.add_url_rule(rule='/download/start', endpoint='start', view_func=Download.start, methods=['GET'])
+server.add_url_rule(rule='/download/kill', endpoint='kill', view_func=Download.kill, methods=['GET'])
 server.add_url_rule(rule='/api/download', endpoint='add_download_request', view_func=Download.add_download_request,
 					methods=['POST'])
 server.add_url_rule(rule='/api/download/<int:id>', endpoint='remove_download_request',
@@ -40,7 +40,7 @@ server.add_url_rule(rule='/api/downloads/<int:limit>', endpoint='get_downloads_r
 server.add_url_rule(rule='/api/download/<int:id>', endpoint='get_download', view_func=Download.get_download,
 					methods=['GET'])
 server.add_url_rule(rule='/api/file_from_minio/<int:id>', endpoint='get_file_from_minio', view_func=Download.get_file_from_minio,
-					methods=['GET'])			
+					methods=['GET'])
 
 # user action api endpoints
 server.add_url_rule(rule='/api/login', endpoint='login', view_func=User.login, methods=['POST'])
