@@ -33,7 +33,6 @@ class Handler(queue.Queue):
         queue.Queue.__init__(self)
         self.ws = ws
         self.num_workers = 5
-        self.start_workers()
 
     def add_to_queue(self, download):
         self.put(download)
@@ -67,7 +66,7 @@ class Handler(queue.Queue):
 
 class MessageHandler():
 
-    def __init__(self,ws):
+    def __init__(self, ws):
         self.num_workers = 5
         self.ws = ws
 
@@ -135,7 +134,7 @@ class MessageHandler():
                     get_status(self.ws, None, data['params'][0]['gid'])
                     db_lock.release()
                     messageQueue.task_done()
-            
+
 class RepeatedTimer(object):
     def __init__(self, interval, function, *args, **kwargs):
         self._timer     = None
@@ -240,8 +239,7 @@ def on_error(ws, error):
 
 
 def on_close(ws):
-    pass
-
+    logging.info("Socket closed")
 
 def on_open(ws):
     initialize(ws)
@@ -259,13 +257,13 @@ def starter(socket):
                                 on_close=on_close)
     ws.on_open = on_open
     handler = Handler(ws)
+    handlerLst.append(handler)
     # socketio.emit("test", {'data': 'A NEW FILE WAS POSTED'}, namespace='/news')
     threading.Thread(target=handler.start_workers).start()
-    mHandler = MessageHandler(ws) 
+    mHandler = MessageHandler(ws)
     threading.Thread(target=mHandler.start_message_workers).start()
     messageQueue.join()
     ws.run_forever()
-
 
 
 
