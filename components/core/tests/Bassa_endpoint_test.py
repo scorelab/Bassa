@@ -39,6 +39,6 @@ class TestFlaskAPIUsingRequests(unittest.TestCase):
         resp = requests.post('http://localhost:5000/api/login',incorrect_string,headers=headers)
         self.assertEqual(resp.status_code,403)
 if __name__ == "__main__":
-    suite = unittest.TestLoader().loadTestsFromTestCase(Test)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestFlaskAPIUsingRequests)
     unittest.TextTestRunner(verbosity=2).run(suite)
     
