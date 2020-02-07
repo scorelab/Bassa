@@ -70,9 +70,9 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# dotenv environment variables and user config file
 .env
-
+user.db.config.json
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
