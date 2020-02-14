@@ -14,14 +14,14 @@ headers = {
 user_data = {
     "user_name": "user",
     "password": "password",
-    "email": "fdddsfasdsadsasdsdj@dgd.com",
+    "email": "user@email.com",
     "auth": "0"
 }
 
 regular_user_data = {
     "user_name": "reg_user",
     "password": "password",
-    "email": "fdddsfasdsadsasdcsasdj@dgd.com",
+    "email": "regular_user@email.com",
 }
 
 correctlogin = "user_name=rand&password=pass"
@@ -35,14 +35,14 @@ class TestFlaskAPIUsingRequests(unittest.TestCase):
         resp = requests.post(url + '/login', correctlogin, headers=headers)
         cls.token = resp.headers['token']
 
-    def test_api_user_login_returns_auth_level(self):
+    def test_api_user_login(self):
         resp = requests.post(url + '/user', json=user_data,
                              headers={'Content-Type': 'application/json', 'token': self.token,
                                       'Access-Control-Expose-Headers': 'token',
                                       'Access-Control-Allow-Origin': 'http://localhost:3000'})
         self.assertEqual(resp.status_code, 200)
 
-    def test_api_regular_user_login_returns_auth_level(self):
+    def test_api_regular_user_login(self):
         resp = requests.post(url + '/regularuser', json=regular_user_data,
                              headers={'Content-Type': 'application/json'})
         self.assertEqual(resp.status_code, 200)
