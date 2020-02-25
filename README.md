@@ -50,7 +50,7 @@ Use python 3 instead of Python 2
 1. Type below in a MySql terminal.
 
 ```
-create database Bassa
+create database Bassa;
 ```
 
 2. Type below in the root of project.
