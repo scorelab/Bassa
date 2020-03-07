@@ -1,4 +1,5 @@
-![logo](./ui/src/assets/images/logo.png?raw=250x250 "logo")
+![logo](./ui/src/assets/images/logo.png?raw=250x250	 "logo")
+<img src="./ui/src/assets/images/logo.png" width="25px" height="25px">
 
 [![Build Status](https://travis-ci.org/scorelab/Bassa.svg?branch=master)](https://travis-ci.org/scorelab/Bassa)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7de63c7b9a69448787e8014a12a260b1)](https://www.codacy.com/app/SCoRe-Lab/Bassa?utm_source=github.com&utm_medium=referral&utm_content=scorelab/Bassa&utm_campaign=badger)
