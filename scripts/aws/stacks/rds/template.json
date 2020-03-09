@@ -1,0 +1,103 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "ScoreLab RDS",
+  "Parameters": {
+    "DBName": {
+      "Description": "Name of the Database",
+      "Type": "String",
+      "MinLength": "1",
+      "MaxLength": "15"
+    },
+    "DBUser": {
+      "NoEcho": "true",
+      "Description": "Username for database",
+      "Type": "String",
+      "MinLength": "4",
+      "MaxLength": "10"
+    },
+    "DBPassword": {
+      "NoEcho": "true",
+      "Description": "Password for database",
+      "Type": "String",
+      "MinLength": "8",
+      "MaxLength": "15"
+    },
+    "MultiAZDatabase": {
+      "Default": "false",
+      "Description": "Multiple Availability zone deployment",
+      "AllowedValues": [
+        "true",
+        "false"
+      ],
+      "Type": "String"
+    },
+    "DBClass": {
+      "Default": "db.t2.micro",
+      "Description": "Database instance class",
+      "Type": "String"
+    },
+    "DBAllocatedStorage": {
+      "Default": "100",
+      "Description": "Database storage capacity",
+      "Type": "String"
+    },
+    "SecurityGroupId":{
+      "Type":"String",
+      "Description":"Security group ID of the source EC2 instance"
+    }
+  },
+  "Resources": {
+    "SecurityGroup":{
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription": "Open database for access",
+        "SecurityGroupIngress" : [{
+          "IpProtocol" : "tcp",
+          "FromPort" : "3306",
+          "ToPort" : "3306",
+          "SourceSecurityGroupId" : { "Ref" : "SecurityGroupId" }
+        }]
+      }
+    },
+    "DBInstance" : {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "DBInstanceIdentifier": { "Ref": "AWS::StackName" },
+        "DBName"            : { "Ref" : "DBName" },
+        "Engine"            : "MySQL",
+        "MultiAZ"           : { "Ref": "MultiAZDatabase" },
+        "MasterUsername"    : { "Ref" : "DBUser" },
+        "DBInstanceClass"   : { "Ref" : "DBClass" },
+        "AllocatedStorage"  : { "Ref" : "DBAllocatedStorage" },
+        "MasterUserPassword": { "Ref" : "DBPassword" },
+        "VPCSecurityGroups" : [ { "Fn::GetAtt": [ "SecurityGroup", "GroupId" ] } ]
+      }
+    }
+  },
+  "Outputs": {
+    "Hostname": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Fn::GetAtt": [
+                "DBInstance",
+                "Endpoint.Address"
+              ]
+            },
+            ":",
+            {
+              "Fn::GetAtt": [
+                "DBInstance",
+                "Endpoint.Port"
+              ]
+            }
+          ]
+        ]
+      },
+      "Description": "Endpoint to access RDS instance"
+    }
+  }
+}
