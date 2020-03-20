@@ -13,6 +13,7 @@
     };
 
     $scope.incorrectCredentials = false;
+    $scope.errorMsg = '';
 
     var validate = function(obj) {
       for (var key in obj) {
@@ -60,20 +61,25 @@
     }
 
     $scope.validatePwd = function () {
-      let lowerCaseLetters = /[a-z]/g;
-      let uppserCaseLetters = /[A-Z]/g;
-      let numbers = /[0-9]/g;
+      const lowerCaseLetters = /[a-z]/g;
+      const upperCaseLetters = /[A-Z]/g;
+      const numbers = /[0-9]/g;
       if (typeof $scope.user.password !== 'undefined') {
-        if (!$scope.user.password.match(lowerCaseLetters)) {
+        if ($scope.user.password.length < 8) {
           passwordInValid();
-        } if (!$scope.user.password.match(uppserCaseLetters)) {
+          $scope.errorMsg = 'Password must contains Minimum <b>8 characters</b>';
+        } else if (!$scope.user.password.match(upperCaseLetters)) {
           passwordInValid();
+          $scope.errorMsg = 'Password must contains a <b>uppercase</b> letter';
+        } else if (!$scope.user.password.match(lowerCaseLetters)) {
+          passwordInValid();
+          $scope.errorMsg = 'Password must contains a <b>lowercase</b> letter';
         } else if (!$scope.user.password.match(numbers)) {
           passwordInValid();
-        } else if ($scope.user.password.length < 8) {
-          passwordInValid();
+          $scope.errorMsg = 'Password must contains a <b>number</b>';
         } else {
           passwordValid();
+          $scope.errorMsg = '';
         }
       }
     };

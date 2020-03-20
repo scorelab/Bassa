@@ -14,7 +14,7 @@
 
     <div class="group" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
       <input type="password" class="form-control inputStyle" placeholder="Password" name="password" ng-model="user.password" required ng-change="validatePwd()"/><span class="highlight"></span><span class="bar"></span>
-      <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Password must contains Minimum <b>8 characters</b>, A <b>lowercase</b> letter, An <b>uppercase</b> letter, A <b>number</b> </p>
+      <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty" ng-bind-html="errorMsg"></p>
     </div>
 
     <div class="group" ng-class="{'has-error': user.confirm_password != user.password, 'has-success': user.confirm_password == user.password}">
