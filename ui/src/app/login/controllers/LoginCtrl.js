@@ -6,6 +6,7 @@
 
   function LoginCtrl($scope, $state, UserService) {
     $scope.user = {};
+    $scope.inputType = 'password';
     $scope.login = function(){
       $scope.incorrectCredentials = false;
       $scope.unApproved = false;
@@ -17,7 +18,15 @@
         } else if(status.state == 403) {
           $scope.incorrectCredentials = true;
         }
-       });
+      });
+    };
+
+    $scope.hideShowPassword = function(){
+      if ($scope.inputType === 'password') {
+        $scope.inputType = 'text';
+      } else {
+        $scope.inputType = 'password';
+      }
     };
 
     $scope.signup = function() {

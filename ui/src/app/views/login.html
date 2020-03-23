@@ -2,12 +2,17 @@
     <img class="logo" ng-src="assets/images/logo.png">
     <div layout="column" class="login-content">
         <md-input-container class="input-container">
-            <label>User name</label>
+            <label>Username</label>
             <input type="text" ng-model="user.user_name" />
         </md-input-container>
         <md-input-container class="input-container">
             <label>Password</label>
-            <input type="password" ng-model="user.password" ng-enter="login()" />
+            <input type="{{inputType}}" ng-model="user.password" ng-enter="login()" />
+        </md-input-container>
+        <label><input type="checkbox" id="checkbox" ng-model="passwordCheckbox" ng-click="hideShowPassword()"/>
+            <span ng-if="passwordCheckbox">Hide password</span>
+            <span ng-if="!passwordCheckbox">Show password</span>
+        </label><br/>
         </md-input-container>
         <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
         <div layout="row">
