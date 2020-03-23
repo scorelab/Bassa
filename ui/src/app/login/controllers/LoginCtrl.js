@@ -21,7 +21,7 @@
       });
     };
 
-    $scope.hideShowPassword = function(){
+    $scope.hideShowPassword = function() {
       if ($scope.inputType === 'password') {
         $scope.inputType = 'text';
       } else {
