@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Single queued file component should match with its snapshot 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <WithStyles(ForwardRef(Table))>
+    <WithStyles(ForwardRef(TableBody))>
+      <WithStyles(ForwardRef(TableRow))>
+        <WithStyles(WithStyles(ForwardRef(TableCell)))>
+          NaN
+        </WithStyles(WithStyles(ForwardRef(TableCell)))>
+        <WithStyles(WithStyles(ForwardRef(TableCell)))
+          className="makeStyles-row-2"
+          component="th"
+          scope="row"
+        >
+          Name of the file
+        </WithStyles(WithStyles(ForwardRef(TableCell)))>
+        <WithStyles(WithStyles(ForwardRef(TableCell)))
+          align="right"
+        >
+          <WithStyles(ForwardRef(Fab))
+            aria-label="Delete"
+            className="makeStyles-fab-4"
+            data-test="button-delete"
+            size="small"
+          >
+            <DeleteOutlinedIcon />
+          </WithStyles(ForwardRef(Fab))>
+        </WithStyles(WithStyles(ForwardRef(TableCell)))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableBody))>
+  </WithStyles(ForwardRef(Table))>
+</div>
+`;

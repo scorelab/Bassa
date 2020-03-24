@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Completed single file component should match with its snapshot 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <WithStyles(ForwardRef(Table))>
+    <WithStyles(ForwardRef(TableBody))>
+      <WithStyles(ForwardRef(TableRow))>
+        <WithStyles(WithStyles(ForwardRef(TableCell)))>
+          1
+        </WithStyles(WithStyles(ForwardRef(TableCell)))>
+        <WithStyles(WithStyles(ForwardRef(TableCell)))
+          className="row"
+          component="th"
+          scope="row"
+        />
+        <WithStyles(WithStyles(ForwardRef(TableCell)))
+          align="left"
+        />
+        <WithStyles(WithStyles(ForwardRef(TableCell)))
+          align="left"
+        >
+          NaN
+           KB
+        </WithStyles(WithStyles(ForwardRef(TableCell)))>
+        <WithStyles(WithStyles(ForwardRef(TableCell)))
+          align="left"
+        />
+        <WithStyles(WithStyles(ForwardRef(TableCell)))
+          align="right"
+        >
+          <WithStyles(ForwardRef(Button))
+            className="makeStyles-button-3"
+            color="primary"
+            data-test="button-download"
+            size="small"
+            variant="outlined"
+          >
+            <SaveIcon
+              className="icon"
+            />
+             Download
+          </WithStyles(ForwardRef(Button))>
+        </WithStyles(WithStyles(ForwardRef(TableCell)))>
+      </WithStyles(ForwardRef(TableRow))>
+    </WithStyles(ForwardRef(TableBody))>
+  </WithStyles(ForwardRef(Table))>
+</div>
+`;

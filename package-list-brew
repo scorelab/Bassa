@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo "Installing Homebrew"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo "Homebrew Installed"
+
+echo "Installing python3 and pip"
+brew install python3
+echo "python3 and pip Installed"
+
+echo "Installing Aria2"
+brew install aria2
+echo "Aria2 Installed"
+
+echo "Installing and starting MySQL"
+brew install mysql
+brew services start mysql
+echo "MySQL Installed and Started"
+
+echo "Installing Node"
+brew install node
+echo "Node Installed"
+
+echo "Installing Bower"
+npm install -g bower
+echo "Bower Installed"
+
+echo "Installing Gulp"
+npm install -g gulp
+npm install -g gulp-cli
+echo "Gulp Installed"

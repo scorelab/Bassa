@@ -9,3 +9,4 @@ README.md
 # This should contain all files created during `npm run build`.
 build
 node_modules
+package-lock.json

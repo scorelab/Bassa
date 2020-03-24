@@ -52,31 +52,35 @@
         });
       }
     };
-    
+
     $scope.addDownload = function(keyEvent) {
   if (keyEvent.which === 13)
     $scope.addLink();
   }
-    var getActiveDownloads = function() {
-      DashService.getDownloads().then(function (response) {
-        var data = response.data;
-        $scope.downloads = _.filter(data, function(d) {return d.status==0});
-        $scope.downloads = _.map($scope.downloads, function(element) {
-             return _.extend({}, element, {progress: 0});
-        });
-      }, function(error){
-        ToastService.showToast("Oops! Something went wrong when fetching data");
+  var getActiveDownloads = function() {
+    DashService.getDownloads().then(function (response) {
+      var data = response.data;
+      $scope.filterdownloads = _.filter(data, function(d) {return d.status==0});
+      $scope.downloads = _.map($scope.filterdownloads, function(obj) {
+           return _.extend({}, obj, {progress: 0});
       });
-    }
+    }, function(error){
+      ToastService.showToast("Oops! Something went wrong when fetching data");
+    });
+}
 
-    $scope.removeLink = function (id) {
+    $scope.removeLink = function (index, id) {
       // Shows window confirmation before deleting download.
       var deleteDownload = $window.confirm('Confirm download task deletion !');
 
       if(deleteDownload){
         DashService.removeDownload(id).then(function(response){
-          ToastService.showToast("Download removed");
-          getActiveDownloads();},
+          if(response.status === 200){
+            $scope.downloads.splice(index, 1);
+            ToastService.showToast("Download removed");
+          }else{
+            ToastService.showToast("Download could not be removed. Please try again!");
+          } },
           function (error){
           ToastService.showToast("Download started. Entry cannot be deleted.");
         });
@@ -84,7 +88,7 @@
      };
 
     getActiveDownloads();
-    
+
   }
 
 })();

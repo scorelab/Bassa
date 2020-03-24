@@ -25,10 +25,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `compression`
+--
+
+CREATE TABLE IF NOT EXISTS `compression` (
+  `id` varchar(255) NOT NULL,
+  `progress` tinyint(4) DEFAULT NULL,
+  `start_time` bigint(20) DEFAULT NULL,
+  `completed_time` bigint(20) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `download`
 --
 
-CREATE TABLE `download` (
+CREATE TABLE IF NOT EXISTS `download` (
   `id` bigint(20) NOT NULL,
   `link` text NOT NULL,
   `user_name` varchar(256) NOT NULL,
@@ -48,7 +63,7 @@ CREATE TABLE `download` (
 -- Table structure for table `rate`
 --
 
-CREATE TABLE `rate` (
+CREATE TABLE IF NOT EXISTS `rate` (
   `user_name` varchar(256) NOT NULL,
   `id` bigint(20) NOT NULL,
   `rate` tinyint(1) NOT NULL
@@ -60,7 +75,7 @@ CREATE TABLE `rate` (
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `user_name` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   `auth` tinyint(11) NOT NULL,
@@ -68,6 +83,21 @@ CREATE TABLE `user` (
   `blocked` tinyint(1) NOT NULL DEFAULT '0',
   `approved` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `minio`
+--
+
+CREATE TABLE IF NOT EXISTS `minio` (
+  `mid` bigint(20) NOT NULL,
+  `mgid` varchar(256) DEFAULT NULL,
+  `muser_name` varchar(256) NOT NULL,
+  `mfile_name` varchar(256) NOT NULL,
+  `msize` varchar(7) NOT NULL DEFAULT '0',
+  `mpath` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
 -- Dumping data for table `user`
@@ -104,6 +134,14 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_name`),
   ADD UNIQUE KEY `user_name` (`user_name`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `minio`
+--
+ALTER TABLE `minio`
+  ADD PRIMARY KEY (`mid`),
+  ADD UNIQUE KEY `mid` (`mid`),
+  ADD KEY `mfile_name` (`mfile_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
