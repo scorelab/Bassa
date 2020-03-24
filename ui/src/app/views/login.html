@@ -1,13 +1,33 @@
 <div layout="column" layout-align="center center">
     <img class="logo" ng-src="assets/images/logo.png">
-    <div layout="column" class="login-content">
+    <form name="loginForm" style="all: unset !important;width: 23% !important">
+        <div layout="column">
+            <md-input-container class="input-container">
+                <label>User name</label>
+                <input type="text" ng-model="user.user_name" name="user_name" ng-required="true" />
+            </md-input-container>
+            <md-input-container class="input-container">
+                <label>Password</label>
+                <input type="password" ng-model="user.password" ng-required="true" ng-enter="login()" name="password" />
+            </md-input-container>
+            <md-button class="md-raised md-primary login-button" ng-disabled="loginForm.$invalid" ng-click="login();">Login</md-button>
+            <div layout="row">
+                <p>Don't have an account?</p>
+                <a class="" id="signup-button" ng-click="signup()">Signup</a>
+            </div>
+            <br>
+        </div>
+    </form>
+
+    <!-- <div layout="column" class="login-content">
         <md-input-container class="input-container">
-            <label>User name</label>
-            <input type="text" ng-model="user.user_name" />
+            <label id="user_name_label">User name</label>
+            <input type="text" ng-model="user.user_name" id="user_name" ng-required="true" />
+            <span ng-show="user.user_name.$touched"> User name is required </span>
         </md-input-container>
         <md-input-container class="input-container">
-            <label>Password</label>
-            <input type="password" ng-model="user.password" ng-enter="login()" />
+            <label id="password_label">Password</label>
+            <input type="password" ng-model="user.password" ng-required="true" ng-enter="login()" id="password" />
         </md-input-container>
         <md-button class="md-raised md-primary login-button" ng-click="login()">Login</md-button>
         <div layout="row">
@@ -15,7 +35,8 @@
             <a class="" id="signup-button" ng-click="signup()">Signup</a>
         </div>
         <br>
-    </div>
+    </div> -->
+
     <div class="alert" ng-if="incorrectCredentials">
         <span class="closebtn msg" onclick="this.parentElement.style.display='none';">&times;</span> Incorrect Credentials
     </div>
