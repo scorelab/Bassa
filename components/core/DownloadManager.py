@@ -1,5 +1,5 @@
 from Models import Download, Status
-from DBCon import *
+from DBCon import get_db_con,MySQLdb
 import time
 import sys
 import sqlalchemy.pool as pool
@@ -23,7 +23,7 @@ def add_download(download):
         try:
             cursor.execute(sql, (download.link, download.userName, int(time.time()), download_name))
             db.commit()
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             # Shows error thrown up by database
             print(e)
@@ -46,7 +46,7 @@ def remove_download(id, userName):
                 return "Download started. Entry cannot be deleted."
             cursor.execute(sql, [str(id), userName])
             db.commit()
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -67,7 +67,7 @@ def rate_download(id, userName, rate):
                 cursor.execute(sql, (userName, id, rate))
             db.commit()
             update_rate(id)
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -85,7 +85,7 @@ def update_rate(id):
             data = cursor.fetchone()
             cursor.execute(sql, (data[0], id))
             db.commit()
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -103,7 +103,7 @@ def get_downloads_user(userName, limit):
             results = cursor.fetchall()
             db.close()
             return results
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -119,7 +119,7 @@ def get_downloads(limit):
             results = cursor.fetchall()
             db.close()
             return results
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -138,7 +138,7 @@ def update_status_gid(gid, status, completed=False):
             else:
                 cursor.execute(sql, (status, gid))
             db.commit()
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -153,7 +153,7 @@ def set_gid(id, gid):
         try:
             cursor.execute(sql)
             db.commit()
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -167,7 +167,7 @@ def set_name(gid, name):
         try:
             cursor.execute(sql, (name, gid))
             db.commit()
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -181,7 +181,7 @@ def set_size(gid, size):
         try:
             cursor.execute(sql, (size, gid))
             db.commit()
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -201,7 +201,7 @@ def get_to_download():
             if verbose: print ("LIST", results)
             downloads = [Download(result['link'], result['user_name'], result['id']) for result in results]
             return downloads
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -213,7 +213,7 @@ def set_path(gid, path):
         try:
             cursor.execute(sql, (path, gid))
             db.commit()
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -232,7 +232,7 @@ def get_download_path(id):
             path = results['path']
             db.close()
             return path
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -249,12 +249,11 @@ def get_download_email(gid):
             path = results['email']
             db.close()
             return path
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
 
 def get_to_delete(time, rate):
-    recordsPerPage = 15
     db = threadpool.connect()
     if db is not None:
         cursor = db.cursor()
@@ -266,7 +265,7 @@ def get_to_delete(time, rate):
             if verbose: print ("Time", time, "Rate", rate)
             if verbose: print ("results", results)
             return results
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -278,7 +277,7 @@ def set_delete_status(path):
         try:
             cursor.execute(sql)
             db.commit()
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             db.rollback()
             return e[1]
         return "success"
@@ -298,7 +297,7 @@ def get_download_status(id):
             status = results['status']
             db.close()
             return status
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -315,7 +314,7 @@ def get_id_from_gid(gid):
             status = results['id']
             db.close()
             return status
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -332,7 +331,7 @@ def get_username_from_gid(gid):
             status = results['user_name']
             db.close()
             return status
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
 
@@ -350,6 +349,6 @@ def get_gid_from_id(id):
             gid = results['gid']
             db.close()
             return gid
-        except MySQLdb.Error as e:
+        except MySQLdb._mysql.Error as e:
             return e[1]
     return "db connection error"
