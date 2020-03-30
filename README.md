@@ -54,9 +54,8 @@ You can also discuss about other projects on [SCoRe Lab gitter channel](https://
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. 
-<a href="https://opencollective.com/Bassa#contributors" target="_blank"><img src="https://opencollective.com/Bassa/contributors.svg?width=890&button=false" /></a>
-
+This project exists thanks to all the people who contribute.
+[![Contributors Image](https://opencollective.com/Bassa/contributors.svg?width=890&button=false)](https://opencollective.com/Bassa#contributors)
 
 ## Backers
 
