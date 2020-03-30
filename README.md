@@ -1,6 +1,6 @@
 <hr>
 
-![logo](http://gdurl.com/7XYK)
+![Bassa logo](https://github.com/scorelab/Bassa/blob/master/ui/src/assets/images/bassa.png?raw=true)
 
 [![Build Status](https://travis-ci.org/scorelab/Bassa.svg?branch=master)](https://travis-ci.org/scorelab/Bassa)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7de63c7b9a69448787e8014a12a260b1)](https://www.codacy.com/app/SCoRe-Lab/Bassa?utm_source=github.com&utm_medium=referral&utm_content=scorelab/Bassa&utm_campaign=badger)
