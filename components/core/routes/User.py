@@ -1,23 +1,21 @@
-from flask import Flask
-from flask.ext.cors import CORS
-from flask import send_file, send_from_directory
-from flask import request, jsonify, abort, Response, g
-from flask_socketio import SocketIO, join_room
+from flask import json
+from flask import request, abort, Response, g
 from Auth import *
+from EMail import send_mail
 from Models import *
 from DownloadManager import *
-import urllib.request, urllib.error, urllib.parse, _thread
-from gevent import monkey
-from Server import *
+import _thread
+from utils.token_utils import token_validator
+from utils.app_constants import SERVER_SECRET_KEY
 
-@server.route('/api/login', methods=['POST'])
+
 def login():
     userName = request.form['user_name']
     password = request.form['password']
     if user_login(userName, password):
         if check_approved(userName, password):
             user = get_user(userName)
-            token = generate_auth_token(user, server.config['SECRET_KEY'])
+            token = generate_auth_token(user, SERVER_SECRET_KEY)
             resp = Response(response='{"auth":"'+ str(user.auth) + '"}',status=200)
             resp.headers['token'] = token
             resp.headers['Access-Control-Expose-Headers'] = 'token'
@@ -29,7 +27,6 @@ def login():
         abort(403)
 
 
-@server.route('/api/regularuser', methods=['POST'])
 def regular_user_request():
     data = request.get_json(force=True)
     try:
@@ -41,11 +38,10 @@ def regular_user_request():
         else:
             resp = Response(response='{"error":"' + status + '"}', status=400)
     except Exception as e:
-        resp = Response(response='{"error":"username exists"}', status=400)
+        resp = Response(response='{"error":"Connection error"}', status=500)
     return resp
 
 
-@server.route('/api/user', methods=['POST'])
 def add_user_request():
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -59,7 +55,7 @@ def add_user_request():
             else:
                 resp = Response(response='{"error":"' + status + '"}', status=400)
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -69,7 +65,6 @@ def add_user_request():
         return '{"error":"token error"}', 403
 
 
-@server.route('/api/user/<string:username>', methods=['DELETE'])
 def remove_user_request(username):
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -77,7 +72,7 @@ def remove_user_request(username):
             status = remove_user(username)
             resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -87,7 +82,6 @@ def remove_user_request(username):
         return '{"error":"token error"}', 403
 
 
-@server.route('/api/user/<string:username>', methods=['PUT'])
 def update_user_request(username):
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -97,7 +91,7 @@ def update_user_request(username):
             status = update_user(newUser, username)
             resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -107,7 +101,6 @@ def update_user_request(username):
         return '{"error":"token error"}', 403
 
 
-@server.route('/api/user', methods=['GET'])
 def get_users_request():
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -118,7 +111,7 @@ def get_users_request():
             else:
                 resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -127,7 +120,7 @@ def get_users_request():
     else:
         return '{"error":"token error"}', 403
 
-@server.route('/api/user/requests', methods=['GET'])
+
 def get_user_signup_requests():
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -138,7 +131,7 @@ def get_user_signup_requests():
             else:
                 resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -147,7 +140,7 @@ def get_user_signup_requests():
     else:
         return '{"error":"token error"}', 403
 
-@server.route('/api/user/approve/<string:username>', methods=['POST'])
+
 def approve_user_request(username):
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -155,7 +148,7 @@ def approve_user_request(username):
             status = approve_user(username)
             resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -164,7 +157,7 @@ def approve_user_request(username):
     else:
         return '{"error":"token error"}', 403
 
-@server.route('/api/user/blocked', methods=['GET'])
+
 def get_blocked_users_request():
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -175,7 +168,7 @@ def get_blocked_users_request():
             else:
                 resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -185,7 +178,6 @@ def get_blocked_users_request():
         return '{"error":"token error"}', 403
 
 
-@server.route('/api/user/blocked/<string:username>', methods=['POST'])
 def block_user_request(username):
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -193,7 +185,7 @@ def block_user_request(username):
             status = block_user(username)
             resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -203,7 +195,6 @@ def block_user_request(username):
         return '{"error":"token error"}', 403
 
 
-@server.route('/api/user/blocked/<string:username>', methods=['DELETE'])
 def unblock_user_request(username):
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -211,7 +202,7 @@ def unblock_user_request(username):
             status = unblock_user(username)
             resp = Response(response='{"status":"'+ status + '"}', status= (200 if status == "success" else 400))
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -221,7 +212,6 @@ def unblock_user_request(username):
         return '{"error":"token error"}', 403
 
 
-@server.route('/api/user/downloads/<int:limit>', methods=['GET'])
 def get_downloads_user_request(limit):
     token = token_validator(request.headers['token'])
     if token is not None :
@@ -232,7 +222,7 @@ def get_downloads_user_request(limit):
             else:
                 resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
@@ -242,7 +232,6 @@ def get_downloads_user_request(limit):
         return '{"error":"token error"}', 403
 
 
-@server.route('/api/user/heavy', methods=['GET'])
 def get_topten_heaviest_users():
     token = token_validator(request.headers['token'])
     if token is not None and g.user.auth == AuthLeval.ADMIN:
@@ -253,7 +242,7 @@ def get_topten_heaviest_users():
             else:
                 resp = Response('{"error":"' + status + '"}', status=400)
         except Exception as e:
-            resp = Response(response='{"error":"' + e.message + '"}', status=400)
+            resp = Response(response='{"error":"' + str(e) + '"}', status=400)
         resp.headers['token'] = token
         resp.headers['Access-Control-Expose-Headers'] = 'token'
         return resp
