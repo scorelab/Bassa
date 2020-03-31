@@ -33,6 +33,17 @@ def token_validator(token):
         return token
     return None
 
+# Pause downloading
+@socketio.on('pauseDownload')
+def pause_download(data):
+    print("Downloading pausing")
+
+
+# Resume Downloading
+@socketio.on('resumeDownload')
+def resume_download(data):
+    print("Downloading continueing")
+    
 
 @server.route('/ui/<string:path>')
 def serve_ui(path):

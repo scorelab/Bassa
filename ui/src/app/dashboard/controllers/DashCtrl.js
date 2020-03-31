@@ -8,6 +8,7 @@
     var socket = io.connect(BassaUrl + '/progress');
     $scope.dlink = {link: ''};
     $scope.downloads = [];
+    $scope.is_paused = false;
     $scope.username = UserService.getUsername();
 
     socket.on('connect', function(){
@@ -82,6 +83,16 @@
         });
       }
      };
+
+    $scope.pauseDownloading = function (data) {
+      $scope.is_paused = true;
+      socket.emit('pauseDownload', {data: data})
+    }
+
+    $scope.resumeDownloading = function (data) {
+      $scope.is_paused = false;
+      socket.emit('resumeDownload', {data: data})
+    }
 
     getActiveDownloads();
     

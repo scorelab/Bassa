@@ -24,7 +24,15 @@
                 value="{{data.progress}}">
               </md-progress-linear>
             </td>
-            <td><md-button class="md-fab md-warn md-mini" ng-click="removeLink(data.id,$event)">
+            <td>
+              <md-button class="md-fab md-primary md-mini" ng-if="!is_paused" ng-click="pauseDownloading(data,$event)">
+                <i class="material-icons">pause</i>
+              </md-button>
+              <md-button class="md-fab md-warn md-mini" ng-if="is_paused" ng-click="resumeDownloading(data,$event)">
+                <i class="material-icons">play_arrow</i>
+              </md-button>
+            </td>
+            <td ng-if="!is_paused"><md-button class="md-fab md-warn md-mini" ng-click="removeLink(data.id,$event)">
                 <i class="material-icons">delete</i>
                 </md-button>
             </td>
