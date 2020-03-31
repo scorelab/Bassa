@@ -18,6 +18,7 @@
         <tr ng-repeat="data in downloads">
             <td id="vertalign" data-title="ID">{{$index + 1}}</td>
             <td id="vertalign" data-title="Issue">{{data.download_name}}</td>
+            <td id="vertalign" data-title="DateTime">{{data.added_time | date:"MM/dd/yyyy 'at' h:mma"}}</td>
             <td id="vertalign" data-title="Progress">
               <md-progress-linear
                 md-mode="determinate"
@@ -36,4 +37,3 @@
   </md-content>
 
 </div>
-
