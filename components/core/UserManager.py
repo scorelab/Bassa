@@ -95,7 +95,7 @@ def remove_user(username):
         cursor = db.cursor()
         sql = "DELETE from user WHERE user_name=%s;"
         try:
-            cursor.execute(sql, (username))
+            cursor.execute(sql, (username,))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
