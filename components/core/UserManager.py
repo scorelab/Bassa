@@ -38,7 +38,7 @@ def check_user_name(username):
     if db is not None:
         cursor = db.cursor()
         sql = "SELECT * FROM user WHERE user_name=%s;"
-        cursor.execute(sql, (username))
+        cursor.execute(sql, (username,))
         data = cursor.fetchone()
         db.close()
         if data == None:
@@ -95,7 +95,7 @@ def remove_user(username):
         cursor = db.cursor()
         sql = "DELETE from user WHERE user_name=%s;"
         try:
-            cursor.execute(sql, (username))
+            cursor.execute(sql, (username,))
             db.commit()
         except MySQLdb.Error as e:
             db.rollback()
