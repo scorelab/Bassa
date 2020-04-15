@@ -60,7 +60,7 @@
       $scope.loginForm.password.$dirty = true;
     }
 
-    $scope.validatePwd = function () {
+    $scope.validatePwd = () => {
       const lowerCaseLetters = /[a-z]/g;
       const upperCaseLetters = /[A-Z]/g;
       const numbers = /[0-9]/g;
