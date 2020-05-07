@@ -1,9 +1,10 @@
 'use strict';
+import { config } from "../../config";
 
 angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
   'ngSanitize', 'ui.router', 'ngMaterial', 'nvd3', 'app'])
 
-  .value('BassaUrl', 'http://localhost:5000')
+  .value('BassaUrl', config.API_URL)
 
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $mdThemingProvider,
                     $mdIconProvider, $qProvider) {
