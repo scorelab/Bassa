@@ -8,6 +8,7 @@ from EMail import send_mail
 from DiskMan import *
 from ConfReader import get_conf_reader
 import logging
+from MinioHandler import *
 
 import websocket
 import sys
