@@ -1,10 +1,10 @@
 'use strict';
-import { config } from "../../config";
+// import { constants } from "./config";
 
 angular.module('bassa', ['ngAnimate', 'ngCookies', 'ngTouch',
   'ngSanitize', 'ui.router', 'ngMaterial', 'nvd3', 'app'])
 
-  .value('BassaUrl', config.API_URL)
+  .value('BassaUrl', "http://localhost:5000")
 
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $mdThemingProvider,
                     $mdIconProvider, $qProvider) {

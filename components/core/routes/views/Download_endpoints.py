@@ -3,11 +3,11 @@ from routes.Download import *
 
 downloadprint = Blueprint("download", __name__)
 
-downloadprint.add_url_rule(rule='/download/start',
+downloadprint.add_url_rule(rule='/api/download/start',
                            endpoint='start',
                            view_func=start)
 
-downloadprint.add_url_rule(rule='/download/kill',
+downloadprint.add_url_rule(rule='/api/download/kill',
                            endpoint='kill',
                            view_func=kill)
 

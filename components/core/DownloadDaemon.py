@@ -7,7 +7,6 @@ from Models import Status, Download
 from EMail import send_mail
 from DiskMan import *
 from ConfReader import get_conf_reader
-from MinioHandler import *
 import logging
 
 import websocket
@@ -86,6 +85,9 @@ class MessageHandler():
             data = json.loads(message)
             print(threading.current_thread().name,data)
             print ("TOP LEVEL DATA", data)
+            if 'error' in data:
+                logging.error("Aria2c error: %s", data['error'])
+                return
             if 'id' in data and data['id'] == "act":
                 toBeDownloaded = get_to_download()
                 if toBeDownloaded:
@@ -178,6 +180,7 @@ def add_uri(ws, download):
 def get_status(ws, id=None, gid=None):
     if id:
         gid = get_gid_from_id(id)
+    gid = str(gid)
     msg = JSONer("stat", 'aria2.tellStatus', [gid, ['gid', 'files']])
     print ("Getting status")
     ws.send(msg)
@@ -236,7 +239,7 @@ def on_message(ws, message):
     messageQueue.put(message)
 
 def on_error(ws, error):
-    print(error)
+    logging.error(error)
 
 
 def on_close(ws):
@@ -252,6 +255,7 @@ def starter(socket):
     sc = socket
     remove_files(conf['max_age'], conf['min_rating'])
     folder_size=get_size(conf['down_folder'])
+    logging.info("SERVER: folder_size: %d", folder_size)
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(conf['aria_server'],
                                 on_message=on_message,
@@ -265,7 +269,6 @@ def starter(socket):
     threading.Thread(target=mHandler.start_message_workers).start()
     messageQueue.join()
     ws.run_forever()
-
 
 
 

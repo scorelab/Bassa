@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine
 
 # Defining dockerfile maintainer
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>
@@ -21,7 +21,7 @@ VOLUME [ "/data" ]
 WORKDIR /data
 
 # Starting the Aria2c RPC server
-CMD ["aria2c", "--enable-rpc", "--rpc-listen-all"]
+CMD ["aria2c", "--enable-rpc=true", "--rpc-listen-all", "--no-conf=true", "--disable-ipv6", "--console-log-level=debug"]
 
 # Labels for dockerfile information
 LABEL scorelab.bassa.name="Aria2c RPC server" \

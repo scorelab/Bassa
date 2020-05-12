@@ -13,14 +13,23 @@ from MinioHandler import *
 
 conf = get_conf_reader("dl.conf")
 
+processes = []
 
 def start():
 	try:
 		token = request.headers['key']
 		if str(token) != SERVER_SECRET_KEY:
 			return "{'error':'not authorized'}", 403
-		global p
+		if len(processes) != 0:
+			p = processes[0]
+			processes.clear()
+			p.terminate()
+			p.join()
+			jsonreq = json.dumps({'jsonrpc': '2.0', 'id': 'qwer', 'method': 'aria2.pauseAll'})
+			jsonreq = jsonreq.encode('ascii')
+			c = urllib.request.urlopen(conf['aria_server'], jsonreq)
 		p = Process(target=starter, args=(socketio,))
+		processes.append(p)
 		p.start()
 		return '{"status":"' + str(p.pid) + '"}'
 	except Exception as e:
