@@ -15,10 +15,10 @@ RUN apk update && \
 EXPOSE 6800
 
 # Volume for storing the downloaded data
-VOLUME [ "/data" ]   
+VOLUME [ "/downloads" ]   
 
 # Changing the current directory to data so that the files get downloaded there
-WORKDIR /data
+WORKDIR /downloads
 
 # Starting the Aria2c RPC server
 CMD ["aria2c", "--enable-rpc=true", "--rpc-listen-all", "--no-conf=true", "--disable-ipv6", "--console-log-level=debug"]

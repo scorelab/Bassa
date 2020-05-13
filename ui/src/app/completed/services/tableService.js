@@ -5,7 +5,7 @@
     .service('TableService', ['$http', 'BassaUrl', TableService]);
 
   function TableService($http, BassaUrl){
-
+    
     var getCompletedDownloads = function() {
       return $http({
         method: 'GET',
@@ -16,7 +16,8 @@
       return $http({
           method: 'POST',
           url : BassaUrl + '/api/compress',
-          data : {'gid' : gids}
+          data : {'gid' : gids},
+          headers: {'token': window.localStorage.getItem("Token")}
       })
     };
     var compressionProgress = function (progressId) {
