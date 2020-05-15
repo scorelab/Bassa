@@ -17,9 +17,6 @@
         method: 'POST',
         url: BassaUrl + '/api/compress',
         data: { 'gid': gids },
-        headers: {
-          'token': window.localStorage.getItem("Token")
-        }
       })
     };
     var compressionProgress = function (progressId) {
