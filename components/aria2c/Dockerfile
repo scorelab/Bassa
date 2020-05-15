@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3
 
 # Defining dockerfile maintainer
 MAINTAINER SCoRe Lab Community <commuity@scorelab.org>

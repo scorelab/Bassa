@@ -3,7 +3,7 @@ from DBCon import *
 import time
 import sys
 import sqlalchemy.pool as pool
-import logging 
+import logging
 
 verbose = False
 
