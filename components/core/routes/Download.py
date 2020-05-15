@@ -27,7 +27,7 @@ def start():
 			p.join()
 			jsonreq = json.dumps({'jsonrpc': '2.0', 'id': 'qwer', 'method': 'aria2.pauseAll'})
 			jsonreq = jsonreq.encode('ascii')
-			c = urllib.request.urlopen(conf['aria_server'], jsonreq)
+			urllib.request.urlopen(conf['aria_server'], jsonreq)
 		p = Process(target=starter, args=(socketio,))
 		processes.append(p)
 		p.start()
