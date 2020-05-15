@@ -13,7 +13,6 @@
     };
 
     $scope.incorrectCredentials = false;
-    $scope.errorMsg = '';
 
     var validate = function(obj) {
       for (var key in obj) {
@@ -45,42 +44,6 @@
         });
       } else {
         ToastService.showToast('Please ensure entered details are correct');
-      }
-    };
-
-
-    function passwordValid() {
-      $scope.loginForm.password.$valid = true;
-      $scope.loginForm.password.$dirty = false;
-      $scope.loginForm.password.$invalid = false;
-    }
-    function passwordInValid() {
-      $scope.loginForm.password.$valid = false;
-      $scope.loginForm.password.$invalid = true;
-      $scope.loginForm.password.$dirty = true;
-    }
-
-    $scope.validatePwd = () => {
-      const lowerCaseLetters = /[a-z]/g;
-      const upperCaseLetters = /[A-Z]/g;
-      const numbers = /[0-9]/g;
-      if (typeof $scope.user.password !== 'undefined') {
-        if ($scope.user.password.length < 8) {
-          passwordInValid();
-          $scope.errorMsg = 'Password must contains Minimum <b>8 characters</b>';
-        } else if (!$scope.user.password.match(upperCaseLetters)) {
-          passwordInValid();
-          $scope.errorMsg = 'Password must contains a <b>uppercase</b> letter';
-        } else if (!$scope.user.password.match(lowerCaseLetters)) {
-          passwordInValid();
-          $scope.errorMsg = 'Password must contains a <b>lowercase</b> letter';
-        } else if (!$scope.user.password.match(numbers)) {
-          passwordInValid();
-          $scope.errorMsg = 'Password must contains a <b>number</b>';
-        } else {
-          passwordValid();
-          $scope.errorMsg = '';
-        }
       }
     };
   }
