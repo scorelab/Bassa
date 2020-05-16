@@ -26,6 +26,7 @@ def serve_ui1():
 	return send_file(os.path.dirname(os.path.realpath(__file__)) + "/ui/index.html")
 
 
+
 def register_blueprint(server):
     """Register Flask blueprints."""
     server.register_blueprint(User_endpoints.userprint, url_prefix="/api")
