@@ -44,7 +44,7 @@
         $mdToast.hide($scope.zipToast);
       }
       if(token) {
-        window.location.href = BassaUrl + '/api/file?gid=' + downloadGID + "&token=" + token;
+        window.location.href = BassaUrl + '/api/file?gid=' + downloadGID + "&share=" + token;
       }else{
         ToastService.showToast("Unable to process your download request")
       }
