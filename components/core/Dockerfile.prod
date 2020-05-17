@@ -19,7 +19,7 @@ RUN apt-get update && \
     apt-get clean
 
 # Installing the python modules
-RUN python3 setup.py develop
+RUN ["/bin/bash", "-c", "python3", "setup.py", "develop"]
 
 # -----------------------------
 
