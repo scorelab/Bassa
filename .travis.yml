@@ -17,9 +17,7 @@ script:
   - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-aria2c components/aria2c >/dev/null
 
 after_success:
-  - echo $TRAVIS_BRANCH
-  - echo $TRAVIS_PULL_REQUEST
-  - if [ "$TRAVIS_BRANCH" == "develop" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  - if [ "$TRAVIS_BRANCH" == "develop" ]; then
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
     docker push scoreucsc/bassa-prod-ui;
     docker push scoreucsc/bassa-dev-ui;
