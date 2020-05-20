@@ -34,7 +34,7 @@ services:
     ports:
       - 6800:6800
     volumes:
-      - ./downloads:/data
+      - ./downloads:/downloads
     restart: always
 
   db:

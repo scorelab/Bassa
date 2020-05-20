@@ -8,7 +8,7 @@
     var startDownloads = function() {
       return $http({
           method: 'GET',
-          url: BassaUrl + '/download/start',
+          url: BassaUrl + '/api/download/start',
           headers: {'key': '123456789'}
       });
     };
@@ -16,7 +16,7 @@
     var killDownloads = function() {
       return $http({
         method: 'GET',
-        url: BassaUrl + '/download/kill',
+        url: BassaUrl + '/api/download/kill',
         headers: {'key': '123456789'}
       });
     };

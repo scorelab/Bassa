@@ -5,7 +5,7 @@
         <md-button ng-show="isShowingCheckbox" ng-click="deselectAll()"><i class="material-icons ng-scope">check_circle_outline</i></md-button>
         <md-button ng-show="isShowingCheckbox" ng-click="selectAll()"><i class="material-icons ng-scope">check_circle</i></md-button>
     </div>
-    <table id="table" class="table table-hover table-bordered" ng-show="!isGridVisible">
+    <table id="table" class="table table-hover table-bordered" ng-show="isGridVisible">
         <thead>
         <tr>
             <th>#</th>
@@ -23,7 +23,7 @@
             <td data-title="Issue">{{data.download_name}}</td>
             <td data-title="Progress">{{data.size}}</td>
             <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"></td>
-            <td><button ng-click="downloadFromMinio([data.id])">Download</button></td>
+            <td><button ng-click="compressFiles([data.gid])">Download</button></td>
             <td><md-checkbox ng-show="isShowingCheckbox" ng-model="data.checked" ng-change="selectThisItem(data)"></md-checkbox></td>
         </tr>
         </tbody>
@@ -37,7 +37,7 @@
 </div>
 
 <ul>
-    <li class="li-grid" ng-repeat="download in downloads" ng-show="isGridVisible" ng-click="onFileItemClick()">
+    <li class="li-grid" ng-repeat="download in downloads" ng-show="!isGridVisible" ng-click="onFileItemClick()">
         <md-card class="card-view">
             <img ng-src="{{getImage(download.download_name)}}" class="md-card-image image-class" alt="image caption">
             <md-card-content>

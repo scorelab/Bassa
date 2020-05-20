@@ -7,8 +7,8 @@ from Models import Status, Download
 from EMail import send_mail
 from DiskMan import *
 from ConfReader import get_conf_reader
-from MinioHandler import *
 import logging
+from MinioHandler import *
 
 import websocket
 import sys
@@ -33,7 +33,6 @@ class Handler(queue.Queue):
         queue.Queue.__init__(self)
         self.ws = ws
         self.num_workers = 5
-        self.start_workers()
 
     def add_to_queue(self, download):
         self.put(download)
@@ -67,7 +66,7 @@ class Handler(queue.Queue):
 
 class MessageHandler():
 
-    def __init__(self,ws):
+    def __init__(self, ws):
         self.num_workers = 5
         self.ws = ws
 
@@ -86,6 +85,9 @@ class MessageHandler():
             data = json.loads(message)
             print(threading.current_thread().name,data)
             print ("TOP LEVEL DATA", data)
+            if 'error' in data:
+                logging.error("Aria2c error: %s", data['error'])
+                return
             if 'id' in data and data['id'] == "act":
                 toBeDownloaded = get_to_download()
                 if toBeDownloaded:
@@ -135,7 +137,7 @@ class MessageHandler():
                     get_status(self.ws, None, data['params'][0]['gid'])
                     db_lock.release()
                     messageQueue.task_done()
-            
+
 class RepeatedTimer(object):
     def __init__(self, interval, function, *args, **kwargs):
         self._timer     = None
@@ -178,6 +180,7 @@ def add_uri(ws, download):
 def get_status(ws, id=None, gid=None):
     if id:
         gid = get_gid_from_id(id)
+    gid = str(gid)
     msg = JSONer("stat", 'aria2.tellStatus', [gid, ['gid', 'files']])
     print ("Getting status")
     ws.send(msg)
@@ -236,12 +239,11 @@ def on_message(ws, message):
     messageQueue.put(message)
 
 def on_error(ws, error):
-    print(error)
+    logging.error(error)
 
 
 def on_close(ws):
-    pass
-
+    logging.info("Socket closed")
 
 def on_open(ws):
     initialize(ws)
@@ -252,6 +254,7 @@ def starter(socket):
     sc = socket
     remove_files(conf['max_age'], conf['min_rating'])
     folder_size=get_size(conf['down_folder'])
+    logging.info("SERVER: folder_size: %d", folder_size)
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(conf['aria_server'],
                                 on_message=on_message,
@@ -259,13 +262,13 @@ def starter(socket):
                                 on_close=on_close)
     ws.on_open = on_open
     handler = Handler(ws)
+    handlerLst.append(handler)
     # socketio.emit("test", {'data': 'A NEW FILE WAS POSTED'}, namespace='/news')
     threading.Thread(target=handler.start_workers).start()
-    mHandler = MessageHandler(ws) 
+    mHandler = MessageHandler(ws)
     threading.Thread(target=mHandler.start_message_workers).start()
     messageQueue.join()
     ws.run_forever()
-
 
 
 

@@ -3,9 +3,6 @@
 
 <hr>
 
-
-
-
 [![Build Status](https://travis-ci.org/scorelab/Bassa.svg?branch=master)](https://travis-ci.org/scorelab/Bassa)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7de63c7b9a69448787e8014a12a260b1)](https://www.codacy.com/app/SCoRe-Lab/Bassa?utm_source=github.com&utm_medium=referral&utm_content=scorelab/Bassa&utm_campaign=badger)
 [![Docker Build](https://img.shields.io/docker/automated/scoreucsc/bassa.svg)]()
@@ -58,9 +55,8 @@ You can also discuss about other projects on [SCoRe Lab gitter channel](https://
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. 
-<a href="https://opencollective.com/Bassa#contributors" target="_blank"><img src="https://opencollective.com/Bassa/contributors.svg?width=890&button=false" /></a>
-
+This project exists thanks to all the people who contribute.
+[![Contributors Image](https://opencollective.com/Bassa/contributors.svg?width=890&button=false)](https://opencollective.com/Bassa#contributors)
 
 ## Backers
 

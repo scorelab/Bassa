@@ -6,24 +6,22 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - |
-      if ! git diff --name-only $TRAVIS_COMMIT_RANGE | grep -qvE '(.md)|(.png)|(.)|^(LICENSE)|^(docs)|^(robots.txt)|^(package-list-yum)|^(package-list-pacman)|^(package-list-dnf)|^(package-list-brew)|^(package-list-aptget)|^(humans.txt)|^(docker-compose.yml)|^(docker-compose.dev.yml)|^(bassa)|^(.gitignore)|^(.gitattributes)|^(bassa-ui.yaml)|^(bassa-ingress.yaml)|^(bassa-api.yaml)|^(deploy_rds.sh)|^(rds-dev.json)|^(template.json)|^(setup-mysql.sh)|^(setup-database.sh)|^(create-schema.sh)|^(Bassa.sql)'
-      then
-        echo "Files changed not related to dockerfile, therefore travis build ends"
-        exit
-      fi
 
 script: 
-  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-ui  ui
-  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa   components/core
+  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-prod-ui ui
+  - docker build -f ui/Dockerfile.dev --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-dev-ui ui
+  - docker build -f components/core/Dockerfile.prod --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-prod-server components/core
+  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-dev-server components/core
+  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-aria2c components/aria2c
+
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  - if [ "$TRAVIS_BRANCH" == "develop" -a "$TRAVIS_PULL_REQUEST" == "true" ]; then
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-    docker push scoreucsc/bassa;
-    curl -X POST 'https://hooks.microbadger.com/images/scoreucsc/bassa/Wbi5zehDMooS3ri2bgC8LETGGuQ=';
-    docker push scoreucsc/bassa-ui;
-    curl -X POST 'https://hooks.microbadger.com/images/scoreucsc/bassa-ui/et6pa2aJq-tEvwFoW-PL8ixNxr0=';
+    docker push scoreucsc/bassa-prod-ui;
+    docker push scoreucsc/bassa-dev-ui;
+    docker push scoreucsc/bassa-prod-server;
+    docker push scoreucsc/bassa-dev-server
+    docker push scoreucsc/bassa-aria2c;
     fi
 
