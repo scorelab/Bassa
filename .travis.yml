@@ -10,11 +10,11 @@ notifications:
   webhooks: https://www.travisbuddy.com/
 
 script:
-  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-prod-ui ui >/dev/null
-  - docker build -f ui/Dockerfile.dev --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-dev-ui ui >/dev/null
-  - docker build -f components/core/Dockerfile.prod --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-prod-server components/core >/dev/null
-  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-dev-server components/core >/dev/null
-  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa-aria2c components/aria2c >/dev/null
+  - docker build -t scoreucsc/bassa-ui:prod ui >/dev/null
+  - docker build -f ui/Dockerfile.dev -t scoreucsc/bassa-ui:dev ui >/dev/null
+  - docker build -f components/core/Dockerfile.prod -t scoreucsc/bassa-server:prod components/core >/dev/null
+  - docker build -t scoreucsc/bassa-server:dev components/core >/dev/null
+  - docker build -t scoreucsc/bassa-aria2c components/aria2c >/dev/null
 
 deploy:
   - provider: script
