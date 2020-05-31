@@ -106,12 +106,32 @@ def update_rate(id):
 def get_downloads_user(userName, limit):
 	recordsPerPage = 15
 	db = threadpool.connect()
+	isAdmin = None
 	if db is not None:
-		cursor = db.cursor(MySQLdb.cursors.DictCursor)
-		sql = "SELECT * FROM download WHERE user_name=%s ORDER by 'added_time' LIMIT %s, %s;"
+		cursor = db.cursor()
+		sql = "SELECT auth FROM user WHERE user_name=%s;"
 		try:
-			cursor.execute(sql, (userName, (limit - 1) * recordsPerPage, limit * recordsPerPage))
+			cursor.execute(sql, userName)
+			result = cursor.fetchone()
+			logging.info(result)
+			print(result)
+			if result['auth'] == '0':
+				sql = "SELECT * FROM download ORDER by 'added_time' LIMIT %s, %s;"
+				isAdmin = True
+			elif result['auth'] == '1':
+				sql = "SELECT * FROM download WHERE user_name=%s ORDER by 'added_time' LIMIT %s, %s;"
+				isAdmin = False
+			cursor.close()
+		except MySQLdb.Error as e:
+			logging.error("Error %d: %s", e.args[0], e.args[1])
+		cursor = db.cursor(MySQLdb.cursors.DictCursor)
+		try:
+			if isAdmin:
+				cursor.execute(sql, ((limit - 1) * recordsPerPage, limit * recordsPerPage))
+			else:
+				cursor.execute(sql, (userName, (limit - 1) * recordsPerPage, limit * recordsPerPage))
 			results = cursor.fetchall()
+			cursor.close()
 			db.close()
 			return results
 		except MySQLdb.Error as e:

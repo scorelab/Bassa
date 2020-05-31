@@ -217,6 +217,7 @@ def get_downloads_user_request(limit):
     if token is not None :
         try:
             status = get_downloads_user(g.user.userName, int(limit))
+            logging.info(status)
             if not isinstance(status, str):
                 resp = Response(response=json.dumps(status),status=200)
             else:

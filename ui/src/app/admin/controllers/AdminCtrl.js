@@ -2,9 +2,9 @@
   'use strict';
   angular
     .module('app')
-    .controller('AdminCtrl', [ '$scope', 'ToastService', 'AdminService', 'UtilityService', AdminCtrl]);
+    .controller('AdminCtrl', [ '$scope', 'ToastService', 'AdminService', 'UtilityService', '$window', AdminCtrl]);
 
-  function AdminCtrl($scope, ToastService, AdminService, UtilityService) {
+  function AdminCtrl($scope, ToastService, AdminService, UtilityService, $window) {
 
     $scope.signup_requests = [];
     $scope.usageChartData = [];
@@ -30,11 +30,14 @@
     };
 
     $scope.start = function() {
-      AdminService.startDownloads().then(function (response) {
-        ToastService.showToast('Downloading');
-      }, function(error){
-        ToastService.showToast('Oops! Something went wrong');
-      });
+      var startDownload = $window.confirm('Confirm start download!');
+      if (startDownload){
+        AdminService.startDownloads().then(function (response) {
+          ToastService.showToast('Downloading');
+        }, function(error){
+          ToastService.showToast('Oops! Something went wrong');
+        });
+      }
     };
 
     $scope.kill = function() {
