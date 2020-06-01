@@ -5,7 +5,7 @@
         <md-button ng-show="isShowingCheckbox" ng-click="deselectAll()"><i class="material-icons ng-scope">check_circle_outline</i></md-button>
         <md-button ng-show="isShowingCheckbox" ng-click="selectAll()"><i class="material-icons ng-scope">check_circle</i></md-button>
     </div>
-    <table id="table" class="table table-hover table-bordered" ng-show="isGridVisible">
+    <table id="table" class="table table-hover table-bordered" ng-show="!isGridVisible">
         <thead>
         <tr>
             <th>#</th>
@@ -28,6 +28,24 @@
         </tr>
         </tbody>
     </table>
+
+    <ul>
+        <li class="li-grid" ng-repeat="download in downloads" ng-show="isGridVisible" ng-click="onFileItemClick()">
+            <md-card class="card-view">
+                <img ng-src="{{getImage(download.download_name)}}" class="md-card-image image-class" alt="image caption">
+                <md-card-content>
+                    <div>
+                        <p class="file-name">{{download.download_name}}</p>
+                    </div>
+                </md-card-content>
+                <button class="md-raised md-primary md-button md-ink-ripple button-design" ng-click="compressFiles([download.gid])">
+                    Download
+                </button>
+                <!-- please add checkbox here also -->
+            </md-card>
+        </li>
+    </ul>
+    
 </div>
 
 <div ng-if="data.length == 0">
@@ -36,19 +54,4 @@
   </md-content>
 </div>
 
-<ul>
-    <li class="li-grid" ng-repeat="download in downloads" ng-show="!isGridVisible" ng-click="onFileItemClick()">
-        <md-card class="card-view">
-            <img ng-src="{{getImage(download.download_name)}}" class="md-card-image image-class" alt="image caption">
-            <md-card-content>
-                <div>
-                    <p class="file-name">{{download.download_name}}</p>
-                </div>
-            </md-card-content>
-            <button class="md-raised md-primary md-button md-ink-ripple button-design" ng-click="compressFiles([download.gid])">
-                Download
-            </button>
-            <!-- please add checkbox here also -->
-        </md-card>
-    </li>
-</ul>
+
