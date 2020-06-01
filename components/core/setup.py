@@ -27,10 +27,8 @@ install_reqs = parse_requirements(requirements_path, session=False)
 try:
     requirements = [str(ir.req) for ir in install_reqs]
 except:
-    requirements = [str(ir) for ir in install_reqs]
+    requirements = [str(ir.requirement) for ir in install_reqs]
 
-print(requirements)
-raise Exception("Stop")
 
 ### Set configs ###
 if platform.system() == 'Linux':
