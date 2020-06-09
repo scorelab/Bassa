@@ -41,7 +41,9 @@ def kill():
 		token = request.headers['key']
 		if str(token) != SERVER_SECRET_KEY:
 			return "{'error':'not authorized'}", 403
-		if p is not None:
+		p = None
+		if len(processes) != 0:
+			p = processes[0]
 			p.terminate()
 			p.join()
 			jsonreq = json.dumps({'jsonrpc': '2.0', 'id': 'qwer', 'method': 'aria2.pauseAll'})

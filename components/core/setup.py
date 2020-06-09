@@ -24,7 +24,11 @@ requirements_path = os.path.join(base_dir, 'requirements.txt')
 
 install_reqs = parse_requirements(requirements_path, session=False)
 
-requirements = [str(ir.req) for ir in install_reqs]
+try:
+    requirements = [str(ir.req) for ir in install_reqs]
+except:
+    requirements = [str(ir.requirement) for ir in install_reqs]
+
 
 ### Set configs ###
 if platform.system() == 'Linux':

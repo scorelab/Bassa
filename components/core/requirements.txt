@@ -14,3 +14,4 @@ Werkzeug==0.11.4
 SQLAlchemy==1.1.9
 gunicorn==19.9.0
 minio==5.0.5
+Flask==0.10.1
