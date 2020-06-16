@@ -2,10 +2,11 @@ from Models import User
 from DBCon import *
 from ConfReader import get_conf_reader
 import sqlalchemy.pool as pool
+import logging
 
 conf = get_conf_reader("dl.conf")
 
-threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=20)
+threadpool = pool.QueuePool(get_db_con, max_overflow=10, pool_size=0)
 
 def user_login(username, password):
     db = threadpool.connect()
@@ -14,6 +15,7 @@ def user_login(username, password):
         sql = "SELECT * FROM user WHERE user_name=%s AND password=MD5(%s) AND blocked=0;"
         cursor.execute(sql, (username, password))
         data = cursor.fetchone()
+        cursor.close()
         db.close()
         if data == None:
             return False
@@ -27,6 +29,7 @@ def check_approved(username, password):
         sql = "SELECT * FROM user WHERE user_name=%s AND password=MD5(%s) AND approved=1;"
         cursor.execute(sql, (username, password))
         data = cursor.fetchone()
+        cursor.close()
         db.close()
         if data == None:
             return False
@@ -40,6 +43,7 @@ def check_user_name(username):
         sql = "SELECT * FROM user WHERE user_name=%s;"
         cursor.execute(sql, (username))
         data = cursor.fetchone()
+        cursor.close()
         db.close()
         if data == None:
             return False
@@ -54,6 +58,7 @@ def get_user(username):
         sql = "SELECT * FROM user WHERE user_name='%s' and blocked=0;" % username
         cursor.execute(sql)
         data = cursor.fetchone()
+        cursor.close()
         db.close()
         if data == None:
             return None
@@ -68,10 +73,12 @@ def add_user(user):
         sql = "INSERT into user VALUES(%s, MD5(%s), %s, %s, 0, 0);"
         try:
             cursor.execute(sql, (user.userName, user.password, user.auth, user.email))
+            cursor.close()
             db.commit()
+            db.close()
         except MySQLdb.Error as e:
             db.rollback()
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
         return "success"
     return "db connection error"
 
@@ -82,10 +89,12 @@ def add_regular_user(user):
         sql = "INSERT into user VALUES(%s, MD5(%s), %s, %s, 0, 0);"
         try:
             cursor.execute(sql, (user.userName, user.password, user.auth, user.email))
+            cursor.close()
             db.commit()
-        except MySQLdb.Error as e:
+            db.close()
+        except MySQLdb.IntegrityError:
             db.rollback()
-            return e[1]
+            return "username taken"
         return "success"
     return "db connection error"
 
@@ -96,10 +105,12 @@ def remove_user(username):
         sql = "DELETE from user WHERE user_name=%s;"
         try:
             cursor.execute(sql, (username))
+            cursor.close()
             db.commit()
+            db.close()
         except MySQLdb.Error as e:
             db.rollback()
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
         return "success"
     return "db connection error"
 
@@ -111,10 +122,12 @@ def update_user(user, username):
         sql = "UPDATE user SET user_name=%s, auth=%s, email=%s WHERE user_name=%s;"
         try:
             cursor.execute(sql, (user.userName, user.auth, user.email, username))
+            cursor.close()
             db.commit()
+            db.close()
         except MySQLdb.Error as e:
             db.rollback()
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
         return "success"
     return "db connection error"
 
@@ -126,10 +139,11 @@ def get_users():
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
+            cursor.close()
             db.close()
             return results
         except MySQLdb.Error as e:
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
     return "db connection error"
 
 def get_blocked_users():
@@ -140,10 +154,11 @@ def get_blocked_users():
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
+            cursor.close()
             db.close()
             return results
         except MySQLdb.Error as e:
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
     return "db connection error"
 
 def block_user(username):
@@ -153,10 +168,12 @@ def block_user(username):
         sql = "UPDATE user SET blocked=%s WHERE user_name=%s;"
         try:
             cursor.execute(sql, (1, username))
+            cursor.close()
             db.commit()
+            db.close()
         except MySQLdb.Error as e:
             db.rollback()
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
         return "success"
     return "db connection error"
 
@@ -167,10 +184,12 @@ def unblock_user(username):
         sql = "UPDATE user SET blocked=%s WHERE user_name=%s;"
         try:
             cursor.execute(sql, (0, username))
+            cursor.close()
             db.commit()
+            db.close()
         except MySQLdb.Error as e:
             db.rollback()
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
         return "success"
     return "db connection error"
 
@@ -182,10 +201,11 @@ def get_signup_requests():
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
+            cursor.close()
             db.close()
             return results
         except MySQLdb.Error as e:
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
     return "db connection error"
 
 def approve_user(username):
@@ -195,10 +215,12 @@ def approve_user(username):
         sql = "UPDATE user SET approved=%s WHERE user_name=%s;"
         try:
             cursor.execute(sql, (1, username))
+            cursor.close()
             db.commit()
+            db.close()
         except MySQLdb.Error as e:
             db.rollback()
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
         return "success"
     return "db connection error"
 
@@ -211,10 +233,11 @@ def get_heavy_users():
         try:
             cursor.execute(sql)
             results = cursor.fetchall()
+            cursor.close()
             db.close()
             return results
         except MySQLdb.Error as e:
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
     return "db connection error"
 
 def check_if_bandwidth_exceeded(username):
@@ -226,6 +249,8 @@ def check_if_bandwidth_exceeded(username):
         try:
             cursor.execute(sql, (MONTH, username))
             result = cursor.fetchone()
+            cursor.close()
+            db.close()
             if result['sum'] == None:
                 return False
             elif result['sum'] > conf['max_bandwidth']:
@@ -234,5 +259,5 @@ def check_if_bandwidth_exceeded(username):
                 return False
             return result
         except MySQLdb.Error as e:
-            return e[1]
+            logging.error("Error %d: %s", e.args[0], e.args[1])
     return "db connection error"

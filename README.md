@@ -1,125 +1,82 @@
-![logo](http://gdurl.com/7XYK)
+<hr>
+
+![Bassa logo](https://github.com/scorelab/Bassa/blob/master/ui/src/assets/images/bassa.png?raw=true)
 
 [![Build Status](https://travis-ci.org/scorelab/Bassa.svg?branch=master)](https://travis-ci.org/scorelab/Bassa)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7de63c7b9a69448787e8014a12a260b1)](https://www.codacy.com/app/SCoRe-Lab/Bassa?utm_source=github.com&utm_medium=referral&utm_content=scorelab/Bassa&utm_campaign=badger)
-[![Docker Build Status](https://img.shields.io/docker/build/scoreucsc/bassa.svg)]()
-[![PyPI](https://img.shields.io/pypi/dm/Bassa.svg)](https://pypi.python.org/pypi)
-[![PyPI](https://img.shields.io/pypi/v/Bassa.svg)](https://pypi.python.org/pypi)
+[![Docker Build](https://img.shields.io/docker/automated/scoreucsc/bassa.svg)]()
+[![PyPI](https://img.shields.io/pypi/v/Bassa.svg)](https://pypi.python.org/pypi/bassa)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/scorelab/scorelab)
 [![](https://images.microbadger.com/badges/image/scoreucsc/bassa.svg)](https://microbadger.com/images/scoreucsc/bassa "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/scoreucsc/bassa.svg)](https://microbadger.com/images/scoreucsc/bassa "Get your own version badge on microbadger.com")
 [![](https://images.microbadger.com/badges/commit/scoreucsc/bassa.svg)](https://microbadger.com/images/scoreucsc/bassa "Get your own commit badge on microbadger.com")
+[![Backers on Open Collective](https://opencollective.com/Bassa/backers/badge.svg)](#backers) 
+[![Sponsors on Open Collective](https://opencollective.com/Bassa/sponsors/badge.svg)](#sponsors) 
 
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
-# About 
+<hr>
+
+## About
 Bassa solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.
 
 ## Main functionalities
 * Provides an interface for users to add their downloads as links or torrent magnet links
-* Provide users  an interface to view and download the files in local server
-* Provide a rating system to users to rate the files residing in local server
+* Provide users with an interface to view and download the files in the local server
+* Provide a rating system for users to rate the files residing in local server
 * Automatically start and stop downloading in given time frame
 * Automatically clean the disks and make room for new downloads
-* Notify user when his/her download is completed
+* Notify the users when his/her download is completed
 * Mark inappropriate downloads
-* Provides admins an interface to deal with inappropriate files
+* Provides admins with an interface to deal with inappropriate files
 
-## Installation
+## Installation Guide
 
-Note: Windows users can check the installation guide [here](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide).
+### Setting up Bassa via containers
+* Using Docker and docker-compose [Recommended] [LINK](https://github.com/scorelab/Bassa/wiki/Setting-up-Bassa-via-containers)
+* Using Podman, buildah and podman-compose [Recommended] [LINK]()
 
-First clone the Repository 
-``` git clone https://github.com/scorelab/Bassa.git```
-
-![gitclone](https://user-images.githubusercontent.com/28682735/35194406-2f6f08e2-fed9-11e7-8411-86d83bed6507.gif)
-
-Use python 3 instead of Python 2
-
-```
-  $ ./setup.sh
-  $ cd components/core/
-  $ sudo python3 setup.py develop
-```
-![setupsh](https://user-images.githubusercontent.com/28682735/35194409-2ffbca66-fed9-11e7-9242-ffe036067d18.gif)
+### Setting up Bassa on host from source code
+* On Linux based operating systems [LINK](https://github.com/scorelab/Bassa/wiki/Linux-Installation-Guide)
+* On MacOS [LINK](https://github.com/scorelab/Bassa/wiki/MacOS-Installation-Guide)
+* On Windows operation system [LINK](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide)
 
 
+## User Guide
+You can learn how to use Bassa as an effective download queue for communities by taking best use of internet bandwidth. You can know about different functionalities according to the roles provided. Please move to this [User Guide](https://github.com/scorelab/Bassa/wiki/How-to-use-Bassa) 
 
-## Database Setup
+## Developer Guide
+Once you have setup Bassa locally, you can move to our [Developer Guide](https://github.com/scorelab/Bassa/wiki/Bassa:-Developer-Guide) to know more about the project internals.
+Please go through [contribution guidelines document](https://github.com/scorelab/Bassa/wiki/Contribution-Guidelines) before making any contributions.
+## Communication
+Feel free to discuss on our [Bassa gitter channel](https://gitter.im/scorelab/Bassa).
+You can also discuss about other projects on [SCoRe Lab gitter channel](https://gitter.im/scorelab/scorelab).
 
-1. Type below in a MySql terminal.
+## Contributors
 
-```
-create database Bassa
-```
+This project exists thanks to all the people who contribute.
+[![Contributors Image](https://opencollective.com/Bassa/contributors.svg?width=890&button=false)](https://opencollective.com/Bassa#contributors)
 
-2. Type below in the root of project.
+## Backers
 
-```
-mysql -u root -p  Bassa < Bassa.sql
-```
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/Bassa#backer)]
 
-3. Open components/core/DBCon.py and setup database username and password.
-
-
-## Test Server
-```
-  $ cd components/core/
-  $ python3 Main.py
-```
-![python3main](https://user-images.githubusercontent.com/28682735/35194408-2fce9136-fed9-11e7-80e6-fac5e6f54bc7.gif)
+<a href="https://opencollective.com/Bassa#backers" target="_blank"><img src="https://opencollective.com/Bassa/backers.svg?width=890"></a>
 
 
-## Bassa UI
+## Sponsors
 
-### Install dependencies with
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/Bassa#sponsor)]
 
-
-```
-$ cd ui/
-$ npm install
-```
-
-### To start
-run `gulp serve`
-
-
-![gulp_serve](https://user-images.githubusercontent.com/28682735/35194407-2fa172e6-fed9-11e7-9e89-065ecb3cbf87.gif)
-
+<a href="https://opencollective.com/Bassa/sponsor/0/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/1/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/2/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/3/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/4/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/5/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/6/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/7/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/8/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/Bassa/sponsor/9/website" target="_blank"><img src="https://opencollective.com/Bassa/sponsor/9/avatar.svg"></a>
 
 
-In the first time you login, the credentials would be as follows.
-
-- username - rand
-- password - pass
-
-
-![bassaui](https://user-images.githubusercontent.com/28682735/35193753-667c7e0c-fecd-11e7-918f-13ce1d00d055.gif)
-
-
-### Make sure you have aria2 installed.
-run `aria2c --enable-rpc`
-
-
-![aria2c](https://user-images.githubusercontent.com/28682735/35193755-709e92ee-fecd-11e7-8dd0-412304853c8c.gif)
-
-
-### How to Use Bassa
-* After Setting up Bassa, Login/Register.There are two types of users in Bassa- (1) The Admin and (2) The Normal Users.
-* A user can add a link through the webapp and Bassa stores it in the local server right away. This way multiple users can add various links, but the downloads won’t start right away. 
-* The organisation admin can start the downloads at a time of his/her liking. 
-* Then the users who had added links for certain files can download them from the local servers at a much higher speed.
-* You can even watch a video tutorial for the same on [Youtube](https://www.youtube.com/watch?v=NxS8T1EphCA)
-### Autoformat JS with Prettier
-
-- [Sublime Text Plugin](https://github.com/jonlabelle/SublimeJsPrettier)
-- [Atom Plugin](https://github.com/prettier/prettier-atom)
-
-Find more plugins [here](https://github.com/prettier/prettier#editor-integration)
-
-
-### Run UI unit tests
-```
-	$ cd ui/
-	$ npm test OR $ yarn test 
-```

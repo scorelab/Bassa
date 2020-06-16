@@ -1,5 +1,11 @@
-<div class="table-responsive-vertical md-whiteframe-z1">
-    <table id="table" class="table table-hover table-bordered">
+<div ng-if="data.length != 0" class="table-responsive-vertical md-whiteframe-z1">
+    <div>
+        <md-button class="md-primary md-raised" layout-align="center end" ng-click="isGridVisible = !isGridVisible"><i class="material-icons ng-scope">{{ isGridVisible ? 'view_list' : 'view_module' }}</i></md-button>
+        <md-button layout-align="end none" ng-show="isShowingActions" ng-click="generateSharingLink()"><i class="material-icons ng-scope">share</i></md-button>
+        <md-button ng-show="isShowingCheckbox" ng-click="deselectAll()"><i class="material-icons ng-scope">check_circle_outline</i></md-button>
+        <md-button ng-show="isShowingCheckbox" ng-click="selectAll()"><i class="material-icons ng-scope">check_circle</i></md-button>
+    </div>
+    <table id="table" class="table table-hover table-bordered" ng-show="!isGridVisible">
         <thead>
         <tr>
             <th>#</th>
@@ -7,16 +13,45 @@
             <th>Download name</th>
             <th>Size</th>
             <th>Completed time</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="data in downloads">
+        <tr ng-repeat="data in downloads" ng-click="onFileItemClick()">
             <td data-title="ID">{{$index + 1}}</td>
             <td data-title="User">{{data.user_name}}</td>
             <td data-title="Issue">{{data.download_name}}</td>
             <td data-title="Progress">{{data.size}}</td>
-            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"</td>
+            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"></td>
+            <td><button ng-click="compressFiles([data.gid])">Download</button></td>
+            <td><md-checkbox ng-show="isShowingCheckbox" ng-model="data.checked" ng-change="selectThisItem(data)"></md-checkbox></td>
         </tr>
         </tbody>
     </table>
+
+    <ul>
+        <li class="li-grid" ng-repeat="download in downloads" ng-show="isGridVisible" ng-click="onFileItemClick()">
+            <md-card class="card-view">
+                <img ng-src="{{getImage(download.download_name)}}" class="md-card-image image-class" alt="image caption">
+                <md-card-content>
+                    <div>
+                        <p class="file-name">{{download.download_name}}</p>
+                    </div>
+                </md-card-content>
+                <button class="md-raised md-primary md-button md-ink-ripple button-design" ng-click="compressFiles([download.gid])">
+                    Download
+                </button>
+                <!-- please add checkbox here also -->
+            </md-card>
+        </li>
+    </ul>
+    
 </div>
+
+<div ng-if="data.length == 0">
+  <md-content class="no-data-content" >
+    <h4>There are no completed downloads yet!</h4>
+  </md-content>
+</div>
+
+

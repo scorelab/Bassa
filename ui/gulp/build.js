@@ -8,6 +8,8 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
+const uglify = require('gulp-uglify-es').default;
+
 gulp.task('partials', function () {
   return gulp.src([
     paths.src + '/{app,components}/**/*.html',
@@ -43,7 +45,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
-    .pipe($.uglify())
+    .pipe(uglify())
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
     .pipe($.csso())

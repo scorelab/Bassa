@@ -33,15 +33,19 @@
     $scope.signup = function() {
       if(validate($scope.user)) {
         UserService.signup($scope.user).then(function(response) {
-          ToastService.showToast('Success');
+          if (response.status === 200) {
+            ToastService.showToast('Success');
+          } else if (response.status === 400) {
+            ToastService.showToast('Username already exists');
+          } else {
+            ToastService.showToast('Something went wrong :(');
+          }
           $state.go('login');
-        }, function(error) {
-          ToastService.showToast('Username already exists');
         });
       } else {
         ToastService.showToast('Please ensure entered details are correct');
       }
     };
-  };
+  }
 
 })();

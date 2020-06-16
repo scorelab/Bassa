@@ -3,7 +3,11 @@ import shutil
 import inspect
 import platform
 from setuptools import setup
-from pip.req import parse_requirements
+import setuptools
+try:
+    from pip.req import parse_requirements
+except ImportError:
+    from pip._internal.req import parse_requirements
 
 EMAIL_CONF = 'email.conf'
 DL_CONF = 'dl.conf'
@@ -20,7 +24,11 @@ requirements_path = os.path.join(base_dir, 'requirements.txt')
 
 install_reqs = parse_requirements(requirements_path, session=False)
 
-requirements = [str(ir.req) for ir in install_reqs]
+try:
+    requirements = [str(ir.req) for ir in install_reqs]
+except:
+    requirements = [str(ir.requirement) for ir in install_reqs]
+
 
 ### Set configs ###
 if platform.system() == 'Linux':
@@ -48,7 +56,7 @@ setup(
     license="GPL",
     keywords="bassa download queue",
     url="https://github.com/scorelab/Bassa",
-    packages=['tests'],
+    packages=setuptools.find_packages(),
     install_requires=requirements,
     long_description=read('README.md'),
     classifiers=[

@@ -3,7 +3,7 @@
 
   <form name="loginForm" novalidate>
     <div class="group" ng-class="{'has-error': loginForm.user_name.$invalid && loginForm.user_name.$dirty, 'has-success': loginForm.user_name.$valid }">
-      <input type="user_name" class="form-control inputStyle" placeholder="User Name" name="user_name" ng-model="user.user_name" ng-minlength="3" ng-maxlength="15" required/><span class="highlight"></span><span class="bar"></span>
+      <input type="user_name" class="form-control inputStyle" placeholder="Username" name="user_name" ng-model="user.user_name" ng-minlength="3" ng-maxlength="15" required/><span class="highlight"></span><span class="bar"></span>
       <p class="help-block" ng-if="loginForm.user_name.$invalid && loginForm.user_name.$dirty">Username should be more than 3 characters and less than 15</p>
     </div>
 
@@ -13,12 +13,12 @@
     </div>
 
     <div class="group" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
-      <input type="password" class="form-control inputStyle" placeholder="Password" name="password" ng-model="user.password" ng-minLength="8" required"/><span class="highlight"></span><span class="bar"></span>
-      <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Please Enter at least 8 characters</p>
+      <input type="password" class="form-control inputStyle" placeholder="Password" name="password" ng-model="user.password" required ng-change="validatePwd()"/><span class="highlight"></span><span class="bar"></span>
+      <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty" ng-bind-html="errorMsg"></p>
     </div>
 
     <div class="group" ng-class="{'has-error': user.confirm_password != user.password, 'has-success': user.confirm_password == user.password}">
-      <input type="password" class="form-control inputStyle" placeholder="Password" name="confirm_password" ng-model="user.confirm_password" ng-minLength="8" required ng-enter="login()"/><span class="highlight"></span><span class="bar"></span>
+      <input type="password" class="form-control inputStyle" placeholder="Confirm Password" name="confirm_password" ng-model="user.confirm_password" ng-minLength="8" required ng-enter="login()"/><span class="highlight"></span><span class="bar"></span>
       <p class="help-block" ng-if="user.confirm_password != user.password && user.confirm_password != 0">Password did not match!</p>
     </div>
 
