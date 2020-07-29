@@ -6,6 +6,7 @@ metadata:
     name: prometheus-rules
   namespace: bassa-monitoring
 data:
+# you can modify alert rules as you wish, useful explanation is added here https://github.com/scorelab/Bassa/wiki/Prometheus-for-monitoring-and-alerting-K8s-cluster
   alert.rules: |-
     groups:
       - name: Deployment
