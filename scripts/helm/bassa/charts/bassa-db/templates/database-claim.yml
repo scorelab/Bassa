@@ -1,0 +1,10 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: "{{ include "bassa-db.fullname" . }}-{{ .Values.persistentVolume.name }}-claim"
+spec:
+  accessModes:
+    - {{ .Values.persistentVolume.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.persistentVolume.storage }}

@@ -1,0 +1,40 @@
+# Default values for bassa.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+ingress:
+  enabled: true
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: bassa.installer.to
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+bassa-ui:
+  image:
+    repository: scoreucsc/bassa-ui
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+
+bassa-api:
+  fullnameOverride: "bassa-api"
+  image:
+    # Overrides the image tag whose default is the chart appVersion.
+    repository: kmehant/api
+    tag: "latest"
+  aria2_image:
+    # Overrides the image tag whose default is the chart appVersion.
+    repository: kmehant/aria2c
+    tag: "latest"
+  persistentVolume:
+    storage: 250Mi
+
+bassa-db:
+  image:
+    repository: kmehant/db
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"

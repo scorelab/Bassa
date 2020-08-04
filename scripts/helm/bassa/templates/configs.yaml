@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "bassa.fullname" . }}
+data:
+  {{ (.Files.Glob "envs.yaml").AsConfig | indent 2 }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "bassa.fullname" . }}
+type: Opaque
+data:
+  {{ (.Files.Glob "secrets.yaml").AsSecrets | indent 2 }}
