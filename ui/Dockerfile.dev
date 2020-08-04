@@ -21,10 +21,10 @@ RUN apt-get update && \
 
 # Add environment variable values to env.js
 # ENV: apiUrl : backend url
-RUN sh env.sh 
+RUN sh env-dev.sh 
 
 # Starting gulp server
-CMD ["gulp", "serve"]
+CMD ["sh env-dev.sh &&" ,"gulp", "serve"]
 
 # labels to dockerfile
 LABEL scorelab.bassa.name="Bassa Web development server" \

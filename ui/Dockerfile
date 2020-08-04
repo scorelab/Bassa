@@ -13,12 +13,10 @@ RUN apt-get update && \
     npm install --global bower gulp-cli && \
     bower --allow-root install
 
-# Add environment variable values to env.js
-# ENV: apiUrl : backend url
-RUN sh env.sh 
-
 # Building the ui component to obtain static files.
 RUN gulp build
+
+RUN mv env-prod.sh /ui/dist/
 
 #------------------------------ Production
 FROM nginx:alpine as production
@@ -33,6 +31,8 @@ COPY --from=builder /ui/dist/ /usr/share/nginx/html
 
 # Expose ports
 EXPOSE 80
+
+CMD [ "sh /usr/share/nginx/html/env-prod.sh &&","nginx", "-g", "daemon off;"]
 
 # Adding metadata as docker labels
 LABEL scorelab.bassa.name="Bassa Web production server" \
