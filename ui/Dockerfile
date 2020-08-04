@@ -12,8 +12,10 @@ RUN apt-get update && \
     npm install && \
     npm install --global bower gulp-cli && \
     bower --allow-root install
-    
-    
+
+# Add environment variable values to env.js
+# ENV: apiUrl : backend url
+RUN sh env.sh 
 
 # Building the ui component to obtain static files.
 RUN gulp build
@@ -34,11 +36,11 @@ EXPOSE 80
 
 # Adding metadata as docker labels
 LABEL scorelab.bassa.name="Bassa Web production server" \
-      scorelab.bassa.description="Dockerfile for Bassa Web Nginx server" \
-      scorelab.bassa.url="https://github.com/scorelab/Bassa/wiki" \
-      scorelab.bassa.vcs-url="https://github.com/scorelab/Bassa" \
-      scorelab.bassa.vcs-ref=$VCS_REF \
-      scorelab.bassa.build-date=$BUILD_DATE \
-      scorelab.bassa.vendor="Sustainable Computing Research Group" \
-      scorelab.bassa.version="1.0" \
-      scorelab.bassa.schema-version="1.0"
+    scorelab.bassa.description="Dockerfile for Bassa Web Nginx server" \
+    scorelab.bassa.url="https://github.com/scorelab/Bassa/wiki" \
+    scorelab.bassa.vcs-url="https://github.com/scorelab/Bassa" \
+    scorelab.bassa.vcs-ref=$VCS_REF \
+    scorelab.bassa.build-date=$BUILD_DATE \
+    scorelab.bassa.vendor="Sustainable Computing Research Group" \
+    scorelab.bassa.version="1.0" \
+    scorelab.bassa.schema-version="1.0"
