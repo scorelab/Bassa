@@ -27,6 +27,8 @@ services:
       - api
     depends_on:
       - db
+    environment:
+      apiUrl: http://localhost:5000
 
   aria2c:
     build: components/aria2c/
