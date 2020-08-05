@@ -32,7 +32,7 @@ COPY --from=builder /ui/dist/ /usr/share/nginx/html
 # Expose ports
 EXPOSE 80
 
-CMD [ "sh /usr/share/nginx/html/env-prod.sh &&","nginx", "-g", "daemon off;"]
+CMD sh /usr/share/nginx/html/env-prod.sh && nginx -g 'daemon off;'
 
 # Adding metadata as docker labels
 LABEL scorelab.bassa.name="Bassa Web production server" \
