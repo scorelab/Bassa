@@ -34,6 +34,17 @@ spec:
             - name: http
               containerPort: 3306
               protocol: TCP
+          env: #TODO See https://github.com/scorelab/Bassa/issues/926
+            - name: MYSQL_ROOT_PASSWORD
+              value: bassa@1234
+            - name: MYSQL_DATABASE
+              value: Bassa
+            - name: MYSQL_USER
+              value: bassa
+            - name: BASSA_DB_NAME
+              value: Bassa
+            - name: MYSQL_PASSWORD
+              value: bassa@1234
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: {{ .Values.persistentVolume.name }}

@@ -36,7 +36,7 @@ spec:
               servicePort: 80
           - path: /api
             backend:
-              serviceName: "bassa-api"
+              serviceName: "bassa-api" # TODO https://github.com/scorelab/Bassa/issues/928
               servicePort: 5000
     {{- end }}
   {{- end }}

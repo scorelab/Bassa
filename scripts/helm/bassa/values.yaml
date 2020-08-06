@@ -21,7 +21,7 @@ bassa-ui:
     tag: "latest"
 
 bassa-api:
-  fullnameOverride: "bassa-api"
+  fullnameOverride: "bassa-api" # TODO See https://github.com/scorelab/Bassa/issues/928
   image:
     # Overrides the image tag whose default is the chart appVersion.
     repository: kmehant/api

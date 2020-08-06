@@ -37,6 +37,13 @@ spec:
             - name: http
               containerPort: 5000
               protocol: TCP
+          env: #TODO See https://github.com/scorelab/Bassa/issues/926
+            - name: BASSA_DB_NAME
+              value: 'Bassa'
+            - name: BASSA_DB_USERNAME
+              value: 'bassa'
+            - name: BASSA_DB_PASSWORD
+              value: 'bassa@1234'
           volumeMounts:
             - mountPath: /downloads
               name: {{ include "bassa-api.fullname" . }}-{{ .Values.persistentVolume.name }}
