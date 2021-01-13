@@ -19,6 +19,16 @@
     navService
       .loadAllItems()
       .then(function(menuItems) {
+        if (UserService.getAuthLevel() !== 0) {
+          let index = 0;
+          const MenuItemsLength = menuItems.length;
+          for (; index < MenuItemsLength; index += 1) {
+            if (menuItems[index].name === 'Admin') {
+              menuItems.splice(index, 1);
+              break;
+            }
+          }
+        }
         $scope.menuItems = [].concat(menuItems);
       });
 
