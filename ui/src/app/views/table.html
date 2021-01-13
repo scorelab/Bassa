@@ -5,18 +5,37 @@
             <th>#</th>
             <th>User</th>
             <th>Download name</th>
-            <th>Size</th>
             <th>Completed time</th>
+
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="data in downloads">
+            <!-- {{data.size}} -->
+        <tr ng-repeat="data in downloads" ng-init="viewModel={icon: defaultIcon, DropdownClass: defaultDropdownClass, InfoClass: defaultInfoDivClass, id: data.id}">
             <td data-title="ID">{{$index + 1}}</td>
+
+
+
             <td data-title="User">{{data.user_name}}</td>
             <td data-title="Issue">{{data.download_name}}</td>
             <td data-title="Progress">{{data.size}}</td>
-            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"</td>
+           
+            <td data-title="Completed time" am-time-ago="data.completed_time|amFromUnix"></td>
+            <td ng-class="viewModel.DropdownClass" data-title="More">
+                <md-icon ng-click="toggleInfo(viewModel)" class="bassa-red-color">{{viewModel.icon}}</md-icon>
+                <div ng-class="viewModel.InfoClass">
+                    
+                    <span class="information"><md-icon class="bassa-red-color info-icon">insert_drive_file</md-icon> Size : {{data.size}} </span>
+
+                    <span class="information "><md-icon class="bassa-red-color  info-icon">cloud_download</md-icon> Downloaded : {{ (data.completed_time*1000) | date : "h:mm a d MMM, y " }} </span>
+
+                    <span ng-click="remove(viewModel)" id="remove" class="information"><md-icon class="bassa-red-color info-icon">delete</md-icon> Remove</span>
+                </div>
+
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
+
+

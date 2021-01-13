@@ -12,9 +12,19 @@
         url: BassaUrl + '/api/downloads/1'
       });
     };
+   var removeDownload = function(id) {
+      console.log(id);
+      return $http({
+        method: 'DELETE',
+        url: BassaUrl + '/api/downloads/' + id
+      });
+    };
 
     return {
-      getCompletedDownloads : getCompletedDownloads
+      getCompletedDownloads : getCompletedDownloads,
+      removeDownload : removeDownload
     };
+
+
   }
 })();
