@@ -6,6 +6,7 @@
 
   function TableCtrl($scope, ToastService, TableService, UtilityService) {
     $scope.downloads = [];
+    $scope.showToast = ToastService.showToast;
 
     var setSize = function(lst) {
       lst.data.forEach(function(download) {
