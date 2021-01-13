@@ -44,6 +44,7 @@ First clone the Repository
 Use python 3 instead of Python 2
 
 ```
+  $ sudo apt-get update (to prevent any possible version failiures)
   $ ./setup.sh
   $ cd components/core/
   $ sudo python3 setup.py develop
