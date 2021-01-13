@@ -45,6 +45,7 @@ Use python 3 instead of Python 2
 
 ```
   $ ./setup.sh
+
   $ cd components/core/
   $ sudo python3 setup.py develop
 ```
