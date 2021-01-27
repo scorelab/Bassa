@@ -1,34 +1,27 @@
 dist: trusty
-language: node_js
-node_js:
-  - "6.10.0"
-python:
-  - "3.6"
+language: generic
+
 sudo: required
 
 services:
   - docker
 
-cache:
-  directories:
-    - ui/node_modules
+notifications:
+  webhooks: https://www.travisbuddy.com/
 
-before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  
-script: 
-  - ./setup.sh 
-  - cd ui && npm install && npm test
-  - cd $TRAVIS_BUILD_DIR
-  - cd components/core && python setup.py test
-  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa  .
+script:
+  - docker build -t scoreucsc/bassa-ui:prod ui >/dev/null
+  - docker build -f ui/Dockerfile.dev -t scoreucsc/bassa-ui:dev ui >/dev/null
+  - docker build -f components/core/Dockerfile.prod -t scoreucsc/bassa-server:prod components/core >/dev/null
+  - docker build -t scoreucsc/bassa-server:dev components/core >/dev/null
+  - docker build -t scoreucsc/bassa-aria2c components/aria2c >/dev/null
 
-after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-    docker push scoreucsc/bassa;
-    curl -X POST 'https://hooks.microbadger.com/images/scoreucsc/bassa/Wbi5zehDMooS3ri2bgC8LETGGuQ=';
-    fi
-
+deploy:
+  - provider: script
+    script: deploy.sh
+    on:
+      branch: master
+  - provider: script
+    script: deploy.sh
+    on:
+      branch: develop

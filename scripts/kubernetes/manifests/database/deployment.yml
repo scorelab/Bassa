@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: db
+  namespace: bassa
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: db
+    spec:
+      containers:
+        - name: db
+          image: kmehant/db
+          imagePullPolicy: Always
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: bassa@1234
+            - name: MYSQL_DATABASE
+              value: Bassa
+            - name: MYSQL_USER
+              value: bassa
+            - name: BASSA_DB_NAME
+              value: Bassa
+            - name: MYSQL_PASSWORD
+              value: bassa@1234
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: data-volume
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: database-claim         

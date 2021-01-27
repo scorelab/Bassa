@@ -62,15 +62,14 @@
 
     var getName = function() {
       return localStorage.getItem('UserName');
-
     };
 
     var getAuthLevel = function() {
-      return data.authLevel;
+      return localStorage.getItem('AuthLevel');
     };
 
     var setAuthLevel = function(auth) {
-      data.authLevel = auth;
+      localStorage.setItem('AuthLevel', auth);
     };
 
     var setToken = function(newToken) {

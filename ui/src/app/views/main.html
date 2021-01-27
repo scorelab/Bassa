@@ -1,8 +1,8 @@
 <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
             class="md-whiteframe-z2 md-sidenav-left">
   <md-toolbar md-theme="custom" class="md-hue-1 md-whiteframe-z2">
-    <md-button layout="row" layout-align="center center" class="md-toolbar-tools md-warn">
-      <h1>Bassa</h1>
+    <md-button layout="row" layout-align="center center" class="md-toolbar-tools md-warn" onClick="parent.open('https://github.com/scorelab/Bassa')">
+    <img class="" src="assets/images/bassa.png">
     </md-button>
   </md-toolbar>
       <md-button ng-repeat-start="item in menuItems" layout="column" layout-align="center center"
@@ -22,15 +22,13 @@
     <md-toolbar layout="row" layout-align="center center">
         <section layout-align="start center" layout-fill flex>
         </section>
+        <section layout-align="center center">
+          <p>Hi {{username}}</p>
+        </section>
         <section layout-align="end center">
-            <md-menu md-offset="0 20">
-                <md-button class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">
-                <i class="material-icons">menu</i>
-                </md-button>
-                <md-menu-content width="3">
-                    <md-menu-item><md-button ng-click="logout()" ui-sref="login">Log out from {{ username }} </md-button></md-menu-item>
-                </md-menu-content>
-            </md-menu>
+            <md-button ng-click="logout()" ui-sref="login">
+            <md-tooltip> Log out </md-tooltip>
+            <i class="fa fa-power-off" style="color:maroon"></i> </md-button>
         </section>
     </md-toolbar>
 

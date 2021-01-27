@@ -1,0 +1,8 @@
+database:
+        database_type: mysql
+        database_port: 3306
+        database_ip: localhost
+        database_name: bassa
+        database_user_username: bassaman
+        database_user_password: s57d46857f968t79pho
+

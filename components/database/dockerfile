@@ -1,0 +1,5 @@
+FROM mysql:5.7
+COPY ../../db_schema/Bassa.sql /tmp/schema/
+COPY ../../.docker/volumes/mysql/create-schema.sh /docker-entrypoint-initdb.d/
+EXPOSE 3306
+CMD ["mysqld"]

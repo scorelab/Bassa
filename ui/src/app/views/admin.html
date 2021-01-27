@@ -13,27 +13,46 @@
       </md-button>
   </md-content>
 
- <md-content class="block md-padding table-responsive-vertical" >
-    <md-subheader class="md-primary">Signup requests</md-subheader>
+  <div ng-if="data.length != 0">
+   <md-content class="block md-padding table-responsive-vertical" >
+      <md-subheader class="md-primary">Signup requests</md-subheader>
 
-    <table id="table" class="table table-hover table-bordered signup-requests-table">
-        <tbody>
-        <tr ng-repeat="data in signup_requests">
-            <td data-title="ID">{{$index + 1}}</td>
-            <td data-title="Name">{{data.user_name}}</td>
-            <td data-title="Email">{{data.email}}</td>
-            <td id="approve-btn">
-              <md-button class="md-raised" ng-click="approve(data)">
-                  <i class="material-icons">done</i>
-              </md-button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+      <table id="table" class="table table-hover table-bordered signup-requests-table">
+          <tbody>
+          <tr ng-repeat="data in signup_requests">
+              <td data-title="ID">{{$index + 1}}</td>
+              <td data-title="Name">{{data.user_name}}</td>
+              <td data-title="Email">{{data.email}}</td>
+              <td id="approve-btn">
+                <md-button class="md-raised" ng-click="approve(data)">
+                    <i class="material-icons">done</i>
+                </md-button>
+              </td>
+          </tr>
+          </tbody>
+      </table>
 
-  </md-content>
+    </md-content>
+  </div>
+
+  <div ng-if="data.length == 0">
+    <md-content class="no-data-content" >
+      <h4>There are no pending signup requests!</h4>
+    </md-content>
+  </div>
 
   <md-content class="block md-padding table-responsive-vertical" >
+    <!-- Minio
+    <md-content layout="row" layout-sm="column">
+      <md-subheader>View downloaded files</md-subheader>
+      <md-button class="md-raised md-primary" ng-click="visitMinio()">
+        Visit Minio
+      </md-button>
+    </md-content>
+-->
+    <br>
+    <br>
+  
     <md-subheader class="md-primary">Usage of top heaviest users</md-subheader>
     <nvd3 options="chartOptions" data="usageChartData"></nvd3>
   </md-content>
