@@ -36,6 +36,7 @@ gulp.task('html', ['inject', 'partials'], function () {
 
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
+  var envFilter = $.filter('*.js');
   var cssFilter = $.filter('**/*.css');
   var assets;
 
@@ -47,6 +48,10 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.ngAnnotate())
     .pipe(uglify())
     .pipe(jsFilter.restore())
+    .pipe(envFilter)
+    .pipe($.ngAnnotate())
+    .pipe(uglify())
+    .pipe(envFilter.restore())
     .pipe(cssFilter)
     .pipe($.csso())
     .pipe(cssFilter.restore())
