@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bassa-monitoring
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager
+  namespace: bassa-monitoring
+data:
+  config.yml: |-
+    global:
+    resolve_timeout: 1m
+    templates:
+    - '/etc/alertmanager-templates/*.tmpl'
+    route:
+    receiver: 'bassa-mail-notifications'
+
+    receivers:
+    - name: 'bassa-mail-notifications'
+      email_configs:
+      - to: bassa-monitoring-group@gmail.com
+        from: monitoring-alert-bot@gmail.com
+        smarthost: smtp.gmail.com:587
+        auth_username: monitoring-alert-bot
+        auth_identity: monitoring-alert-bot
+        auth_password: password
+        send_resolved: true

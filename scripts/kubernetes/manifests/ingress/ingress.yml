@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: web-ingress
+  name: bassa-ingress
   namespace: bassa
 spec:
   rules:
@@ -15,3 +15,11 @@ spec:
         backend:
           serviceName: api
           servicePort: 5000
+      - path: /prom
+        backend:
+          serviceName: prometheus
+          servicePort: 8080   
+      - path: /grafana
+        backend:
+          serviceName: grafana
+          servicePort: 3000
