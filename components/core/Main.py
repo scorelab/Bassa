@@ -1,12 +1,11 @@
 #!flask/bin/python
 
-from Server import socketio, server, register_blueprint
+from Server import socketio, server
 from ConfReader import check_conf_availability
 import logging
 
 
 def main():
-    register_blueprint(server)
     socketio.run(server, host='0.0.0.0', port=5000)
     # server.run(debug=True)
 
