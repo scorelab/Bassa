@@ -1,0 +1,6 @@
+# Downloads folder is reserved for user-specific downloads.
+# Developer should not push local downloads to remote upstream.
+# All contents of the folder will be ignored, other than this file.
+
+*
+!.gitignore
