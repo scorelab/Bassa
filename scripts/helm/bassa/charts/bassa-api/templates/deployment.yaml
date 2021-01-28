@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bassa-api.fullname" . }}
+  labels:
+    {{- include "bassa-api.labels" . | nindent 4 }}
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "bassa-api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "bassa-api.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "bassa-api.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          env: #TODO See https://github.com/scorelab/Bassa/issues/926
+            - name: BASSA_DB_NAME
+              value: 'Bassa'
+            - name: BASSA_DB_USERNAME
+              value: 'bassa'
+            - name: BASSA_DB_PASSWORD
+              value: 'bassa@1234'
+          volumeMounts:
+            - mountPath: /downloads
+              name: {{ include "bassa-api.fullname" . }}-{{ .Values.persistentVolume.name }}
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        - name: aria2c
+          image: "{{ .Values.aria2_image.repository }}:{{ .Values.aria2_image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 6800
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: {{ include "bassa-api.fullname" . }}-{{ .Values.persistentVolume.name }}
+      volumes:
+        - name: {{ include "bassa-api.fullname" . }}-{{ .Values.persistentVolume.name }}
+          persistentVolumeClaim:
+            claimName: "{{ include "bassa-api.fullname" . }}-{{ .Values.persistentVolume.name }}-claim"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
