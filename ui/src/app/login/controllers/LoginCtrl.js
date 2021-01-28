@@ -16,6 +16,8 @@
           $scope.unApproved = true;
         } else if(status.state == 403) {
           $scope.incorrectCredentials = true;
+          $scope.user.password = '';
+          $scope.loginForm.password.$setTouched();
         }
        });
     };
