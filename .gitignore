@@ -88,7 +88,6 @@ __pycache__/
 build/
 develop-eggs/
 dist/
-downloads/
 eggs/
 .eggs/
 lib/
@@ -235,3 +234,7 @@ tags
 .vscode/*
 
 # End of https://www.gitignore.io/api/vim,node,python,sublimetext,visualstudiocode
+
+###make empty folder in downloads
+downloads/*
+!downloads/.gitkeep
