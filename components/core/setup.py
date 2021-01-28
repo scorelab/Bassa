@@ -2,6 +2,7 @@ import os
 import shutil
 import inspect
 import platform
+import json
 from setuptools import setup
 import setuptools
 try:
@@ -11,6 +12,9 @@ except ImportError:
 
 EMAIL_CONF = 'email.conf'
 DL_CONF = 'dl.conf'
+DB_CONF = 'db.config.json'
+USER_DB_CONF = 'user.db.config.json'
+
 LINUX_CONFDIR = os.path.expanduser('~') + '/.config/bassa/'
 WIN_CONFDIR = os.path.expanduser('~') + '/%app_data%/bassa/'
 OSX_CONFDIR  = os.path.expanduser('~') + '/.config/bassa/'
@@ -42,8 +46,22 @@ if not os.path.exists(configdir):
 
 email_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + EMAIL_CONF
 dl_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + DL_CONF
+db_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + DB_CONF
+user_db_conf_location = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/" + USER_DB_CONF
 shutil.copyfile(email_conf_location, configdir + EMAIL_CONF)
 shutil.copyfile(dl_conf_location, configdir + DL_CONF)
+shutil.copyfile(db_conf_location, configdir + DB_CONF)
+## merge db configs if user config exist
+if os.path.exists(user_db_conf_location):
+    # userDbConf, defaultDbConf
+    with open(user_db_conf_location) as user_db_conf:
+        userDbConf = json.load(user_db_conf)
+    with open(configdir + DB_CONF) as default_db_conf:
+        defaultDbConf = json.load(default_db_conf)
+    for key in userDbConf:
+        defaultDbConf[key] = userDbConf[key]
+    with open(configdir + DB_CONF, 'w') as default_db_conf:
+        json.dump(defaultDbConf, default_db_conf, indent=4)
 
 ###/ Set configs ###
 
