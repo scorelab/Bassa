@@ -1,0 +1,3 @@
+# Ignores everything (all download information) in this directory
+*
+!.gitignore
