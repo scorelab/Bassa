@@ -2,7 +2,7 @@ import { userActions } from '../constants';
 
 const initialState = {
   isUserAdmin: false,
-  isloggedIn: false,
+  isloggedIn: !!sessionStorage.getItem('token'),
   hasAuthFailed: false,
   hasSignupFailed: false,
   hasSignupSuccessful: false,
@@ -17,8 +17,10 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case userActions.AUTH_SUCCESS:
-      return { ...state, isloggedIn: true, username: action.username };
-
+      if (sessionStorage.getItem('token')) {
+        return { ...state, isloggedIn: true, username: action.username };
+      }
+      return { ...state };
     case userActions.CHECK_ADMIN:
       if (action.payload === '0') {
         return { ...state, isUserAdmin: true };
@@ -26,7 +28,8 @@ const userReducer = (state = initialState, action) => {
       return { ...state };
 
     case userActions.LOGOUT_USER:
-      return { state: initialState, isloggedIn: false };
+      sessionStorage.removeItem('token');
+      return { state: initialState, isloggedIn: false, authLevel: null };
 
     case userActions.ADD_NEW_USER:
       return { ...state, details: action.details };

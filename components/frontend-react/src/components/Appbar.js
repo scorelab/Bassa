@@ -82,7 +82,6 @@ const BassaAppBar = props => {
   const handleNavigationButtons = route => {
     switch (route) {
       case 'logout':
-        sessionStorage.removeItem('token');
         props.logoutUser();
         props.history.replace('/');
         break;
@@ -207,7 +206,4 @@ const mapDispatchToProps = dispatch => ({
   logoutUser: () => dispatch(logoutUser())
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withRouter(BassaAppBar));
+export default connect(null, mapDispatchToProps)(withRouter(BassaAppBar));
