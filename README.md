@@ -31,16 +31,7 @@ Bassa solves the problem of wasting internet bandwidth by queuing a download if 
 * Provides admins with an interface to deal with inappropriate files
 
 ## Installation Guide
-
-### Setting up Bassa via containers
-* Using Docker and docker-compose [Recommended] [LINK](https://github.com/scorelab/Bassa/wiki/Setting-up-Bassa-via-containers)
-* Using Podman, buildah and podman-compose [Recommended] [LINK]()
-
-### Setting up Bassa on host from source code
-* On Linux based operating systems [LINK](https://github.com/scorelab/Bassa/wiki/Linux-Installation-Guide)
-* On MacOS [LINK](https://github.com/scorelab/Bassa/wiki/MacOS-Installation-Guide)
-* On Windows operation system [LINK](https://github.com/scorelab/Bassa/wiki/Windows-Installation-Guide)
-
+You can look at our [Wiki page](https://github.com/scorelab/Bassa/wiki/Bassa:-Installation-Guide) for the installation guide.
 
 ## User Guide
 You can learn how to use Bassa as an effective download queue for communities by taking best use of internet bandwidth. You can know about different functionalities according to the roles provided. Please move to this [User Guide](https://github.com/scorelab/Bassa/wiki/How-to-use-Bassa) 
