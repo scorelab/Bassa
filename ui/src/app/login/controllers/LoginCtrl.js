@@ -19,7 +19,9 @@
         }
        });
     };
-
+    $scope.togglePassword = function () {
+      $scope.typePassword = !$scope.typePassword;
+    };
     $scope.signup = function() {
       $state.go('signup');
     };
