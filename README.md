@@ -13,7 +13,14 @@
 Automated Download Queue for Enterprise to take the best use of Internet bandwidth
 
 # About 
-Bassa solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and when the traffic is low, it completes the download of the files. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.
+Bassa solves the problem of wasting internet bandwidth by queuing a download if it is larger than a given threshold value in high traffic and it completes the download of files when traffic is low. After the files are downloaded, the users can get their files from the local servers which do not require external internet bandwidth.
+
+- [Main functionalities](main-functionalities)
+- [Installation](installation)
+- [Database Setup](database-setup)
+- [Test Server](test-server)
+- [Bassa UI](bassa-ui)
+
 
 ## Main functionalities
 * Provides an interface for users to add their downloads as links or torrent magnet links
