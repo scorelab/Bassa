@@ -1,0 +1,52 @@
+name: Test and Deploy
+on: push
+
+env:
+  CHROME_BIN: "chromium-browser"
+  DISPLAY: ":99.0"
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+
+jobs:
+  before_install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 6.10.0
+      - name: Initial
+        run: sh -e /etc/init.d/xvfb start
+      - name: Setup
+        run: ./setup.sh
+      - name: install packages
+        run: npm install
+        working-directory: ./ui
+      - name: Test UI
+        run: npm test
+        working-directory: ./ui
+      - name: Test Python
+        run: python3 setup.py test
+        working-directory: ./components/core
+      - name: Docker build
+        run: docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa  .
+  after_success:
+    needs: before_install
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 6.10.0
+      - name: Docker login
+        run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      - name: Docker build and push
+        run: |-
+          docker build --build-arg VCS_REF=`git rev-parse --short HEAD`   --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` -t scoreucsc/bassa  .
+          docker push scoreucsc/bassa
+      - name: Make post request
+        run: curl -X POST 'https://hooks.microbadger.com/images/scoreucsc/bassa/Wbi5zehDMooS3ri2bgC8LETGGuQ='
