@@ -3,7 +3,10 @@ import shutil
 import inspect
 import platform
 from setuptools import setup
-from pip.req import parse_requirements
+try: 
+    from pip._internal.req import parse_requirements
+except ImportError: 
+    from pip.req import parse_requirements
 
 EMAIL_CONF = 'email.conf'
 DL_CONF = 'dl.conf'
@@ -19,8 +22,11 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 requirements_path = os.path.join(base_dir, 'requirements.txt')
 
 install_reqs = parse_requirements(requirements_path, session=False)
-
-requirements = [str(ir.req) for ir in install_reqs]
+requirements = list(requirements_path) 
+try:
+    requirements = [str(ir.req) for ir in install_reqs]
+except:
+    requirements = [str(ir.requirement) for ir in install_reqs]
 
 ### Set configs ###
 if platform.system() == 'Linux':
